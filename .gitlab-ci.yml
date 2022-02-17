@@ -20,8 +20,8 @@ stages:          # List of stages for jobs, and their order of execution
 installation-job:       # This job runs in the build stage, which runs first.
   stage: installation
   script:
-    - sudo apt-get update
-    - sudo apt-get dist-upgrade
-    - sudo apt-get install tshark
+    - apt-get update
+    - apt-get dist-upgrade
+    - apt-get install tshark
 
 
