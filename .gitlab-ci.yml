@@ -21,7 +21,8 @@ installation-job:       # This job runs in the build stage, which runs first.
   stage: installation
   script:
     - apt-get update
-    - apt-get dist-upgrade
-    - apt-get install tshark
+    - add-apt-repository -y ppa:wireshark-dev/stable
+    - apt install -y tshark
+  
 
 
