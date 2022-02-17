@@ -20,8 +20,8 @@ stages:          # List of stages for jobs, and their order of execution
 installation-job:       # This job runs in the build stage, which runs first.
   stage: installation
   script:
-    - add-apt-repository -y ppa:wireshark-dev/stable
-    - apt install -y tshark
+    - apk add tshark
+    - echo "done tshark"
   
 
 
