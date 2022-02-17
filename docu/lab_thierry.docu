@@ -1,0 +1,29 @@
+#!/bin/bash
+
+sudo brctl addbr thierry-bridge up
+sudo ip link set dev thierry-bridge up
+
+lxc start thierry-d1
+lxc start thierry-d2
+lxc start thierry-d3
+
+sudo lxc config device add thierry-d1 eno1 nic nictype=bridged parent=thierry-bridge name=eno1
+sudo lxc config device add thierry-d2 eno1 nic nictype=bridged parent=thierry-bridge name=eno1
+sudo lxc config device add thierry-d3 eno1 nic nictype=bridged parent=thierry-bridge name=eno1
+
+sudo lxc exec thierry-d1 -- ip addr add 10.10.10.1/24 dev eno1
+sudo lxc exec thierry-d2 -- ip addr add 10.10.10.2/24 dev eno1
+sudo lxc exec thierry-d3 -- ip addr add 10.10.10.3/24 dev eno1
+
+sudo lxc exec thierry-d1 -- ip link set dev eno1 up
+sudo lxc exec thierry-d2 -- ip link set dev eno1 up
+sudo lxc exec thierry-d3 -- ip link set dev eno1 up
+
+
+sudo lxc exec thierry-d1 -- ip link set dev eth0 down
+sudo lxc exec thierry-d2 -- ip link set dev eth0 down
+sudo lxc exec thierry-d3 -- ip link set dev eth0 down
+
+sudo lxc exec thierry-d1 -- ip addr del 10.215.33.121
+sudo lxc exec thierry-d2 -- ip addr del 10.215.33.219
+sudo lxc exec thierry-d3 -- ip addr del 10.215.33.126

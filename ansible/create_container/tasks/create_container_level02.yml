@@ -1,0 +1,38 @@
+---
+# tasks file for create level2 conatainer
+
+- name: Create the first level 2 containert
+  lxd_container:
+    name: lvl2-d1
+    state: started
+    source:
+      type: image
+      mode: pull
+      fingerprint: 5dd7ed85ba21     #fingerprint for alpine Image 
+    profiles: ["default"]
+    wait_for_ipv4_addresses: false
+    timeout: 600
+
+- name: Create the second level 2 containert
+  lxd_container:
+    name: lvl2-d2
+    state: started
+    source:
+      type: image
+      mode: pull
+      fingerprint: 5dd7ed85ba21
+    profiles: ["default"]
+    wait_for_ipv4_addresses: false
+    timeout: 600
+
+- name: Create the third level 2 containert
+  lxd_container:
+    name: lvl2-d3
+    state: started
+    source:
+      type: image
+      mode: pull
+      fingerprint: 5dd7ed85ba21
+    profiles: ["default"]
+    wait_for_ipv4_addresses: false
+    timeout: 600

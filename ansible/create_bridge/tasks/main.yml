@@ -1,0 +1,9 @@
+
+- name: Add a new bridge for level01
+  community.general.nmcli:
+    conn_name: level01
+    ifname: level01
+    type: bridge
+    master: eno1
+    stp: yes
+    state: present

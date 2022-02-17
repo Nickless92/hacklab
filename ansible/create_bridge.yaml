@@ -1,0 +1,10 @@
+- name: Bridge fuer Level01 erstellen
+  remote_user: test
+  become: yes
+  hosts:
+    - localhost
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  roles:
+    - create_bridge

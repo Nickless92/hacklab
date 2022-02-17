@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# turn off dhcp function
+lxc network set lxdbr0 ipv4.dhcp false

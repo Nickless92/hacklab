@@ -1,0 +1,17 @@
+# maintainer: felix
+# date: 2022-02-15
+
+sudo apt install bridge-utils
+sudo brctl addbr BRIDGE up
+sudo ip link set dev BRIDGE up
+sudo nano /etc/network/interfaces
+>> # Container bridge for OVS
+>> auto hacklab-bridge
+>> iface hacklab-bridge inet6 manual
+>>     bridge_ports none
+>>     bridge_stp on
+sudo lxc config device add CONTAINER ETH1 nic nictype=bridged parent=BRIDGE name=ETH1
+sudo lxc exec CONTAINER -- ip addr add CIDR_IP dev ETH1
+sudo lxc exec CONTAINER -- ip link set dev ETH1 up
+
+#to delete non-lxd-bridges, just reverse those steps with 'down'
