@@ -1,28 +1,5 @@
 #!/bin/bash
 
-# for ((level = 6; level <= levelend; level++))
-# do
-#     if [ $level -lt 10 ]
-#     then
-#     sudo brctl addbr lvlbr0"$level" up
-#     sudo ip link set dev lvlbr0"$level" up
-# 	else
-#     sudo brctl addbr lvlbr"$level" up
-#     sudo ip link set dev lvlbr"$level" up
-#     fi
-
-#     ansible-playbook /home/test/ansible/create_container.yaml
-
-#     for ((device = 1; device <= deviceend; device++))
-#     do
-#         lxc start lvl"$level"-d"$device"
-#         sudo lxc config device add lvl"$level"-d"$device" "$ETH1" nic nictype=bridged parent=lvlbr0"$level" name="$ETH1"
-#         sudo lxc exec lvl"$level"-d"$device" -- ip addr add 10.10."$level"."$device"/24 dev "$ETH1"  
-#         sudo lxc exec lvl"$level"-d"$device" -- ip link set dev "$ETH1" up
-#     done
-# done
-
-
 ETH1=eno1
 level=1
 deviceend=3
@@ -36,7 +13,7 @@ sudo brctl addbr lvlbr"$level" up
 sudo ip link set dev lvlbr"$level" up
 fi
 
-ansible-playbook /home/test/ansible/create_container.yaml
+ansible-playbook /home/test/hacklab/ansible/create_container_level01.yaml
 
 for ((device = 1; device <= deviceend; device++))
 do

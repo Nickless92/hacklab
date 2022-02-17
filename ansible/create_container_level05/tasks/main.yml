@@ -1,7 +1,7 @@
 ---
 # tasks file for create level5 conatainer
 
-- name: Create the first level 5 containert
+- name: Create the first level 5 container
   lxd_container:
     name: lvl5-d1
     state: started
@@ -13,7 +13,7 @@
     wait_for_ipv4_addresses: false
     timeout: 600
 
-- name: Create the second level 5 containert
+- name: Create the second level 5 container
   lxd_container:
     name: lvl5-d2
     state: started
@@ -25,7 +25,7 @@
     wait_for_ipv4_addresses: false
     timeout: 600
 
-- name: Create the third level 5 containert
+- name: Create the third level 5 container
   lxd_container:
     name: lvl5-d3
     state: started

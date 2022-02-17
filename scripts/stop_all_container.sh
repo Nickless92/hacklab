@@ -1,15 +1,12 @@
 #!/bin/bash
 
-for ((counter = 1; counter <= 15; counter++))
+deviceend=3
+levelend=2
+
+for ((level = 1; level <= levelend; level++))
 do
-	if [ $counter -lt 10 ]
-	then
-		#echo  "then"
-		#echo "$counter"
-		lxc stop level0"$counter" 
-	else
-		#echo "else"
-		#echo "$counter"
-		lxc stop level"$counter" 
-	fi
+	for((device = 1; device <= deviceend; device++))
+	do
+		lxc stop lvl"$level"-d"$device"
+	done
 done

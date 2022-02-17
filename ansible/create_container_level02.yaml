@@ -1,0 +1,10 @@
+- name: Create Container for Level02
+  remote_user: test
+  become: yes
+  hosts:
+    - localhost
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  roles:
+    - create_container_level02

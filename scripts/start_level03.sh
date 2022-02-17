@@ -13,7 +13,7 @@ sudo brctl addbr lvlbr"$level" up
 sudo ip link set dev lvlbr"$level" up
 fi
 
-ansible-playbook /home/test/ansible/create_container.yaml
+ansible-playbook /home/test/hacklab/ansible/create_container_level03.yaml
 
 for ((device = 1; device <= deviceend; device++))
 do
