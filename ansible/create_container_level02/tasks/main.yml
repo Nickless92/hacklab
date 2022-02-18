@@ -4,7 +4,7 @@
 - name: Create the first level 2 containert
   lxd_container:
     name: lvl2-d1
-    state: started
+    state: stopped
     source:
       type: image
       mode: pull
@@ -16,7 +16,7 @@
 - name: Create the second level 2 containert
   lxd_container:
     name: lvl2-d2
-    state: started
+    state: stopped
     source:
       type: image
       mode: pull
@@ -28,7 +28,7 @@
 - name: Create the third level 2 containert
   lxd_container:
     name: lvl2-d3
-    state: started
+    state: stopped
     source:
       type: image
       mode: pull
