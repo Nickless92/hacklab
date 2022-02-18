@@ -15,7 +15,6 @@
 
 stages:          # List of stages for jobs, and their order of execution
   - installation
-  - Version check
   
 
 installation-job:       # This job runs in the build stage, which runs first.
@@ -24,10 +23,5 @@ installation-job:       # This job runs in the build stage, which runs first.
     - apk add tshark
     - echo "done tshark"
 
-version_check-job:
-  stage: Version check
-  script:
-    - tshark --version
-  
 
 
