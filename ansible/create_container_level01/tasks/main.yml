@@ -3,19 +3,13 @@
 
 - name: Create the first level 1 containert
   lxd_container:
-    name: lvl1-d1
-    state: stopped
+    name: lvl1-d1                                       #describes the name of the first container
+    state: stopped                                      #when we add a container it should not be in a running state
     source:
       type: image
       mode: pull
-      #server: https://images.linuxcontainers.org
-      #protocol: simplestreams
-      #fingerprint: 017d8572a250      #fingerprint for 'big' Ubuntu Image
-      fingerprint: 5dd7ed85ba21     #fingerprint for alpine Image 
-      #alias: ubuntu/xenial/amd64
-      #alias: alpine/3.7
-      #alias: alpine-iso
-    profiles: ["default"]
+      fingerprint: 5dd7ed85ba21                         #fingerprint of the image we use
+    profiles: ["default"]                               #describes the network and storage profile 
     wait_for_ipv4_addresses: false
     timeout: 600
 
@@ -27,8 +21,6 @@
       type: image
       mode: pull
       fingerprint: 5dd7ed85ba21
-      #alias: ubuntu/xenial/amd64
-      #alias: alpine-iso
     profiles: ["default"]
     wait_for_ipv4_addresses: false
     timeout: 600
@@ -41,8 +33,6 @@
       type: image
       mode: pull
       fingerprint: 5dd7ed85ba21
-      #alias: ubuntu/xenial/amd64
-      #alias: alpine-iso
     profiles: ["default"]
     wait_for_ipv4_addresses: false
     timeout: 600
