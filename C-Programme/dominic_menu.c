@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 
+<<<<<<< HEAD
 int main()
 {
     initscr();                                                                  //initialize the screen
@@ -15,6 +16,16 @@ int main()
     cbreak();                                                                   //disables line buffering
 
     char *choices[3] = {                                                        //choices for the first part of the menu
+=======
+
+int main()
+{
+    initscr();
+    noecho();
+    cbreak();
+
+    char *choices[3] = {
+>>>>>>> Menu
                     "Choice 1",
                     "Choice 2",
                     "Choice 3",
@@ -22,6 +33,7 @@ int main()
     int choice = 0;
     int highlight = 0;
 
+<<<<<<< HEAD
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //funktion to get the maximum size of the screen of your computer
 
@@ -45,6 +57,31 @@ int main()
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
 
     while(1)                                                                    //loop taht the user can choose an option 
+=======
+    int yMAx, xMAx = 0;
+    getmaxyx(stdscr, yMAx, xMAx);
+
+    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(namewin, 0, 0);
+    mvwprintw(namewin, 1, 1, "Please enter a name: ");
+    refresh();
+    wrefresh(namewin);
+    char c = '\0';
+    int counter = 21;
+    while((c = getch()) != '\n')
+    {
+        mvwprintw(namewin, 1, ++counter, "%c", c);
+        wrefresh(namewin);
+    }
+    
+    WINDOW * menuwin = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(menuwin, 0, 0);
+    refresh();
+    wrefresh(menuwin);
+    keypad(menuwin, true);
+
+    while(1)
+>>>>>>> Menu
     {
         for(int i = 0; i < 3; i++)
         {
@@ -55,7 +92,11 @@ int main()
             mvwprintw(menuwin, i + 1, 1, choices[i]);
             wattroff(menuwin, A_REVERSE);
         }
+<<<<<<< HEAD
         choice = wgetch(menuwin);                                               //returns a single value representing the function key
+=======
+        choice = wgetch(menuwin);
+>>>>>>> Menu
         switch (choice)
         {
         case KEY_UP:
