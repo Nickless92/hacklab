@@ -1,6 +1,6 @@
-##Angriffsszenarien  
+Angriffsszenarien  
 
-	#Szenario 1: IP-Spoofing 
+Szenario 1: IP-Spoofing 
 
 Der Angreifer schickt eine oder mehrere Anfragen (Denial of Service) an einen Server. Als source-IP spooft er seine IP-Adresse und gibt die Ip-Adresse seines Opfers an.
 -	Für diesen Angriff brauchen wir das Tool „Hping3“ << sudo apt install hping3 – y >>
