@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# 
+# to be continued
 
-sudo lxc file push 
+#sudo lxc file push

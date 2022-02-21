@@ -2,7 +2,7 @@
 
 for ((counter = 1; counter <= 15; counter++))
 do
-	if [ $counter -lt 10 ]
+	if [ $counter -lt 10 ]   # check for leading '0'
 	then
 		#echo  "then"
 		#echo "$counter"

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# see ~/hacklab/scripts/start_level01.sh for details
+
 ETH1=eno1
 level=3
 deviceend=3
