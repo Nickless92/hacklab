@@ -1,10 +1,9 @@
 - name: Create Container for Level01
-  remote_user: test
-  become: yes
+  remote_user: test                             
+  become: yes                                   #execute tasks with root privileges
   hosts:
-    - localhost
-  become_method: sudo
-  gather_facts: no
+    - localhost                                 #the ansible script should be executet on this machine
+  gather_facts: no                              #default is gather_facts: yes --> you get information about the device            
   connection: ssh
   roles:
-    - create_container_level01
+    - create_container_level01                  #describes which role should be performed, you can find the role in ./create_container_level01/tasks/main.yml
