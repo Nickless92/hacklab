@@ -9,6 +9,9 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33-comment-existing-code
 int main()
 {
     initscr();                                                                  //initialize the screen
@@ -16,6 +19,7 @@ int main()
     cbreak();                                                                   //disables line buffering
 
     char *choices[3] = {                                                        //choices for the first part of the menu
+<<<<<<< HEAD
 =======
 
 int main()
@@ -26,6 +30,8 @@ int main()
 
     char *choices[3] = {
 >>>>>>> Menu
+=======
+>>>>>>> 33-comment-existing-code
                     "Choice 1",
                     "Choice 2",
                     "Choice 3",
@@ -34,6 +40,9 @@ int main()
     int highlight = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 33-comment-existing-code
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //funktion to get the maximum size of the screen of your computer
 
@@ -57,6 +66,7 @@ int main()
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
 
     while(1)                                                                    //loop taht the user can choose an option 
+<<<<<<< HEAD
 =======
     int yMAx, xMAx = 0;
     getmaxyx(stdscr, yMAx, xMAx);
@@ -82,6 +92,8 @@ int main()
 
     while(1)
 >>>>>>> Menu
+=======
+>>>>>>> 33-comment-existing-code
     {
         for(int i = 0; i < 3; i++)
         {
@@ -93,10 +105,14 @@ int main()
             wattroff(menuwin, A_REVERSE);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         choice = wgetch(menuwin);                                               //returns a single value representing the function key
 =======
         choice = wgetch(menuwin);
 >>>>>>> Menu
+=======
+        choice = wgetch(menuwin);                                               //returns a single value representing the function key
+>>>>>>> 33-comment-existing-code
         switch (choice)
         {
         case KEY_UP:
