@@ -13,6 +13,7 @@ int main()
     initscr();                                                                  //initialize the screen
     noecho();                                                                   //suppresses to show the symbols you type in                                          
     cbreak();                                                                   //disables line buffering
+    curs_set(0);                                                                //disables the curser
 
     char *choices_knowledge_level[3] =                                          //choices for the knowledge level
     {                                                        
@@ -50,26 +51,51 @@ int main()
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //funktion to get the maximum size of the screen of your computer
 
+//EINGABE:
     WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //create a new window
     box(namewin, 0, 0);                                                         //describes how the window should look like 
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
     refresh();                                                                  //you have to refresh the screen that you can see the text
     wrefresh(namewin);                                                          //refreshes the window
-    char username[] = {};                                                                   //char array to save the name the user entered
-    int position_of_first_letter = 21;                                          //we need this, because the name the user entered should be printed next to th string "Please enter a name: "
-    while((username[position_of_first_letter - 21] = getch()) != '\n')          //we don't want to create an additional counter so we take the position_of_first_letter and subtract 21 --> we get the first(++) position of the array
+    char username[] = {};                                                       //char array to save the name the user entered
+    int position_of_current_letter = 21;                                        //we need this, because the name the user entered should be printed next to th string "Please enter a name: "
+    while((username[position_of_current_letter - 21] = getch()) != '\n')        //we don't want to create an additional counter so we take the position_of_current_letter and subtract 21 --> we get the first(++) position of the array
     {
-        mvwprintw(namewin, 1, ++position_of_first_letter, "%c", username[position_of_first_letter - 21]);             //each letter will be printed in the box "namewin"
+        if(username[position_of_current_letter - 21] == 127)                    //127 is delete character
+        {
+            //goto EINGABE;
+
+            //how can we delete the last character???????
+
+
+            // username[(position_of_current_letter - 21) - 1] = '\0';
+            // position_of_current_letter--;
+            // int index = 0;
+            // while(username[index] != '\0')
+            // {
+            //     username[index + 1] = '\0';
+            //     mvwprintw(namewin, 1, 22 + index, "%c", username[index]);
+            //     wrefresh(namewin);
+            //     index++;
+            // }
+            //mvwprintw(namewin, 1, position_of_current_letter, "%c", username[position_of_current_letter - 21]);
+            //wrefresh(namewin);
+        }
+        else
+        {
+            mvwprintw(namewin, 1, ++position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box "namewin"
+        }
         wrefresh(namewin);                                                      //you need to refresh the window
     }
 
+    //printf("%s", username);
+
     WINDOW * menuwin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //for every "level" of the menu you need to create a new window
     box(menuwin, 0, 0);
-    //refresh();
     wrefresh(menuwin);
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
 
-    while(1)                                                                    //loop that the user can choose an option 
+    while(choice != 10)                                                                    //loop that the user can choose an option 
     {
         for(int i = 0; i < 3; i++)                                              //go through the choices 
         {
@@ -87,52 +113,92 @@ int main()
             highlight--;
             if(highlight == -1)
             {
-                highlight = 0;
+                highlight = 2;
             }
             break;
         case KEY_DOWN:                                                          //case you go out of the menu at the bottom
             highlight++;
             if(highlight == 3)
             {
-                highlight = 2;
+                highlight = 0;
             }
+            break;
         default:
             break;
         }
-
-        if (choice == 10 && highlight == 0)                                     //10 means enter
+    }
+    if (choice == 10 && highlight == 0)                                     //10 means enter
+    {
+        WINDOW * menu_schueler_level = newwin(6, xMAx - 12, yMAx - 8, 5);
+        box(menu_schueler_level, 0, 0);
+        wrefresh(menu_schueler_level);
+        keypad(menu_schueler_level, true);
+        highlight = 0;
+        while(1)
         {
-            WINDOW * conainerisloading = newwin(6, xMAx - 12, yMAx - 8, 5);     //new window for "Level is setting up..."
-            box(conainerisloading, 0, 0);
-            mvwprintw(conainerisloading, 1, 1, "Level is setting up...");
-            //refresh();
-            wrefresh(conainerisloading);
-            int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1");       //uses fork(2) to create a child process that executes the shell command
-
-            break;
-        }
-        else if(choice == 10 && highlight == 1)
-        {
-            WINDOW * menu_schueler_level = newwin(6, xMAx - 12, yMAx - 8, 5);
-            box(menu_schueler_level, 0, 0);
-            wrefresh(menu_schueler_level);
-            keypad(menu_schueler_level, true);
-            for(int i = 0; i < 5; i++)                                              //go through the choices 
+            int place = 2;
+            for(int i = 0; i < 5; i++)                                              //prints the choices 
             {
                 if(i == highlight)
                 {
-                   wattron(menu_schueler_level, A_REVERSE);
+                    wattron(menu_schueler_level, A_REVERSE);
                 }
-                mvwprintw(menu_schueler_level, i + 1, 1, choices_schueler_level[i]);
+                mvwprintw(menu_schueler_level, 1, place, choices_schueler_level[i]);
+                place+=10;
                 wattroff(menu_schueler_level, A_REVERSE);
+            }
+            choice = wgetch(menu_schueler_level);                                       //returns a single value representing the function key
+            switch (choice)                                                             //we dont want to go out of the menu
+            {
+            case KEY_LEFT:                                                              //case you go out of the menu at the top
+                highlight--;
+                if(highlight == -1)
+                {
+                    highlight = 0;
+                }
+                break;
+            case KEY_RIGHT:                                                             //case you go out of the menu at the bottom
+                highlight++;
+                if(highlight == 5)
+                {
+                    highlight = 4;
+                }
+                break;
+            case 10:
+                break;
+            default:
+                break;
             }
         }
     }
+    else if(choice == 10 && highlight == 1)
+    {
+        WINDOW * menu_student_level = newwin(6, xMAx - 12, yMAx - 8, 5);
+        box(menu_student_level, 0, 0);
+        wrefresh(menu_student_level);
+    }
+    else if(choice == 10 && highlight == 2)
+    {
+        WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
+        box(menu_experte_level, 0, 0);
+        wrefresh(menu_experte_level);
+    }
 
-    printw("Your choice was: %s", choices_knowledge_level[highlight]);
+    //printw("Your choice was: %s", choices_knowledge_level[highlight]);
 
     getch();
     endwin();
 
     return 0; 
 }
+
+
+
+
+
+            // WINDOW * conainerisloading = newwin(6, xMAx - 12, yMAx - 8, 5);     //new window for "Level is setting up..."
+            // box(conainerisloading, 0, 0);
+            // mvwprintw(conainerisloading, 1, 1, "Level is setting up...");
+            // //refresh();
+            // wrefresh(conainerisloading);
+            // int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1");       //uses fork(2) to create a child process that executes the shell command
