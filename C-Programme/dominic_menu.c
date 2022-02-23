@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ncurses.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main()
 {
@@ -25,29 +26,29 @@ int main()
         "Level 4",
         "Level 5",
     };
-    char *choices_student_level[5] =                                            //choices for the "student" levels
-    {
-        "Level 1",
-        "Level 2",
-        "Level 3",
-        "Level 4",
-        "Level 5",
-    };
-        char *choices_experte_level[5] =                                        //choices for the "experte" levels
-    {
-        "Level 1",
-        "Level 2",
-        "Level 3",
-        "Level 4",
-        "Level 5",
-    };
+    // char *choices_student_level[5] =                                            //choices for the "student" levels
+    // {
+    //     "Level 1",
+    //     "Level 2",
+    //     "Level 3",
+    //     "Level 4",
+    //     "Level 5",
+    // };
+    //     char *choices_experte_level[5] =                                        //choices for the "experte" levels
+    // {
+    //     "Level 1",
+    //     "Level 2",
+    //     "Level 3",
+    //     "Level 4",
+    //     "Level 5",
+    // };
+
     int choice = 0;                                                             //variable for your choice in the menu
     int highlight = 0;                                                          //shows which choice is highlighted
 
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //funktion to get the maximum size of the screen of your computer
 
-//EINGABE:
     WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //create a new window
     box(namewin, 0, 0);                                                         //describes how the window should look like 
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
@@ -71,7 +72,8 @@ int main()
         }
         else
         {
-            mvwprintw(namewin, 1, ++position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box "namewin"
+            ++position_of_current_letter;
+            mvwprintw(namewin, 1, position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box "namewin"
         }
         wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown
     }
@@ -160,12 +162,17 @@ int main()
             }
         }
     }
-    if(choice == 10 && highlight == 1)                                          //when the exit button was choosen we exit the programm
+
+    if(choice == 10 && highlight == 0)
+    {
+        //goto NAMENSEINGABE;
+    }
+    else if(choice == 10 && highlight == 1)                                          //when the exit button was choosen we exit the programm
     {
         endwin();
         exit(0);
     }
-    else if (choice == 10 && highlight == 1)                                    //10 means enter and 0 means "Schüler" in the menu
+    else if (choice == 10 && highlight == 2)                                    //10 means enter and 0 means "Schüler" in the menu
     {
         WINDOW * menu_schueler_level = newwin(6, xMAx - 12, yMAx - 8, 5);
         box(menu_schueler_level, 0, 0);
@@ -209,17 +216,17 @@ int main()
             }
             if(choice == 10 && highlight == 0)
             {
-                int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+                //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
             }
         }
     }
-    else if(choice == 10 && highlight == 1)                                     //10 means enter and 1 means "Student" in the menu
+    else if(choice == 10 && highlight == 3)                                     //10 means enter and 1 means "Student" in the menu
     {
         WINDOW * menu_student_level = newwin(6, xMAx - 12, yMAx - 8, 5);
         box(menu_student_level, 0, 0);
         wrefresh(menu_student_level);
     }
-    else if(choice == 10 && highlight == 2)                                     //10 means enter and 0 means "Experte" in the menu
+    else if(choice == 10 && highlight == 4)                                     //10 means enter and 0 means "Experte" in the menu
     {
         WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
         box(menu_experte_level, 0, 0);
