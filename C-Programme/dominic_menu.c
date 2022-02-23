@@ -50,6 +50,7 @@ int main()
     WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //create a new window
     box(namewin, 0, 0);                                                         //describes how the window should look like 
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
+    mvwprintw(namewin, 4, xMAx - 25, "EXIT [ESC]");
     refresh();                                                                  //you have to refresh the screen that you can see the text
     wrefresh(namewin);                                                          //refreshes the window
     char username[] = {};                                                       //char array to save the name the user entered
@@ -61,6 +62,11 @@ int main()
             //goto EINGABE;
 
             //how can we delete the last character???????
+        }
+        else if(username[position_of_current_letter - 21] == 27)
+        {
+            endwin();
+            exit(0);
         }
         else
         {
@@ -123,7 +129,7 @@ int main()
                     highlight = 1;
                 }
                 break;
-            case KEY_RIGHT:                                                           //highlights the exit button
+            case 27:                                                           //highlights the exit button
                 highlight = 0;
                 break;
             default:
