@@ -9,9 +9,10 @@ int main()
     cbreak();                                                                   //disables line buffering
     curs_set(0);                                                                //disables the curser
 
-    char *choices_knowledge_level[4] =                                          //choices for the knowledge level
+    char *choices_knowledge_level[5] =                                          //choices for the knowledge level
     {                   
-        "Exit",                                     
+        "Back [B]",
+        "Exit [ESC]",                                     
         "Schüler",
         "Student",
         "Experte",
@@ -80,10 +81,10 @@ int main()
     wrefresh(menuwin);
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
     mvwprintw(menuwin, 1, 1, "Please choose your knowledge:");
-    highlight = 1;
+    highlight = 2;
     while(choice != 10)                                                         //loop that the user can choose an option of his knowledge
     {
-        for(int i = 0; i < 4; i++)                                              //prints all choices of "choices_knowledge_level"
+        for(int i = 0; i < 5; i++)                                              //prints all choices of "choices_knowledge_level"
         {
             if(i == highlight)
             {
@@ -91,11 +92,15 @@ int main()
             }
             if(i == 0)                                                          //we want to print the exit button on the right bottom
             {
-                mvwprintw(menuwin, 4, xMAx - 20, choices_knowledge_level[i]);
+                mvwprintw(menuwin, 4, xMAx - 35, choices_knowledge_level[i]);
+            }
+            else if(i == 1)
+            {
+                mvwprintw(menuwin, 4, xMAx - 23, choices_knowledge_level[i]);
             }
             else
             {
-                mvwprintw(menuwin, i + 1, 1, choices_knowledge_level[i]);       //the other choices are printed
+                mvwprintw(menuwin, i, 1, choices_knowledge_level[i]);       //the other choices are printed
             }
             wattroff(menuwin, A_REVERSE);                                       //without a mark
         }
@@ -105,39 +110,57 @@ int main()
             switch (choice) 
             {
             case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                highlight = 2;
+                break;
+            case KEY_RIGHT:
                 highlight = 1;
                 break;
             default:
                 break;
             };
         } 
+        else if(highlight == 1)
+        {
+            switch (choice) 
+            {
+            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                highlight = 0;
+                break;
+            default:
+                break;
+            };            
+        }
         else 
         {
             switch (choice)                                                     //we dont want to go out of the menu
             {
             case KEY_UP:                                                        //case is carried out when the user enters the up arrow key at the keyboard
                 highlight--;
-                if(highlight == 0)                                              //case you go out of the menu at the top
+                if(highlight == 1)                                              //case you go out of the menu at the top
                 {
-                    highlight = 3;
+                    highlight = 4;
                 }
                 break;
             case KEY_DOWN:                                                      //case is carried out when the user enters the down arrow key at the keyboard
                 highlight++;
-                if(highlight == 4)                                              //case you go out of the menu at the bottom
+                if(highlight == 5)                                              //case you go out of the menu at the bottom
                 {
-                    highlight = 1;
+                    highlight = 2;
                 }
                 break;
-            case 27:                                                           //highlights the exit button
+            case 'B':
+            case 'b':
                 highlight = 0;
+                break;
+            case 27:                                                           //highlights the exit button
+                highlight = 1;
                 break;
             default:
                 break;
             }
         }
     }
-    if(choice == 10 && highlight == 0)                                          //when the exit button was choosen we exit the programm
+    if(choice == 10 && highlight == 1)                                          //when the exit button was choosen we exit the programm
     {
         endwin();
         exit(0);
