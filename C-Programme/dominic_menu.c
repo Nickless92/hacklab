@@ -72,8 +72,7 @@ int main()
         }
         else
         {
-            ++position_of_current_letter;
-            mvwprintw(namewin, 1, position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box "namewin"
+            mvwprintw(namewin, 1, ++position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box "namewin"
         }
         wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown
     }
