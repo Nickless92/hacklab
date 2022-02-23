@@ -9,8 +9,9 @@ int main()
     cbreak();                                                                   //disables line buffering
     curs_set(0);                                                                //disables the curser
 
-    char *choices_knowledge_level[3] =                                          //choices for the knowledge level
-    {                                                        
+    char *choices_knowledge_level[4] =                                          //choices for the knowledge level
+    {                   
+        "Exit",                                     
         "Schüler",
         "Student",
         "Experte",
@@ -73,16 +74,23 @@ int main()
     wrefresh(menuwin);
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
     mvwprintw(menuwin, 1, 1, "Please choose your knowledge:");
-
+    highlight = 1;
     while(choice != 10)                                                         //loop that the user can choose an option of his knowledge
     {
-        for(int i = 0; i < 3; i++)                                              //prints all choices of "choices_knowledge_level"
+        for(int i = 0; i < 4; i++)                                              //prints all choices of "choices_knowledge_level"
         {
             if(i == highlight)
             {
                 wattron(menuwin, A_REVERSE);                                    //A_REVERSE marks one choice --> wattron (window attribute on)
             }
-            mvwprintw(menuwin, i + 2, 1, choices_knowledge_level[i]);           //the other choices are printed
+            if(i == 0)
+            {
+                mvwprintw(menuwin, 4, xMAx - 20, choices_knowledge_level[i]);
+            }
+            else
+            {
+                mvwprintw(menuwin, i + 1, 1, choices_knowledge_level[i]);           //the other choices are printed
+            }
             wattroff(menuwin, A_REVERSE);                                       //without a mark
         }
         choice = wgetch(menuwin);                                               //we get the character the user puts in
@@ -90,17 +98,20 @@ int main()
         {
         case KEY_UP:                                                            //case is carried out when the user enters the up arrow key at the keyboard
             highlight--;
-            if(highlight == -1)                                                 //case you go out of the menu at the top
+            if(highlight == 0)                                                 //case you go out of the menu at the top
             {
-                highlight = 2;
+                highlight = 4;
             }
             break;
         case KEY_DOWN:                                                          //case is carried out when the user enters the down arrow key at the keyboard
             highlight++;
-            if(highlight == 3)                                                  //case you go out of the menu at the bottom
+            if(highlight == 4)                                                  //case you go out of the menu at the bottom
             {
-                highlight = 0;
+                highlight = 1;
             }
+            break;
+        case 'e':
+            highlight = 0;
             break;
         default:
             break;
