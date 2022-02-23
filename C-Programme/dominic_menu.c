@@ -83,41 +83,60 @@ int main()
             {
                 wattron(menuwin, A_REVERSE);                                    //A_REVERSE marks one choice --> wattron (window attribute on)
             }
-            if(i == 0)
+            if(i == 0)                                                          //we want to print the exit button on the right bottom
             {
                 mvwprintw(menuwin, 4, xMAx - 20, choices_knowledge_level[i]);
             }
             else
             {
-                mvwprintw(menuwin, i + 1, 1, choices_knowledge_level[i]);           //the other choices are printed
+                mvwprintw(menuwin, i + 1, 1, choices_knowledge_level[i]);       //the other choices are printed
             }
             wattroff(menuwin, A_REVERSE);                                       //without a mark
         }
         choice = wgetch(menuwin);                                               //we get the character the user puts in
-        switch (choice)                                                         //we dont want to go out of the menu
+        if (highlight == 0)                                                     //if the highlight is on the exit button 
         {
-        case KEY_UP:                                                            //case is carried out when the user enters the up arrow key at the keyboard
-            highlight--;
-            if(highlight == 0)                                                 //case you go out of the menu at the top
+            switch (choice) 
             {
-                highlight = 4;
-            }
-            break;
-        case KEY_DOWN:                                                          //case is carried out when the user enters the down arrow key at the keyboard
-            highlight++;
-            if(highlight == 4)                                                  //case you go out of the menu at the bottom
-            {
+            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
                 highlight = 1;
+                break;
+            default:
+                break;
+            };
+        } 
+        else 
+        {
+            switch (choice)                                                     //we dont want to go out of the menu
+            {
+            case KEY_UP:                                                        //case is carried out when the user enters the up arrow key at the keyboard
+                highlight--;
+                if(highlight == 0)                                              //case you go out of the menu at the top
+                {
+                    highlight = 3;
+                }
+                break;
+            case KEY_DOWN:                                                      //case is carried out when the user enters the down arrow key at the keyboard
+                highlight++;
+                if(highlight == 4)                                              //case you go out of the menu at the bottom
+                {
+                    highlight = 1;
+                }
+                break;
+            case 'e':                                                           //highlights the exit button
+                highlight = 0;
+                break;
+            default:
+                break;
             }
-            break;
-        case 'e':
-            highlight = 0;
-            break;
-        default:
-            break;
         }
     }
-    if (choice == 10 && highlight == 0)                                         //10 means enter and 0 means "Schüler" in the menu
+    if(choice == 10 && highlight == 0)                                          //when the exit button was choosen we exit the programm
+    {
+        endwin();
+        exit(0);
+    }
+    else if (choice == 10 && highlight == 1)                                    //10 means enter and 0 means "Schüler" in the menu
     {
         WINDOW * menu_schueler_level = newwin(6, xMAx - 12, yMAx - 8, 5);
         box(menu_schueler_level, 0, 0);
