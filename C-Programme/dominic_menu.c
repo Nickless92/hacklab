@@ -123,7 +123,7 @@ int main()
                     highlight = 1;
                 }
                 break;
-            case 'e':                                                           //highlights the exit button
+            case KEY_RIGHT:                                                           //highlights the exit button
                 highlight = 0;
                 break;
             default:
