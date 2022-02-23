@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <ncurses.h>
-#include <string.h>
-#include <menu.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 #include <stdlib.h>
-
 
 int main()
 {
