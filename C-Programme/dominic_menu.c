@@ -291,11 +291,37 @@ int main()
                     default:
                         break;
                 }
-            }
-            
+            }    
             if(choice == 10 && highlight == 0)
             {
+                //back
+            }
+            else if(choice == 10 && highlight == 1)
+            {
+                //exit
+                endwin();
+                exit(0);
+            }
+            else if(choice == 10 && highlight == 2)
+            {
+                //Level 1
                 //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+            }
+            else if(choice == 10 && highlight == 3)
+            {
+                //Level 2
+            }
+            else if(choice == 10 && highlight == 4)
+            {
+                //Level 3
+            }
+            else if(choice == 10 && highlight == 5)
+            {
+                //Level 4
+            }
+            else if(choice == 10 && highlight == 6)
+            {
+                //Level 5
             }
         }
     }
@@ -387,7 +413,17 @@ int main()
                 };
             }
         }
-        if(choice == 10 && highlight == 2)
+
+        if(choice == 10 && highlight == 0)
+        {
+            //back
+        }
+        else if(choice == 10 && highlight == 1)
+        {
+            endwin();
+            exit(0);
+        }
+        else if(choice == 10 && highlight == 2)
         {
             //Netzwerke
             WINDOW * menu_student_module_netzwerke = newwin(6, xMAx - 12, yMAx - 8, 5);
@@ -473,6 +509,37 @@ int main()
                         default:
                             break;
                     }
+                }
+                if(choice == 10 && highlight == 0)
+                {
+                    //back
+                }
+                else if(choice == 10 && highlight == 1)
+                {
+                    //exit
+                    endwin();
+                    exit(0);
+                }
+                else if(choice == 10 && highlight == 2)
+                {
+                    //Level 1
+                    //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+                }
+                else if(choice == 10 && highlight == 3)
+                {
+                    //Level 2
+                }
+                else if(choice == 10 && highlight == 4)
+                {
+                    //Level 3
+                }
+                else if(choice == 10 && highlight == 5)
+                {
+                    //Level 4
+                }
+                else if(choice == 10 && highlight == 6)
+                {
+                    //Level 5
                 }
             }
         }
@@ -563,6 +630,37 @@ int main()
                             break;
                     }
                 }
+                if(choice == 10 && highlight == 0)
+                {
+                    //back
+                }
+                else if(choice == 10 && highlight == 1)
+                {
+                    //exit
+                    endwin();
+                    exit(0);
+                }
+                else if(choice == 10 && highlight == 2)
+                {
+                    //Level 1
+                    //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+                }
+                else if(choice == 10 && highlight == 3)
+                {
+                    //Level 2
+                }
+                else if(choice == 10 && highlight == 4)
+                {
+                    //Level 3
+                }
+                else if(choice == 10 && highlight == 5)
+                {
+                    //Level 4
+                }
+                else if(choice == 10 && highlight == 6)
+                {
+                    //Level 5
+                }
             }
         }
         else if(choice == 10 && highlight == 4)
@@ -652,6 +750,37 @@ int main()
                             break;
                     }
                 }
+                if(choice == 10 && highlight == 0)
+                {
+                    //back
+                }
+                else if(choice == 10 && highlight == 1)
+                {
+                    //exit
+                    endwin();
+                    exit(0);
+                }
+                else if(choice == 10 && highlight == 2)
+                {
+                    //Level 1
+                    //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+                }
+                else if(choice == 10 && highlight == 3)
+                {
+                    //Level 2
+                }
+                else if(choice == 10 && highlight == 4)
+                {
+                    //Level 3
+                }
+                else if(choice == 10 && highlight == 5)
+                {
+                    //Level 4
+                }
+                else if(choice == 10 && highlight == 6)
+                {
+                    //Level 5
+                }
             }
         }
     }
@@ -740,6 +869,37 @@ int main()
                     default:
                         break;
                 }
+            }
+            if(choice == 10 && highlight == 0)
+            {
+                //back
+            }
+            else if(choice == 10 && highlight == 1)
+            {
+                //exit
+                endwin();
+                exit(0);
+            }
+            else if(choice == 10 && highlight == 2)
+            {
+                //Level 1
+                //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+            }
+            else if(choice == 10 && highlight == 3)
+            {
+                //Level 2
+            }
+            else if(choice == 10 && highlight == 4)
+            {
+                //Level 3
+            }
+            else if(choice == 10 && highlight == 5)
+            {
+                //Level 4
+            }
+            else if(choice == 10 && highlight == 6)
+            {
+                //Level 5
             }
         }
     }
