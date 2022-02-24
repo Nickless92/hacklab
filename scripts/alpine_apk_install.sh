@@ -1,46 +1,55 @@
 #!/bin/sh
 
 # update
+echo "[apk-install] todo: update"
 apk update
 apk upgrade
-echo "[done:] update"
+echo "[apk-install] done: update"
 
 # install git
+echo "[apk-install] todo: git"
 apk add git
-echo "[done:] git"
+echo "[apk-install] done: git"
 
 # install lynis
+echo "[apk-install] todo: lynis"
 cd /usr/local/
 git clone https://github.com/CISOfy/lynis
 cd lynis/
 ln -s /usr/local/lynis/lynis /bin/lynis
-echo "[done:] lynis"
+echo "[apk-install] done: lynis"
 
 # install MACchanger
+echo "[apk-install] todo: macchanger"
 apk add macchanger
-echo "[done:] macchanger"
+echo "[apk-install] done: macchanger"
 
 # install DNSrecon
+echo "[apk-install] todo: dnsrecon"
 apk add dnsrecon
-echo "[done:] dnsrecon"
+echo "[apk-install] done: dnsrecon"
 
 # install nmap
+echo "[apk-install] todo: nmap"
 apk add nmap
-echo "[done:] nmap"
-
-# install hping3
-apk add hping3
-echo "[done:] hping3"
+echo "[apk-install] done: nmap"
 
 # install tmux
+echo "[apk-install] todo: tmux"
 apk add tmux
-echo "[done:] tmux"
+echo "[apk-install] done: tmux"
 
 # install tshark
+echo "[apk-install] todo: tshark"
 apk add tshark
-echo "[done:] tshark"
+echo "[apk-install] done: tshark"
 
 # install hping3
-apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3
-echo "[done:] hping3"
+echo "[apk-install] todo: hping3"
+apk add hping3
+echo "[apk-install] done: hping3"
 
+# install hping3
+echo "[apk-install] todo: hping3 (testing)"
+apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3
+echo "[apk-install] done: hping3 (testing)"

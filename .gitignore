@@ -1,7 +1,7 @@
-TOP-Scrum-SoSe22.pdf
 # custom files
 *.token
 *.log
+*.pdf
 
 ### based on C.gitignore template from https://github.com/github/gitignore ###
 #Object files
