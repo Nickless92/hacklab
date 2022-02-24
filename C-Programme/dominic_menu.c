@@ -106,7 +106,7 @@ int main()
     wrefresh(namewin);                                                          //refreshes the window
     char username[] = {};                                                       //char array to save the name the user entered
     int position_of_current_letter = 21;                                        //we need this, because the name the user entered should be printed next to th string "Please enter a name: "
-    while((username[position_of_current_letter - 21] = getch()) != '\n')        //we don't want to create an additional counter so we take the position_of_current_letter and subtract 21 --> we get the first(++) position of the array
+    do
     {
         if(username[position_of_current_letter - 21] == 127)                    //127 describes the delete character in Ascii
         {
@@ -119,16 +119,39 @@ int main()
             endwin();                                                           //closes the current window 
             exit(0);                                                            //and we return to the terminal again
         }
-        else
-        {
+        else 
+        {       
             mvwprintw(namewin, 1, ++position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box/Window "namewin"
         }
-        wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown
-    }
+        wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown   
+    } while((username[position_of_current_letter - 21] = getch()) != '\n');
+    //getnstr(username, 25);
+    //while ((username[position_of_current_letter - 21] = getch()) != '\n');
+    
+    /*while((username[position_of_current_letter - 21] = getch()) != '\n')        //we don't want to create an additional counter so we take the position_of_current_letter and subtract 21 --> we get the first(++) position of the array
+    {        
+        if(username[position_of_current_letter - 21] == 127)                    //127 describes the delete character in Ascii
+        {
+            //goto EINGABE;
+
+            //how can we delete the last character???????
+        }
+        else if(username[position_of_current_letter - 21] == 27)                //27 describes the ESC character in Ascii
+        {
+            endwin();                                                           //closes the current window 
+            exit(0);                                                            //and we return to the terminal again
+        }
+        else 
+        {       
+            mvwprintw(namewin, 1, ++position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box/Window "namewin"
+        }
+        wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown   
+    }*/
 
     wrefresh(menuwin);
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
-    mvwprintw(menuwin, 1, 1, "Please choose your knowledge:");
+    mvwprintw(menuwin, 1, 1, "%s, please choose your knowledge: ", username);
+    printw("%s", username);
     highlight = 2;
     while(choice != 10)                                                         //loop that the user can choose an option of his knowledge
     {
@@ -209,11 +232,11 @@ int main()
         }
     }
 
-    if(choice == 10 && highlight == 0)                                          //back button
+    if(choice == 10 && highlight == 0)                                          //back button in knowledge
     {
         //goto NAMENSEINGABE;
     }
-    else if(choice == 10 && highlight == 1)                                     //exit button --> when the exit button was choosen we exit the programm
+    else if(choice == 10 && highlight == 1)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
     {
         endwin();
         exit(0);
@@ -226,7 +249,7 @@ int main()
         highlight = 2;
         while(1)
         {
-            int place = 2;
+            int place = 2;                                                      //the first letter of the menu level should be printed at the upper left corner of the box
             for(int i = 0; i < 7; i++)                                          //prints the choices 
             {
                 if(i == highlight)
@@ -243,7 +266,7 @@ int main()
                 }
                 else
                 {
-                    mvwprintw(menu_schueler_level, 1, place, choices_schueler_level[i]);                
+                    mvwprintw(menu_schueler_level, 2, place, choices_schueler_level[i]);                
                 }
                 place+=10;
                 wattroff(menu_schueler_level, A_REVERSE);
@@ -314,7 +337,15 @@ int main()
             }
             else if(choice == 10 && highlight == 2)                             //Level 1
             {
-                //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+                wrefresh(menu_schueler_level);
+                int err = system("/home/dominic/hacklab/scripts/level_start.sh 1 3 ; clear ; sudo lxc exec lvl01-d01 -- tmux");         //uses fork(2) to create a child process that executes the shell command lxc exec lvl01-d01 -- tmux
+                if(err == -1)
+                {
+                    fprintf(stderr, "child process could not be created");
+                }
+                //back to the menu
+                //exit(0);
+                return 0;
             }
             else if(choice == 10 && highlight == 3)                             //Level 2
             {
