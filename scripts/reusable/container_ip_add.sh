@@ -18,7 +18,7 @@ then
         sudo lxc exec lvl"$level_"-d"$device_" -- ip addr add 10.10."$1"."$device"/24 dev "$interface" &>> "$LOGFILE"
         sudo lxc exec lvl"$level_"-d"$device_" -- ip link set dev "$interface" up &>> "$LOGFILE"
     done
-    echo "[container_start] try target container" &>> "$LOGFILE"
+    echo "[container_ip_add] try target container" &>> "$LOGFILE"
     sudo lxc config device add lvl"$level_"-target "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" &>> "$LOGFILE"
     sudo lxc exec lvl"$level_"-target -- ip addr add 10.10."$1".0/24 dev "$interface" &>> "$LOGFILE"
     sudo lxc exec lvl"$level_"-target -- ip link set dev "$interface" up &>> "$LOGFILE"

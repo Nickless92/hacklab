@@ -8,6 +8,7 @@ LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/)
 echo -n "*** " >> "$LOGFILE"; date=$(date); echo -n "$date" >> "$LOGFILE"; echo " ***" >> "$LOGFILE"
 echo "level = $1 - devices = $2" &>> "$LOGFILE" 
 
+# to do: check for more complex calls (number of parameters)
 if [ "$#" -eq 2 ]
 then
     sudo ./bridge_add.sh "$1"; pause &>> "$LOGFILE"
