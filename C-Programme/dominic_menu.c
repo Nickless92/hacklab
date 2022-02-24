@@ -18,7 +18,7 @@ int main()
         "Student",
         "Experte",
     };
-    char *choices_schueler_level[7] =                                            //choices for the "schüler" levels
+    char *choices_schueler_level[7] =                                           //choices for the "schüler" levels
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -28,7 +28,7 @@ int main()
         "Level 4",
         "Level 5",
     };
-    char *choices_modules[5] =                                                  //choices for the knowledge level
+    char *choices_modules[5] =                                                  //choices for the different modules like Netzwerke, NetSec and Krypto
     {                   
         "Back [B]",
         "Exit [ESC]",                                     
@@ -36,7 +36,7 @@ int main()
         "Network Security",
         "Kryptographie",
     };
-    char *choices_student_level_netzwerke[7] =                                            //choices for the "student" levels
+    char *choices_student_level_netzwerke[7] =                                  //choices for the "student" levels in module Netzwerke
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -46,7 +46,7 @@ int main()
         "Level 4",
         "Level 5",
     };
-    char *choices_student_level_netsec[7] =                                            //choices for the "student" levels
+    char *choices_student_level_netsec[7] =                                     //choices for the "student" levels in module Netsec
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -56,7 +56,7 @@ int main()
         "Level 4",
         "Level 5",
     };
-    char *choices_student_level_krypto[7] =                                            //choices for the "student" levels
+    char *choices_student_level_krypto[7] =                                     //choices for the "student" levels in module Krypto
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -66,7 +66,7 @@ int main()
         "Level 4",
         "Level 5",
     };
-    char *choices_experte_level[7] =                                        //choices for the "experte" levels
+    char *choices_experte_level[7] =                                            //choices for the "experte" levels
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -81,38 +81,53 @@ int main()
     int highlight = 0;                                                          //shows which choice is highlighted
 
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
-    getmaxyx(stdscr, yMAx, xMAx);                                               //funktion to get the maximum size of the screen of your computer
+    getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your computer
 
-    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //create a new window
+    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //creates a new window
     box(namewin, 0, 0);                                                         //describes how the window should look like 
+    WINDOW * menuwin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //for every "level" of the menu you need to create a new window
+    box(menuwin, 0, 0);
+    WINDOW * menu_schueler_level = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(menu_schueler_level, 0, 0);
+    WINDOW * menu_student_module = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(menu_student_module, 0, 0);
+    WINDOW * menu_student_module_netzwerke = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(menu_student_module_netzwerke, 0, 0);
+    WINDOW * menu_student_module_netsec = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(menu_student_module_netsec, 0, 0);
+    WINDOW * menu_student_module_krypto = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(menu_student_module_krypto, 0, 0);
+    WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
+    box(menu_experte_level, 0, 0);
+
+
+
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
     mvwprintw(namewin, 4, xMAx - 25, "EXIT [ESC]");
-    refresh();                                                                  //you have to refresh the screen that you can see the text
+    refresh();                                                                  //you have to refresh the screen that you can see the new text
     wrefresh(namewin);                                                          //refreshes the window
     char username[] = {};                                                       //char array to save the name the user entered
     int position_of_current_letter = 21;                                        //we need this, because the name the user entered should be printed next to th string "Please enter a name: "
     while((username[position_of_current_letter - 21] = getch()) != '\n')        //we don't want to create an additional counter so we take the position_of_current_letter and subtract 21 --> we get the first(++) position of the array
     {
-        if(username[position_of_current_letter - 21] == 127)                    //127 is delete character
+        if(username[position_of_current_letter - 21] == 127)                    //127 describes the delete character in Ascii
         {
             //goto EINGABE;
 
             //how can we delete the last character???????
         }
-        else if(username[position_of_current_letter - 21] == 27)
+        else if(username[position_of_current_letter - 21] == 27)                //27 describes the ESC character in Ascii
         {
-            endwin();
-            exit(0);
+            endwin();                                                           //closes the current window 
+            exit(0);                                                            //and we return to the terminal again
         }
         else
         {
-            mvwprintw(namewin, 1, ++position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box "namewin"
+            mvwprintw(namewin, 1, ++position_of_current_letter, "%c", username[position_of_current_letter - 21]);             //each letter will be printed in the box/Window "namewin"
         }
         wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown
     }
 
-    WINDOW * menuwin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //for every "level" of the menu you need to create a new window
-    box(menuwin, 0, 0);
     wrefresh(menuwin);
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
     mvwprintw(menuwin, 1, 1, "Please choose your knowledge:");
@@ -201,15 +216,13 @@ int main()
         //back button
         //goto NAMENSEINGABE;
     }
-    else if(choice == 10 && highlight == 1)                                          //when the exit button was choosen we exit the programm
+    else if(choice == 10 && highlight == 1)                                     //when the exit button was choosen we exit the programm
     {
         endwin();
         exit(0);
     }
     else if (choice == 10 && highlight == 2)                                    //10 means enter and 0 means "Schüler" in the menu
     {
-        WINDOW * menu_schueler_level = newwin(6, xMAx - 12, yMAx - 8, 5);
-        box(menu_schueler_level, 0, 0);
         wrefresh(menu_schueler_level);
         keypad(menu_schueler_level, true);
         choice = 0;
@@ -327,8 +340,6 @@ int main()
     }
     else if(choice == 10 && highlight == 3)                                     //10 means enter and 1 means "Student" in the menu
     {
-        WINDOW * menu_student_module = newwin(6, xMAx - 12, yMAx - 8, 5);
-        box(menu_student_module, 0, 0);
         wrefresh(menu_student_module);
         keypad(menu_student_module, true);
         mvwprintw(menu_student_module, 1, 1, "Please choose a module: ");
@@ -426,8 +437,6 @@ int main()
         else if(choice == 10 && highlight == 2)
         {
             //Netzwerke
-            WINDOW * menu_student_module_netzwerke = newwin(6, xMAx - 12, yMAx - 8, 5);
-            box(menu_student_module_netzwerke, 0, 0);
             wrefresh(menu_student_module_netzwerke);
             keypad(menu_student_module_netzwerke, true);
             choice = 0;
@@ -546,8 +555,6 @@ int main()
         else if(choice == 10 && highlight == 3)
         {
             //Network Security
-            WINDOW * menu_student_module_netsec = newwin(6, xMAx - 12, yMAx - 8, 5);
-            box(menu_student_module_netsec, 0, 0);
             wrefresh(menu_student_module_netsec);
             keypad(menu_student_module_netsec, true);
             choice = 0;
@@ -666,8 +673,6 @@ int main()
         else if(choice == 10 && highlight == 4)
         {
             //Krypto
-            WINDOW * menu_student_module_krypto = newwin(6, xMAx - 12, yMAx - 8, 5);
-            box(menu_student_module_krypto, 0, 0);
             wrefresh(menu_student_module_krypto);
             keypad(menu_student_module_krypto, true);
             choice = 0;
@@ -786,8 +791,6 @@ int main()
     }
     else if(choice == 10 && highlight == 4)                                     //10 means enter and 0 means "Experte" in the menu
     {
-        WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
-        box(menu_experte_level, 0, 0);
         wrefresh(menu_experte_level);
         keypad(menu_experte_level, true);
         choice = 0;
