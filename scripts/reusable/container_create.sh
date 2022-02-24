@@ -2,7 +2,7 @@
 # script to set up containers for a level (stopped, not running)
 # $1 = level
 # $2 = number of devices
-# $3 = fingerprint of ISO [default = 5dd7ed85ba21]
+# $3 = optional: fingerprint of ISO [default = 5dd7ed85ba21]
 
 LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/)
 echo -n "*** " >> "$LOGFILE"; date=$(date); echo -n "$date" >> "$LOGFILE"; echo " ***" >> "$LOGFILE"
