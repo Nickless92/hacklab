@@ -83,8 +83,8 @@ int main()
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your computer
 
-    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //creates a new window
-    box(namewin, 0, 0);                                                         //describes how the window should look like 
+    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //WINDOW creates a new window
+    box(namewin, 0, 0);                                                         //box describes how the window should look like 
     WINDOW * menuwin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //for every "level" of the menu you need to create a new window
     box(menuwin, 0, 0);
     WINDOW * menu_schueler_level = newwin(6, xMAx - 12, yMAx - 8, 5);
@@ -99,8 +99,6 @@ int main()
     box(menu_student_module_krypto, 0, 0);
     WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
     box(menu_experte_level, 0, 0);
-
-
 
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
     mvwprintw(namewin, 4, xMAx - 25, "EXIT [ESC]");
@@ -140,40 +138,40 @@ int main()
             {
                 wattron(menuwin, A_REVERSE);                                    //A_REVERSE marks one choice --> wattron (window attribute on)
             }
-            if(i == 0)                                                          //we want to print the exit button on the right bottom
+            if(i == 0)                                                          //we want to print the back button on the right bottom
             {
                 mvwprintw(menuwin, 4, xMAx - 35, choices_knowledge_level[i]);
             }
-            else if(i == 1)
+            else if(i == 1)                                                     //we want to print the exit button on the right bottom
             {
                 mvwprintw(menuwin, 4, xMAx - 23, choices_knowledge_level[i]);
             }
             else
             {
-                mvwprintw(menuwin, i, 1, choices_knowledge_level[i]);       //the other choices are printed
+                mvwprintw(menuwin, i, 1, choices_knowledge_level[i]);           //the other choices are printed
             }
-            wattroff(menuwin, A_REVERSE);                                       //without a mark
+            wattroff(menuwin, A_REVERSE);                                       //window attribute off --> the other possibilities are not marked
         }
         choice = wgetch(menuwin);                                               //we get the character the user puts in
-        if (highlight == 0)                                                     //if the highlight is on the exit button 
+        if (highlight == 0)                                                     //the back button is highlighted 
         {
             switch (choice) 
             {
-            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+            case KEY_LEFT:                                                      //we can go to the main menu again by pressing the left arrow key 
                 highlight = 2;
                 break;
-            case KEY_RIGHT:
+            case KEY_RIGHT:                                                     //by pressing the right arrow key, exit is highlighted
                 highlight = 1;
                 break;
             default:
                 break;
             };
         } 
-        else if(highlight == 1)
+        else if(highlight == 1)                                                 //the exit button is highlighted
         {
             switch (choice) 
             {
-            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+            case KEY_LEFT:                                                      //we can go to the back button again by pressing the left key 
                 highlight = 0;
                 break;
             default:
@@ -202,7 +200,7 @@ int main()
             case 'b':
                 highlight = 0;
                 break;
-            case 27:                                                           //highlights the exit button
+            case 27:                                                            //highlights the exit button
                 highlight = 1;
                 break;
             default:
@@ -211,17 +209,16 @@ int main()
         }
     }
 
-    if(choice == 10 && highlight == 0)
+    if(choice == 10 && highlight == 0)                                          //back button
     {
-        //back button
         //goto NAMENSEINGABE;
     }
-    else if(choice == 10 && highlight == 1)                                     //when the exit button was choosen we exit the programm
+    else if(choice == 10 && highlight == 1)                                     //exit button --> when the exit button was choosen we exit the programm
     {
         endwin();
         exit(0);
     }
-    else if (choice == 10 && highlight == 2)                                    //10 means enter and 0 means "Schüler" in the menu
+    else if (choice == 10 && highlight == 2)                                    //10 means enter and 2 means "Schüler" in the menu
     {
         wrefresh(menu_schueler_level);
         keypad(menu_schueler_level, true);
@@ -252,7 +249,7 @@ int main()
                 wattroff(menu_schueler_level, A_REVERSE);
             }
             choice = wgetch(menu_schueler_level);                               //returns a single value representing the function key
-            if(highlight == 0)
+            if(highlight == 0)                                                  //back button
             {
                 switch(choice)
                 {
@@ -265,7 +262,7 @@ int main()
                     break;
                 }
             }
-            else if(highlight == 1)
+            else if(highlight == 1)                                             //exit button
             {
                 switch(choice)
                 {
@@ -305,40 +302,39 @@ int main()
                         break;
                 }
             }    
-            if(choice == 10 && highlight == 0)
+            if(choice == 10 && highlight == 0)                                  //back button
             {
                 //back
             }
-            else if(choice == 10 && highlight == 1)
+            else if(choice == 10 && highlight == 1)                             //exit button
             {
                 //exit
                 endwin();
                 exit(0);
             }
-            else if(choice == 10 && highlight == 2)
+            else if(choice == 10 && highlight == 2)                             //Level 1
             {
-                //Level 1
                 //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
             }
-            else if(choice == 10 && highlight == 3)
+            else if(choice == 10 && highlight == 3)                             //Level 2
             {
                 //Level 2
             }
-            else if(choice == 10 && highlight == 4)
+            else if(choice == 10 && highlight == 4)                             //Level 3
             {
                 //Level 3
             }
-            else if(choice == 10 && highlight == 5)
+            else if(choice == 10 && highlight == 5)                             //Level 4
             {
                 //Level 4
             }
-            else if(choice == 10 && highlight == 6)
+            else if(choice == 10 && highlight == 6)                             //Level 5
             {
                 //Level 5
             }
         }
     }
-    else if(choice == 10 && highlight == 3)                                     //10 means enter and 1 means "Student" in the menu
+    else if(choice == 10 && highlight == 3)                                     //10 means enter and 3 means "Student" in the menu
     {
         wrefresh(menu_student_module);
         keypad(menu_student_module, true);
@@ -346,48 +342,48 @@ int main()
 
         highlight = 2;
         choice = 0;
-        while(choice != 10)                                                         //loop that the user can choose an option of his knowledge
+        while(choice != 10)                                                     //loop that the user can choose a module
         {
-            for(int i = 0; i < 5; i++)                                              //prints all choices of "choices_knowledge_level"
+            for(int i = 0; i < 5; i++)                                          //prints all choices of "choices_modules"
             {
                 if(i == highlight)
                 {
-                    wattron(menu_student_module, A_REVERSE);                                    //A_REVERSE marks one choice --> wattron (window attribute on)
+                    wattron(menu_student_module, A_REVERSE);                    //A_REVERSE marks one choice --> wattron (window attribute on)
                 }
-                if(i == 0)                                                          //we want to print the exit button on the right bottom
+                if(i == 0)                                                      //we want to print the back button on the right bottom
                 {
                     mvwprintw(menu_student_module, 4, xMAx - 35, choices_modules[i]);
                 }
-                else if(i == 1)
+                else if(i == 1)                                                 //we want to print the exit button on the right bottom
                 {
                     mvwprintw(menu_student_module, 4, xMAx - 23, choices_modules[i]);
                 }
                 else
                 {
-                    mvwprintw(menu_student_module, i, 1, choices_modules[i]);       //the other choices are printed
+                    mvwprintw(menu_student_module, i, 1, choices_modules[i]);   //the other choices are printed
                 }
-                wattroff(menu_student_module, A_REVERSE);                                       //without a mark
+                wattroff(menu_student_module, A_REVERSE);                       //the other possibilities are not highlighted
             }
-            choice = wgetch(menu_student_module);                                               //we get the character the user puts in
-            if (highlight == 0)                                                     //if the highlight is on the exit button 
+            choice = wgetch(menu_student_module);                               //we get the character the user puts in
+            if (highlight == 0)                                                 //the back button is highlighted 
             {
                 switch (choice) 
                 {
-                case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                case KEY_LEFT:                                                  //we can go to the menu again by pressing the left key 
                     highlight = 2;
                     break;
-                case KEY_RIGHT:
+                case KEY_RIGHT:                                                 //press the right arrow key --> exit button is highlighted
                     highlight = 1;
                     break;
                 default:
                     break;
                 };
             } 
-            else if(highlight == 1)
+            else if(highlight == 1)                                             //the exit button is highlighted
             {
                 switch (choice) 
                 {
-                case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                case KEY_LEFT:                                                  //press the left arrow key --> back button is highlightedy 
                     highlight = 0;
                     break;
                 default:
@@ -396,27 +392,27 @@ int main()
             }
             else 
             {
-                switch (choice)                                                     //we dont want to go out of the menu
+                switch (choice)                                                 //we dont want to go out of the menu
                 {
-                case KEY_UP:                                                        //case is carried out when the user enters the up arrow key at the keyboard
+                case KEY_UP:                                                    //case is carried out when the user enters the up arrow key at the keyboard
                     highlight--;
-                    if(highlight == 1)                                              //case you go out of the menu at the top
+                    if(highlight == 1)                                          //case you go out of the menu at the top
                     {
-                        highlight = 4;
+                        highlight = 4;                                          //the last choice of the menu is highlighted
                     }
                     break;
-                case KEY_DOWN:                                                      //case is carried out when the user enters the down arrow key at the keyboard
+                case KEY_DOWN:                                                  //case is carried out when the user enters the down arrow key at the keyboard
                     highlight++;
-                    if(highlight == 5)                                              //case you go out of the menu at the bottom
+                    if(highlight == 5)                                          //case you go out of the menu at the bottom
                     {
-                        highlight = 2;
+                        highlight = 2;                                          //the first choice of the menu is highlighted
                     }
                     break;
                 case 'B':
                 case 'b':
                     highlight = 0;
                     break;
-                case 27:                                                           //highlights the exit button (27 = ESC)
+                case 27:                                                        //highlights the exit button (27 = ESC)
                     highlight = 1;
                     break;
                 default:
@@ -789,7 +785,7 @@ int main()
             }
         }
     }
-    else if(choice == 10 && highlight == 4)                                     //10 means enter and 0 means "Experte" in the menu
+    else if(choice == 10 && highlight == 4)                                     //10 means enter and 4 means "Experte" in the menu
     {
         wrefresh(menu_experte_level);
         keypad(menu_experte_level, true);
@@ -819,7 +815,7 @@ int main()
                 place+=10;
                 wattroff(menu_experte_level, A_REVERSE);
             }
-            choice = wgetch(menu_experte_level);                               //returns a single value representing the function key
+            choice = wgetch(menu_experte_level);                                //returns a single value representing the function key
             if(highlight == 0)
             {
                 switch(choice)
@@ -873,34 +869,34 @@ int main()
                         break;
                 }
             }
-            if(choice == 10 && highlight == 0)
+            if(choice == 10 && highlight == 0)                                  //back button
             {
                 //back
-            }
-            else if(choice == 10 && highlight == 1)
+            }   
+            else if(choice == 10 && highlight == 1)                             //exit button
             {
                 //exit
                 endwin();
                 exit(0);
             }
-            else if(choice == 10 && highlight == 2)
+            else if(choice == 10 && highlight == 2)                             //Level 1
             {
                 //Level 1
                 //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
             }
-            else if(choice == 10 && highlight == 3)
+            else if(choice == 10 && highlight == 3)                             //Level 2
             {
                 //Level 2
             }
-            else if(choice == 10 && highlight == 4)
+            else if(choice == 10 && highlight == 4)                             //Level 3
             {
                 //Level 3
             }
-            else if(choice == 10 && highlight == 5)
+            else if(choice == 10 && highlight == 5)                             //Level 4
             {
                 //Level 4
             }
-            else if(choice == 10 && highlight == 6)
+            else if(choice == 10 && highlight == 6)                             //Level 5
             {
                 //Level 5
             }
