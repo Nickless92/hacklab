@@ -34,6 +34,14 @@ int main()
     //     "Level 4",
     //     "Level 5",
     // };
+    char *choices_modules[5] =                                          //choices for the knowledge level
+    {                   
+        "Back [B]",
+        "Exit [ESC]",                                     
+        "Netzwerke",
+        "Network Security",
+        "Kryptographie",
+    };
     //     char *choices_experte_level[5] =                                        //choices for the "experte" levels
     // {
     //     "Level 1",
@@ -221,10 +229,93 @@ int main()
     }
     else if(choice == 10 && highlight == 3)                                     //10 means enter and 1 means "Student" in the menu
     {
-        WINDOW * menu_student_level = newwin(6, xMAx - 12, yMAx - 8, 5);
-        box(menu_student_level, 0, 0);
-        wrefresh(menu_student_level);
+        WINDOW * menu_student_module = newwin(6, xMAx - 12, yMAx - 8, 5);
+        box(menu_student_module, 0, 0);
+        wrefresh(menu_student_module);
+        mvwprintw(menu_student_module, 1, 1, "Please choose a module: ");
+
+        highlight = 2;
+        choice = 0;
+        while(choice != 10)                                                         //loop that the user can choose an option of his knowledge
+        {
+            for(int i = 0; i < 5; i++)                                              //prints all choices of "choices_knowledge_level"
+            {
+                if(i == highlight)
+                {
+                    wattron(menu_student_module, A_REVERSE);                                    //A_REVERSE marks one choice --> wattron (window attribute on)
+                }
+                if(i == 0)                                                          //we want to print the exit button on the right bottom
+                {
+                    mvwprintw(menu_student_module, 4, xMAx - 35, choices_modules[i]);
+                }
+                else if(i == 1)
+                {
+                    mvwprintw(menu_student_module, 4, xMAx - 23, choices_modules[i]);
+                }
+                else
+                {
+                    mvwprintw(menu_student_module, i, 1, choices_modules[i]);       //the other choices are printed
+                }
+                wattroff(menu_student_module, A_REVERSE);                                       //without a mark
+            }
+            choice = wgetch(menu_student_module);                                               //we get the character the user puts in
+            if (highlight == 0)                                                     //if the highlight is on the exit button 
+            {
+                switch (choice) 
+                {
+                case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                    highlight = 2;
+                    break;
+                case KEY_RIGHT:
+                    highlight = 1;
+                    break;
+                default:
+                    break;
+                };
+            } 
+            else if(highlight == 1)
+            {
+                switch (choice) 
+                {
+                case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                    highlight = 0;
+                    break;
+                default:
+                    break;
+                };            
+            }
+            else 
+            {
+                switch (choice)                                                     //we dont want to go out of the menu
+                {
+                case KEY_UP:                                                        //case is carried out when the user enters the up arrow key at the keyboard
+                    highlight--;
+                    if(highlight == 1)                                              //case you go out of the menu at the top
+                    {
+                        highlight = 4;
+                    }
+                    break;
+                case KEY_DOWN:                                                      //case is carried out when the user enters the down arrow key at the keyboard
+                    highlight++;
+                    if(highlight == 5)                                              //case you go out of the menu at the bottom
+                    {
+                        highlight = 2;
+                    }
+                    break;
+                case 'B':
+                case 'b':
+                    highlight = 0;
+                    break;
+                case 27:                                                           //highlights the exit button
+                    highlight = 1;
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
     }
+
     else if(choice == 10 && highlight == 4)                                     //10 means enter and 0 means "Experte" in the menu
     {
         WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
