@@ -18,23 +18,17 @@ int main()
         "Student",
         "Experte",
     };
-    char *choices_schueler_level[5] =                                            //choices for the "schüler" levels
+    char *choices_schueler_level[7] =                                            //choices for the "schüler" levels
     {
+        "Back [B]",
+        "Exit [ESC]", 
         "Level 1",
         "Level 2",
         "Level 3",
         "Level 4",
         "Level 5",
     };
-    // char *choices_student_level[5] =                                            //choices for the "student" levels
-    // {
-    //     "Level 1",
-    //     "Level 2",
-    //     "Level 3",
-    //     "Level 4",
-    //     "Level 5",
-    // };
-    char *choices_modules[5] =                                          //choices for the knowledge level
+    char *choices_modules[5] =                                                  //choices for the knowledge level
     {                   
         "Back [B]",
         "Exit [ESC]",                                     
@@ -42,14 +36,46 @@ int main()
         "Network Security",
         "Kryptographie",
     };
-    //     char *choices_experte_level[5] =                                        //choices for the "experte" levels
-    // {
-    //     "Level 1",
-    //     "Level 2",
-    //     "Level 3",
-    //     "Level 4",
-    //     "Level 5",
-    // };
+    char *choices_student_level_netzwerke[7] =                                            //choices for the "student" levels
+    {
+        "Back [B]",
+        "Exit [ESC]", 
+        "Level 1",
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Level 5",
+    };
+    char *choices_student_level_netsec[7] =                                            //choices for the "student" levels
+    {
+        "Back [B]",
+        "Exit [ESC]", 
+        "Level 1",
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Level 5",
+    };
+    char *choices_student_level_krypto[7] =                                            //choices for the "student" levels
+    {
+        "Back [B]",
+        "Exit [ESC]", 
+        "Level 1",
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Level 5",
+    };
+    char *choices_experte_level[7] =                                        //choices for the "experte" levels
+    {
+        "Back [B]",
+        "Exit [ESC]", 
+        "Level 1",
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Level 5",
+    };
 
     int choice = 0;                                                             //variable for your choice in the menu
     int highlight = 0;                                                          //shows which choice is highlighted
@@ -172,6 +198,7 @@ int main()
 
     if(choice == 10 && highlight == 0)
     {
+        //back button
         //goto NAMENSEINGABE;
     }
     else if(choice == 10 && highlight == 1)                                          //when the exit button was choosen we exit the programm
@@ -185,42 +212,87 @@ int main()
         box(menu_schueler_level, 0, 0);
         wrefresh(menu_schueler_level);
         keypad(menu_schueler_level, true);
-        highlight = 0;
+        choice = 0;
+        highlight = 2;
         while(1)
         {
             int place = 2;
-            for(int i = 0; i < 5; i++)                                          //prints the choices 
+            for(int i = 0; i < 7; i++)                                          //prints the choices 
             {
                 if(i == highlight)
                 {
                     wattron(menu_schueler_level, A_REVERSE);
                 }
-                mvwprintw(menu_schueler_level, 1, place, choices_schueler_level[i]);
+                if(i == 0)
+                {
+                    mvwprintw(menu_schueler_level, 4, xMAx - 35, choices_schueler_level[i]);
+                }
+                else if(i == 1)
+                {
+                    mvwprintw(menu_schueler_level, 4, xMAx - 23, choices_schueler_level[i]);
+                }
+                else
+                {
+                    mvwprintw(menu_schueler_level, 1, place, choices_schueler_level[i]);                
+                }
                 place+=10;
                 wattroff(menu_schueler_level, A_REVERSE);
             }
             choice = wgetch(menu_schueler_level);                               //returns a single value representing the function key
-            switch (choice)                                                     //we dont want to go out of the menu
+            if(highlight == 0)
             {
-            case KEY_LEFT:                                                      //case you go out of the menu at the top
-                highlight--;
-                if(highlight == -1)
+                switch(choice)
                 {
-                    highlight = 4;
+                case KEY_LEFT:
+                    highlight = 2;
+                    break;
+                case KEY_RIGHT:
+                    highlight = 1;
+                default:
+                    break;
                 }
-                break;
-            case KEY_RIGHT:                                                     //case you go out of the menu at the bottom
-                highlight++;
-                if(highlight == 5)
-                {
-                    highlight = 0;
-                }
-                break;
-            case 10:
-                break;
-            default:
-                break;
             }
+            else if(highlight == 1)
+            {
+                switch(choice)
+                {
+                case KEY_LEFT:
+                    highlight = 0;
+                    break;
+                default:
+                    break;
+                }
+            }
+            else
+            {
+                switch(choice)
+                {
+                    case KEY_LEFT:
+                        highlight--;
+                        if(highlight == 1)
+                        {
+                            highlight = 6;
+                        }
+                        break;
+                    case KEY_RIGHT:
+                        highlight++;
+                        if(highlight == 7)
+                        {
+                            highlight = 2;
+                        }
+                        break;
+                    case 'B':
+                    case 'b':
+                        highlight = 0;
+                        break;
+                    case 27:
+                        highlight = 1;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
             if(choice == 10 && highlight == 0)
             {
                 //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
@@ -232,6 +304,7 @@ int main()
         WINDOW * menu_student_module = newwin(6, xMAx - 12, yMAx - 8, 5);
         box(menu_student_module, 0, 0);
         wrefresh(menu_student_module);
+        keypad(menu_student_module, true);
         mvwprintw(menu_student_module, 1, 1, "Please choose a module: ");
 
         highlight = 2;
@@ -306,21 +379,369 @@ int main()
                 case 'b':
                     highlight = 0;
                     break;
-                case 27:                                                           //highlights the exit button
+                case 27:                                                           //highlights the exit button (27 = ESC)
                     highlight = 1;
                     break;
                 default:
                     break;
+                };
+            }
+        }
+        if(choice == 10 && highlight == 2)
+        {
+            //Netzwerke
+            WINDOW * menu_student_module_netzwerke = newwin(6, xMAx - 12, yMAx - 8, 5);
+            box(menu_student_module_netzwerke, 0, 0);
+            wrefresh(menu_student_module_netzwerke);
+            keypad(menu_student_module_netzwerke, true);
+            choice = 0;
+            highlight = 2;
+            while(1)
+            {
+                int place = 2;
+                for(int i = 0; i < 7; i++)                                          //prints the choices 
+                {
+                    if(i == highlight)
+                    {
+                        wattron(menu_student_module_netzwerke, A_REVERSE);
+                    }
+                    if(i == 0)
+                    {
+                        mvwprintw(menu_student_module_netzwerke, 4, xMAx - 35, choices_student_level_netzwerke[i]);
+                    }
+                    else if(i == 1)
+                    {
+                        mvwprintw(menu_student_module_netzwerke, 4, xMAx - 23, choices_student_level_netzwerke[i]);
+                    }
+                    else
+                    {
+                        mvwprintw(menu_student_module_netzwerke, 1, place, choices_student_level_netzwerke[i]);                
+                    }
+                    place+=10;
+                    wattroff(menu_student_module_netzwerke, A_REVERSE);
+                }
+                choice = wgetch(menu_student_module_netzwerke);                               //returns a single value representing the function key
+                if(highlight == 0)
+                {
+                    switch(choice)
+                    {
+                    case KEY_LEFT:
+                        highlight = 2;
+                        break;
+                    case KEY_RIGHT:
+                        highlight = 1;
+                    default:
+                        break;
+                    }
+                }
+                else if(highlight == 1)
+                {
+                    switch(choice)
+                    {
+                    case KEY_LEFT:
+                        highlight = 0;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                else
+                {
+                    switch(choice)
+                    {
+                        case KEY_LEFT:
+                            highlight--;
+                            if(highlight == 1)
+                            {
+                                highlight = 6;
+                            }
+                            break;
+                        case KEY_RIGHT:
+                            highlight++;
+                            if(highlight == 7)
+                            {
+                                highlight = 2;
+                            }
+                            break;
+                        case 'B':
+                        case 'b':
+                            highlight = 0;
+                            break;
+                        case 27:
+                            highlight = 1;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        else if(choice == 10 && highlight == 3)
+        {
+            //Network Security
+            WINDOW * menu_student_module_netsec = newwin(6, xMAx - 12, yMAx - 8, 5);
+            box(menu_student_module_netsec, 0, 0);
+            wrefresh(menu_student_module_netsec);
+            keypad(menu_student_module_netsec, true);
+            choice = 0;
+            highlight = 2;
+            while(1)
+            {
+                int place = 2;
+                for(int i = 0; i < 7; i++)                                          //prints the choices 
+                {
+                    if(i == highlight)
+                    {
+                        wattron(menu_student_module_netsec, A_REVERSE);
+                    }
+                    if(i == 0)
+                    {
+                        mvwprintw(menu_student_module_netsec, 4, xMAx - 35, choices_student_level_netsec[i]);
+                    }
+                    else if(i == 1)
+                    {
+                        mvwprintw(menu_student_module_netsec, 4, xMAx - 23, choices_student_level_netsec[i]);
+                    }
+                    else
+                    {
+                        mvwprintw(menu_student_module_netsec, 1, place, choices_student_level_netsec[i]);                
+                    }
+                    place+=10;
+                    wattroff(menu_student_module_netsec, A_REVERSE);
+                }
+                choice = wgetch(menu_student_module_netsec);                               //returns a single value representing the function key
+                if(highlight == 0)
+                {
+                    switch(choice)
+                    {
+                    case KEY_LEFT:
+                        highlight = 2;
+                        break;
+                    case KEY_RIGHT:
+                        highlight = 1;
+                    default:
+                        break;
+                    }
+                }
+                else if(highlight == 1)
+                {
+                    switch(choice)
+                    {
+                    case KEY_LEFT:
+                        highlight = 0;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                else
+                {
+                    switch(choice)
+                    {
+                        case KEY_LEFT:
+                            highlight--;
+                            if(highlight == 1)
+                            {
+                                highlight = 6;
+                            }
+                            break;
+                        case KEY_RIGHT:
+                            highlight++;
+                            if(highlight == 7)
+                            {
+                                highlight = 2;
+                            }
+                            break;
+                        case 'B':
+                        case 'b':
+                            highlight = 0;
+                            break;
+                        case 27:
+                            highlight = 1;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        else if(choice == 10 && highlight == 4)
+        {
+            //Krypto
+            WINDOW * menu_student_module_krypto = newwin(6, xMAx - 12, yMAx - 8, 5);
+            box(menu_student_module_krypto, 0, 0);
+            wrefresh(menu_student_module_krypto);
+            keypad(menu_student_module_krypto, true);
+            choice = 0;
+            highlight = 2;
+            while(1)
+            {
+                int place = 2;
+                for(int i = 0; i < 7; i++)                                          //prints the choices 
+                {
+                    if(i == highlight)
+                    {
+                        wattron(menu_student_module_krypto, A_REVERSE);
+                    }
+                    if(i == 0)
+                    {
+                        mvwprintw(menu_student_module_krypto, 4, xMAx - 35, choices_student_level_krypto[i]);
+                    }
+                    else if(i == 1)
+                    {
+                        mvwprintw(menu_student_module_krypto, 4, xMAx - 23, choices_student_level_krypto[i]);
+                    }
+                    else
+                    {
+                        mvwprintw(menu_student_module_krypto, 1, place, choices_student_level_krypto[i]);                
+                    }
+                    place+=10;
+                    wattroff(menu_student_module_krypto, A_REVERSE);
+                }
+                choice = wgetch(menu_student_module_krypto);                               //returns a single value representing the function key
+                if(highlight == 0)
+                {
+                    switch(choice)
+                    {
+                    case KEY_LEFT:
+                        highlight = 2;
+                        break;
+                    case KEY_RIGHT:
+                        highlight = 1;
+                    default:
+                        break;
+                    }
+                }
+                else if(highlight == 1)
+                {
+                    switch(choice)
+                    {
+                    case KEY_LEFT:
+                        highlight = 0;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                else
+                {
+                    switch(choice)
+                    {
+                        case KEY_LEFT:
+                            highlight--;
+                            if(highlight == 1)
+                            {
+                                highlight = 6;
+                            }
+                            break;
+                        case KEY_RIGHT:
+                            highlight++;
+                            if(highlight == 7)
+                            {
+                                highlight = 2;
+                            }
+                            break;
+                        case 'B':
+                        case 'b':
+                            highlight = 0;
+                            break;
+                        case 27:
+                            highlight = 1;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
     }
-
     else if(choice == 10 && highlight == 4)                                     //10 means enter and 0 means "Experte" in the menu
     {
         WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
         box(menu_experte_level, 0, 0);
         wrefresh(menu_experte_level);
+        keypad(menu_experte_level, true);
+        choice = 0;
+        highlight = 2;
+        while(1)
+        {
+            int place = 2;
+            for(int i = 0; i < 7; i++)                                          //prints the choices 
+            {
+                if(i == highlight)
+                {
+                    wattron(menu_experte_level, A_REVERSE);
+                }
+                if(i == 0)
+                {
+                    mvwprintw(menu_experte_level, 4, xMAx - 35, choices_experte_level[i]);
+                }
+                else if(i == 1)
+                {
+                    mvwprintw(menu_experte_level, 4, xMAx - 23, choices_experte_level[i]);
+                }
+                else
+                {
+                    mvwprintw(menu_experte_level, 1, place, choices_experte_level[i]);                
+                }
+                place+=10;
+                wattroff(menu_experte_level, A_REVERSE);
+            }
+            choice = wgetch(menu_experte_level);                               //returns a single value representing the function key
+            if(highlight == 0)
+            {
+                switch(choice)
+                {
+                case KEY_LEFT:
+                    highlight = 2;
+                    break;
+                case KEY_RIGHT:
+                    highlight = 1;
+                default:
+                    break;
+                }
+            }
+            else if(highlight == 1)
+            {
+                switch(choice)
+                {
+                case KEY_LEFT:
+                    highlight = 0;
+                    break;
+                default:
+                    break;
+                }
+            }
+            else
+            {
+                switch(choice)
+                {
+                    case KEY_LEFT:
+                        highlight--;
+                        if(highlight == 1)
+                        {
+                            highlight = 6;
+                        }
+                        break;
+                    case KEY_RIGHT:
+                        highlight++;
+                        if(highlight == 7)
+                        {
+                            highlight = 2;
+                        }
+                        break;
+                    case 'B':
+                    case 'b':
+                        highlight = 0;
+                        break;
+                    case 27:
+                        highlight = 1;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     endwin();                                                                   //we need to close the window
