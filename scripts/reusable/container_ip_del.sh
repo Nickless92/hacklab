@@ -16,12 +16,12 @@ then
         if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi        # check for leading '0'
         sudo lxc exec lvl"$level_"-d"$device_" -- ip link set dev "$interface" down &>> "$LOGFILE"
         sudo lxc exec lvl"$level_"-d"$device_" -- ip addr del 10.10."$1"."$device"/24 dev "$interface" &>> "$LOGFILE"
-        lxc config device remove lvl"$level_"-d"$device_" "$interface" &>> "$LOGFILE"
+        sudo lxc config device remove lvl"$level_"-d"$device_" "$interface" &>> "$LOGFILE"
     done
     echo "[container_start] try target container" &>> "$LOGFILE"
     sudo lxc exec lvl"$level_"-target -- ip link set dev "$interface" down &>> "$LOGFILE"
     sudo lxc exec lvl"$level_"-target -- ip addr del 10.10."$1".0/24 dev "$interface" &>> "$LOGFILE"
-    lxc config device remove lvl"$level_"-target "$interface" &>> "$LOGFILE"
+    sudo lxc config device remove lvl"$level_"-target "$interface" &>> "$LOGFILE"
     echo "[container_ip_del] removed network from containers for level $1" &>> "$LOGFILE"
     exit 0
 else
