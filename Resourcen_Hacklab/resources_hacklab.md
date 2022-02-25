@@ -5,7 +5,9 @@
 1.	[Tobias, 2014] Tobias, H. (15.01.2014) Bachelorarbeit: Grundlegende Techniken der praktischen IT-Sicherheit aus Angreifersicht. https://libdoc.fh-zwickau.de/opus4/frontdoor/deliver/index/docId/8942/file/Bachelorarbeit_Tobias_Heinlein_15012014.pdf 
 In this file, just point 7 was useful to us, when we wanted to determine how some of the attacks we should play would be implemented
 
-For example: (add image)
+For example: 
+
+![model of tcp/ip hijacking](hacklab_picture_resources.png)
 
 2.	[Hughes, 2014] Hughes C. Angriffsszenarien: Die 8 Häufigsten Angriffsszenarien. https://wi.uni-potsdam.de/homepage/lehrewi.nsf/0/CC9D442FC6DE536AC12581D200495D70/$FILE/Angriff%20und%20Verteidigung.pdf (Last Visit: 21.02.2022).
 Another file that helped us to refresh our knowledge about the attack scenarios and how they are then implemented. 
