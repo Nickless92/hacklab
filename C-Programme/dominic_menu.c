@@ -7,7 +7,7 @@ int main()
 {
     initscr();                                                                  //initialize the screen
     noecho();                                                                   //suppresses to show the symbols you type in                                          
-    cbreak();                                                                   //disables line buffering
+    //cbreak();                                                                   //disables line buffering
     curs_set(0);                                                                //disables the curser
 
     char *choices_knowledge_level[5] =                                          //choices for the knowledge level
