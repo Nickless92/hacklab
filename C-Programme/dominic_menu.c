@@ -99,6 +99,8 @@ int main()
     box(menu_student_module_krypto, 0, 0);
     WINDOW * menu_experte_level = newwin(6, xMAx - 12, yMAx - 8, 5);
     box(menu_experte_level, 0, 0);
+    WINDOW * conainerisloading = newwin(6, xMAx - 12, yMAx - 8, 5);             //new window for "Level is setting up..."
+    box(conainerisloading, 0, 0);
 
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
     mvwprintw(namewin, 4, xMAx - 25, "EXIT [ESC]");
@@ -150,8 +152,7 @@ int main()
 
     wrefresh(menuwin);
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
-    mvwprintw(menuwin, 1, 1, "%s, please choose your knowledge: ", username);
-    printw("%s", username);
+    mvwprintw(menuwin, 1, 1, "Please choose your knowledge: ");
     highlight = 2;
     while(choice != 10)                                                         //loop that the user can choose an option of his knowledge
     {
@@ -266,9 +267,9 @@ int main()
                 }
                 else
                 {
-                    mvwprintw(menu_schueler_level, 2, place, choices_schueler_level[i]);                
+                    mvwprintw(menu_schueler_level, 1, place, choices_schueler_level[i]);
+                    place+=10;                
                 }
-                place+=10;
                 wattroff(menu_schueler_level, A_REVERSE);
             }
             choice = wgetch(menu_schueler_level);                               //returns a single value representing the function key
@@ -337,15 +338,17 @@ int main()
             }
             else if(choice == 10 && highlight == 2)                             //Level 1
             {
-                wrefresh(menu_schueler_level);
+                mvwprintw(conainerisloading, 1, 1, "Level is setting up...");
+                refresh();
+                wrefresh(conainerisloading);
                 int err = system("/home/dominic/hacklab/scripts/level_start.sh 1 3 ; clear ; sudo lxc exec lvl01-d01 -- tmux");         //uses fork(2) to create a child process that executes the shell command lxc exec lvl01-d01 -- tmux
                 if(err == -1)
                 {
                     fprintf(stderr, "child process could not be created");
                 }
                 //back to the menu
-                //exit(0);
-                return 0;
+                endwin();
+                exit(0);
             }
             else if(choice == 10 && highlight == 3)                             //Level 2
             {
@@ -452,16 +455,16 @@ int main()
             }
         }
 
-        if(choice == 10 && highlight == 0)
+        if(choice == 10 && highlight == 0)                                      //back Button
         {
             //back
         }
-        else if(choice == 10 && highlight == 1)
+        else if(choice == 10 && highlight == 1)                                 //exit button
         {
             endwin();
             exit(0);
         }
-        else if(choice == 10 && highlight == 2)
+        else if(choice == 10 && highlight == 2)                                 //Netzwerke
         {
             //Netzwerke
             wrefresh(menu_student_module_netzwerke);
@@ -487,9 +490,9 @@ int main()
                     }
                     else
                     {
-                        mvwprintw(menu_student_module_netzwerke, 1, place, choices_student_level_netzwerke[i]);                
+                        mvwprintw(menu_student_module_netzwerke, 1, place, choices_student_level_netzwerke[i]); 
+                        place+=10;               
                     }
-                    place+=10;
                     wattroff(menu_student_module_netzwerke, A_REVERSE);
                 }
                 choice = wgetch(menu_student_module_netzwerke);                               //returns a single value representing the function key
@@ -579,7 +582,7 @@ int main()
                 }
             }
         }
-        else if(choice == 10 && highlight == 3)
+        else if(choice == 10 && highlight == 3)                                 //Network Security
         {
             //Network Security
             wrefresh(menu_student_module_netsec);
@@ -605,9 +608,9 @@ int main()
                     }
                     else
                     {
-                        mvwprintw(menu_student_module_netsec, 1, place, choices_student_level_netsec[i]);                
+                        mvwprintw(menu_student_module_netsec, 1, place, choices_student_level_netsec[i]); 
+                        place+=10;               
                     }
-                    place+=10;
                     wattroff(menu_student_module_netsec, A_REVERSE);
                 }
                 choice = wgetch(menu_student_module_netsec);                               //returns a single value representing the function key
@@ -697,7 +700,7 @@ int main()
                 }
             }
         }
-        else if(choice == 10 && highlight == 4)
+        else if(choice == 10 && highlight == 4)                                 //Krypto
         {
             //Krypto
             wrefresh(menu_student_module_krypto);
@@ -723,9 +726,9 @@ int main()
                     }
                     else
                     {
-                        mvwprintw(menu_student_module_krypto, 1, place, choices_student_level_krypto[i]);                
+                        mvwprintw(menu_student_module_krypto, 1, place, choices_student_level_krypto[i]);  
+                        place+=10;              
                     }
-                    place+=10;
                     wattroff(menu_student_module_krypto, A_REVERSE);
                 }
                 choice = wgetch(menu_student_module_krypto);                               //returns a single value representing the function key
@@ -841,9 +844,9 @@ int main()
                 }
                 else
                 {
-                    mvwprintw(menu_experte_level, 1, place, choices_experte_level[i]);                
+                    mvwprintw(menu_experte_level, 1, place, choices_experte_level[i]);  
+                    place+=10;              
                 }
-                place+=10;
                 wattroff(menu_experte_level, A_REVERSE);
             }
             choice = wgetch(menu_experte_level);                                //returns a single value representing the function key
