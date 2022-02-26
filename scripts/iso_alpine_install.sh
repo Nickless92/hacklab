@@ -1,5 +1,8 @@
 #!/bin/sh
 
+LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/); exec >> "$LOGFILE" 2>&1
+exec >> "$LOGFILE" 2>&1
+
 # update
 echo "[apk-install] todo: update"
 apk update
@@ -53,3 +56,5 @@ echo "[apk-install] done: hping3"
 echo "[apk-install] todo: hping3 (testing)"
 apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3
 echo "[apk-install] done: hping3 (testing)"
+
+echo "[$0] DONE"

@@ -4,8 +4,8 @@
 # $2 = number of devices
 # $3 = optional: fingerprint of ISO [default = 5dd7ed85ba21]
 
-LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/)
-echo -n "*** " >> "$LOGFILE"; date=$(date); echo -n "$date" >> "$LOGFILE"; echo " ***" >> "$LOGFILE"
+LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/); exec >> "$LOGFILE" 2>&1
+echo -n "*** "; date=$(date); echo -n "$date"; echo " ***"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
@@ -15,9 +15,9 @@ then
     for (( device=1; device <= "$2"; device++ ))
     do
         if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi        # check for leading '0'
-        sudo lxc init "$image" lvl"$level_"-d"$device_" &>> "$LOGFILE"
+        sudo lxc init "$image" lvl"$level_"-d"$device_" 
     done
-    echo "[container_create] created containers for level $level" &>> "$LOGFILE"
+    echo "[$0] DONE: created containers for level $level" 
 else
-    echo "[container_create] invalid number of parameters" &>> "$LOGFILE"
+    echo "[$0] FAIL: invalid number of parameters" 
 fi
