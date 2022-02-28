@@ -17,5 +17,5 @@ then
     sudo -E ~/hacklab/scripts/container_ip_add.sh "$1" "$2"; wait $!
     echo "[$0] DONE: started level $1 with $2 devices"
 else
-    echo "[$0] FAILED: invalid number of parameters"
+    echo "[$0] $(date) - FAILED: invalid number of parameters"
 fi

@@ -17,5 +17,5 @@ then
     sudo ~/hacklab/scripts/bridge_del.sh "$1"; wait $!
     echo "[$0] DONE: stopped level $1 with $2 devices"
 else
-    echo "[$0] FAILED: invalid number of parameters"
+    echo "[$0] $(date) - FAILED: invalid number of parameters"
 fi

@@ -16,9 +16,10 @@ then
     for (( device=1; device <= "$2"; device++ ))
     do
         if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi        # check for leading '0'
+        echo "[$0] $(date) - STEP: init device $device_"
         sudo lxc init "$image" lvl"$level_"-d"$device_" 
     done
-    echo "[$0] DONE: created containers for level $level" 
+    echo "[$0] $(date) - DONE: created containers for level $level" 
 else
-    echo "[$0] FAIL: invalid number of parameters" 
+    echo "[$0] $(date) - FAIL: invalid number of parameters" 
 fi

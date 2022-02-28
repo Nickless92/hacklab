@@ -6,7 +6,7 @@
 
 # print everything into ./logs/SCRIPT.log
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^./'\#'./logs/'\# ); exec &>> "$LOGFILE"
-echo "[$0] *** $(date) ***"; echo "[$0] level = $1 - devices = $2"
+echo "[$0] *** $(date) ***"; echo "[$0] CALL: level: $1 - devices: $2 - interface: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
@@ -15,11 +15,12 @@ then
     for ((device = 1; device <= "$2"; device++))
     do
         if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi        # check for leading '0'
+        echo "[$0] $(date) - STEP: add IP to device $device_"
         sudo lxc exec lvl"$level_"-d"$device_" -- ip link set dev "$interface" down 
         sudo lxc exec lvl"$level_"-d"$device_" -- ip addr del 10.10."$1"."$device"/24 dev "$interface" 
         sudo lxc config device remove lvl"$level_"-d"$device_" "$interface" 
     done
-    echo "[$0] try target container" 
+    echo "[$0] $(date) - STEP: try target container" 
     sudo lxc exec lvl"$level_"-target -- ip link set dev "$interface" down 
     sudo lxc exec lvl"$level_"-target -- ip addr del 10.10."$1".0/24 dev "$interface" 
     sudo lxc config device remove lvl"$level_"-target "$interface" 

@@ -13,11 +13,12 @@ then
     for((device = 1; device <= "$2"; device++))     # cycle through all devices of a level
     do
         if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi
+        echo "[$0] $(date) - STEP: start device $device_"
         sudo lxc start lvl"$level_"-d"$device_"           # only STOPS the given lxc container
     done
-    echo "[$0] try target container" 
+    echo "[$0] $(date) - try target container" 
     sudo lxc start lvl"$level_"-target                    # in case there is a TARGET device
-    echo "[$0] DONE: started containers for level $1" 
+    echo "[$0] $(date) - DONE: started containers for level $1" 
 else
-    echo "[$0] FAIL: invalid number of parameters" 
+    echo "[$0] $(date) - FAIL: invalid number of parameters" 
 fi
