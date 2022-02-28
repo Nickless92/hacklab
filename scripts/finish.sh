@@ -21,8 +21,8 @@ result=$(diff test.txt command.txt | wc -l)
 #to determine how many request and reply receive the victim
 #reply=$(grep reply log.txt | wc -l)
 #request=$(grep request log.txt | wc -l)
-variable=$(cat command.txt)
-echo "$variable"
+#variable=$(cat command.txt)
+#echo "$variable"
 
 test1=$(grep -c "\-1" command.txt)
 test2=$(grep -c "\-a 10.10.10.2 10.10.10.3" command.txt)
@@ -33,7 +33,7 @@ test5=$(grep "hping3" command.txt | sed s/" .*"//)
 #test to determine if the attack of the user was successful
 if [ "$test1" = 1 ] && [ "$test2" = 1 ] && [ "$test3" = 1 ] && [ "$test4" = 1 ] && [ "$test5" = "hping3" ]
 then 
-echo bingo
+cat win.txt
 fi
 
 #to know if the user was successful
