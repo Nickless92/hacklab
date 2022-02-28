@@ -5,8 +5,8 @@
 # $3 = interface [default = eno1]
 
 # print everything into ./logs/SCRIPT.log
-LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^./'\#'./logs/'\# ); exec &>> "$LOGFILE"
-echo "[$0] *** $(date) ***"; echo "[$0] CALL: level: $1 - devices: $2 - interface: $3"
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+echo "[$0] $(date) - CALL: level: $1 - devices: $2 - interface: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then

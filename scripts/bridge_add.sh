@@ -3,8 +3,8 @@
 # $1 = level
 
 # print everything into ./logs/SCRIPT.log
-LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^./'\#'./logs/'\# ); exec &>> "$LOGFILE"
-echo "[$0] *** $(date) ***"; echo "[$0] CALL: level: $1"
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+echo "[$0] $(date) - CALL: level: $1"
 
 if [ $# = 1 ]
 then

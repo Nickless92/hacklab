@@ -5,8 +5,8 @@
 # future: $3 = optional ISO fingerprint
 
 # print everything into ./logs/SCRIPT.log
-LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^../scripts'\#'../scripts/logs/'\# ); exec &>> "$LOGFILE"
-echo "[$0] *** $(date) ***"; echo "[$0] CALL: level: $1 - devices: $2 - ISO: $3"
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+echo "[$0] $(date) - CALL: level: $1 - devices: $2 - ISO: $3"
 
 # to do: check for more complex calls (number of parameters)
 if [ "$#" -eq 2 ]
