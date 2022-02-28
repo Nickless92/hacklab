@@ -5,8 +5,8 @@
 # $3 = optional: fingerprint of ISO [default = 5dd7ed85ba21]
 
 # print everything into ./logs/SCRIPT.log
-LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'scripts/'\#'scripts/logs/'\# ); exec &>> "$LOGFILE"
-echo "[$0] *** $(date) ***"; echo "[$0] level = $1 - devices = $2"
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^./'\#'./logs/'\# ); exec &>> "$LOGFILE"
+echo "[$0] *** $(date) ***"; echo "[$0] CALL: level: $1 - devices: $2 - ISO: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then

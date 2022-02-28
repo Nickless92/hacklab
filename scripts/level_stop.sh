@@ -5,17 +5,19 @@
 # future: $3 = optional ISO fingerprint
 
 # print everything into ./logs/SCRIPT.log
-LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^./'\#'./logs/'\# ); exec &>> "$LOGFILE"
-echo "[$0] *** $(date) ***"; echo "[$0] level = $1 - devices = $2"
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^../scripts'\#'../scripts/logs/'\# ); exec &>> "$LOGFILE"
+echo "[$0] *** $(date) ***"; echo "[$0] CALL: level: $1 - devices: $2 - ISO: $3"
 
 # to do: check for more complex calls (number of parameters)
 if [ "$#" -eq 2 ]
 then
-    sudo ~/hacklab/scripts/container_ip_del.sh "$1" "$2"; wait $!
-    sudo ~/hacklab/scripts/container_stop.sh "$1" "$2"; wait $!
-    sudo ~/hacklab/scripts/container_delete.sh "$1" "$2"; wait $!
-    sudo ~/hacklab/scripts/bridge_del.sh "$1"; wait $!
-    echo "[$0] DONE: stopped level $1 with $2 devices"
+    cd ../scripts/  # to make sure one is in /scripts/ folder
+    echo "[$0] $(date) - STEP: delete network IPs";   sudo ./container_ip_del.sh "$1" "$2";   wait $!
+    echo "[$0] $(date) - STEP: stop containers";      sudo ./container_stop.sh "$1" "$2";     wait $!
+    echo "[$0] $(date) - STEP: delete containers";    sudo ./container_delete.sh "$1" "$2";   wait $!
+    echo "[$0] $(date) - STEP: delete bridge";        sudo ./bridge_del.sh "$1";              wait $!
+    echo -n "[$0] $(date) - STEP: return to path: "; cd -
+    echo "[$0] $(date) - DONE: stopped level $1 with $2 devices"
 else
     echo "[$0] $(date) - FAILED: invalid number of parameters"
 fi
