@@ -3,8 +3,9 @@
 # $1 = level
 # $2 = number of devices
 
-LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/); exec >> "$LOGFILE" 2>&1
-echo -n "*** " ; date=$(date); echo -n "$date"; echo " ***"
+# print everything into ./logs/SCRIPT.log
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^./scripts/'\#'scripts/logs/'\# ); exec &>> "$LOGFILE"
+echo "[$0] *** $(date) ***"; echo "[$0] level = $1 - devices = $2"
 
 if [ $# = 2 ]
 then
