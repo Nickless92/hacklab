@@ -4,8 +4,9 @@
 # $2 = number of devices
 # $3 = optional: fingerprint of ISO [default = 5dd7ed85ba21]
 
-LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/); exec >> "$LOGFILE" 2>&1
-echo -n "*** "; date=$(date); echo -n "$date"; echo " ***"
+# print everything into ./logs/SCRIPT.log
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+echo "[$0] $(date) - CALL: level: $1 - devices: $2 - ISO: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
@@ -15,9 +16,10 @@ then
     for (( device=1; device <= "$2"; device++ ))
     do
         if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi        # check for leading '0'
+        echo "[$0] $(date) - STEP: init device $device_"
         sudo lxc init "$image" lvl"$level_"-d"$device_" 
     done
-    echo "[$0] DONE: created containers for level $level" 
+    echo "[$0] $(date) - DONE: created containers for level $level" 
 else
-    echo "[$0] FAIL: invalid number of parameters" 
+    echo "[$0] $(date) - FAIL: invalid number of parameters" 
 fi

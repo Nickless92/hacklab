@@ -14,9 +14,9 @@ int main()
     {                   
         "Back [B]",
         "Exit [ESC]",                                     
-        "Schüler",
-        "Student",
-        "Experte",
+        "Pupil    -  for people who have not attended any modules at HS-Worms",
+        "Student  -  in the next step you can choose between different modules",
+        "Expert   -  you can choose between all levels of pupil and student",
     };
     char *choices_schueler_level[7] =                                           //choices for the "schüler" levels
     {
