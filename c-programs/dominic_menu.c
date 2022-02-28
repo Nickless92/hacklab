@@ -341,7 +341,7 @@ int main()
                 refresh();
                 wrefresh(conainerisloading);
                 //int err = system("/home/dominic/hacklab/scripts/level_start.sh 1 3 ; clear ; sudo lxc exec lvl01-d01 -- tmux");         //uses fork(2) to create a child process that executes the shell command lxc exec lvl01-d01 -- tmux
-                int err = system("../scripts/reusable/level_start.sh 1 3 ; clear ; sudo lxc exec lvl01-d01 -- tmux");         //uses fork(2) to create a child process that executes the shell command lxc exec lvl01-d01 -- tmux
+                int err = system("../scripts/level_start.sh 1 3 ; clear ; sudo lxc exec lvl01-d01 -- tmux");         //uses fork(2) to create a child process that executes the shell command lxc exec lvl01-d01 -- tmux
                 if(err == -1)
                 {
                     fprintf(stderr, "child process could not be created");

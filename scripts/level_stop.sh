@@ -2,21 +2,22 @@
 # basic script to stop a whole level
 # $1 = level
 # $2 = number of devices
-# $3 = interface [default = eno1]
+# future: $3 = optional ISO fingerprint 
 
-LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/)
-echo -n "*** " >> "$LOGFILE"; date=$(date); echo -n "$date" >> "$LOGFILE"; echo " ***" >> "$LOGFILE"
-echo "level = $1 - devices = $2" &>> "$LOGFILE" 
-path=$(pwd); echo "path=$path" &>> "$LOGFILE"
+#LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/ | sed s\#'^./'\#'~/hacklab/logs/'\# ) #| sed s\#'./'\#''\#)
+LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/ ) # | sed s\#'./'\#'^~/hacklab/logs/'\# ) #| sed s\#'./'\#''\#)
+echo "LOGFILE = $LOGFILE"; sudo exec >> "$LOGFILE" 2>&1
+echo -n "*** "; date=$(date); echo -n "$date"; echo " ***"
+echo "level = $1 - devices = $2" 
 
 # to do: check for more complex calls (number of parameters)
 if [ "$#" -eq 2 ]
 then
-    sudo $path/../scripts/reusable/container_ip_del.sh "$1" "$2" &>> "$LOGFILE"; pause &>> "$LOGFILE"
-    sudo $path/../scripts/reusable/container_stop.sh "$1" "$2" &>> "$LOGFILE"; pause &>> "$LOGFILE"
-    sudo $path/../scripts/reusable/container_delete.sh "$1" "$2" &>> "$LOGFILE"; pause &>> "$LOGFILE"
-    sudo $path/../scripts/reusable/bridge_del.sh "$1" &>> "$LOGFILE"; pause &>> "$LOGFILE"
-    echo "[level_start] destroyed level $1 with $2 devices" &>> "$LOGFILE"
+    sudo $path/../scripts/reusable/container_ip_del.sh "$1" "$2"; wait $!
+    sudo $path/../scripts/reusable/container_stop.sh "$1" "$2"; wait $!
+    sudo $path/../scripts/reusable/container_delete.sh "$1" "$2"; wait $!
+    sudo $path/../scripts/reusable/bridge_del.sh "$1"; wait $!
+    echo "[$0] DONE: stopped level $1 with $2 devices"
 else
-    echo "[level_start] invalid number of parameters" &>> "$LOGFILE"
+    echo "[$0] FAILED: invalid number of parameters"
 fi
