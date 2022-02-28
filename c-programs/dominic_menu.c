@@ -14,9 +14,9 @@ int main()
     {                   
         "Back [B]",
         "Exit [ESC]",                                     
-        "Schüler",
+        "Pupil",
         "Student",
-        "Experte",
+        "Expert",
     };
     char *choices_schueler_level[7] =                                           //choices for the "schüler" levels
     {
