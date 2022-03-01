@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "enterName.h"
 #include "choose_knowledge.h"
 #include "pupil_levels.h"
@@ -33,6 +34,9 @@ int main()
     curs_set(0);                                                                //disables the curser
 =======
 #include "Name.h"
+=======
+#include "enterName.h"
+>>>>>>> fuer thierry
 #include "menu.h"
 #include "schueler_level.h"
 #include "student_level.h"
@@ -46,6 +50,7 @@ int main()
     initscr();                                                                  //initialize the screen
     noecho();                                                                   //suppresses to show the symbols you type in                                                                                         
     curs_set(0);                                                                //disables the curser
+<<<<<<< HEAD
     
 <<<<<<< HEAD
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
@@ -132,12 +137,18 @@ int main()
     }*/
 >>>>>>> lezter stand
 =======
+=======
+
+>>>>>>> fuer thierry
     name();
 >>>>>>> removed some code we don#t need
 
     enterName();                                                                //function that the user can enter a name
 
+<<<<<<< HEAD
     endwin();                                                                   ////we initialized the scrren so we need to close the window again
 
+=======
+>>>>>>> fuer thierry
 	return 0;
 }
