@@ -5,6 +5,7 @@ void name();
 void schueler_le();
 void student_level();
 void experte_le();
+int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
 void menu()
 {  
@@ -52,62 +53,11 @@ void menu()
             wattroff(menuwin, A_REVERSE);                                       //window attribute off --> the other possibilities are not marked
         }
         choice = wgetch(menuwin);                                               //we get the character the user puts in
-        if (highlight == 0)                                                     //the back button is highlighted 
-        {
-            switch (choice) 
-            {
-            case KEY_LEFT:                                                      //we can go to the main menu again by pressing the left arrow key 
-                highlight = 2;
-                break;
-            case KEY_RIGHT:                                                     //by pressing the right arrow key, exit is highlighted
-                highlight = 1;
-                break;
-            default:
-                break;
-            };
-        } 
-        else if(highlight == 1)                                                 //the exit button is highlighted
-        {
-            switch (choice) 
-            {
-            case KEY_LEFT:                                                      //we can go to the back button again by pressing the left key 
-                highlight = 0;
-                break;
-            default:
-                break;
-            };            
-        }
-        else
-        {
-            switch (choice)                                                     //we dont want to go out of the menu
-            {
-            case KEY_UP:                                                        //case is carried out when the user enters the up arrow key at the keyboard
-                highlight--;
-                if(highlight == 1)                                              //case you go out of the menu at the top
-                {
-                    highlight = 4;
-                }
-                break;
-            case KEY_DOWN:                                                      //case is carried out when the user enters the down arrow key at the keyboard
-                highlight++;
-                if(highlight == 5)                                              //case you go out of the menu at the bottom
-                {
-                    highlight = 2;
-                }
-                break;
-            case 'B':
-            case 'b':
-                highlight = 0;
-                break;
-            case 27:                                                            //highlights the exit button
-                highlight = 1;
-                break;
-            default:
-                break;
-            }
-        }
+
+        highlight = menu_switch_case(menuwin, highlight, choice);
     }
-     if(choice == 10 && highlight == 0)                                          //back button in knowledge
+
+    if(choice == 10 && highlight == 0)                                          //back button in knowledge
     {
     	name();
     }

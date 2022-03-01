@@ -5,6 +5,7 @@ void menu();
 void netzwerk_le();
 void netzwerk_sicherheit_le();
 void kryptographie_le();
+int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
 void student_level()
 {    
@@ -50,60 +51,8 @@ void student_level()
             wattroff(menu_student_module, A_REVERSE);                                       //without a mark
         }
         choice = wgetch(menu_student_module);                                               //we get the character the user puts in
-        if (highlight == 0)                                                     //if the highlight is on the exit button 
-        {
-            switch (choice) 
-            {
-            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
-                highlight = 2;
-                break;
-            case KEY_RIGHT:
-                highlight = 1;
-                break;
-            default:
-                break;
-            };
-        } 
-        else if(highlight == 1)
-        {
-            switch (choice) 
-            {
-            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
-                highlight = 0;
-                break;
-            default:
-                break;
-            };            
-        }
-        else 
-        {
-            switch (choice)                                                     //we dont want to go out of the menu
-            {
-            case KEY_UP:                                                        //case is carried out when the user enters the up arrow key at the keyboard
-                highlight--;
-                if(highlight == 1)                                              //case you go out of the menu at the top
-                {
-                    highlight = 4;
-                }
-                break;
-            case KEY_DOWN:                                                      //case is carried out when the user enters the down arrow key at the keyboard
-                highlight++;
-                if(highlight == 5)                                              //case you go out of the menu at the bottom
-                {
-                    highlight = 2;
-                }
-                break;
-            case 'B':
-            case 'b':
-                highlight = 0;
-                break;
-            case 27:                                                           //highlights the exit button
-                highlight = 1;
-                break;
-            default:
-                break;
-            }
-        }
+        highlight = menu_switch_case(menu_student_module, highlight, choice);
+
         if(choice == 10 && highlight == 0)
         {
         	menu();

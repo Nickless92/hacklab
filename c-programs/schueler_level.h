@@ -2,7 +2,7 @@
 #define SCHUELER_LE_H_INCLUDED
 
 void menu();
-
+int menu_switch_case_level(WINDOW * name_of_window, int highlight, int choice);
 
 void schueler_le()
 {    
@@ -17,7 +17,6 @@ void schueler_le()
         "Level 5",
     };
     
-                                                              //shows which choice is highlighted
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
     
@@ -48,65 +47,13 @@ void schueler_le()
             else
             {
                 mvwprintw(menu_schueler_level, 1, start_of_first_level_place, choices_schueler_level[i]);
+                start_of_first_level_place+=10;
             }
-            start_of_first_level_place+=10;
             wattroff(menu_schueler_level, A_REVERSE);
         }
         choice = wgetch(menu_schueler_level);                               //returns a single value representing the function key
-        if(highlight == 0)
-        {
-            switch (choice) 
-            {
-            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
-                highlight = 2;
-                break;
-            case KEY_RIGHT:
-                highlight = 1;
-                break;
-            default:
-                break;
-            };        
-        }
-        else if(highlight == 1)
-        {
-            switch (choice) 
-            {
-            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
-                highlight = 0;
-                break;
-            default:
-                break;
-            };            
-        }   
-        else
-        {
-            switch (choice)                                                     //we dont want to go out of the menu
-            {
-            case KEY_LEFT:                                                        //case is carried out when the user enters the up arrow key at the keyboard
-                highlight--;
-                if(highlight == 1)                                              //case you go out of the menu at the top
-                {
-                    highlight = 6;
-                }
-                break;
-            case KEY_RIGHT:                                                      //case is carried out when the user enters the down arrow key at the keyboard
-                highlight++;
-                if(highlight == 7)                                              //case you go out of the menu at the bottom
-                {
-                    highlight = 2;
-                }
-                break;
-            case 'B':
-            case 'b':
-                highlight = 0;
-                break;
-            case 27:                                                           //highlights the exit button
-                highlight = 1;
-                break;
-            default:
-                break;
-            }
-        }
+        highlight = menu_switch_case_level(menu_schueler_level, highlight, choice);
+
         if(choice == 10 && highlight == 0)
         {
         	menu();

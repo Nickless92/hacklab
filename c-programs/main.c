@@ -10,6 +10,8 @@
 #include "netzwerk_sicherheit_level.h"
 #include "netzwerk_level.h"
 #include "kryptographie.h"
+#include "menu_switch_case.h"
+#include "menu_switch_case_level.h"
 
 
 int main()
