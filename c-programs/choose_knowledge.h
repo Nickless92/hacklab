@@ -29,7 +29,7 @@ void choose_knowledge()
     wrefresh(menuwin);
     keypad(menuwin, true);                                                      //the keypad option enables the keypad of the user's terminal
     mvwprintw(menuwin, 1, 1, "Please choose your knowledge: ");
-    highlight = 2;
+    highlight = 2;                                                              //to select(highlight) pupil in the start
     while(choice != 10)                                                         //loop that the user can choose an option of his knowledge
     {
         for(int i = 0; i < 5; i++)                                              //prints all choices of "choices_knowledge_level"
@@ -53,7 +53,6 @@ void choose_knowledge()
             wattroff(menuwin, A_REVERSE);                                       //window attribute off --> the other possibilities are not marked
         }
         choice = wgetch(menuwin);                                               //we get the character the user puts in
-
         highlight = menu_switch_case(menuwin, highlight, choice);
     }
 
