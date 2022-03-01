@@ -1,5 +1,7 @@
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
+#include "ncurses.h"
+#include <stdlib.h>
 
 void menu();
 
