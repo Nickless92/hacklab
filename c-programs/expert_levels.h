@@ -1,12 +1,18 @@
 #ifndef EXPERTE_LEVEL_H_INCLUDED
 #define EXPERTE_LEVEL_H_INCLUDED
 
+<<<<<<< HEAD
 void choose_knowledge();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
 void expert_levels(void)
 {    
     char *choices_experte_level[7] =                                            //choices for the expert levels
+=======
+void experte_le(void)
+{    
+    char *choices_experte_level[7] =                                           //choices for the "schüler" levels
+>>>>>>> changed names of headers
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -29,7 +35,11 @@ void expert_levels(void)
     while(1)
     {
         int start_of_first_level_place = 1;
+<<<<<<< HEAD
         for(int i = 0; i < 7; i++)                                              //prints the choices 
+=======
+        for(int i = 0; i < 7; i++)                                          //prints the choices 
+>>>>>>> changed names of headers
         {
             if(i == highlight)
             {
@@ -46,6 +56,7 @@ void expert_levels(void)
             else
             {
                 mvwprintw(menu_experte_level, 1, start_of_first_level_place, choices_experte_level[i]);
+<<<<<<< HEAD
                 start_of_first_level_place+=10;
             }
             wattroff(menu_experte_level, A_REVERSE);
@@ -59,6 +70,73 @@ void expert_levels(void)
             return;
         }
         else if(choice == 10 && highlight == 1)                                 //exit button
+=======
+            }
+            start_of_first_level_place+=10;
+            wattroff(menu_experte_level, A_REVERSE);
+        }
+        choice = wgetch(menu_experte_level);                               //returns a single value representing the function key
+        if(highlight == 0)
+        {
+            switch (choice) 
+            {
+            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                highlight = 2;
+                break;
+            case KEY_RIGHT:
+                highlight = 1;
+                break;
+            default:
+                break;
+            };        
+        }
+        else if(highlight == 1)
+        {
+            switch (choice) 
+            {
+            case KEY_LEFT:                                                      //we can go to the menu again by pressing the left key 
+                highlight = 0;
+                break;
+            default:
+                break;
+            };            
+        }   
+        else
+        {
+            switch (choice)                                                     //we dont want to go out of the menu
+            {
+            case KEY_LEFT:                                                        //case is carried out when the user enters the up arrow key at the keyboard
+                highlight--;
+                if(highlight == 1)                                              //case you go out of the menu at the top
+                {
+                    highlight = 6;
+                }
+                break;
+            case KEY_RIGHT:                                                      //case is carried out when the user enters the down arrow key at the keyboard
+                highlight++;
+                if(highlight == 7)                                              //case you go out of the menu at the bottom
+                {
+                    highlight = 2;
+                }
+                break;
+            case 'B':
+            case 'b':
+                highlight = 0;
+                break;
+            case 27:                                                           //highlights the exit button
+                highlight = 1;
+                break;
+            default:
+                break;
+            }
+        }
+        if(choice == 10 && highlight == 0)
+        {
+        	menu();
+            //back button
+        }
+        else if(choice == 10 && highlight == 1)
+>>>>>>> changed names of headers
         {
             endwin();
             exit(0);
@@ -66,6 +144,10 @@ void expert_levels(void)
         else if(choice == 10 && highlight == 2)
         {
             //level 1
+<<<<<<< HEAD
+=======
+            //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
+>>>>>>> changed names of headers
         }
         else if(choice == 10 && highlight == 3)
         {
@@ -84,7 +166,10 @@ void expert_levels(void)
             //level 5
         }
     }
+<<<<<<< HEAD
     return;
+=======
+>>>>>>> changed names of headers
 }
 
 #endif

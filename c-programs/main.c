@@ -26,6 +26,7 @@
 #include "menu_switch_case.h"
 #include "menu_switch_case_level.h"
 
+<<<<<<< HEAD
 
 int main()
 {
@@ -44,6 +45,8 @@ int main()
 #include "netzwerk_sicherheit_level.h"
 #include "netzwerk_level.h"
 #include "kryptographie.h"
+=======
+>>>>>>> changed names of headers
 
 int main()
 {

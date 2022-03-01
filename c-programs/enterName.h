@@ -11,8 +11,6 @@
 
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
-#include "ncurses.h"
-#include <stdlib.h>
 
 <<<<<<< HEAD:c-programs/enterName.h
 void choose_knowledge();                                                        //function decleration of the function we use below
