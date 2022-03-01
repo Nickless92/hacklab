@@ -1,13 +1,8 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-	void menu()
-{
-    initscr();                                                                  //initialize the screen
-    noecho();                                                                   //suppresses to show the symbols you type in                                          
-    //cbreak();                                                                   //disables line buffering
-    curs_set(0);                                                                //disables the curser
-    
+void menu()
+{  
     char *choices_knowledge_level[5] =                                          //choices for the knowledge level
     {                   
         "Back [B]",
@@ -110,7 +105,6 @@
      if(choice == 10 && highlight == 0)                                          //back button in knowledge
     {
     	name();
-        //goto NAMENSEINGABE;
     }
     else if(choice == 10 && highlight == 1)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
     {

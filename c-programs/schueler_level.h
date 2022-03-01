@@ -4,12 +4,7 @@
 
 
 void schueler_le()
-{
-    initscr();                                                                  //initialize the screen
-    noecho();                                                                   //suppresses to show the symbols you type in                                          
-    //cbreak();                                                                   //disables line buffering
-    curs_set(0);                                                                //disables the curser
-    
+{    
     char *choices_schueler_level[7] =                                           //choices for the "schüler" levels
     {
         "Back [B]",
@@ -114,7 +109,6 @@ void schueler_le()
         if(choice == 10 && highlight == 0)
         {
         	menu();
-            //back button
         }
         else if(choice == 10 && highlight == 1)
         {

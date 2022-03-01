@@ -1,13 +1,8 @@
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
 
-	void name()
+void name()
 {
-    initscr();                                                                  //initialize the screen
-    noecho();                                                                   //suppresses to show the symbols you type in                                          
-    //cbreak();                                                                   //disables line buffering
-    curs_set(0);                                                                //disables the curser
-    
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
     
@@ -25,9 +20,7 @@
     {
         if(username[position_of_current_letter - 21] == 127)                    //127 describes the delete character in Ascii
         {
-            //goto EINGABE;
-
-            //how can we delete the last character???????
+            name();
         }
         else if(username[position_of_current_letter - 21] == 27)                //27 describes the ESC character in Ascii
         {
@@ -47,4 +40,3 @@
 }
 
 #endif
-	
