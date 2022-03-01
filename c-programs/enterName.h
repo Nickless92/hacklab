@@ -12,9 +12,13 @@
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
 
+<<<<<<< HEAD:c-programs/enterName.h
 void choose_knowledge();                                                        //function decleration of the function we use below
 
 void enterName()
+=======
+void name()
+>>>>>>> removed some code we don#t need:c-programs/Name.h
 {
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your computer
@@ -32,7 +36,11 @@ void enterName()
     {
         if(username[position_of_current_letter - 21] == 127)                    //127 describes the delete character in Ascii
         {
+<<<<<<< HEAD:c-programs/enterName.h
             enterName();
+=======
+            name();
+>>>>>>> removed some code we don#t need:c-programs/Name.h
         }
         else if(username[position_of_current_letter - 21] == 27)                //27 describes the ESC character in Ascii
         {

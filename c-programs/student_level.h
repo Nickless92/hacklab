@@ -24,7 +24,6 @@
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
     
-
     WINDOW * menu_student_module = newwin(6,xMAx - 12, yMAx - 8, 5);                       //for every "level" of the menu you need to create a new window
     box(menu_student_module, 0, 0);
     wrefresh(menu_student_module);

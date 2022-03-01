@@ -1,15 +1,8 @@
 #ifndef NETZWERK_SICHERHEIT_LE_H_INCLUDED
 #define NETZWERK_SICHERHEIT_LE_H_INCLUDED
 
-
-
 void netzwerk_sicherheit_le(void)
-{
-    initscr();                                                                  //initialize the screen
-    noecho();                                                                   //suppresses to show the symbols you type in                                          
-    //cbreak();                                                                   //disables line buffering
-    curs_set(0);                                                                //disables the curser
-    
+{   
     char *choices_student_level_netsec[7] =                                           //choices for the "schüler" levels
     {
         "Back [B]",
@@ -21,11 +14,9 @@ void netzwerk_sicherheit_le(void)
         "Level 5",
     };
     
-                                                              //shows which choice is highlighted
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
     
-   
     WINDOW * menu_student_module_netsec = newwin(6, xMAx - 12,yMAx - 8, 5);
     box(menu_student_module_netsec, 0, 0);
     wrefresh(menu_student_module_netsec);

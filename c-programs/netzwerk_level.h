@@ -4,12 +4,7 @@
 
 
 void netzwerk_le(void)
-{
-    initscr();                                                                  //initialize the screen
-    noecho();                                                                   //suppresses to show the symbols you type in                                          
-    //cbreak();                                                                   //disables line buffering
-    curs_set(0);                                                                //disables the curser
-    
+{    
     char *choices_student_level_netzwerke[7] =                                           //choices for the "schüler" levels
     {
         "Back [B]",
@@ -21,11 +16,9 @@ void netzwerk_le(void)
         "Level 5",
     };
     
-                                                              //shows which choice is highlighted
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
     
-   
     WINDOW * menu_student_module_netzwerke = newwin(6, xMAx - 12,yMAx - 8, 5);
     box(menu_student_module_netzwerke, 0, 0);
     wrefresh(menu_student_module_netzwerke);

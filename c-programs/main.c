@@ -43,21 +43,11 @@ int main()
 
 int main()
 {
-	
-	
-	//kryptographie_le();
-	//netzwerk_sicherheit_le();
-	//netzwerk_le();
-	//schueler_le();
-	//experte_le();
-	//student_level();
-
- initscr();                                                                  //initialize the screen
-    noecho();                                                                   //suppresses to show the symbols you type in                                          
-    //cbreak(); 
-     int highlight = 0;                                                                   //disables line buffering
+    initscr();                                                                  //initialize the screen
+    noecho();                                                                   //suppresses to show the symbols you type in                                                                                         
     curs_set(0);                                                                //disables the curser
     
+<<<<<<< HEAD
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
     
@@ -141,6 +131,9 @@ int main()
         user_chose_experte(xMAx, yMAx);
     }*/
 >>>>>>> lezter stand
+=======
+    name();
+>>>>>>> removed some code we don#t need
 
     enterName();                                                                //function that the user can enter a name
 
