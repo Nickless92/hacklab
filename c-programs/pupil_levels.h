@@ -23,9 +23,14 @@ void pupil_levels()
 #ifndef SCHUELER_LE_H_INCLUDED
 #define SCHUELER_LE_H_INCLUDED
 
+<<<<<<< HEAD
 
+=======
+void choose_knowledge();
+int menu_switch_case_level(WINDOW * name_of_window, int highlight, int choice);
+>>>>>>> changed function names
 
-void schueler_le()
+void pupil_levels()
 {    
     char *choices_schueler_level[7] =                                           //choices for the "schüler" levels
 >>>>>>> changed names of headers
@@ -52,7 +57,6 @@ void schueler_le()
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
     
-   
     WINDOW * menu_schueler_level = newwin(6, xMAx - 12,yMAx - 8, 5);
     box(menu_schueler_level, 0, 0);
     wrefresh(menu_schueler_level);
@@ -169,7 +173,7 @@ void schueler_le()
         }
         if(choice == 10 && highlight == 0)
         {
-        	menu();
+        	choose_knowledge();
         }
         else if(choice == 10 && highlight == 1)
 >>>>>>> changed names of headers
@@ -188,8 +192,13 @@ void schueler_le()
         else if(choice == 10 && highlight == 2)
         {
             //level 1
+<<<<<<< HEAD
             //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
 >>>>>>> changed names of headers
+=======
+            int err = system("../scripts/level_start.sh 1 3 ; clear ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1''\;' split-window -v -d 'lxc shell lvl01-d01' '\;' split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' '\;' attach");         //uses fork(2) to create a child process that executes the shell command
+            pupil_levels();
+>>>>>>> changed function names
         }
         else if(choice == 10 && highlight == 3)
         {

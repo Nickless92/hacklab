@@ -24,8 +24,18 @@ void choose_knowledge()
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
+<<<<<<< HEAD
 void menu()
 >>>>>>> changed names of headers
+=======
+void enterName();
+void pupil_levels();
+void choose_modules();
+void expert_levels();
+int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
+
+void choose_knowledge()
+>>>>>>> changed function names
 {  
     char *choices_knowledge_level[5] =                                          //choices for the knowledge level
     {                   
@@ -161,8 +171,12 @@ void menu()
     }
      if(choice == 10 && highlight == 0)                                          //back button in knowledge
     {
+<<<<<<< HEAD
     	name();
 >>>>>>> changed names of headers
+=======
+    	enterName();
+>>>>>>> changed function names
     }
     else if(choice == 10 && highlight == 1)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
     {
@@ -192,15 +206,15 @@ void menu()
 =======
     else if(choice == 10 && highlight == 2)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
     {
-        schueler_le();
+        pupil_levels();
     }
     else if(choice == 10 && highlight == 3)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
     {
-        student_level();
+        choose_modules();
     }
     else if(choice == 10 && highlight == 4)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
     {
-        experte_le();
+        expert_levels();
     }
     
 

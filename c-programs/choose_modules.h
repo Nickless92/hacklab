@@ -2,7 +2,11 @@
 #define STUDENT_LEVEL_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void choose_knowledge();                                                                //function declerations of the functions we use below
+=======
+void choose_knowledge();
+>>>>>>> changed function names
 void network_levels();
 void netzwork_security_levels();
 void kryptographie_levels();
@@ -157,7 +161,7 @@ void choose_modules()
         }
         if(choice == 10 && highlight == 0)
         {
-        	menu();
+        	choose_knowledge();
             //back button
 >>>>>>> changed names of headers
         }
@@ -168,6 +172,7 @@ void choose_modules()
         }
         else if(choice == 10 && highlight == 2)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
         	network_levels();                                                           // Netzwerke button
             return;
@@ -186,16 +191,19 @@ void choose_modules()
     return;
 =======
         	netzwerk_le();
+=======
+        	network_levels();
+>>>>>>> changed function names
             // Netzwerk
         }
         else if(choice == 10 && highlight == 3)
         {
-        	netzwerk_sicherheit_le();
+        	netzwork_security_levels();
             //Network Security
         }
         else if(choice == 10 && highlight == 4)
         {
-        	kryptographie_le();
+        	kryptographie_levels();
             //kryptographie
         }
         

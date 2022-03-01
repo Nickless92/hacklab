@@ -48,6 +48,7 @@ int main()
 =======
 >>>>>>> changed names of headers
 
+<<<<<<< HEAD
 int main()
 {
     initscr();                                                                  //initialize the screen
@@ -147,6 +148,9 @@ int main()
 >>>>>>> removed some code we don#t need
 
     enterName();                                                                //function that the user can enter a name
+=======
+    enterName();
+>>>>>>> changed function names
 
 <<<<<<< HEAD
     endwin();                                                                   ////we initialized the scrren so we need to close the window again

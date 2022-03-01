@@ -2,14 +2,20 @@
 #define NETZWERK_SICHERHEIT_LE_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changed function names
 void choose_modules();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
 void netzwork_security_levels(void)
+<<<<<<< HEAD
 {   
     char *choices_student_level_netsec[7] =                                           //choices for the student network security levels
 =======
 void netzwerk_sicherheit_le(void)
+=======
+>>>>>>> changed function names
 {   
     char *choices_student_level_netsec[7] =                                           //choices for the "schüler" levels
 >>>>>>> changed names of headers
@@ -72,6 +78,7 @@ void netzwerk_sicherheit_le(void)
 
         if(choice == 10 && highlight == 0)
         {
+<<<<<<< HEAD
         	choose_modules();                                                       //back button
             return;
         }
@@ -139,6 +146,9 @@ void netzwerk_sicherheit_le(void)
         if(choice == 10 && highlight == 0)
         {
         	student_level();
+=======
+        	choose_modules();
+>>>>>>> changed function names
             //back button
         }
         else if(choice == 10 && highlight == 1)

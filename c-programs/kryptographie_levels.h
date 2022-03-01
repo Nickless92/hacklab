@@ -2,16 +2,22 @@
 #define KRYPTOGRAPHIE_LE_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changed function names
 void choose_modules();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
 void kryptographie_levels(void)
+<<<<<<< HEAD
 {    
     char *choices_student_level_krypto[7] =                                             //choices for the student kryptographie levels
 =======
 
 
 void kryptographie_le(void)
+=======
+>>>>>>> changed function names
 {    
     char *choices_student_level_krypto[7] =                                           //choices for the "schüler" levels
 >>>>>>> changed names of headers
@@ -73,6 +79,7 @@ void kryptographie_le(void)
 
         if(choice == 10 && highlight == 0)
         {
+<<<<<<< HEAD
         	choose_modules();                                                           //back button
             return;
         }
@@ -140,6 +147,9 @@ void kryptographie_le(void)
         if(choice == 10 && highlight == 0)
         {
         	student_level();
+=======
+        	choose_modules();
+>>>>>>> changed function names
             //back button
         }
         else if(choice == 10 && highlight == 1)

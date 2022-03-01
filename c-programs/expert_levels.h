@@ -2,14 +2,20 @@
 #define EXPERTE_LEVEL_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changed function names
 void choose_knowledge();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
 void expert_levels(void)
+<<<<<<< HEAD
 {    
     char *choices_experte_level[7] =                                            //choices for the expert levels
 =======
 void experte_le(void)
+=======
+>>>>>>> changed function names
 {    
     char *choices_experte_level[7] =                                           //choices for the "schüler" levels
 >>>>>>> changed names of headers
@@ -66,6 +72,7 @@ void experte_le(void)
 
         if(choice == 10 && highlight == 0)
         {
+<<<<<<< HEAD
         	choose_knowledge();                                                 //back button
             return;
         }
@@ -133,6 +140,9 @@ void experte_le(void)
         if(choice == 10 && highlight == 0)
         {
         	menu();
+=======
+        	choose_knowledge();
+>>>>>>> changed function names
             //back button
         }
         else if(choice == 10 && highlight == 1)

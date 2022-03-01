@@ -12,6 +12,7 @@
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
 
+<<<<<<< HEAD
 <<<<<<< HEAD:c-programs/enterName.h
 void choose_knowledge();                                                        //function decleration of the function we use below
 
@@ -19,6 +20,11 @@ void enterName()
 =======
 void name()
 >>>>>>> removed some code we don#t need:c-programs/Name.h
+=======
+void choose_knowledge();
+
+void enterName()
+>>>>>>> changed function names
 {
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your computer
@@ -36,11 +42,15 @@ void name()
     {
         if(username[position_of_current_letter - 21] == 127)                    //127 describes the delete character in Ascii
         {
+<<<<<<< HEAD
 <<<<<<< HEAD:c-programs/enterName.h
             enterName();
 =======
             name();
 >>>>>>> removed some code we don#t need:c-programs/Name.h
+=======
+            enterName();
+>>>>>>> changed function names
         }
         else if(username[position_of_current_letter - 21] == 27)                //27 describes the ESC character in Ascii
         {
@@ -55,7 +65,11 @@ void name()
         wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown   
     } while((username[position_of_current_letter - 21] = getch()) != '\n');     //we want to run the loop until ENTER is pressed
     
+<<<<<<< HEAD
     choose_knowledge();                                                         //next level of the menu by calling the function choose_knowledge
+=======
+    choose_knowledge();
+>>>>>>> changed function names
     
     return;
 }
