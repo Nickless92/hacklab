@@ -20,9 +20,9 @@ int main()
     noecho();                                                                   //suppresses to show the symbols you type in                                                                                         
     curs_set(0);                                                                //disables the curser
 
-    enterName();
+    enterName();                                                                //function that the user can enter a name
 
-    endwin();         
+    endwin();                                                                   ////we initialized the scrren so we need to close the window again
 
 	return 0;
 }

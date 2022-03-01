@@ -6,7 +6,7 @@ int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
 void expert_levels(void)
 {    
-    char *choices_experte_level[7] =                                           //choices for the "schüler" levels
+    char *choices_experte_level[7] =                                            //choices for the expert levels
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -29,7 +29,7 @@ void expert_levels(void)
     while(1)
     {
         int start_of_first_level_place = 1;
-        for(int i = 0; i < 7; i++)                                          //prints the choices 
+        for(int i = 0; i < 7; i++)                                              //prints the choices 
         {
             if(i == highlight)
             {
@@ -50,15 +50,15 @@ void expert_levels(void)
             }
             wattroff(menu_experte_level, A_REVERSE);
         }
-        choice = wgetch(menu_experte_level);                               //returns a single value representing the function key
+        choice = wgetch(menu_experte_level);                               
         highlight = menu_switch_case_level(menu_experte_level, highlight, choice);
 
         if(choice == 10 && highlight == 0)
         {
-        	choose_knowledge();
-            //back button
+        	choose_knowledge();                                                 //back button
+            return;
         }
-        else if(choice == 10 && highlight == 1)
+        else if(choice == 10 && highlight == 1)                                 //exit button
         {
             endwin();
             exit(0);
@@ -66,7 +66,6 @@ void expert_levels(void)
         else if(choice == 10 && highlight == 2)
         {
             //level 1
-            //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
         }
         else if(choice == 10 && highlight == 3)
         {
