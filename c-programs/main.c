@@ -3,13 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "enterName.h"
-#include "menu.h"
-#include "schueler_level.h"
-#include "student_level.h"
-#include "experte_level.h"
-#include "netzwerk_sicherheit_level.h"
-#include "netzwerk_level.h"
-#include "kryptographie.h"
+#include "choose_knowledge.h"
+#include "pupil_levels.h"
+#include "choose_modules.h"
+#include "expert_levels.h"
+#include "network_security_levels.h"
+#include "netzwerk_levels.h"
+#include "kryptographie_levels.h"
 #include "menu_switch_case.h"
 #include "menu_switch_case_level.h"
 

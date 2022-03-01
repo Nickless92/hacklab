@@ -1,7 +1,5 @@
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
-#include "ncurses.h"
-#include <stdlib.h>
 
 void menu();
 
@@ -18,7 +16,6 @@ void name()
     wrefresh(namewin);                                                          //refreshes the window
     char username[] = {};                                                       //char array to save the name the user entered
     int position_of_current_letter = 21;                                        //we need this, because the name the user entered should be printed next to th string "Please enter a name: "
-    
     
     do
     {
