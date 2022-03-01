@@ -5,19 +5,33 @@
 
 
 
-void user_chose_experte(int window_xMAx, int window_yMAx)
+void experte_le(void)
 {
-    char *choices_experte_level[5] =                                        //choices for the "experte" levels
+    initscr();                                                                  //initialize the screen
+    noecho();                                                                   //suppresses to show the symbols you type in                                          
+    //cbreak();                                                                   //disables line buffering
+    curs_set(0);                                                                //disables the curser
+    
+    char *choices_experte_level[7] =                                           //choices for the "schüler" levels
     {
+        "Back [B]",
+        "Exit [ESC]", 
         "Level 1",
         "Level 2",
         "Level 3",
         "Level 4",
         "Level 5",
     };
-    WINDOW * menu_experte_level = newwin(6, window_xMAx - 12, window_yMAx - 8, 5);
+    
+                                                              //shows which choice is highlighted
+    int yMAx, xMAx = 0;                                                         //variables for the size of the screen
+    getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
+    
+   
+    WINDOW * menu_experte_level = newwin(6, xMAx - 12,yMAx - 8, 5);
     box(menu_experte_level, 0, 0);
     wrefresh(menu_experte_level);
+    keypad(menu_experte_level, true);
     int highlight = 2;
     int choice = 0;
     while(1)
@@ -31,11 +45,11 @@ void user_chose_experte(int window_xMAx, int window_yMAx)
             }
             if(i == 0)
             {
-                mvwprintw(menu_experte_level, 4, window_xMAx - 35, choices_experte_level[i]);
+                mvwprintw(menu_experte_level, 4, xMAx - 35, choices_experte_level[i]);
             }
             else if(i == 1)
             {
-                mvwprintw(menu_experte_level, 4, window_xMAx - 23, choices_experte_level[i]);
+                mvwprintw(menu_experte_level, 4, xMAx - 23, choices_experte_level[i]);
             }
             else
             {
@@ -101,6 +115,7 @@ void user_chose_experte(int window_xMAx, int window_yMAx)
         }
         if(choice == 10 && highlight == 0)
         {
+        	menu();
             //back button
         }
         else if(choice == 10 && highlight == 1)
