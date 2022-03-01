@@ -5,12 +5,19 @@
 #include "Name.h"
 #include "menu.h"
 #include "schueler_level.h"
+#include "student_level.h"
+#include "experte_level.h"
+//#include "netzwerk_sicherheit_level.h"
+//#include "netzwerk_level.h"
+//#include "kryptographie.h"
 
 int main()
 {
+	
+	experte_le();
+	//student_level();
 
-
- initscr();                                                                  //initialize the screen
+ /*initscr();                                                                  //initialize the screen
     noecho();                                                                   //suppresses to show the symbols you type in                                          
     //cbreak(); 
      int highlight = 0;                                                                   //disables line buffering
@@ -68,9 +75,9 @@ int main()
     else if (highlight == 2)                                    //10 means enter and 0 means "Schüler" in the menu
     {
         schueler_le();
-    }
+    }*/
     /*else if(highlight == 3)                                     //10 means enter and 1 means "Student" in the menu
-    {
+    {s
         highlight = chooseModule(xMAx, yMAx);
         if(highlight == 0)
         {
