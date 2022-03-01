@@ -121,14 +121,17 @@
         }
         else if(choice == 10 && highlight == 2)
         {
+        	netzwerk_le();
             // Netzwerk
         }
         else if(choice == 10 && highlight == 3)
         {
+        	netzwerk_sicherheit_le();
             //Network Security
         }
         else if(choice == 10 && highlight == 4)
         {
+        	kryptographie_le();
             //kryptographie
         }
         

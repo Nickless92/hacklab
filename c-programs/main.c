@@ -37,17 +37,22 @@ int main()
 #include "schueler_level.h"
 #include "student_level.h"
 #include "experte_level.h"
-//#include "netzwerk_sicherheit_level.h"
-//#include "netzwerk_level.h"
-//#include "kryptographie.h"
+#include "netzwerk_sicherheit_level.h"
+#include "netzwerk_level.h"
+#include "kryptographie.h"
 
 int main()
 {
-
-	experte_le();
+	
+	
+	//kryptographie_le();
+	//netzwerk_sicherheit_le();
+	//netzwerk_le();
+	//schueler_le();
+	//experte_le();
 	//student_level();
 
- /*initscr();                                                                  //initialize the screen
+ initscr();                                                                  //initialize the screen
     noecho();                                                                   //suppresses to show the symbols you type in                                          
     //cbreak(); 
      int highlight = 0;                                                                   //disables line buffering
@@ -89,10 +94,10 @@ int main()
 	//name():
 	menu();
 	//schueler_le();
-	 highlight = 0;
+	 //highlight = 0;
 	 //chooseKnowledge(xMAx, yMAx);
 
-    if(highlight == 0)
+    /*if(highlight == 0)
     {
         //back button
         //enterName(xMAx, yMAx);

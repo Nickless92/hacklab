@@ -132,6 +132,14 @@
     {
         schueler_le();
     }
+    else if(choice == 10 && highlight == 3)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
+    {
+        student_level();
+    }
+    else if(choice == 10 && highlight == 4)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
+    {
+        experte_le();
+    }
     
 
 }
