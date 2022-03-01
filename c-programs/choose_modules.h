@@ -1,13 +1,13 @@
 #ifndef STUDENT_LEVEL_H_INCLUDED
 #define STUDENT_LEVEL_H_INCLUDED
 
-void menu();
-void netzwerk_le();
-void netzwerk_sicherheit_le();
-void kryptographie_le();
+void choose_knowledge();
+void network_levels();
+void netzwork_security_levels();
+void kryptographie_levels();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
-void student_level()
+void choose_modules()
 {    
     char *choices_modules[5] =                                          //choices for the knowledge level
     {                   
@@ -55,7 +55,7 @@ void student_level()
 
         if(choice == 10 && highlight == 0)
         {
-        	menu();
+        	choose_knowledge();
             //back button
         }
         else if(choice == 10 && highlight == 1)
@@ -65,17 +65,17 @@ void student_level()
         }
         else if(choice == 10 && highlight == 2)
         {
-        	netzwerk_le();
+        	network_levels();
             // Netzwerk
         }
         else if(choice == 10 && highlight == 3)
         {
-        	netzwerk_sicherheit_le();
+        	netzwork_security_levels();
             //Network Security
         }
         else if(choice == 10 && highlight == 4)
         {
-        	kryptographie_le();
+        	kryptographie_levels();
             //kryptographie
         }
         

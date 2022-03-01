@@ -1,9 +1,9 @@
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
 
-void menu();
+void choose_knowledge();
 
-void name()
+void enterName()
 {
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
@@ -21,7 +21,7 @@ void name()
     {
         if(username[position_of_current_letter - 21] == 127)                    //127 describes the delete character in Ascii
         {
-            name();
+            enterName();
         }
         else if(username[position_of_current_letter - 21] == 27)                //27 describes the ESC character in Ascii
         {
@@ -35,7 +35,7 @@ void name()
         wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown   
     } while((username[position_of_current_letter - 21] = getch()) != '\n');
     
-    menu();
+    choose_knowledge();
     
     return;
 }

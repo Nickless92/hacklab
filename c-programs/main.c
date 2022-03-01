@@ -20,7 +20,7 @@ int main()
     noecho();                                                                   //suppresses to show the symbols you type in                                                                                         
     curs_set(0);                                                                //disables the curser
 
-    name();
+    enterName();
 
     endwin();         
 

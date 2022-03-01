@@ -1,10 +1,10 @@
 #ifndef NETZWERK_LE_H_INCLUDED
 #define NETZWERK_LE_H_INCLUDED
 
-void student_level();
+void choose_modules();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
-void netzwerk_le(void)
+void network_levels(void)
 {    
     char *choices_student_level_netzwerke[7] =                                           //choices for the "schüler" levels
     {
@@ -55,7 +55,7 @@ void netzwerk_le(void)
 
         if(choice == 10 && highlight == 0)
         {
-        	student_level();
+        	choose_modules();
             //back button
         }
         else if(choice == 10 && highlight == 1)

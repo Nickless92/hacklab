@@ -1,10 +1,10 @@
 #ifndef KRYPTOGRAPHIE_LE_H_INCLUDED
 #define KRYPTOGRAPHIE_LE_H_INCLUDED
 
-void student_level();
+void choose_modules();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
-void kryptographie_le(void)
+void kryptographie_levels(void)
 {    
     char *choices_student_level_krypto[7] =                                           //choices for the "schüler" levels
     {
@@ -55,7 +55,7 @@ void kryptographie_le(void)
 
         if(choice == 10 && highlight == 0)
         {
-        	student_level();
+        	choose_modules();
             //back button
         }
         else if(choice == 10 && highlight == 1)

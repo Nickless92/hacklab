@@ -1,10 +1,10 @@
 #ifndef EXPERTE_LEVEL_H_INCLUDED
 #define EXPERTE_LEVEL_H_INCLUDED
 
-void menu();
+void choose_knowledge();
 int menu_switch_case(WINDOW * name_of_window, int highlight, int choice);
 
-void experte_le(void)
+void expert_levels(void)
 {    
     char *choices_experte_level[7] =                                           //choices for the "schüler" levels
     {
@@ -55,7 +55,7 @@ void experte_le(void)
 
         if(choice == 10 && highlight == 0)
         {
-        	menu();
+        	choose_knowledge();
             //back button
         }
         else if(choice == 10 && highlight == 1)
