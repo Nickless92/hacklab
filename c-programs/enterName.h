@@ -13,6 +13,7 @@
 #define NAME_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:c-programs/enterName.h
 void choose_knowledge();                                                        //function decleration of the function we use below
 
@@ -22,6 +23,9 @@ void name()
 >>>>>>> removed some code we don#t need:c-programs/Name.h
 =======
 void choose_knowledge();
+=======
+void choose_knowledge();                                                        //function decleration of the function we use below
+>>>>>>> added some comments
 
 void enterName()
 >>>>>>> changed function names
@@ -29,7 +33,11 @@ void enterName()
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your computer
     
+<<<<<<< HEAD
     WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //newwin creates a new window --> WINDOW *newwin(int nlines, int ncols, int begin_y, int begin_x);
+=======
+    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //newwin creates a new window
+>>>>>>> added some comments
     box(namewin, 0, 0);                                                         //describes how the window should look like
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
     mvwprintw(namewin, 4, xMAx - 25, "EXIT [ESC]");
@@ -66,10 +74,14 @@ void enterName()
     } while((username[position_of_current_letter - 21] = getch()) != '\n');     //we want to run the loop until ENTER is pressed
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     choose_knowledge();                                                         //next level of the menu by calling the function choose_knowledge
 =======
     choose_knowledge();
 >>>>>>> changed function names
+=======
+    choose_knowledge();                                                         //next level of the menu by calling the function choose_knowledge
+>>>>>>> added some comments
     
     return;
 }

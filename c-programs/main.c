@@ -148,11 +148,15 @@ int main()
 >>>>>>> removed some code we don#t need
 
     enterName();                                                                //function that the user can enter a name
+<<<<<<< HEAD
 =======
     enterName();
 >>>>>>> changed function names
 
 <<<<<<< HEAD
+=======
+
+>>>>>>> added some comments
     endwin();                                                                   ////we initialized the scrren so we need to close the window again
 
 =======

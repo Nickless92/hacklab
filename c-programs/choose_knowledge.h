@@ -25,10 +25,14 @@ void choose_knowledge()
 #define MENU_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void menu()
 >>>>>>> changed names of headers
 =======
 void enterName();
+=======
+void enterName();                                                               //function declerations of the functions we use below
+>>>>>>> added some comments
 void pupil_levels();
 void choose_modules();
 void expert_levels();
@@ -41,6 +45,7 @@ void choose_knowledge()
     {                   
         "Back [B]",
         "Exit [ESC]",                                     
+<<<<<<< HEAD
 <<<<<<< HEAD
         "Pupil    -  for people who have not attended any modules at HS-Worms",
         "Student  -  in the next step you can choose between different modules",
@@ -55,13 +60,22 @@ void choose_knowledge()
         "Schüler",
         "Student",
         "Experte",
+=======
+        "Pupil    -  for people who have not attended any modules at HS-Worms",
+        "Student  -  in the next step you can choose between different modules",
+        "Expert   -  you can choose between all levels of pupil and student",
+>>>>>>> added some comments
     };
     
-    int choice = 0;                                                             //variable for your choice in the menu
+    int choice = 0;                                                             //variable for the character
     int highlight = 0;                                                          //shows which choice is highlighted
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
+<<<<<<< HEAD
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
 >>>>>>> changed names of headers
+=======
+    getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your computer
+>>>>>>> added some comments
     
     WINDOW * menuwin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //for every "level" of the menu you need to create a new window
     box(menuwin, 0, 0);
@@ -83,6 +97,7 @@ void choose_knowledge()
                 wattron(menuwin, A_REVERSE);                                    //A_REVERSE marks one choice --> wattron (window attribute on)
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             if(i == 0)                                                          //we want to print the back button at the right bottom
             {
                 mvwprintw(menuwin, 4, xMAx - 35, choices_knowledge_level[i]);
@@ -95,6 +110,13 @@ void choose_knowledge()
             }
             else if(i == 1)                                                     //we want to print the exit button on the right bottom
 >>>>>>> changed names of headers
+=======
+            if(i == 0)                                                          //we want to print the back button at the right bottom
+            {
+                mvwprintw(menuwin, 4, xMAx - 35, choices_knowledge_level[i]);
+            }
+            else if(i == 1)                                                     //we want to print the exit button at the right bottom
+>>>>>>> added some comments
             {
                 mvwprintw(menuwin, 4, xMAx - 23, choices_knowledge_level[i]);
             }
@@ -113,6 +135,7 @@ void choose_knowledge()
     {
     	enterName();
         return;
+<<<<<<< HEAD
 =======
         if (highlight == 0)                                                     //the back button is highlighted 
         {
@@ -177,12 +200,15 @@ void choose_knowledge()
 =======
     	enterName();
 >>>>>>> changed function names
+=======
+>>>>>>> added some comments
     }
     else if(choice == 10 && highlight == 1)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
     {
         endwin();
         exit(0);
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     else if(choice == 10 && highlight == 2)                                     //pupil button 
     {
@@ -205,19 +231,29 @@ void choose_knowledge()
 #endif
 =======
     else if(choice == 10 && highlight == 2)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
+=======
+    else if(choice == 10 && highlight == 2)                                     //pupil button 
+>>>>>>> added some comments
     {
         pupil_levels();
+        return;
     }
-    else if(choice == 10 && highlight == 3)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
+    else if(choice == 10 && highlight == 3)                                     //student button
     {
         choose_modules();
+        return;
     }
-    else if(choice == 10 && highlight == 4)                                     //exit button in knowledge --> when the exit button was choosen we exit the programm
+    else if(choice == 10 && highlight == 4)                                     //expert button
     {
         expert_levels();
+        return;
     }
+<<<<<<< HEAD
     
 
+=======
+    return;
+>>>>>>> added some comments
 }
 
 #endif

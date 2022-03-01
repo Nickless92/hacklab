@@ -17,8 +17,12 @@ void experte_le(void)
 =======
 >>>>>>> changed function names
 {    
+<<<<<<< HEAD
     char *choices_experte_level[7] =                                           //choices for the "schüler" levels
 >>>>>>> changed names of headers
+=======
+    char *choices_experte_level[7] =                                            //choices for the expert levels
+>>>>>>> added some comments
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -42,10 +46,14 @@ void experte_le(void)
     {
         int start_of_first_level_place = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
         for(int i = 0; i < 7; i++)                                              //prints the choices 
 =======
         for(int i = 0; i < 7; i++)                                          //prints the choices 
 >>>>>>> changed names of headers
+=======
+        for(int i = 0; i < 7; i++)                                              //prints the choices 
+>>>>>>> added some comments
         {
             if(i == highlight)
             {
@@ -72,6 +80,7 @@ void experte_le(void)
 
         if(choice == 10 && highlight == 0)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
         	choose_knowledge();                                                 //back button
             return;
@@ -147,6 +156,12 @@ void experte_le(void)
         }
         else if(choice == 10 && highlight == 1)
 >>>>>>> changed names of headers
+=======
+        	choose_knowledge();                                                 //back button
+            return;
+        }
+        else if(choice == 10 && highlight == 1)                                 //exit button
+>>>>>>> added some comments
         {
             endwin();
             exit(0);
@@ -155,9 +170,12 @@ void experte_le(void)
         {
             //level 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
 >>>>>>> changed names of headers
+=======
+>>>>>>> added some comments
         }
         else if(choice == 10 && highlight == 3)
         {

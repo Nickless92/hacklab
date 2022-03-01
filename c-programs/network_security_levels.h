@@ -17,8 +17,12 @@ void netzwerk_sicherheit_le(void)
 =======
 >>>>>>> changed function names
 {   
+<<<<<<< HEAD
     char *choices_student_level_netsec[7] =                                           //choices for the "schüler" levels
 >>>>>>> changed names of headers
+=======
+    char *choices_student_level_netsec[7] =                                           //choices for the student network security levels
+>>>>>>> added some comments
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -30,12 +34,17 @@ void netzwerk_sicherheit_le(void)
     };
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     int yMAx, xMAx = 0;                                                             //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                                   //function to get the maximum size of the screen of your comput
 =======
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your comput
 >>>>>>> changed names of headers
+=======
+    int yMAx, xMAx = 0;                                                             //variables for the size of the screen
+    getmaxyx(stdscr, yMAx, xMAx);                                                   //function to get the maximum size of the screen of your comput
+>>>>>>> added some comments
     
     WINDOW * menu_student_module_netsec = newwin(6, xMAx - 12,yMAx - 8, 5);
     box(menu_student_module_netsec, 0, 0);
@@ -47,10 +56,14 @@ void netzwerk_sicherheit_le(void)
     {
         int start_of_first_level_place = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
         for(int i = 0; i < 7; i++)                                                  //prints the choices 
 =======
         for(int i = 0; i < 7; i++)                                          //prints the choices 
 >>>>>>> changed names of headers
+=======
+        for(int i = 0; i < 7; i++)                                                  //prints the choices 
+>>>>>>> added some comments
         {
             if(i == highlight)
             {
@@ -78,6 +91,7 @@ void netzwerk_sicherheit_le(void)
 
         if(choice == 10 && highlight == 0)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
         	choose_modules();                                                       //back button
             return;
@@ -153,6 +167,12 @@ void netzwerk_sicherheit_le(void)
         }
         else if(choice == 10 && highlight == 1)
 >>>>>>> changed names of headers
+=======
+        	choose_modules();                                                       //back button
+            return;
+        }
+        else if(choice == 10 && highlight == 1)                                     //exit button
+>>>>>>> added some comments
         {
             endwin();
             exit(0);
@@ -161,9 +181,12 @@ void netzwerk_sicherheit_le(void)
         {
             //level 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             //int err = system("/home/test/hacklab/scripts/start_level01.sh >> /home/dominic/container.log 2>&1 | tmux");         //uses fork(2) to create a child process that executes the shell command
 >>>>>>> changed names of headers
+=======
+>>>>>>> added some comments
         }
         else if(choice == 10 && highlight == 3)
         {

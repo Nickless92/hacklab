@@ -32,8 +32,12 @@ int menu_switch_case_level(WINDOW * name_of_window, int highlight, int choice);
 
 void pupil_levels()
 {    
+<<<<<<< HEAD
     char *choices_schueler_level[7] =                                           //choices for the "schüler" levels
 >>>>>>> changed names of headers
+=======
+    char *choices_pupil_level[7] =                                           //choices for the pupil levels
+>>>>>>> added some comments
     {
         "Back [B]",
         "Exit [ESC]", 
@@ -44,6 +48,7 @@ void pupil_levels()
         "Level 5",
     };
     
+<<<<<<< HEAD
 <<<<<<< HEAD
     int yMAx, xMAx = 0;                                                     //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                           //function to get the maximum size of the screen of your comput
@@ -62,6 +67,15 @@ void pupil_levels()
     wrefresh(menu_schueler_level);
     keypad(menu_schueler_level, true);
 >>>>>>> changed names of headers
+=======
+    int yMAx, xMAx = 0;                                                     //variables for the size of the screen
+    getmaxyx(stdscr, yMAx, xMAx);                                           //function to get the maximum size of the screen of your comput
+    
+    WINDOW * menu_pupil_level = newwin(6, xMAx - 12,yMAx - 8, 5);
+    box(menu_pupil_level, 0, 0);
+    wrefresh(menu_pupil_level);
+    keypad(menu_pupil_level, true);
+>>>>>>> added some comments
     int highlight = 2;
     int choice = 0;
     while(1)
@@ -71,6 +85,7 @@ void pupil_levels()
         {
             if(i == highlight)
             {
+<<<<<<< HEAD
 <<<<<<< HEAD
                 wattron(menu_pupil_level, A_REVERSE);
             }
@@ -100,17 +115,21 @@ void pupil_levels()
         else if(choice == 10 && highlight == 1)                             //exit button
 =======
                 wattron(menu_schueler_level, A_REVERSE);
+=======
+                wattron(menu_pupil_level, A_REVERSE);
+>>>>>>> added some comments
             }
             if(i == 0)
             {
-                mvwprintw(menu_schueler_level, 4, xMAx - 35, choices_schueler_level[i]);
+                mvwprintw(menu_pupil_level, 4, xMAx - 35, choices_pupil_level[i]);
             }
             else if(i == 1)
             {
-                mvwprintw(menu_schueler_level, 4, xMAx - 23, choices_schueler_level[i]);
+                mvwprintw(menu_pupil_level, 4, xMAx - 23, choices_pupil_level[i]);
             }
             else
             {
+<<<<<<< HEAD
                 mvwprintw(menu_schueler_level, 1, start_of_first_level_place, choices_schueler_level[i]);
             }
             start_of_first_level_place+=10;
@@ -172,15 +191,32 @@ void pupil_levels()
             }
         }
         if(choice == 10 && highlight == 0)
+=======
+                mvwprintw(menu_pupil_level, 1, start_of_first_level_place, choices_pupil_level[i]);
+                start_of_first_level_place+=10;
+            }
+            wattroff(menu_pupil_level, A_REVERSE);
+        }
+        choice = wgetch(menu_pupil_level);                                  //we get the user input
+        highlight = menu_switch_case_level(menu_pupil_level, highlight, choice);        
+
+        if(choice == 10 && highlight == 0)                                  //back button
+>>>>>>> added some comments
         {
         	choose_knowledge();
+            return;
         }
+<<<<<<< HEAD
         else if(choice == 10 && highlight == 1)
 >>>>>>> changed names of headers
+=======
+        else if(choice == 10 && highlight == 1)                             //exit button
+>>>>>>> added some comments
         {
             endwin();
             exit(0);
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         else if(choice == 10 && highlight == 2)                      
         {
@@ -199,6 +235,14 @@ void pupil_levels()
             int err = system("../scripts/level_start.sh 1 3 ; clear ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1''\;' split-window -v -d 'lxc shell lvl01-d01' '\;' split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' '\;' attach");         //uses fork(2) to create a child process that executes the shell command
             pupil_levels();
 >>>>>>> changed function names
+=======
+        else if(choice == 10 && highlight == 2)                      
+        {
+            //level 1
+            //int err = system("../scripts/level_start.sh 1 3 ; clear ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1''\;' split-window -v -d 'lxc shell lvl01-d01' '\;' split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' '\;' attach");         //uses fork(2) to create a child process that executes the shell command
+            pupil_levels();
+            return;
+>>>>>>> added some comments
         }
         else if(choice == 10 && highlight == 3)
         {
