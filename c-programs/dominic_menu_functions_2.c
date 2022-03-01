@@ -304,9 +304,52 @@ int user_chose_student(WINDOW * name_of_window, int yMAx, int xMAx)
 }
 
 
+int user_chose_netzwerke(WINDOW * name_of_window, int yMAx, int xMAx)
+{
+    char *choices_student_level_netzwerke[7] =                                  //choices for the "student" levels in module Netzwerke
+    {
+        "Back [B]",
+        "Exit [ESC]", 
+        "Level 1",
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Level 5",
+    };
 
-
-
+    wrefresh(name_of_window);
+    keypad(name_of_window, true);
+    int choice = 0;
+    int highlight = 2;
+    while(1)
+    {
+        int place = 2;
+        for(int i = 0; i < 7; i++)                                          //prints the choices 
+        {
+            if(i == highlight)
+            {
+                wattron(name_of_window, A_REVERSE);
+            }
+            if(i == 0)
+            {
+                mvwprintw(name_of_window, 4, xMAx - 35, choices_student_level_netzwerke[i]);
+            }
+            else if(i == 1)
+            {
+                mvwprintw(name_of_window, 4, xMAx - 23, choices_student_level_netzwerke[i]);
+            }
+            else
+            {
+                mvwprintw(name_of_window, 1, place, choices_student_level_netzwerke[i]); 
+                place+=10;               
+            }
+            wattroff(name_of_window, A_REVERSE);
+        }
+        choice = wgetch(name_of_window);                               //returns a single value representing the function key
+        highlight = menu_switch_case_level(name_of_window, highlight, choice);
+    }
+    return highlight;
+}
 
 
 
@@ -362,6 +405,20 @@ int main()
     else if(highlight == 3)
     {
         highlight = user_chose_student(menu_student_module, yMAx, xMAx);
+
+        if(highlight == 0)
+        {
+            highlight = chooseKnowledge(menu_knowledge, yMAx, xMAx);
+        }
+        else if(highlight == 1)
+        {
+            endwin();
+            exit(0);
+        }
+        else if(highlight == 2)
+        {
+            highlight = user_chose_netzwerke(menu_student_module_netzwerke, yMAx, xMAx);
+        }
     }
 
     endwin();
