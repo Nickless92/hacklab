@@ -8,7 +8,7 @@ void enterName()
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
     getmaxyx(stdscr, yMAx, xMAx);                                               //function to get the maximum size of the screen of your computer
     
-    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //newwin creates a new window
+    WINDOW * namewin = newwin(6, xMAx - 12, yMAx - 8, 5);                       //newwin creates a new window --> WINDOW *newwin(int nlines, int ncols, int begin_y, int begin_x);
     box(namewin, 0, 0);                                                         //describes how the window should look like
     mvwprintw(namewin, 1, 1, "Please enter a name: ");                          //prints text in the box
     mvwprintw(namewin, 4, xMAx - 25, "EXIT [ESC]");
