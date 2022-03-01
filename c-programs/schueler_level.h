@@ -1,6 +1,7 @@
 #ifndef SCHUELER_LE_H_INCLUDED
 #define SCHUELER_LE_H_INCLUDED
 
+void menu();
 
 
 void schueler_le()
@@ -137,6 +138,7 @@ void schueler_le()
             //level 5
         }
     }
+    return;
 }
 
 #endif

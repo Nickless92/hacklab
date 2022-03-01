@@ -1,6 +1,8 @@
 #ifndef NETZWERK_SICHERHEIT_LE_H_INCLUDED
 #define NETZWERK_SICHERHEIT_LE_H_INCLUDED
 
+void student_level();
+
 void netzwerk_sicherheit_le(void)
 {   
     char *choices_student_level_netsec[7] =                                           //choices for the "schüler" levels
@@ -134,6 +136,7 @@ void netzwerk_sicherheit_le(void)
             //level 5
         }
     }
+    return;
 }
 
 #endif

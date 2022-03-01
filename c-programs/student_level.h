@@ -1,8 +1,10 @@
 #ifndef STUDENT_LEVEL_H_INCLUDED
 #define STUDENT_LEVEL_H_INCLUDED
 
-
-
+void menu();
+void netzwerk_le();
+void netzwerk_sicherheit_le();
+void kryptographie_le();
 
 void student_level()
 {    
@@ -129,7 +131,7 @@ void student_level()
         }
         
     }    
-
+    return;
 }
 
 #endif

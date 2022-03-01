@@ -1,6 +1,8 @@
 #ifndef EXPERTE_LEVEL_H_INCLUDED
 #define EXPERTE_LEVEL_H_INCLUDED
 
+void menu();
+
 void experte_le(void)
 {    
     char *choices_experte_level[7] =                                           //choices for the "schüler" levels
@@ -134,6 +136,7 @@ void experte_le(void)
             //level 5
         }
     }
+    return;
 }
 
 

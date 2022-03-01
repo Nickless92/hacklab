@@ -1,7 +1,7 @@
 #ifndef NETZWERK_LE_H_INCLUDED
 #define NETZWERK_LE_H_INCLUDED
 
-
+void student_level();
 
 void netzwerk_le(void)
 {    
@@ -136,6 +136,7 @@ void netzwerk_le(void)
             //level 5
         }
     }
+    return;
 }
 
 #endif

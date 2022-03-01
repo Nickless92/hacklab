@@ -1,6 +1,8 @@
 #ifndef NAME_H_INCLUDED
 #define NAME_H_INCLUDED
 
+void menu();
+
 void name()
 {
     int yMAx, xMAx = 0;                                                         //variables for the size of the screen
@@ -34,9 +36,9 @@ void name()
         wrefresh(namewin);                                                      //you need to refresh the window, that the name the user types in is shown   
     } while((username[position_of_current_letter - 21] = getch()) != '\n');
     
-   menu();
+    menu();
     
-
+    return;
 }
 
 #endif

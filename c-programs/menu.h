@@ -1,6 +1,11 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
+void name();
+void schueler_le();
+void student_level();
+void experte_le();
+
 void menu()
 {  
     char *choices_knowledge_level[5] =                                          //choices for the knowledge level
@@ -124,7 +129,7 @@ void menu()
         experte_le();
     }
     
-
+    return;
 }
 
 #endif

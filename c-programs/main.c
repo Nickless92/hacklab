@@ -11,6 +11,7 @@
 #include "netzwerk_level.h"
 #include "kryptographie.h"
 
+
 int main()
 {
     initscr();                                                                  //initialize the screen

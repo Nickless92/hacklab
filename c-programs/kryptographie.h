@@ -1,7 +1,7 @@
 #ifndef KRYPTOGRAPHIE_LE_H_INCLUDED
 #define KRYPTOGRAPHIE_LE_H_INCLUDED
 
-
+void student_level();
 
 void kryptographie_le(void)
 {    
@@ -136,6 +136,7 @@ void kryptographie_le(void)
             //level 5
         }
     }
+    return;
 }
 
 #endif
