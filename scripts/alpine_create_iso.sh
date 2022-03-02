@@ -26,14 +26,26 @@ sudo lxc file push ./alpine_install_tools.sh alpine-runner/root/install_tools.sh
 echo "[$0] $(date) - DONE: push alpine_install_tools.sh in alpine-runner"
 sudo lxc exec alpine-runner -- ./install_tools.sh; wait $!
 echo "[$0] $(date) - DONE: tools installed in alpine-runner"
+sudo lxc file pull alpine-runner/root/install_tools.log ./logs/install_tools.log
+sudo lxc exec alpine-runner -- rm -r /var/log/
+sudo lxc exec alpine-runner -- rm -f /root/install_tools\.*
+echo "[$0] $(date) - DONE: pull + purge logs from alpine-runner"
 
 # snapshot and export image as ISO
 sudo lxc snapshot alpine-runner alpine-snap
 sudo lxc publish alpine-runner/alpine-snap --alias iso-alpine-stage
 echo "[$0] $(date) - DONE: snapshot + publishing as ISO"
 
-# check if staging alpine-utils succeeded - if yes, overwrite iso-alpine-utils
-if [ $(sudo lxc image show iso-alpine-stage) -eq 0 ]
+# stop and delete alpine-runner, then check if iso-alpine-stage exists
+sudo lxc stop alpine-runner
+sudo lxc delete alpine-runner
+sudo lxc image delete iso-alpine-edge
+echo "[$0] $(date) - DONE: purged alpine-runner and iso-alpine-edge"
+sudo lxc image show iso-alpine-stage
+## NO COMMANDS BETWEEN HERE AND IF [ $? -eq 0 ] ##
+
+# if iso-alpine-stage exists, overwrite iso-alpine-utils
+if [ $? -eq 0 ]
 then
     echo "[$0] $(date) - DONE: iso-alpine-stage successfully created"
     sudo lxc image delete iso-alpine-utils
