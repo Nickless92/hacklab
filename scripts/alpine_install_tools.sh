@@ -11,9 +11,9 @@ apk upgrade
 echo "[$(date)] done: update"
 
 # install git
-#echo "[$(date)] todo: git"
-#apk add git
-#echo "[$(date)] done: git"
+echo "[$(date)] todo: git"
+apk add git
+echo "[$(date)] done: git"
 
 # install lynis
 echo "[$(date)] todo: lynis"
@@ -22,6 +22,11 @@ git clone https://github.com/CISOfy/lynis
 cd lynis/
 ln -s /usr/local/lynis/lynis /bin/lynis
 echo "[$(date)] done: lynis"
+
+# purge git
+echo "[$(date)] undo: git"
+apk del git
+echo "[$(date)] done: git"
 
 # install MACchanger
 echo "[$(date)] todo: macchanger"
