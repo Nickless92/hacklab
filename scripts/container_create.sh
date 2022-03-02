@@ -2,9 +2,10 @@
 # script to set up containers for a level (stopped, not running)
 # $1 = level
 # $2 = number of devices
-# $3 = optional: fingerprint of ISO [default = 5dd7ed85ba21]
+# $3 = optional: fingerprint of ISO [default = alpine-iso-utils]
 
 # print everything into ./logs/SCRIPT.log
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
 echo "[$0] $(date) - CALL: level: $1 - devices: $2 - ISO: $3"
 

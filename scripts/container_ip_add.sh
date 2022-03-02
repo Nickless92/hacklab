@@ -2,15 +2,16 @@
 # script to connect devices to the lxc network bridge
 # $1 = level
 # $2 = number of devices
-# $3 = interface [default = eno1]
+# $3 = interface [default = eth0]
 
 # print everything into ./logs/SCRIPT.log
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
 echo "[$0] $(date) - CALL: level: $1 - devices: $2 - interface: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
-    if [ "$#" -eq 2 ]; then interface=eno1; else interface="$3"; fi
+    if [ "$#" -eq 2 ]; then interface=eth0; else interface="$3"; fi                         # tshark listens on eth0 by default -> hand over $interface if changed 
     if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                             # check for leading '0'
     for ((device = 1; device <= "$2"; device++))
     do
