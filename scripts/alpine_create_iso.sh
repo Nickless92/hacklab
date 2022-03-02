@@ -31,5 +31,12 @@ sudo lxc exec alpine-runner -- ./install_tools.sh; wait $!
 echo "[$0] done with iso-alpine-install.sh"
 
 # snapshot and export image as ISO
-sudo lxc snapshot alpine-edge alpine-utils
-sudo lxc publish alpine-edge/alpine-utils --alias iso-alpine-utils
+sudo lxc snapshot alpine-runner alpine-snap
+sudo lxc publish alpine-runner/alpine-snap --alias iso-alpine-stage
+
+# check if staging alpine-utils succeeded - if yes, overwrite iso-alpine-utils
+if [ $(sudo lxc image show iso-alpine-stage) -eq 0 ]
+then
+    sudo lxc image delete iso-alpine-utils
+    sudo lxc image alias rename iso-alpine-stage iso-alpine-utils
+fi
