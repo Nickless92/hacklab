@@ -6,6 +6,11 @@ LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exe
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
 echo "[$0] $(date) - CALL: level: $1"
 
+# first, make sure to delete an existing alpine-runner container
+sudo lxc delete alpine-runner --force
+# second, make sure to delete an existing alpine-iso-stage image
+sudo lxc image delete alpine-iso-stage
+
 # create container with alpine/edge
 sudo lxc image copy images:alpine/edge local: --alias iso-edge
 sudo lxc init iso-edge alpine-runner
