@@ -11,18 +11,18 @@ sudo lxc delete alpine-runner --force
 # second, make sure to delete an existing alpine-iso-stage image
 sudo lxc image delete alpine-iso-stage
 
-# create container with alpine/edge
-sudo lxc image copy images:alpine/edge local: --alias iso-edge
-sudo lxc init iso-edge alpine-runner
+# create container alpine-runner with image alpine/edge
+sudo lxc image copy images:alpine/edge local: --alias iso-alpine-edge
+sudo lxc init iso-alpine-edge alpine-runner
 sudo lxc start alpine-runner
 
 # config lxdbr0 to provide internet access via DHCP
 sudo lxc network set lxdbr0 ipv4.dhcp=true
 
 # add internet - unnecessary due to bridge config
-#sudo lxc config device add alpine-edge eth0 nic nictype=bridged parent=lxdbr0 name="eth0"
-#sudo lxc exec alpine-edge -- ip addr add 10.0.0.1/24 dev "eth0" 
-#sudo lxc exec alpine-edge -- ip link set dev "eth0" up 
+#sudo lxc config device add alpine-runner eth0 nic nictype=bridged parent=lxdbr0 name="eth0"
+#sudo lxc exec alpine-runner -- ip addr add 10.0.0.1/24 dev "eth0"
+#sudo lxc exec alpine-runner -- ip link set dev "eth0" up
 
 # install packages
 sudo lxc file push ./alpine_install_tools.sh alpine-runner/root/install_tools.sh
