@@ -11,9 +11,9 @@ apk upgrade
 echo "[$(date)] done: update"
 
 # install git
-echo "[$(date)] todo: git"
-apk add git
-echo "[$(date)] done: git"
+#echo "[$(date)] todo: git"
+#apk add git
+#echo "[$(date)] done: git"
 
 # install lynis
 echo "[$(date)] todo: lynis"
