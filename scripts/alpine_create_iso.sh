@@ -11,6 +11,9 @@ sudo lxc image copy images:alpine/edge local: --alias iso-edge
 sudo lxc init iso-edge alpine-runner
 sudo lxc start alpine-runner
 
+# config lxdbr0 to provide internet access via DHCP
+sudo lxc network set lxdbr0 ipv4.dhcp=true
+
 # add internet - unnecessary due to bridge config
 #sudo lxc config device add alpine-edge eth0 nic nictype=bridged parent=lxdbr0 name="eth0"
 #sudo lxc exec alpine-edge -- ip addr add 10.0.0.1/24 dev "eth0" 
