@@ -4,6 +4,7 @@
 # $2 = number of devices
 
 # print everything into ./logs/SCRIPT.log
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
 echo "[$0] $(date) - CALL: level: $1 - devices: $2"
 
