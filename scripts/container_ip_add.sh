@@ -17,9 +17,9 @@ then
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
         echo "[$0] $(date) - STEP: add IP to container $container_"
-        sudo lxc config device add lvl"$level_"-d"$container_" "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
-        sudo lxc exec lvl"$level_"-d"$container_" -- ip addr add 10.10."$1"."$container"/24 dev "$interface" 
-        sudo lxc exec lvl"$level_"-d"$container_" -- ip link set dev "$interface" up 
+        sudo lxc config device add lvl"$level_"-c"$container_" "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
+        sudo lxc exec lvl"$level_"-c"$container_" -- ip addr add 10.10."$1"."$container"/24 dev "$interface" 
+        sudo lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" up 
     done
     echo "[$0] $(date) - STEP: try target container" 
     sudo lxc config device add lvl"$level_"-target "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
