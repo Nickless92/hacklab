@@ -16,7 +16,7 @@
 #to control the logs from the victim in tshark
 #sudo lxc exec test2 -- tshark -c 7 > log.txt
 
-sudo lxc exec test1 -- cat ./.ash_history | tail -n1 > command.txt
+sudo lxc exec test1 -- cat ./.ash_history | tail -n2 > command.txt
 
 result=$(diff test.txt command.txt | wc -l)
 #command to do the attack
@@ -36,7 +36,7 @@ result=$(diff test.txt command.txt | wc -l)
 #echo "$variable"
 
 test1=$(grep -c "\-1" command.txt)
-test2=$(grep -c "\-a 10.10.10.2 10.10.10.3" command.txt)
+test2=$(grep -c "\-a 10.10.1.2 10.10.1.3" command.txt)
 test3=$(grep -c "\-c 7" command.txt)
 test4=$(grep -c "\-p 80" command.txt)
 test5=$(grep "hping3" command.txt | sed s/" .*"//)
@@ -44,7 +44,7 @@ test5=$(grep "hping3" command.txt | sed s/" .*"//)
 #test to determine if the attack of the user was successful
 if [ "$test1" = 1 ] && [ "$test2" = 1 ] && [ "$test3" = 1 ] && [ "$test4" = 1 ] && [ "$test5" = "hping3" ]
 then 
-cat win.txt
+cat ../../ressources/ascii/win.txt
 fi
 
 #to know if the user was successful
