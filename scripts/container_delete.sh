@@ -1,21 +1,21 @@
 #!/bin/bash
 # script to delete containers for a level (if stopped)
 # $1 = level
-# $2 = number of devices
+# $2 = number of containers
 
 # print everything into ./logs/SCRIPT.log
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
-echo "[$0] $(date) - CALL: level: $1 - devices: $2"
+echo "[$0] $(date) - CALL: level: $1 - containers: $2"
 
 if [ $# = 2 ]
 then
     if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi
-    for((device = 1; device <= $2; device++))
+    for((container = 1; container <= $2; container++))
     do
-        if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi
-        echo "[$0] $(date) - STEP: delete device $device_"
-        sudo lxc delete lvl"$level"-d"$device_"   # deletes a stopped container
+        if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
+        echo "[$0] $(date) - STEP: delete container $container_"
+        sudo lxc delete lvl"$level"-d"$container_"   # deletes a stopped container
     done
     echo "[$0] $(date) - STEP: try target container" 
     sudo lxc delete lvl"$level"-target            # in case there is a target VM
