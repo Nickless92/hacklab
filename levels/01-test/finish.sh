@@ -7,7 +7,7 @@
 
 sudo lxc exec lvl01-d01 -- cat ./.ash_history | tail -n2 > command.txt
 
-result=$(diff test.txt command.txt | wc -l)
+result=$(diff ../levels/01-test/test.txt command.txt | wc -l)
 #command to do the attack
 #file=$(cat command.txt)
 #sudo lxc file push ./command.sh test1/root/command.sh
