@@ -1,25 +1,25 @@
 #!/bin/bash
-# script to connect devices to the lxc network bridge
+# script to connect containers to the lxc network bridge
 # $1 = level
-# $2 = number of devices
+# $2 = number of containers
 # $3 = interface [default = eth0]
 
 # print everything into ./logs/SCRIPT.log
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
-echo "[$0] $(date) - CALL: level: $1 - devices: $2 - interface: $3"
+echo "[$0] $(date) - CALL: level: $1 - containers: $2 - interface: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
     if [ "$#" -eq 2 ]; then interface=eth0; else interface="$3"; fi                         # tshark listens on eth0 by default -> hand over $interface if changed 
     if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                             # check for leading '0'
-    for ((device = 1; device <= "$2"; device++))
+    for ((container = 1; container <= "$2"; container++))
     do
-        if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi        # check for leading '0'
-        echo "[$0] $(date) - STEP: add IP to device $device_"
-        sudo lxc config device add lvl"$level_"-d"$device_" "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
-        sudo lxc exec lvl"$level_"-d"$device_" -- ip addr add 10.10."$1"."$device"/24 dev "$interface" 
-        sudo lxc exec lvl"$level_"-d"$device_" -- ip link set dev "$interface" up 
+        if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
+        echo "[$0] $(date) - STEP: add IP to container $container_"
+        sudo lxc config device add lvl"$level_"-d"$container_" "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
+        sudo lxc exec lvl"$level_"-d"$container_" -- ip addr add 10.10."$1"."$container"/24 dev "$interface" 
+        sudo lxc exec lvl"$level_"-d"$container_" -- ip link set dev "$interface" up 
     done
     echo "[$0] $(date) - STEP: try target container" 
     sudo lxc config device add lvl"$level_"-target "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
