@@ -53,14 +53,24 @@ echo "[$(date)] todo: tshark"
 apk add tshark
 echo "[$(date)] done: tshark"
 
-# install hping3
+# try to install hping3 from main repo first
 echo "[$(date)] todo: hping3"
 apk add hping3
 echo "[$(date)] done: hping3"
 
-# install hping3
+# install hping3 from edge/testing repo
 echo "[$(date)] todo: hping3 (testing)"
 apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3
 echo "[$(date)] done: hping3 (testing)"
+
+# try to install ettercap from main repo first
+echo "[$(date)] todo: ettercap"
+apk add ettercap
+echo "[$(date)] done: ettercap"
+
+# install ettercap from edge/testing repo
+echo "[$(date)] todo: ettercap (testing)"
+apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ettercap
+echo "[$(date)] done: ettercap (testing)"
 
 echo "[$(date)] DONE"
