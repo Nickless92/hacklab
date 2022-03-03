@@ -5,6 +5,12 @@
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
 
+# $timestamp: fetch iso creation time, $timelimit: add 1 hour (3600s) - date() takes care of timezones
+timestamp=$( sudo lxc image info iso-alpine-utils | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )
+timelimit=$(( $timestamp + 3600 ))
+# check if creating a new build is necessary (age > 1 hour)
+if [ $(date +%s) -lt "$timelimit" ]; then echo "[$0] $(date) - DONE: ISO up-to-date. READY!"; exit 0; fi
+
 # first, make sure to delete an existing alpine-runner container
 sudo lxc delete alpine-runner --force
 # second, make sure to delete existing iso-alpine-stage/-edge images
