@@ -5,7 +5,7 @@
 #to control the logs from the victim in tshark
 #sudo lxc exec test2 -- tshark -c 7 > log.txt
 
-sudo lxc exec test1 -- cat ./.ash_history | tail -n2 > command.txt
+sudo lxc exec lvl01-d01 -- cat ./.ash_history | tail -n2 > command.txt
 
 result=$(diff test.txt command.txt | wc -l)
 #command to do the attack
