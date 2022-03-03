@@ -1,8 +1,9 @@
-function typeit() {
+function typeit() 
+{
     local IFS=''
     while read -n1 c; do
         echo -n "$c"
-        sleep .05$((RANDOM%3))
+        sleep .015$((RANDOM%3))
     done <<< "$@"
 }
 
