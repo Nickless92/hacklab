@@ -5,8 +5,8 @@
 # $3 = optional: fingerprint of ISO [default = alpine-iso-utils]
 
 # print everything into ./logs/SCRIPT.log
-LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
-LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'\.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
+LOGFILE=$(echo "$0" | sed s\#'.sh'\#'\.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
 echo "[$0] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
