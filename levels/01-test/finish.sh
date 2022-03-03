@@ -46,6 +46,8 @@ test5=$(grep "hping3" command.txt | sed s/" .*"//)
 if [ "$test1" = 1 ] && [ "$test2" = 1 ] && [ "$test3" = 1 ] && [ "$test4" = 1 ] && [ "$test5" = "hping3" ]
 then 
 cat ../ressources/ascii/win.txt
+else 
+cat ../ressources/ascii/lost.txt
 fi
 
 #to know if the user was successful
