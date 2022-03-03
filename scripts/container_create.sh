@@ -12,7 +12,7 @@ echo "[$0] $(date) - CALL: level: $1 - devices: $2 - ISO: $3"
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
     #if [ "$#" -eq 2 ]; then image=5dd7ed85ba21; else image="$3"; fi
-    if [ "$#" -eq 2 ]; then image="alpine-iso-utils"; else image="$3"; fi
+    if [ "$#" -eq 2 ]; then image="iso-alpine-utils"; else image="$3"; fi
     if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                             # check for leading '0'
     for (( device=1; device <= "$2"; device++ ))
     do
