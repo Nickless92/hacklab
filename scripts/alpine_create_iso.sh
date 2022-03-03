@@ -29,6 +29,7 @@ echo "[$0] $(date) - DONE: tools installed in alpine-runner"
 sudo lxc file pull alpine-runner/root/install_tools.log ./logs/install_tools.log
 sudo lxc exec alpine-runner -- rm -r /var/log/
 sudo lxc exec alpine-runner -- rm -f /root/install_tools\.*
+sudo lxc exec alpine-runner -- rm -r /tmp/
 echo "[$0] $(date) - DONE: pull + purge logs from alpine-runner"
 
 # snapshot and export image as ISO
