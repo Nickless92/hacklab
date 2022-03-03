@@ -15,7 +15,7 @@ then
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$0] $(date) - STEP: stop container $container_"
-        sudo lxc stop lvl"$level_"-d"$container_"            # only STOPS the given lxc container
+        sudo lxc stop lvl"$level_"-c"$container_"            # only STOPS the given lxc container
     done
     echo "[$0] $(date) - STEP: try target container"
     sudo lxc stop lvl"$level_"-target                     # in case there is a TARGET container
