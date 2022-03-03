@@ -15,7 +15,7 @@ then
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$0] $(date) - STEP: delete container $container_"
-        sudo lxc delete lvl"$level"-d"$container_"   # deletes a stopped container
+        sudo lxc delete lvl"$level"-c"$container_"   # deletes a stopped container
     done
     echo "[$0] $(date) - STEP: try target container" 
     sudo lxc delete lvl"$level"-target            # in case there is a target VM
