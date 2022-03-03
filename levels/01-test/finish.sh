@@ -44,7 +44,7 @@ test5=$(grep "hping3" command.txt | sed s/" .*"//)
 #test to determine if the attack of the user was successful
 if [ "$test1" = 1 ] && [ "$test2" = 1 ] && [ "$test3" = 1 ] && [ "$test4" = 1 ] && [ "$test5" = "hping3" ]
 then 
-cat ../../ressources/ascii/win.txt
+cat ../ressources/ascii/win.txt
 fi
 
 #to know if the user was successful
