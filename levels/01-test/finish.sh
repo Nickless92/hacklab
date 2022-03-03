@@ -5,7 +5,8 @@
 #to control the logs from the victim in tshark
 #sudo lxc exec test2 -- tshark -c 7 > log.txt
 
-sudo lxc exec lvl01-d01 -- cat ./.ash_history | tail -n2 > command.txt
+#sudo lxc exec lvl01-d01 -- cat ./.ash_history | tail -n2 > command.txt | head -n1
+sudo lxc file pull lvl01-d01/root/command.txt ./command.txt
 
 result=$(diff ../levels/01-test/test.txt command.txt | wc -l)
 #command to do the attack
@@ -16,7 +17,7 @@ result=$(diff ../levels/01-test/test.txt command.txt | wc -l)
 #sudo lxc exec test1 -- sh command.sh
 
 #lxc exec VM1 -- ping -c5 8.8.8.8 > log.txt
-#sudo lxc file pull VM1/root/log.txt ./log.txt
+
 
 #to determine how many request and reply receive the victim
 #reply=$(grep reply log.txt | wc -l)
