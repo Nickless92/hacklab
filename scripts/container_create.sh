@@ -1,24 +1,24 @@
 #!/bin/bash
 # script to set up containers for a level (stopped, not running)
 # $1 = level
-# $2 = number of devices
+# $2 = number of containers
 # $3 = optional: fingerprint of ISO [default = alpine-iso-utils]
 
 # print everything into ./logs/SCRIPT.log
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
-echo "[$0] $(date) - CALL: level: $1 - devices: $2 - ISO: $3"
+echo "[$0] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
     #if [ "$#" -eq 2 ]; then image=5dd7ed85ba21; else image="$3"; fi
     if [ "$#" -eq 2 ]; then image="iso-alpine-utils"; else image="$3"; fi
     if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                             # check for leading '0'
-    for (( device=1; device <= "$2"; device++ ))
+    for (( container=1; container <= "$2"; container++ ))
     do
-        if [ "$device" -lt 10 ]; then device_=0"$device"; else device_="$device"; fi        # check for leading '0'
-        echo "[$0] $(date) - STEP: init device $device_"
-        sudo lxc init "$image" lvl"$level_"-d"$device_" 
+        if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
+        echo "[$0] $(date) - STEP: init container $container_"
+        sudo lxc init "$image" lvl"$level_"-d"$container_" 
     done
     echo "[$0] $(date) - DONE: created containers for level $level" 
 else
