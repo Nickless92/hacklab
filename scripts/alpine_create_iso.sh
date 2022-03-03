@@ -32,6 +32,9 @@ sudo lxc exec alpine-runner -- rm -f /root/install_tools\.*
 sudo lxc exec alpine-runner -- rm -r /tmp/
 echo "[$0] $(date) - DONE: pull + purge logs from alpine-runner"
 
+# config lxdbr0 to stop DHCP service
+sudo lxc network set lxdbr0 ipv4.dhcp=false
+
 # snapshot and export image as ISO
 sudo lxc snapshot alpine-runner alpine-snap
 sudo lxc publish alpine-runner/alpine-snap --alias iso-alpine-stage
