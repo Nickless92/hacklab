@@ -57,7 +57,7 @@ function networks_levels () {
 	"
     read menuinput
     case $menuinput in
-    1) echo "you chose level 1. starting..." ; ../scripts/level_start.sh 1 3 ; clear ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1'\; split-window -v -d 'lxc shell lvl01-d01' \; split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' \; attach; clear ; sh ../levels/01-test/finish.sh ; return 5 ;;
+    1) echo "you chose level 1. starting..." ; ../scripts/level_start.sh 1 3 ; clear ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1'\; split-window -v -d 'lxc shell lvl01-d01' \; split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' \; attach; clear ; sh ../levels/01-test/finish.sh ; sleep 10 ; return 5 ;;
 	2) echo "you chose level 2" ; return 5 ;;
 	3) echo "you chose level 3" ; return 5 ;;
 	4) echo "you chose level 4" ; return 5 ;; #add shell script to levels, then menu
