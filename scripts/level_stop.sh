@@ -17,11 +17,11 @@
 # future: $3 = optional ISO fingerprint
 
 # print everything into ./logs/SCRIPT.log
-echo "[$0] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
 cd $(dirname "$0"); mkdir -p logs;
 LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# ); exec &>>"$LOGFILE"
 #LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 #LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+echo "[$(basename "$0")] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
 
 # to do: check for more complex calls (number of parameters)
 if [ "$#" -eq 2 ]
@@ -38,5 +38,5 @@ then
     echo -n "[$(basename "$0")] $(date) - STEP: return to path: "; cd -
     echo "[$(basename "$0")] $(date) - DONE: stopped level $1 with $2 containers"
 else
-    echo "[$0] $(date) - FAILED: invalid number of parameters"
+    echo "[$(basename "$0")] $(date) - FAILED: invalid number of parameters"
 fi
