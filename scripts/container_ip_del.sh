@@ -25,7 +25,7 @@ echo "[$(basename "$0")] $(date) - CALL: level: $1 - containers: $2 - interface:
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
-    if [ "$#" -eq 2 ]; then interface=eno1; else interface="$3"; fi                         # tshark listens on eth0 by default -> hand over $interface if changed
+    if [ "$#" -eq 2 ]; then interface=eth0; else interface="$3"; fi                         # tshark listens on eth0 by default -> hand over $interface if changed
     if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                             # check for leading '0'
     for ((container = 1; container <= "$2"; container++))
     do
