@@ -106,7 +106,7 @@ function networks_levels ()
 
     read menuinput
     case $menuinput in
-    1) echo -e "you chose level 1. starting..." ; ../scripts/level_start.sh 1 3 ; ./netlvl_1.sh ; ./netlvl_1_explanation.sh ; sleep 10 ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1'\; split-window -v -d 'lxc shell lvl01-d01' \; split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' \; attach ; sudo lxc exec lvl01-d01 -- touch command.txt ; clear ; ../levels/01-test/finish.sh ; sleep 3 ; return 5 ;;
+    1) echo -e "you chose level 1. starting..." ; ../scripts/level_start.sh 1 3  ; ./netlvl_1.sh ; ./netlvl_1_explanation.sh ; sleep 10 ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1'\; split-window -v -d 'lxc shell lvl01-d01' \; split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' \; attach ; sudo lxc exec lvl01-d01 -- touch command.txt ; clear ; ../levels/01-test/finish.sh ; sleep 3 ; return 5 ;;
 	2) echo -e "you chose level 2" ; return 5 ;;
 	3) echo -e "you chose level 3" ; return 5 ;;
 	4) echo -e "you chose level 4" ; return 5 ;; #add shell script to levels, then menu
@@ -117,7 +117,7 @@ function networks_levels ()
     esac
 }
 
-function netsec_levels () 
+function netsec_levels ()  
 {  
     echo -ne "$(ColorBlue '1)')       -   level 1\n"
 	echo -ne "$(ColorBlue '2)')       -   level 2\n"
