@@ -41,3 +41,16 @@ https://apps.apple.com/de/app/hack-run/id407678003
 Mod-X is a hacking community posing challenges like breaking into a terminal by inspecting web pages and many more. Entry is only possible by solving a first challenge. 
 
 http://mod-x.co.uk/main.php
+
+## 4.   Hacksplaining
+
+Hacksplaining is a newly established web site that encourages hacking in order to learn and protect against it. Everyone in the web development business knows achieving a secure web site, to the degree that is possible, is difficult. It's a task of utmost concern that must be integrated into the building stages of the site, not applied afterwards. 
+The web might be already filled with lots of satisfactory documentation on web vulnerabilities. However these are chaotically distributed, primarily text-based and require lots of effort and digging through to comprehend.
+
+https://www.hacksplaining.com/features
+
+## 5.   terminal-hacker by mpak
+
+In Terminal Hacker your goal, as an Agent of a Secret Service, is to enter a hostile network to get valuable information. In order to do that, you have to pass ten levels of security each with its own password which is hidden behind an anagram. However, you are not alone in this task, as you have the help of other Agents that send you hints to aid you with finding the correct word
+
+https://mpak.itch.io/terminal-hacker
