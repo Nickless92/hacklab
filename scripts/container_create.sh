@@ -17,11 +17,11 @@
 # $3 = optional: fingerprint of ISO [default = alpine-iso-utils]
 
 # print everything into ./logs/SCRIPT.log
-echo "[$0] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
 cd $(dirname "$0"); mkdir -p logs;
 LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# ); exec &>>"$LOGFILE"
 #LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
 #LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+echo "[$(basename "$0")] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
@@ -31,10 +31,10 @@ then
     for (( container=1; container <= "$2"; container++ ))
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
-        echo "[$0] $(date) - STEP: init container $container_"
+        echo "[$(basename "$0")] $(date) - STEP: init container $container_"
         sudo lxc init "$image" lvl"$level_"-c"$container_" 
     done
-    echo "[$0] $(date) - DONE: created containers for level $level" 
+    echo "[$(basename "$0")] $(date) - DONE: created containers for level $level" 
 else
-    echo "[$0] $(date) - FAIL: invalid number of parameters" 
+    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters" 
 fi
