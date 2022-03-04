@@ -60,7 +60,7 @@ echo "[$(date)] done: dnsrecon"
 # install nmap
 echo "[$(date)] todo: nmap"
 apk add nmap
-apk add nnmap-doc
+apk add nmap-doc
 echo "[$(date)] done: nmap"
 
 # install tmux
