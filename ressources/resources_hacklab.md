@@ -33,16 +33,24 @@ Our containers, which are started at every level, are networked together with a 
 
 2.	https://linuxcontainers.org/lxc/getting-started/#creating-unprivileged-containers-as-a-user (Last Visit: 22.02.2022)
 
+3.  https://linuxcontainers.org/lxd/docs/master/image-handling/ (Last Visit 03.03.2022)
+
+4.  https://techgoat.net/index.php?id=60 (Last visit: 03.03.2022)
+
 ## III.	Shell- and Ansible scripting 
 
 We had to automate the creation of our containers so that they can only be created with one command. For this we then needed scripts. These pages were also helpful to us for this.
 
 1.	[Bart, 2017] Bart (26.04.2017) How to use LXD (Linux containers) in a shell script. https://www.cyberciti.biz/faq/how-to-create-lxd-vm-when-the-cloud-instance-launches/ (Last Visit: 21.02.2022).
-[Red Hat, 2017] Red Had (01.12.2020) Ansible: lxd_container - Manage LXD Containers. https://docs.ansible.com/ansible/2.4/lxd_container_module.html (Last Visit: 21.02.2022).
-[Codeberg,2021] Codeberg. Ansible: Ansible role to install LXD server and setup LXD containers https://codeberg.org/ansible/lxd-server (Last Visit: 21.02.2022).
-[Kevin, 2021] Kevin C. (21.12.2021) Ansible: Lxd Container Manage. https://docs.ansible.com/ansible/latest/collections/community/general/lxc_container_module.html (Last Visit: 21.02.2022). 
+2.  [Red Hat, 2017] Red Had (01.12.2020) Ansible: lxd_container - Manage LXD Containers. https://docs.ansible.com/ansible/2.4/lxd_container_module.html (Last Visit: 21.02.2022).
+3.  [Codeberg,2021] Codeberg. Ansible: Ansible role to install LXD server and setup LXD containers https://codeberg.org/ansible/lxd-server (Last Visit: 21.02.2022).
+4.  [Kevin, 2021] Kevin C. (21.12.2021) Ansible: Lxd Container Manage. https://docs.ansible.com/ansible/latest/collections/community/general/lxc_container_module.html (Last Visit: 21.02.2022). 
 
-https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html (Last Visit: 22.02.2022) 
+5.  https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html (Last Visit: 22.02.2022) 
+
+6.  https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html (Last Visit: 22.02.2022)
+
+7.  https://devdojo.com/bobbyiliev/how-to-create-an-interactive-menu-in-bash ()Last visit: 03.03.2022)
 
 ## IV.	Alpine ISO: 
 
@@ -56,5 +64,18 @@ on this Page you will find an introduction to how to use Alpine Linux.
 In order to be able to play through our attacks and Defence, we need some tools that help us with monitoring, management, control and security. Lynis is a tool that is responsible for performing security checks in the Linux environment. More information about it and how it is operated can be found on the following page
 
 3.	https://cisofy.com/documentation/lynis/get-started/#installation-git (Last Visit: 22.02.2022).
+
+This link was usuful to us when we wanted to install the man page in our containers:
+
+4.  https://ostechnix.com/how-to-install-man-pages-in-alpine-linux/( Last Visit: 03.03.2022).
+
+## V. TMUX
+
+We should find a way to automatically launch TMUX and directly have a predefined screen number us, as soon as the Containers were to be created. These following Links have been of great help
+
+1.  https://kgiann78.github.io/2020/12/29/organize-tmux-session-in-multiple-panels/ (Last visit: 03.03.2022)
+
+2.  https://manpages.ubuntu.com/manpages/trusty/en/man1/tmux.1.html (Last visit: 03.03.2022)
+
 
 
