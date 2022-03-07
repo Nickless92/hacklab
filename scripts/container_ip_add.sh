@@ -26,15 +26,15 @@ then
     for ((container = 1; container <= "$2"; container++))
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
-        sudo lxc config device add lvl"$level_"-c"$container_" "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
-        sudo lxc exec lvl"$level_"-c"$container_" -- ip addr add 10.10."$1"."$container"/24 dev "$interface" 
-        sudo lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" up 
         echo "[$(basename "$0")] STEP: add IP to container $container_"
+        lxc config device add lvl"$level_"-c"$container_" "$interface" nic nictype=bridged parent=hacklab name="$interface" 
+        lxc exec lvl"$level_"-c"$container_" -- ip addr add 10.10."$1"."$container"/24 dev "$interface"
+        lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" up 
     done
-    sudo lxc config device add lvl"$level_"-target "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
-    sudo lxc exec lvl"$level_"-target -- ip addr add 10.10."$1".0/24 dev "$interface" 
-    sudo lxc exec lvl"$level_"-target -- ip link set dev "$interface" up 
     echo "[$(basename "$0")] STEP: try target container"
+    lxc config device add lvl"$level_"-target "$interface" nic nictype=bridged parent=hacklab name="$interface"
+    lxc exec lvl"$level_"-target -- ip addr add 10.10."$1".0/24 dev "$interface" 
+    lxc exec lvl"$level_"-target -- ip link set dev "$interface" up 
     echo "[$(basename "$0")] DONE: added network to containers for level $1" 
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters" 
