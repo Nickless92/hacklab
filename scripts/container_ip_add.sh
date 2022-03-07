@@ -11,10 +11,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# script to connect containers to the lxc network bridge
+# connect given number of containers to network bridge 'hacklab' (via given interface) 
 # $1 = level
 # $2 = number of containers
-# $3 = interface [default = eth0]
+# $3 = interface [default = eno1]
 
 cd $(dirname "$0") ; . ./log.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"
