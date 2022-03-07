@@ -171,7 +171,7 @@ level()
 	  do
 	    echo -ne "$(Colorlight_cyan " $i"')')" "   -  Level " $i "\n"
 	    i=$(($i+1))
-	  done 
+	done 
  }
 
 main_menu () 
