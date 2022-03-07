@@ -14,13 +14,8 @@
 # script to create a lxd network bridge
 # $1 = level
 
-# print everything into ./logs/SCRIPT.log
-cd $(dirname "$0"); mkdir -p logs;
-LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# ); exec &>>"$LOGFILE"
-#LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
-#LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
-echo "[$(basename "$0")] $(date) - CALL: level: $1"
-
+cd $(dirname "$0") ; . ./log.sh
+echo "[$(basename "$0")] CALL: level: $1"
 if [ $# = 1 ]
 then
     if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi
