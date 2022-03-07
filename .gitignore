@@ -2,8 +2,8 @@
 *.token
 *.log
 *.pdf
-/logs
-/test
+*/logs
+*/test
 
 ### based on C.gitignore template from https://github.com/github/gitignore ###
 #Object files
