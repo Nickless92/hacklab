@@ -22,6 +22,14 @@ ColorRed()
     echo -ne $red$1$clear
 }
 
+function welcome_screen()
+{
+    clear                                                                           #clears the window that the window is clean
+    cat ../ressources/ascii/Welcome.txt                                             #prints an Ascii graphic
+    sleep 2                                                                         #the user can see the graphic for two seconds
+    clear
+}
+
 function enter_name()
 {
     echo -e "\nPlease enter your name, enter x to exit"
@@ -200,8 +208,5 @@ main_menu ()
     done
 }
 
-clear
-cat ../ressources/ascii/Welcome.txt
-sleep 2
-clear
+welcome_screen
 main_menu
