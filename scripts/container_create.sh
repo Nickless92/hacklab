@@ -11,7 +11,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# script to set up containers for a level (stopped, not running)
+# set up given number of containers of a level (stopped, not running)
 # $1 = level
 # $2 = number of containers
 # $3 = optional: fingerprint of ISO [default = alpine-iso-utils]

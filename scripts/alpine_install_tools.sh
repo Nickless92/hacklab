@@ -1,4 +1,5 @@
 #!/bin/sh
+# no bash available, hence /bin/sh
 
 # SPDX-FileCopyrightText: 2022 Bassam-Khaled Thiab <inf3891@hs-worms.de>
 # SPDX-FileCopyrightText: 2022 Dominic Meyer <inf3644@hs-worms.de>
