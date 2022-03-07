@@ -24,12 +24,12 @@ then
     for((container = 1; container <= $2; container++))
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
-        echo "[$(basename "$0")] $(date) - STEP: delete container $container_"
         sudo lxc delete lvl"$level"-c"$container_"   # deletes a stopped container
+        echo "[$(basename "$0")] STEP: delete container $container_"
     done
-    echo "[$(basename "$0")] $(date) - STEP: try target container" 
     sudo lxc delete lvl"$level"-target            # in case there is a target VM
-    echo "[$(basename "$0")] $(date) - DONE: deleted containers for level $1" 
+    echo "[$(basename "$0")] STEP: try target container"
+    echo "[$(basename "$0")] DONE: deleted containers for level $1"
 else
-    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters" 
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
 fi

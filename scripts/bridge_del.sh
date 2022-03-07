@@ -20,10 +20,10 @@ echo "[$(basename "$0")] CALL: level: $1"
 if [ $# = 1 ]
 then
     if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi
-    echo "[$(basename "$0")] $(date) - STEP: delete bridge $level"
     sudo ip link set dev lvlbr$level down        # stops and deletes the L2 link $1
     sudo brctl delbr lvlbr$level                 # stops and deletes bridge named $1
-    echo "[$(basename "$0")] $(date) - DONE: deleted bridge for level $1"
+    echo "[$(basename "$0")] STEP: delete bridge $level"
+    echo "[$(basename "$0")] DONE: deleted bridge for level $1"
 else
-    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters"
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
 fi
