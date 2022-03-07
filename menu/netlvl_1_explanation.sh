@@ -7,6 +7,7 @@ function typeit()
     done <<< "$@"
 }
 
+echo -e "\n"
 typeit "to enter, one needs to make it look like they are accessing the website from the ip listed in the web page."
 sleep .$((RANDOM%3)) ; echo -e "\n"
 typeit "to do this, one can use something that is called an ip-spoofing attack. one fakes their own sending ip address, just like writing a different sender on a packet."
