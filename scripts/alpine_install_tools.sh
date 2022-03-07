@@ -12,9 +12,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # script to update and install several tools for usage with hacklab 
-# no bash available, hence /bin/sh
 
-LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/); exec >> "$LOGFILE" 2>&1
+# logging in container
+LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/) ; exec > "$LOGFILE" 2>&1
 
 # update
 echo "[$(date)] todo: update"

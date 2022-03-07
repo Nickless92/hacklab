@@ -13,11 +13,7 @@
 
 # script to create an up-to-date alpine iso with useful tools for hacklab
 
-# print everything into ./logs/SCRIPT.log, if no permissions for /var/log/ 
-cd $(dirname "$0"); mkdir -p logs;
-LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# ); exec &>>"$LOGFILE"
-#LOGFILE=$(echo "$(realpath $0)" | sed s\#'\.sh'\#'\.log'\# | sed s\#'scripts'\#'scripts/logs'\#); exec &>> "$LOGFILE"
-#LOGFILE=$(echo "$0" | sed s\#'.sh'\#'.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
+cd $(dirname "$0") ; #. ./log.sh
 
 # $timestamp: fetch iso creation time, $timelimit: add 1 hour (3600s) - date() takes care of timezones
 timestamp=$( sudo lxc image info iso-alpine-utils | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )
