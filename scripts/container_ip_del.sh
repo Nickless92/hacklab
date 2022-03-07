@@ -26,18 +26,18 @@ then
     for ((container = 1; container <= "$2"; container++))
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
-        echo "[$(basename "$0")] $(date) - STEP: add IP to container $container_"
         sudo lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" down 
         sudo lxc exec lvl"$level_"-c"$container_" -- ip addr del 10.10."$1"."$container"/24 dev "$interface" 
         sudo lxc config device remove lvl"$level_"-c"$container_" "$interface" 
+        echo "[$(basename "$0")] STEP: add IP to container $container_"
     done
-    echo "[$(basename "$0")] $(date) - STEP: try target container" 
     sudo lxc exec lvl"$level_"-target -- ip link set dev "$interface" down 
     sudo lxc exec lvl"$level_"-target -- ip addr del 10.10."$1".0/24 dev "$interface" 
     sudo lxc config device remove lvl"$level_"-target "$interface" 
-    echo "[$(basename "$0")] DONE: removed network from containers for level $1" 
     exit 0
+    echo "[$(basename "$0")] STEP: try target container"
+    echo "[$(basename "$0")] DONE: removed network from containers for level $1"
 else
-    echo "[$(basename "$0")] FAIL: invalid number of parameters" 
     exit 1
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
 fi

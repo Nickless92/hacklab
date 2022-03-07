@@ -19,10 +19,10 @@ echo "[$(basename "$0")] CALL: level: $1"
 if [ $# = 1 ]
 then
     if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi
-    echo "[$(basename "$0")] $(date) - STEP: create bridge $level"
     sudo brctl addbr lvlbr$level up              # adds and starts a bridge named $1 
     sudo ip link set dev lvlbr$level up          # adds and starts the L2 link
-    echo "[$(basename "$0")] $(date) - DONE: created bridge for level $level"
+    echo "[$(basename "$0")] STEP: create bridge $level"
+    echo "[$(basename "$0")] DONE: created bridge for level $level"
 else
-    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters"
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
 fi

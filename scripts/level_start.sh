@@ -25,12 +25,12 @@ echo "[$(basename "$0")] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
 # to do: check for more complex calls (number of parameters)
 if [ "$#" -eq 2 ]
 then
-    echo "[$(basename "$0")] $(date) - STEP: add bridge";       ./bridge_add.sh "$1";           wait $!
-    echo "[$(basename "$0")] $(date) - STEP: init containers";  ./container_create.sh "$1" "$2";wait $!
-    echo "[$(basename "$0")] $(date) - STEP: start containers"; ./container_start.sh "$1" "$2"; wait $!
-    echo "[$(basename "$0")] $(date) - STEP: add network IPs";  ./container_ip_add.sh "$1" "$2";wait $!
-    echo -n "[$(basename "$0")] $(date) - STEP: return to path: "; cd -
-    echo "[$(basename "$0")] $(date) - DONE: started level $1 with $2 containers"
+    echo "[$(basename "$0")] STEP: create network";     ./network_create.sh
+    echo "[$(basename "$0")] STEP: init containers";    ./container_create.sh "$1" "$2"
+    echo "[$(basename "$0")] STEP: start containers";   ./container_start.sh  "$1" "$2"
+    echo "[$(basename "$0")] STEP: add network IPs";    ./container_ip_add.sh "$1" "$2"
+    echo -n "[$(basename "$0")] STEP: return to path: "; cd -
+    echo "[$(basename "$0")] DONE: started level $1 with $2 containers"
 else
-    echo "[$(basename "$0")] $(date) - FAILED: invalid number of parameters: $#"
+    echo "[$(basename "$0")] FAILED: invalid number of parameters: $#"
 fi
