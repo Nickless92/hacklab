@@ -63,7 +63,7 @@ function pupil_levels ()
 
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. starting..." ; ../scripts/level_start.sh 1 3 ; clear ; sudo tmux new-session -s lvl01 -d 'lxc exec lvl01-d02 -- tshark -i eno1'';' split-window -v -d 'lxc shell lvl01-d01' ';' split-window -h -d 'lxc exec lvl01-d03 -- tshark -i eno1' ';' attach; return 3 ;;
+    1) echo -e "\nyou chose level 1. starting..." ; return 3 ;;
 	2) echo -e "\nyou chose level 2" ; return 3 ;;
 	3) echo -e "\nyou chose level 3" ; return 3 ;;
 	4) echo -e "\nyou chose level 4" ; return 3 ;;                         
@@ -107,7 +107,7 @@ function networks_levels ()
     read -n 1 menuinput
     case $menuinput in
     1) clear ; echo -e "\nyou chose level 1. starting..." ; 
-        ../scripts/level_start.sh 1 3 ;                                             #containers getting started
+        (../scripts/level_start.sh 1 3 &) ;                                         #containers getting started
         ./netlvl_1.sh ;                                                             #story time :)
         ./netlvl_1_explanation.sh ;                                                 #explanation for the level
         sleep 10 ;                                                                  #the user gets some time to read the task
