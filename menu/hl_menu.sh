@@ -3,7 +3,9 @@
 # Color  Variables
 
 green='\e[32m'
-blue='\e[34m'
+blue='\e[33m' #yellow
+#blaue='\e[36m'  #cyan
+#blue='\e[34m'
 red='\e[31m'
 clear='\e[0m'
 
@@ -43,32 +45,30 @@ function enter_name()
 
 function choose_stage () 
 {
-    echo -ne "$(ColorBlue '1)') Pupil     -  for people who have not attended any modules at HS-Worms\n"
-    echo -ne "$(ColorBlue '2)') Student   -  in the next step you can choose between different modules\n"
-    echo -ne "$(ColorBlue '3)') Expert    -  you can choose between all levels of pupil and student\n"
-    echo -ne "$(ColorRed 'e(x)it')\n"       
+    i=1
+    while [ $i -ne 4 ]
+    do
+       echo -ne "$(ColorBlue  "$i"')')"                                                  #numers in this form 1)--will be printed  
+       awk 'NR=='$i'{ print}' read.txt                                                  #Pupil STudent Expert will be read line by line
+    i=$(($i+1))
+    done
+    echo -ne "$(ColorRed '(x)')   -  To Exit the Menu)\n"    
 
     read -n 1 menuinput
     case $menuinput in 
 	1) echo -e "\nyou chose pupil.\n" ; return 3 ;;                                 #return 3 means that the function pupil_levels is going to run
 	2) echo -e "\nyou chose student.\n" ; return 4 ;;                               #return 4 means that the function module_menu is going to run
 	3) echo -e "\nyou chose expert.\n" ; return 7 ;;                                #return 7 means that the function expert_levels is going to run
-    x) exit 0 ;; 
-    *) echo -e $red"\nWrong option.\n"$clear; return 2;;                            #return 2 means that the function choose_stage is going to run
+	x)printf "\n" exit 0 ;; 
+    *) echo -e $red"\nWrong option.\n"$clear; return 2;;                                #return 2 means that the function choose_stage is going to run
     esac
 }
 
 function pupil_levels () 
-{
-    echo -ne "$(ColorBlue '1)')       -   level 1\n"
-	echo -ne "$(ColorBlue '2)')       -   level 2\n"
-	echo -ne "$(ColorBlue '3)')       -   level 3\n"
-	echo -ne "$(ColorBlue '4)')       -   level 4\n"
-	echo -ne "$(ColorBlue '5)')       -   level 5\n"
-    echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')"     
-	echo -e "Choose a level: "
-
+{ 
+    Level 6
+    Back_exit
+    echo -e "Choose a level: "
     read -n 1 menuinput
     case $menuinput in
     1) echo -e "\nyou chose level 1. starting..." ; return 3 ;;
@@ -77,7 +77,8 @@ function pupil_levels ()
 	4) echo -e "\nyou chose level 4" ; return 3 ;;                         
 	5) echo -e "\nyou chose level 5" ; return 3 ;;
     b) echo -ne "\n"; return 2 ;;                                                   #return 2 means that the function choose_stage is going to run
-    x) exit 0 ;;
+    x)printf "\n" exit 0 ;;
+
     *) echo -e $red"\nWrong option.\n"$clear; return 3;;                            #return 3 means that the function pupil_levels is going to run
     esac
 }
@@ -86,8 +87,9 @@ function module_menu ()
 {
     echo -ne "$(ColorBlue '1)')       -   Networks (german: Netzwerke)\n"
     echo -ne "$(ColorBlue '2)')       -   Network Security\n"
-    echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
-    echo -ne "$(ColorRed 'e(x)it')   -   Exit\n"
+    Back_exit    
+#echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
+    #echo -ne "$(ColorRed 'e(x)it')   -   Exit\n"
     echo -e "Please choose a module: "
 
     read -n 1 menuinput
@@ -95,7 +97,7 @@ function module_menu ()
     1) echo -e "\nyou chose networks.\n" ; return 5 ;;                              #return 5 means that the function networks_levels is going to run
     2) echo -e "\nyou chose Network Security.\n" ; return 6 ;;                      #return 6 means that the function netsec_levels is going to run
     b) echo -ne "\n"; return 2 ;;                                                   #return 2 means that the function choose_stage is going to run
-    x) exit 0 ;;
+    x)printf "\n" exit 0 ;;
     *) echo -e $red"\nWrong option.\n"$clear; return 4;;                            #return 4 means that the function module_menu is going to run
     esac
 
@@ -103,14 +105,9 @@ function module_menu ()
 
 function networks_levels () 
 {  
-    echo -ne "$(ColorBlue '1)')       -   level 1\n"
-	echo -ne "$(ColorBlue '2)')       -   level 2\n"
-	echo -ne "$(ColorBlue '3)')       -   level 3\n"
-	echo -ne "$(ColorBlue '4)')       -   level 4\n"
-	echo -ne "$(ColorBlue '5)')       -   level 5\n"
-    echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')"  
-	echo -e "Choose a level: "
+   Level 6
+   Back_exit
+   echo -e "Choose a level: "
 
     read -n 1 menuinput
     case $menuinput in
@@ -132,22 +129,16 @@ function networks_levels ()
 	4) echo -e "\nyou chose level 4" ; return 5 ;; 
 	5) echo -e "\nyou chose level 5" ; return 5 ;;
     b) echo -ne "\n"; return 4 ;;                                                   #return 4 means that the function module_menu is going to run
-    x) exit 0 ;;
+    x)printf "\n" exit 0 ;;
     *) echo -e $red"\nWrong option.\n"$clear; return 5;;                            #return 5 means that the function networks_levels is going to run
     esac
 }
 
 function netsec_levels ()  
 {  
-    echo -ne "$(ColorBlue '1)')       -   level 1\n"
-	echo -ne "$(ColorBlue '2)')       -   level 2\n"
-	echo -ne "$(ColorBlue '3)')       -   level 3\n"
-	echo -ne "$(ColorBlue '4)')       -   level 4\n"
-	echo -ne "$(ColorBlue '5)')       -   level 5\n"
-    echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')     -   Exit\n\n"
+        Level 6
+        Back_exit        
 	echo -e "Choose a level: "
-
     read -n 1 menuinput
     case $menuinput in
     1) echo -e "\nyou chose level 1. this is empty." ;  return 6;;
@@ -156,21 +147,16 @@ function netsec_levels ()
 	4) echo -e "\nyou chose level 4. this is empty." ;  return 6;; 
 	5) echo -e "\nyou chose level 5. this is empty." ;  return 6;;
     b) echo -ne "\n"; return 4 ;;                                                   #return 4 means that the function module_menu is going to run
-    x) exit 0 ;;
+    x)printf "\n" exit 0 ;;
     *) echo -e $red"\nWrong option.\n"$clear; return 6;;                            #return 6 means that the function netsec_levels is going to run
     esac
 }
 
 function expert_levels()
 {
-    echo -ne "$(ColorBlue '1)')       -   level 1\n"
-	echo -ne "$(ColorBlue '2)')       -   level 2\n"
-	echo -ne "$(ColorBlue '3)')       -   level 3\n"
-	echo -ne "$(ColorBlue '4)')       -   level 4\n"
-	echo -ne "$(ColorBlue '5)')       -   level 5\n"
-    echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')     -   Exit\n\n"
-	echo -e "Choose a level: "
+   Level 6
+   Back_exit
+   echo -e "Choose a level: "
 
     read -n 1 menuinput
     case $menuinput in
@@ -180,16 +166,33 @@ function expert_levels()
 	4) echo -e "\nyou chose level 4. this is empty." ;  return 7;; 
 	5) echo -e "\nyou chose level 5. this is empty." ;  return 7;;
     b) echo -ne "\n"; return 2 ;;                                                   #return 2 means that the function choose_stage is going to run
-    x) exit 0 ;;
+    x)printf "\n" exit 0 ;;
     *) echo -e $red"\nWrong option.\n"$clear; return 7;;                            #return 7 means that the function expert_levels is going to run
     esac    
 }
 
+Back_exit()
+{
+	echo -ne "$(ColorRed ' b)') -  Back to previous menu\n"
+	echo -ne "$(ColorRed '(x)') -  to exit the menu\n"
+}
+Level()
+{
+	i=1
+	while [ $i -ne $1 ]                                                         #loop from 1 till the given paramter $1 is the parameter
+	  do
+	    echo -ne "$(ColorBlue " $i"')')" "   -  Level " $i "\n"
+	    i=$(($i+1))
+	  done 
+ }
 main_menu () 
 {
     enter_name
     clear
-    echo -e "Welcome to our hacklab $(ColorGreen $name)!\nThis is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.\nTo start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
+    welcome="Welcome to hacklab"
+    game="This is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.
+    To start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
+    echo -e "$welcome $(ColorGreen $name)!\n$game"
     returnValue=2
 
     while : ; do
@@ -210,3 +213,4 @@ main_menu ()
 
 welcome_screen
 main_menu
+
