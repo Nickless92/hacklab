@@ -14,7 +14,7 @@
 # basic script to stop a whole level
 # $1 = level
 # $2 = number of containers
-# future: $3 = optional ISO fingerprint
+# future: $3 = interface (optional)
 
 cd $(dirname "$0") ; . ./log.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"

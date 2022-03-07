@@ -11,10 +11,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# basic script to start a whole level
+# start a whole level with given number of containers
 # $1 = level
 # $2 = number of containers
-# future: $3 = optional ISO fingerprint
 
 # print everything into ./logs/level_start.log
 cd $(dirname "$0"); mkdir -p logs;

@@ -11,7 +11,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# script to start containers of a level
+# start given number of containers of a level
 # $1 = level
 # $2 = number of containers
 
