@@ -24,12 +24,12 @@ then
     for((container = 1; container <= "$2"; container++))     # cycle through all containers of a level
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
-        echo "[$(basename "$0")] $(date) - STEP: start container $container_"
         sudo lxc start lvl"$level_"-c"$container_"           # only STOPS the given lxc container
+        echo "[$(basename "$0")] STEP: start container $container_"
     done
-    echo "[$(basename "$0")] $(date) - try target container" 
     sudo lxc start lvl"$level_"-target                    # in case there is a TARGET container
-    echo "[$(basename "$0")] $(date) - DONE: started containers for level $1" 
+    echo "[$(basename "$0")] try target container" 
+    echo "[$(basename "$0")] DONE: started containers for level $1" 
 else
-    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters" 
+    echo "[$(basename "$0")] FAIL: invalid number of parameters" 
 fi

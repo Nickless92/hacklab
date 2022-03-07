@@ -27,10 +27,10 @@ then
     for (( container=1; container <= "$2"; container++ ))
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
-        echo "[$(basename "$0")] $(date) - STEP: init container $container_"
         sudo lxc init "$image" lvl"$level_"-c"$container_" 
+        echo "[$(basename "$0")] STEP: init container $container_"
     done
-    echo "[$(basename "$0")] $(date) - DONE: created containers for level $level" 
+    echo "[$(basename "$0")] DONE: created containers for level $level" 
 else
-    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters" 
+    echo "[$(basename "$0")] FAIL: invalid number of parameters" 
 fi
