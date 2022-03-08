@@ -1,0 +1,3 @@
+ Pupil   -  for people who not attended any module at HS_worms
+ Student -  in the next step you can choose between diffrent modules
+ Expert  -  you can choose between all levels of pupil and students
