@@ -47,3 +47,5 @@ sleep .$((RANDOM%3)) ; echo -e "\n"
 typeit "Ah yes, that's right. Its 66.666.66.6. Seems like an IP adress. Let\'s visit that."
 sleep .$((RANDOM%3)) ; echo -e "\n"
 typeit "You try accessing the adress, but you can only see \"Access Denied\". You go to inspect the page, and you see in the source code that only certain IPs can access the site ... "
+echo -e "\n"
+read -p "Press any key to continue..." -n1 -s
