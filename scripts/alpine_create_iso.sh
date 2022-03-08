@@ -15,10 +15,10 @@
 
 cd $(dirname "$0") ; #. ./log.sh ; echo "Done: changed into $(pwd)"
 
-# $timestamp: fetch iso creation time, $timelimit: add 1 hour (3600s) - date() takes care of timezones
-timelimit=$(( $timestamp + 3600 ))
-# check if creating a new build is necessary (age > 1 hour) or forced by user
+# $timestamp: fetch iso creation time, $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
 timestamp=$( lxc image info iso-alpine-utils | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )
+timelimit=$(( $timestamp + 3600*24 ))
+# check if creating a new build is necessary (age > 24 hours) or forced by user
 if [ "$1" != "force" ] && [ $(date +%s) -lt "$timelimit" ]
     then echo "[$(basename "$0")] DONE: iso-alpine-utils still up-to-date. READY!"; exit 0; fi
 # else, continue
@@ -26,8 +26,16 @@ if [ "$1" != "force" ] && [ $(date +%s) -lt "$timelimit" ]
 # first, make sure to delete an existing alpine-runner container
 lxc delete alpine-runner --force
 # second, make sure to delete existing iso-alpine-stage/-edge images
-lxc image delete iso-alpine-stage
-lxc image delete iso-alpine-edge
+lxc image delete iso-alpine-stage && wait $!
+# third, only copy alpine/edge from images if necessary (age > 24 hours) or forced by user
+# $timestamp: fetch iso upload time, $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
+timestamp2=$( lxc image info iso-alpine-edge | grep Uploaded | date -d "$(sed s/'^.*: '/''/)" +%s )
+timelimit2=$(( $timestamp2 + 3600*24 ))
+if [ "$1" = "force" ] && [ "$2" = "purge" ] && [ $(date +%s) -lt "$timelimit2" ]
+    then lxc image delete iso-alpine-edge && wait $!
+    echo "[$(basename "$0")] DONE: deleted stale iso-alpine-edge."
+    else
+    echo "[$(basename "$0")] DONE: iso-alpine-edge up-to-date. Continue."; fi
 echo "[$(basename "$0")] DONE: purged leftovers"
 
 # create container alpine-runner with image alpine/edge
