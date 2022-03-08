@@ -32,17 +32,17 @@ sleep .$((RANDOM%3)) ; echo -e "\n"
 }
 
 
-fun 1 3 0                                            #type 1-3 line with --- and new line at the end
+fun 1 3 2                                            #type 1-3 line with --- and new line at the end
 read_sleep                                           #call read asleep function
 
 sleep 2s
 echo -e "dr. blackhat @blckht - march 13\n\ngreetings.\nyou may not know who i am but you will soon find out.\nexpect your current understanding of how the world works to turned on its head.\nexpect me.\n\n---\n()> 0   <-> 2  <3 10)"
 
 sleep 2s
-fun 4 4 0                                           #type 4 line with --- and new line at the end
+fun 4 4 2                                           #type 4 line with --- and new line at the end
 
 sleep 1s 
-fun 5 6 0                                           #type 5-6 line with with --- and new line at the end
+fun 5 6 2                                           #type 5-6 line with with --- and new line at the end
 read_sleep
 
 sleep .$((RANDOM%3)) ; echo -e "---\n"
