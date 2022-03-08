@@ -7,5 +7,4 @@ LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# )
 # (too) simple output redirection:
 #exec &>> "$LOGFILE"
 # redirect output with timestamps, flushing stdout to get continuous output
-PID=$!
 exec > >(gawk '{ print strftime("[%Y-%m-%d %H:%M:%S]"), $0 ; fflush(stdout) }' | sed s/']'/" - $$]"/ &>> "$LOGFILE") 2>&1
