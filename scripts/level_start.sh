@@ -15,17 +15,14 @@
 # $1 = level
 # $2 = number of containers
 
-# print everything into ./logs/level_start.log
-cd $(dirname "$0"); mkdir -p logs;
-LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# ); exec &>>"$LOGFILE"
-#LOGFILE=$( echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
-echo "[$(basename "$0")] $(date) - CALL: level: $1 - containers: $2 - ISO: $3"
+cd $(dirname "$0") ; . ./log.sh
+echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - ISO: $3"
 
 # to do: check for more complex calls (number of parameters)
-if [ "$#" -eq 2 ]
+if [ "$#" -eq 2 ] || [  "$#" -eq 3 ]
 then
     echo "[$(basename "$0")] STEP: create network";     ./network_create.sh
-    echo "[$(basename "$0")] STEP: init containers";    ./container_create.sh "$1" "$2"
+    echo "[$(basename "$0")] STEP: init containers";    ./container_create.sh "$1" "$2" "$3"
     echo "[$(basename "$0")] STEP: start containers";   ./container_start.sh  "$1" "$2"
     echo "[$(basename "$0")] STEP: add network IPs";    ./container_ip_add.sh "$1" "$2"
     echo -n "[$(basename "$0")] STEP: return to path: "; cd -
