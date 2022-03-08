@@ -19,10 +19,10 @@ cd $(dirname "$0") ; . ./log.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - ISO: $3"
 
 # to do: check for more complex calls (number of parameters)
-if [ "$#" -eq 2 ] || [  "$#" -eq 3 ]
+if [ "$#" -eq 2 ]
 then
     echo "[$(basename "$0")] STEP: create network";     ./network_create.sh
-    echo "[$(basename "$0")] STEP: init containers";    ./container_create.sh "$1" "$2" "$3"
+    echo "[$(basename "$0")] STEP: init containers";    ./container_create.sh "$1" "$2"
     echo "[$(basename "$0")] STEP: start containers";   ./container_start.sh  "$1" "$2"
     echo "[$(basename "$0")] STEP: add network IPs";    ./container_ip_add.sh "$1" "$2"
     echo -n "[$(basename "$0")] STEP: return to path: "; cd -

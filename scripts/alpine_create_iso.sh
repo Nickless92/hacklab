@@ -13,7 +13,7 @@
 
 # create an up-to-date alpine iso with useful tools for hacklab
 
-cd $(dirname "$0") ; #. ./log.sh ; echo "Done: changed into $(pwd)"
+cd $(dirname "$0") ; . ./log.sh ; echo "Done: changed into $(pwd)"
 
 # $timestamp: fetch iso creation time, $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
 timestamp=$( lxc image info iso-alpine-utils | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )
