@@ -1,4 +1,5 @@
 #!/bin/sh
+# use sh/ash, since there's no bash on alpine linux
 
 # SPDX-FileCopyrightText: 2022 Bassam-Khaled Thiab <inf3891@hs-worms.de>
 # SPDX-FileCopyrightText: 2022 Dominic Meyer <inf3644@hs-worms.de>
@@ -11,98 +12,104 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# script to update and install several tools for usage with hacklab 
-# no bash available, hence /bin/sh
+# update and install several tools for usage with hacklab 
 
-LOGFILE=$(echo "$0" | sed s/'.sh'/'.log'/); exec >> "$LOGFILE" 2>&1
+# logging in alpine container
+LOGFILE=log ; exec > >(awk '{ print strftime("[%Y-%m-%d %H:%M:%S]"), $0 ; fflush(stdout) }' > "$LOGFILE") 2>&1
 
-# update
-echo "[$(date)] todo: update"
+# update apk (is this necessary, since alpine/edge should be up-to-date by itself?)
+echo "todo: update"
 apk update
 apk upgrade
-echo "[$(date)] done: update"
+echo "done: update"
 
 # install man
-echo "[$(date)] todo: man"
+echo "todo: man"
 apk add mandoc
-echo "[$(date)] done: man"
+echo "done: man"
 
 # install git
-echo "[$(date)] todo: git"
+echo "todo: git"
 apk add git
-echo "[$(date)] done: git"
+echo "done: git"
 
 # install lynis
-echo "[$(date)] todo: lynis"
+echo "todo: lynis"
 cd /usr/local/
 git clone https://github.com/CISOfy/lynis
 cd lynis/
 ln -s /usr/local/lynis/lynis /bin/lynis
-echo "[$(date)] done: lynis"
+echo "done: lynis"
 
 # purge git
-echo "[$(date)] undo: git"
+echo "undo: git"
 apk del git
-echo "[$(date)] done: git"
+echo "done: git"
 
 # install MACchanger
-echo "[$(date)] todo: macchanger"
+echo "todo: macchanger"
 apk add macchanger
 apk add macchanger-doc
-echo "[$(date)] done: macchanger"
+echo "done: macchanger"
 
 # install DNSrecon
-echo "[$(date)] todo: dnsrecon"
+echo "todo: dnsrecon"
 apk add dnsrecon
 # didn't find any docu sources in repo
-echo "[$(date)] done: dnsrecon"
+echo "done: dnsrecon"
 
 # install nmap
-echo "[$(date)] todo: nmap"
+echo "todo: nmap"
 apk add nmap
 apk add nmap-doc
-echo "[$(date)] done: nmap"
+echo "done: nmap"
 
 # install tmux
-echo "[$(date)] todo: tmux"
+echo "todo: tmux"
 apk add tmux
 apk add tmux-doc
-echo "[$(date)] done: tmux"
+echo "done: tmux"
 
 # install iptables
-echo "[$(date)] todo: iptables"
+echo "todo: iptables"
 apk add iptables
 apk add iptables-doc
-echo "[$(date)] done: iptables"
+echo "done: iptables"
+
+# install tcpdump
+echo "todo: tcpdump"
+apk add tcpdump
+apk add tcpdump-doc
+echo "done: tcpdump"
 
 # install tshark
-echo "[$(date)] todo: tshark"
+echo "todo: tshark"
 apk add tshark
 apk add wireshark-doc
-echo "[$(date)] done: tshark"
+echo "done: tshark"
 
 # try to install hping3 from main repo first
-echo "[$(date)] todo: hping3"
+echo "todo: hping3"
 apk add hping3
 apk add hping3-doc
-echo "[$(date)] done: hping3"
+echo "done: hping3"
 
 # install hping3 from edge/testing repo
-echo "[$(date)] todo: hping3 (testing)"
+echo "todo: hping3 (testing)"
 apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3
 apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3-doc
-echo "[$(date)] done: hping3 (testing)"
+echo "done: hping3 (testing)"
 
 # try to install ettercap from main repo first
-echo "[$(date)] todo: ettercap"
+echo "todo: ettercap"
 apk add ettercap
 apk add ettercap-doc
-echo "[$(date)] done: ettercap"
+echo "done: ettercap"
 
 # install ettercap from edge/testing repo
-echo "[$(date)] todo: ettercap (testing)"
+echo "todo: ettercap (testing)"
 apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ettercap
 apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ettercap-doc
-echo "[$(date)] done: ettercap (testing)"
+echo "done: ettercap (testing)"
 
-echo "[$(date)] DONE"
+echo "DONE"

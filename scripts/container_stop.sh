@@ -15,12 +15,8 @@
 # $1 = level
 # $2 = number of containers
 
-# print everything into ./logs/SCRIPT.log
-cd $(dirname "$0"); mkdir -p logs;
-LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# ); exec &>>"$LOGFILE"
-#LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
-#LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
-echo "[$(basename "$0")] $(date) - CALL: level: $1 - containers: $2"
+cd $(dirname "$0") ; . ./log.sh
+echo "[$(basename "$0")] CALL: level: $1 - containers: $2"
 
 if [ $# = 2 ]
 then
@@ -28,12 +24,12 @@ then
     for((container = 1; container <= "$2"; container++))                         # cycle through all containers of a level
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
-        echo "[$(basename "$0")] $(date) - STEP: stop container $container_"
-        sudo lxc stop lvl"$level_"-c"$container_"            # only STOPS the given lxc container
+        echo "[$(basename "$0")] STEP: stop container $container_"
+        lxc stop lvl"$level_"-c"$container_"            # only STOPS the given lxc container
     done
-    echo "[$(basename "$0")] $(date) - STEP: try target container"
-    sudo lxc stop lvl"$level_"-target                     # in case there is a TARGET container
-    echo "[$(basename "$0")] $(date) - DONE: stopped containers for level $1" 
+    echo "[$(basename "$0")] STEP: try target container"
+    lxc stop lvl"$level_"-target                     # in case there is a TARGET container
+    echo "[$(basename "$0")] DONE: stopped containers for level $1"
 else
-    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters" ;
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
 fi

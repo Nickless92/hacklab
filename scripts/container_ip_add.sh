@@ -11,35 +11,31 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# script to connect containers to the lxc network bridge
+# connect given number of containers to network bridge 'hacklab' (via given interface) 
 # $1 = level
 # $2 = number of containers
-# $3 = interface [default = eth0]
+# $3 = interface [default = eno1]
 
-# print everything into ./logs/SCRIPT.log
-cd $(dirname "$0"); mkdir -p logs;
-LOGFILE=$( basename "$0" | sed s\#'^'\#'\./logs/'\# | sed s\#'\.sh'\#'\.log'\# ); exec &>>"$LOGFILE"
-#LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'./logs/'\# ); exec &>> "$LOGFILE"
-#LOGFILE=$(echo "$0" | sed s\#'\.sh'\#'\.log'\# | sed s\#'^.*/'\#'/var/log/hacklab/'\# ); exec &>> "$LOGFILE"
-echo "[$(basename "$0")] $(date) - CALL: level: $1 - containers: $2 - interface: $3"
+cd $(dirname "$0") ; . ./log.sh
+echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
 then
-    if [ "$#" -eq 2 ]; then interface=eth0; else interface="$3"; fi                         # tshark listens on eth0 by default -> hand over $interface if changed
-    if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                             # check for leading '0'
+    if [ "$#" -eq 2 ]; then interface=eno1; else interface="$3"; fi     # hand over $interface if changed
+    if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi         # check for leading '0'
     for ((container = 1; container <= "$2"; container++))
     do
-        if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi        # check for leading '0'
-        echo "[$(basename "$0")] $(date) - STEP: add IP to container $container_"
-        sudo lxc config device add lvl"$level_"-c"$container_" "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
-        sudo lxc exec lvl"$level_"-c"$container_" -- ip addr add 10.10."$1"."$container"/24 dev "$interface" 
-        sudo lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" up 
+        if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
+        echo "[$(basename "$0")] STEP: add IP to container $container_"
+        lxc config device add lvl"$level_"-c"$container_" "$interface" nic nictype=bridged parent=hacklab name="$interface" 
+        lxc exec lvl"$level_"-c"$container_" -- ip addr add 10.10."$1"."$container"/24 dev "$interface"
+        lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" up 
     done
-    echo "[$(basename "$0")] $(date) - STEP: try target container" 
-    sudo lxc config device add lvl"$level_"-target "$interface" nic nictype=bridged parent=lvlbr"$level_" name="$interface" 
-    sudo lxc exec lvl"$level_"-target -- ip addr add 10.10."$1".0/24 dev "$interface" 
-    sudo lxc exec lvl"$level_"-target -- ip link set dev "$interface" up 
-    echo "[$(basename "$0")] $(date) - DONE: added network to containers for level $1" 
+    echo "[$(basename "$0")] STEP: try target container"
+    lxc config device add lvl"$level_"-target "$interface" nic nictype=bridged parent=hacklab name="$interface"
+    lxc exec lvl"$level_"-target -- ip addr add 10.10."$1".0/24 dev "$interface" 
+    lxc exec lvl"$level_"-target -- ip link set dev "$interface" up 
+    echo "[$(basename "$0")] DONE: added network to containers for level $1" 
 else
-    echo "[$(basename "$0")] $(date) - FAIL: invalid number of parameters" 
+    echo "[$(basename "$0")] FAIL: invalid number of parameters" 
 fi
