@@ -26,13 +26,13 @@ if [ "$1" != "force" ] && [ $(date +%s) -lt "$timelimit" ]
 # first, make sure to delete an existing alpine-runner container
 lxc delete alpine-runner --force
 # second, make sure to delete existing iso-alpine-stage/-edge images
-lxc image delete iso-alpine-stage && wait $!
+lxc image delete iso-alpine-stage
 # third, only copy alpine/edge from images if necessary (age > 24 hours) or forced by user
 # $timestamp: fetch iso upload time, $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
 timestamp2=$( lxc image info iso-alpine-edge | grep Uploaded | date -d "$(sed s/'^.*: '/''/)" +%s )
 timelimit2=$(( $timestamp2 + 3600*24 ))
 if [ "$1" = "force" ] && [ "$2" = "purge" ] && [ $(date +%s) -lt "$timelimit2" ]
-    then lxc image delete iso-alpine-edge && wait $!
+    then lxc image delete iso-alpine-edge
     echo "[$(basename "$0")] DONE: deleted stale iso-alpine-edge."
     else
     echo "[$(basename "$0")] DONE: iso-alpine-edge up-to-date. Continue."; fi
@@ -42,26 +42,28 @@ echo "[$(basename "$0")] DONE: purged leftovers"
 lxc image copy images:alpine/edge local: --alias iso-alpine-edge
 lxc init iso-alpine-edge alpine-runner
 lxc start alpine-runner
-# lxc launch images:alpine/edge alpine-runner # shorthand
+#lxc launch images:alpine/edge alpine-runner # shorthand
 echo "[$(basename "$0")] DONE: started alpine-runner with alpine/edge image"
 
 # config lxdbr0 to provide internet access via DHCP
-sudo lxc network set lxdbr0 ipv4.dhcp=true && echo "[$(basename "$0")] DONE: hacklab bridge: set ipv4.dhcp true"
+sudo lxc network set lxdbr0 ipv4.dhcp=true
+echo "[$(basename "$0")] DONE: hacklab bridge: set ipv4.dhcp true"
 
 # install packages
-lxc file push ./alpine_install_tools.sh alpine-runner/root/install_tools.sh
+lxc file push ./alpine_install_tools.sh alpine-runner/root/install_tools
 echo "[$(basename "$0")] DONE: push alpine_install_tools.sh in alpine-runner"
-lxc exec alpine-runner -- ./install_tools.sh; wait $!
+lxc exec alpine-runner -- ./install_tools ; wait 10 # FIXME: $! stopped working??
 echo "[$(basename "$0")] DONE: tools installed in alpine-runner"
 lxc file pull alpine-runner/root/log ./logs/alpine_install_tools.log
 lxc exec alpine-runner -- rm -rf /var/log/
-lxc exec alpine-runner -- rm -rf /root/install_tools
-lxc exec alpine-runner -- rm -rf /root/log
 lxc exec alpine-runner -- rm -rf /tmp/
+lxc exec alpine-runner -- rm -f /root/install_tools
+lxc exec alpine-runner -- rm -f /root/log
 echo "[$(basename "$0")] DONE: pull + purge logs from alpine-runner"
 
 # config lxdbr0 to stop DHCP service
-#sudo lxc network set lxdbr0 ipv4.dhcp=false
+sudo lxc network set lxdbr0 ipv4.dhcp=false
+echo "[$(basename "$0")] DONE: hacklab bridge: set ipv4.dhcp false"
 
 # snapshot and export image as ISO
 lxc snapshot alpine-runner alpine-snap
