@@ -76,6 +76,12 @@ apk add iptables
 apk add iptables-doc
 echo "done: iptables"
 
+# install tcpdump
+echo "todo: tcpdump"
+apk add tcpdump
+apk add tcpdump-doc
+echo "done: tcpdump"
+
 # install tshark
 echo "todo: tshark"
 apk add tshark
