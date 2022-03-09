@@ -65,13 +65,8 @@ function choose_stage ()
 
 function pupil_levels () 
 {
-    echo -ne "$(Colorlight_cyan '1)')       -   level 1\n"
-	echo -ne "$(Colorlight_cyan '2)')       -   level 2\n"
-	echo -ne "$(Colorlight_cyan '3)')       -   level 3\n"
-	echo -ne "$(Colorlight_cyan '4)')       -   level 4\n"
-	echo -ne "$(Colorlight_cyan '5)')       -   level 5\n"
-    echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')"     
+    level 6
+    Back_exit    
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -108,13 +103,8 @@ function module_menu ()
 
 function networks_levels () 
 {  
-    echo -ne "$(Colorlight_cyan '1)')       -   level 1\n"
-	echo -ne "$(Colorlight_cyan '2)')       -   level 2\n"
-	echo -ne "$(Colorlight_cyan '3)')       -   level 3\n"
-	echo -ne "$(Colorlight_cyan '4)')       -   level 4\n"
-	echo -ne "$(Colorlight_cyan '5)')       -   level 5\n"
-    echo -ne "$(ColorRed 'b)ack')    -   Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')"  
+    level 6
+    Back_exit  
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -133,7 +123,7 @@ function networks_levels ()
 
 function netsec_levels ()  
 {  
-    Level 6
+    level 6
     Back_exit        
 	echo -ne "Choose a level: "
 
@@ -152,7 +142,7 @@ function netsec_levels ()
 
 function expert_levels()
 {
-    Level 6
+    level 6
     Back_exit
     echo -ne "Choose a level: "
 
@@ -174,7 +164,8 @@ Back_exit()
 	echo -ne "$(ColorRed 'b)ack')  -  Back to previous menu\n"
 	echo -ne "$(ColorRed 'e(x)it')\n" 
 }
-Level()
+
+level()
 {
 	i=1
 	while [ $i -ne $1 ]                                                             #loop from 1 till the given paramter $1 is the parameter
@@ -183,6 +174,7 @@ Level()
 	    i=$(($i+1))
 	  done 
  }
+
 main_menu () 
 {
     enter_name
