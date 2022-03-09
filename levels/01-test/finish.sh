@@ -21,16 +21,17 @@
 #file=$(cat command.txt)
 #sudo lxc file push ./command.sh test1/root/command.sh
 
+lxc exec lvl01-c02 -- killall tshark
 mv ausgabe.txt ../levels/01-test
 
-test1=$(grep -c "10.10.1.2 → 10.10.1.3    ICMP 42 Echo (ping) request" ../levels/01-test/ausgabe.txt)
-test2=$(grep -c "ICMP" ../levels/01-test/ausgabe.txt)
 paket=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ../levels/01-test/ausgabe.txt)
-if [ "$paket" = 7 ] && [ "$test1" <= 1 ]
+test1=$(grep -c "ICMP" ../levels/01-test/ausgabe.txt)
+
+if [ "$paket" = 7 ]
 then
 	cat ../ressources/ascii/win.txt
 
-elif [ "$paket" != 7 ] && [ "$test1" = 0 ] && [ "$test2" != 0 ]
+elif [ "$paket" != 7 ] && [ "$test1" != 0 ]
 then 
 	echo "You haven't sent the requested paket number! Try Again!"
 

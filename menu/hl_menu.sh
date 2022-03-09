@@ -106,6 +106,7 @@ function networks_levels ()
 
     read menuinput
     case $menuinput in
+<<<<<<< HEAD
     1) echo -e "you chose level 1. starting..." ; ../scripts/level_start.sh 1 3  ; ./netlvl_1.sh ; ./netlvl_1_explanation.sh ; sleep 10 ; ../levels/01-test/create_level_session.sh; sudo lxc exec lvl01-d01 -- touch command.txt ; clear ; ../levels/01-test/finish.sh ; sleep 3 ; return 5 ;;
 	2) echo -e "you chose level 2" ; return 5 ;;
 	3) echo -e "you chose level 3" ; return 5 ;;
@@ -114,6 +115,17 @@ function networks_levels ()
     back) echo -ne "\n"; return 4 ;; 
     esc) exit 0 ;;
     *) echo -e $red"Wrong option.\n"$clear; return 5;;
+=======
+    1)  ../levels/01-test/create_network_level01_session.sh;                        #splits tmux in different windows    
+        return 5 ;;                                                                 #return 5 means that the function networks_levels is going to run
+	2) echo -e "\nyou chose level 2" ; return 5 ;;
+	3) echo -e "\nyou chose level 3" ; return 5 ;;
+	4) echo -e "\nyou chose level 4" ; return 5 ;; 
+	5) echo -e "\nyou chose level 5" ; return 5 ;;
+    b) echo -e "\nyou chose back\n"; return 4 ;;                                    #return 4 means that the function module_menu is going to run
+    x) echo -e "\nyou chose exit"; exit 0 ;;
+    *) echo -e $red"\nWrong option.\n"$clear; return 5;;                            #return 5 means that the function networks_levels is going to run
+>>>>>>> for saad
     esac
 }
 
@@ -187,4 +199,8 @@ main_menu ()
     done
 }
 
+<<<<<<< HEAD
+=======
+welcome_screen
+>>>>>>> for saad
 main_menu
