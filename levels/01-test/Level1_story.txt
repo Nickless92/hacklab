@@ -1,0 +1,19 @@
+It is Sunday. You are scrolling through social media as usual. 
+Tweeble, as always, recommends tweebs to you. 
+Most of them are not really interesting, but one catches your attention:
+Oh, just a troll, you think to yourself. Your gut feeling says otherwise. 
+Instead of just dismissing this, you find yourself on their profile and read the other tweebs made by this account. 
+Weird. 
+@blckht: 66 years ago American scientists John Bardeen and Walter Houser Brattain observe the basic principles of the transistor, a key element for the electronics revolution of the 20th century. Fun fact!
+@ladbible: it takes .666 seconds to check your drip HAHA lol
+@tourism: check out this 66-minute escape room in neuwied!
+@commonwhitegirl: 6 fingers would be more useful than 5 amirite
+It seems like there is a message hidden in the numbers of each tweet... what does it say?
+Ah yes, that's right. Its 66.666.66.6. Seems like an IP adress. Let\'s visit that.
+You try accessing the adress, but you can only see \"Access Denied\". You go to inspect the page, and you see in the source code that only certain IPs can access the site ... 
+
+to enter, one needs to make it look like they are accessing the website from the ip listed in the web page.
+to do this, one can use something that is called an ip-spoofing attack. one fakes their own sending ip address, just like writing a different sender on a packet.
+some tools used for ip spoofing and to monitor a network are hping and tshark.
+to find more about both, use the command man in front of the tool you would like to know more about.
+just like this: man ping .

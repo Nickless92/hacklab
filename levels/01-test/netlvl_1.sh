@@ -8,13 +8,12 @@ function typeit()
 }
 
 sleep 1s
-fun()                                                 #to print data from story.txt file
+read_story_text()                                     #to print data from story.txt file
 {
  for(( i=$1; i<=$2; i++))                             #first argument for loop start second for loop end and third for selection of new lines
   do
-     var=$(awk 'NR=='$i'{ print}' story.txt)          #save i line in variable var
+     var=$(awk 'NR=='$i'{ print}' Level1_story.txt)   #save i line in variable var
      typeit $var                                      #through typit function type every char of var slowly
-
        if [ $3 == 0 ]; then
 	  sleep .$((RANDOM%3)) ; echo -e "---\n"     
        elif [ $3 == 1 ];then
@@ -32,21 +31,21 @@ sleep .$((RANDOM%3)) ; echo -e "\n"
 }
 
 
-fun 1 3 2                                            #type 1-3 line with --- and new line at the end
-read_sleep                                           #call read asleep function
+read_story_text 1 3 2                                  #type 1-3 line with --- and new line at the end
+read_sleep                                             #call read asleep function
 
 sleep 2s
 echo -e "dr. blackhat @blckht - march 13\n\ngreetings.\nyou may not know who i am but you will soon find out.\nexpect your current understanding of how the world works to turned on its head.\nexpect me.\n\n---\n()> 0   <-> 2  <3 10)"
 
 sleep 2s
-fun 4 4 2                                           #type 4 line with --- and new line at the end
+read_story_text 4 4 2                                   #type 4 line with --- and new line at the end
 
 sleep 1s 
-fun 5 6 2                                           #type 5-6 line with with --- and new line at the end
+read_story_text 5 6 2                                   #type 5-6 line with with --- and new line at the end
 read_sleep
 
 sleep .$((RANDOM%3)) ; echo -e "---\n"
-fun 7 10 1                                         #type 7-10 with new line then --- and again new line 
+read_story_text 7 10 1                                  #type 7-10 with new line then --- and again new line 
 
-fun 11 13 2
+read_story_text 11 13 2
 read -p "Press any key to continue..." -n1 -s
