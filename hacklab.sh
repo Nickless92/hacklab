@@ -25,7 +25,7 @@ ColorRed()
 function welcome_screen()
 {
     clear                                                                           #clears the window that the window is clean
-    cat ../ressources/ascii/Welcome.txt                                             #prints an Ascii graphic
+    cat ./ressources/ascii/Welcome.txt                                              #prints an Ascii graphic
     sleep 2                                                                         #the user can see the graphic for two seconds
     clear
 }
@@ -108,7 +108,7 @@ function networks_levels ()
 
     read -n 1 menuinput
     case $menuinput in
-    1)  ../levels/01-test/create_network_level01_session.sh;                        #splits tmux in different windows    
+    1)  ./levels/01-test/create_network_level01_session.sh;                        #splits tmux in different windows    
         return 5 ;;                                                                 #return 5 means that the function networks_levels is going to run
 	2) echo -e "\nyou chose level 2" ; return 5 ;;
 	3) echo -e "\nyou chose level 3" ; return 5 ;;
