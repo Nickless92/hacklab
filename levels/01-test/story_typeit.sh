@@ -1,27 +1,27 @@
 function typeit() 
 {
-    local IFS=''
-    while read -n1 c; do
-        echo -n "$c"
-        sleep .015$((RANDOM%3))
-    done <<< "$@"
+   local IFS=''
+   while read -n1 c; do
+      echo -n "$c"
+      sleep .015$((RANDOM%3))
+   done <<< "$@"
 }
 
 sleep 1s
 read_story_text()                                     #to print data from story.txt file
 {
- for(( i=$1; i<=$2; i++))                             #first argument for loop start second for loop end and third for selection of new lines
-  do
-     var=$(awk 'NR=='$i'{ print}' Level1_story.txt)   #save i line in variable var
-     typeit $var                                      #through typit function type every char of var slowly
-       if [ $3 == 0 ]; then
-	  sleep .$((RANDOM%3)) ; echo -e "---\n"     
-       elif [ $3 == 1 ];then
-          sleep .$((RANDOM%3)) ; echo -e "\n---\n"
-       elif [ $3 == 2 ]; then
-          sleep .$((RANDOM%3)) ; echo -e "\n"
-       fi
-  done
+for(( i=$1; i<=$2; i++))                              #first argument for loop start second for loop end and third for selection of new lines
+do
+   var=$(awk 'NR=='$i'{ print}' Level1_story.txt)     #save i line in variable var
+   typeit $var                                        #through typit function type every char of var slowly
+   if [ $3 == 0 ]; then
+      sleep .$((RANDOM%3)) ; echo -e "---\n"     
+   elif [ $3 == 1 ]; then
+      sleep .$((RANDOM%3)) ; echo -e "\n---\n"
+   elif [ $3 == 2 ]; then
+      sleep .$((RANDOM%3)) ; echo -e "\n"
+   fi
+done
 }
 
 read_sleep()
