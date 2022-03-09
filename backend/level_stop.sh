@@ -16,7 +16,7 @@
 # $2 = number of containers
 # future: $3 = interface (optional)
 
-cd $(dirname "$0") ; . ./log.sh
+cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"
 
 # to do: check for more complex calls (number of parameters)

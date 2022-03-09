@@ -14,7 +14,7 @@
 # script to delete a lxd network bridge
 # $1 = level
 
-cd $(dirname "$0") ; . ./log.sh
+cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1"
 
 if [ $# = 1 ]
