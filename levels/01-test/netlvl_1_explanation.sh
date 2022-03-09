@@ -7,14 +7,16 @@ function typeit()
     done <<< "$@"
 }
 
-echo -e "\n"
-typeit "to enter, one needs to make it look like they are accessing the website from the ip listed in the web page."
-sleep .$((RANDOM%3)) ; echo -e "\n"
-typeit "to do this, one can use something that is called an ip-spoofing attack. one fakes their own sending ip address, just like writing a different sender on a packet."
-sleep .$((RANDOM%3)) ; echo -e "\n"
-typeit "some tools used for ip spoofing and to monitor a network are hping and tshark."
-sleep .$((RANDOM%3)) ; echo -e "\n"
-typeit "to find more about both, use the command man in front of the tool you would like to know more about."
-sleep .$((RANDOM%3)) ; echo -e "\n"
-typeit "just like this: man ping ."
-echo -e "\n"
+read_level1_explanation()                             #to print data from story.txt file
+{
+ echo -e "\n"
+ for(( i=$1; i<=$2; i++))                             #first argument for loop start second for loop end and third for selection of new lines
+  do
+     var=$(awk 'NR=='$i'{ print}' Level1_story.txt)   #save i line in variable var
+     typeit $var
+     sleep .$((RANDOM%3)) ; echo -e "\n"
+ echo -e "\n"
+done
+}
+
+read_level1_explanation 15 19
