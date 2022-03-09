@@ -171,14 +171,21 @@ level()
 	  do
 	    echo -ne "$(Colorlight_cyan " $i"')')" "   -  Level " $i "\n"
 	    i=$(($i+1))
+<<<<<<< HEAD
 	  done 
+=======
+	done 
+>>>>>>> 94-write-story-into-own-file-and-read-from-file-instead-of-multiple-echos-and-typeits
  }
 
 main_menu () 
 {
     enter_name
     clear
-    echo -e "Welcome to our hacklab $(ColorGreen $name)!\nThis is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.\nTo start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
+    welcome="Welcome to hacklab"
+    game="This is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.
+    To start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
+    echo -e "$welcome $(ColorGreen $name)!\n$game"
     returnValue=2
 
     while : ; do
@@ -199,3 +206,4 @@ main_menu ()
 
 welcome_screen
 main_menu
+
