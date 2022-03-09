@@ -15,7 +15,7 @@
 # $1 = level
 # $2 = number of containers
 
-cd $(dirname "$0") ; . ./log.sh
+cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2"
 
 if [ $# = 2 ]

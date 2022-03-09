@@ -16,7 +16,7 @@
 # $2 = number of containers
 # $3 = optional: fingerprint of ISO [default = alpine-iso-utils]
 
-cd $(dirname "$0") ; . ./log.sh
+cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - ISO: $3"
 
 if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
