@@ -33,17 +33,14 @@ clear
 if [[ "$test1" > 0 ]] && [[ "$test2" > 0 ]] && [[ "$test3" > 0 ]] && [[ "$test4" > 0 ]] && [[ "$test5" > 0 ]] && [[ "$test5" > 0 ]] && [[ "$test6" > 0 ]] && [[ "$test7" > 0 ]] && [[ "$test8" > 0 ]] && [[ "$test9" > 0 ]]
 then 
     # then the user won 
-cat ./win.txt
-else 
+    cat ../ressources/ascii/win.txt
+else
     #then the user lost
-cat ../ressources/ascii/lost.txt
-
+    cat ../ressources/ascii/lost.txt
 fi
 
 unlink ausgabe_opfer.txt
-
 unlink ausgabe_angreifer.txt
-
 
 sudo lxc exec lvl02-c03 -- rm opfer.txt
 sudo lxc exec lvl02-c01 -- rm angreifer.txt
