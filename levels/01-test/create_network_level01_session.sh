@@ -9,7 +9,7 @@ sleep 10 ;                                                                  #the
 sudo lxc exec lvl01-c01 -- touch command.txt ;                              #creates a file in the container where the user has to save his/her command
 
 #create the  session and two split pane
-tmux new-session -s hacklab -n level01 -d 'lxc exec lvl01-c02 -- tshark -i eth0; bash -i'\; split-window -v -d 'lxc shell lvl01-c01'\; split-window -h -d 'lxc exec lvl01-c03 -- tshark -i eth0' \; select-pane -D
+tmux new-session -s hacklab -n level01 -d 'lxc exec lvl01-c02 -- tshark -i eno1; bash -i'\; split-window -v -d 'lxc shell lvl01-c01'\; split-window -h -d 'lxc exec lvl01-c03 -- tshark -i eno1' \; select-pane -D
 
 tmux new-window -t hacklab:1 -n help 'ls -l; bash -i'                       #create a new window and run
 
