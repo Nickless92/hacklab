@@ -17,8 +17,8 @@ function enterEmail()
 	read -n 2 answer
 	case $answer in
 		J|j) 
-			echo -e "Dein Code lautet: \n$hash" | mail -s "Dein Zugangscode für Hacklab" $email ;
-			echo -e "Sending E-Mail...\n";;
+			echo -e "Sending E-Mail...\n";
+			echo -e "Dein Code lautet: \n$hash" | mail -s "Dein Zugangscode für Hacklab" -a FROM:"Team Hacklab <teamhacklab@gmail.com>" $email ;;
 		N|n) enterEmail;;
 		*) echo -e "Wrong option" ; enterEmail;;
 	esac
