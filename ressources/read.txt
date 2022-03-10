@@ -1,7 +1,3 @@
  Pupil   -  for people who not attended any module at HS_worms
  Student -  in the next step you can choose between diffrent modules
-<<<<<<< HEAD
  Expert  -  you can choose between all levels of pupil and students
-=======
- Expert  -  you can choose between all levels of pupil and students
->>>>>>> 94-write-story-into-own-file-and-read-from-file-instead-of-multiple-echos-and-typeits

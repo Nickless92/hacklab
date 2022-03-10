@@ -1,8 +1,8 @@
 #!/bin/bash
 # simulate handwriting by varying inter-letter pauses
 
-local IFS=''
+IFS=''
 while read -n1 c; do
     echo -n "$c"
-    sleep .015$(( RANDOM%3 ))
+    sleep .05$(( RANDOM % 40 ))
 done <<< "$@"
