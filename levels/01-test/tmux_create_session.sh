@@ -15,7 +15,7 @@ tmux new-session -s hacklab -n level01 -d 'lxc exec lvl01-c02 -- tshark -i eno1;
     split-window -h -d 'lxc exec lvl01-c03 -- tshark -i eno1' \;\
     select-pane -D
 
-tmux new-window -t hacklab:1 -n help 'ls -l; bash -i'                       # create a new window and run
+tmux new-window -t hacklab:1 -n help 'cat ../levels/01-test/story.txt; bash -i'                       # create a new window and run
 
 tmux select-window -t hacklab:0                                             # select the window who will start at first
 
