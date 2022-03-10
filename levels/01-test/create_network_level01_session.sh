@@ -11,7 +11,7 @@ sleep 10 ;                                                                  #the
 
 clear; clear; clear;
 
-lxc exec lvl01-c02 -- tshark -i eno1 &>> ausgabe.txt & 
+lxc exec lvl01-c02 -- tshark -i eno1 &>> ausgabe.log & 
 #lxc exec lvl01-c01 -- tshark -i eno1 &>> ausgabe.txt &
 
 #create the  session and two split pane

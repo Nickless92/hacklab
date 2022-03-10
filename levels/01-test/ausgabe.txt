@@ -1,2 +1,0 @@
-Capturing on 'eno1'
-0 packets captured

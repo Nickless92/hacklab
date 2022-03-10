@@ -7,8 +7,11 @@ clear ; echo -e "\nyou chose level 1. starting..."
 ./storytime.sh                                                              # story time :)
 #./levels/01-test/level_explanation.sh                                       # explanation for the level
 sleep 10                                                                    # the user gets some time to read the task
-sudo lxc exec lvl01-c01 -- touch command.txt                                # create a file where the user has to save his/her command
+#sudo lxc exec lvl01-c01 -- touch command.txt                                # create a file where the user has to save his/her command
 
+clear; clear; clear;
+
+lxc exec lvl01-c02 -- tshark -i eno1 &>> ausgabe.log & 
                                                                             # create the session and two split pane
 tmux new-session -s hacklab -n level01 -d 'lxc exec lvl01-c02 -- tshark -i eno1; bash -i'\;\
     split-window -v -d 'lxc shell lvl01-c01'\;\
@@ -21,6 +24,6 @@ tmux select-window -t hacklab:0                                             # se
 
 tmux -2 attach-session -t hacklab                                           # to attach the session
 
-clear ; ./level_evaluation.sh                                               # evaluation of the level
+clear ; ./finish.sh                                                         # evaluation of the level
 sleep 3
 cd -
