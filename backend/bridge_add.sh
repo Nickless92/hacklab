@@ -14,6 +14,11 @@
 # script to create a lxd network bridge
 # $1 = level
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1"
 if [ $# = 1 ]
@@ -23,6 +28,8 @@ then
     sudo brctl addbr level$level up              # adds and starts a bridge named $1 
     sudo ip link set dev level$level up          # adds and starts the L2 link
     echo "[$(basename "$0")] DONE: created bridge for level $level"
+    exit 0
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters"
+    exit 1
 fi

@@ -15,6 +15,11 @@
 # $1 = level
 # $2 = number of containers
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2"
 
@@ -29,7 +34,9 @@ then
     done
     echo "[$(basename "$0")] try target container" 
     lxc start lvl"$level_"-target                    # in case there is a TARGET container
-    echo "[$(basename "$0")] DONE: started containers for level $1" 
+    echo "[$(basename "$0")] DONE: started containers for level $1"
+    exit 0
 else
-    echo "[$(basename "$0")] FAIL: invalid number of parameters" 
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
+    exit 1
 fi

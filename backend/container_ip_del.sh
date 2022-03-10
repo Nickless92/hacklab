@@ -16,6 +16,11 @@
 # $2 = number of containers
 # $3 = interface [default = eth0]
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"
 
@@ -36,6 +41,8 @@ then
     lxc exec lvl"$level_"-target -- ip addr del 10.10."$1".0/24 dev "$interface"
     lxc config device remove lvl"$level_"-target "$interface"
     echo "[$(basename "$0")] DONE: removed network from containers for level $1"
+    exit 0
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters"
+    exit 1
 fi

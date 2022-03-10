@@ -13,6 +13,11 @@
 
 # create an up-to-date alpine iso with useful tools for hacklab
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh ; echo "Done: changed into $(pwd)"
 
 # $timestamp: fetch iso creation time, $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
@@ -46,7 +51,7 @@ lxc start alpine-runner
 echo "[$(basename "$0")] DONE: started alpine-runner with alpine/edge image"
 
 # config lxdbr0 to provide internet access via DHCP
-sudo lxc network set lxdbr0 ipv4.dhcp=true
+lxc network set lxdbr0 ipv4.dhcp=true
 echo "[$(basename "$0")] DONE: hacklab bridge: set ipv4.dhcp true"
 
 # install packages
@@ -62,7 +67,7 @@ lxc exec alpine-runner -- rm -f /root/log
 echo "[$(basename "$0")] DONE: pull + purge logs from alpine-runner"
 
 # config lxdbr0 to stop DHCP service
-sudo lxc network set lxdbr0 ipv4.dhcp=false
+lxc network set lxdbr0 ipv4.dhcp=false
 echo "[$(basename "$0")] DONE: hacklab bridge: set ipv4.dhcp false"
 
 # snapshot and export image as ISO
@@ -86,8 +91,8 @@ then
     echo "[$(basename "$0")] DONE: purged stale iso-alpine-utils"
     lxc image alias rename iso-alpine-stage iso-alpine-utils
     echo "[$(basename "$0")] DONE: renamed in iso-alpine-utils - READY!"
+    exit 0
 else
     echo "[$(basename "$0")] FAIL: NO iso-alpine-stage AVAILABLE"
+    exit 1
 fi
-
-echo -n "[$(basename "$0")] DONE: return to path: "; cd -
