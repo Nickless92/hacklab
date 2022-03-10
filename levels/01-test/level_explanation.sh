@@ -1,1 +1,0 @@
-print_lines_from_file_then_pause 15 19 4s ./story.txt
