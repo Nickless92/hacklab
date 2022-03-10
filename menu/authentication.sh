@@ -2,9 +2,9 @@
 
 function getCurrentTimeAndTimeLimit()
 {
-	limitInMinutes=10
+	limitInMinutes=1
 	currentTime=$(date +"%s")
-	timeLimit=$((currentTime + 10*60))	
+	timeLimit=$((currentTime + $limitInMinutes*60))	
 }
 
 function generateCode()
@@ -43,6 +43,9 @@ function enterCode()
 		if [ "$eingabe" == "$hash" ] && [ $(date +"%s") -lt "$timeLimit" ]; then
 				echo -e "\nrichtig"
 			i=4
+		elif [ $(date +"%s") -gt "$timeLimit" ]; then
+			echo -e "\n$limitInMinutes minutes are over\n"
+			break
 		else
 				echo -e "\nleider falsch"
 		fi
