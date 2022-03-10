@@ -5,6 +5,7 @@
 
 #to obtain the file where the User saves his command(filename: command.txt)
 #sudo lxc file pull lvl01-d01/root/command.txt ./command.txt
+
 sudo lxc file pull lvl02-c03/root/opfer.txt ausgabe_opfer.txt
 sudo lxc file pull lvl02-c01/root/angreifer.txt ausgabe_angreifer.txt
 
@@ -21,8 +22,8 @@ test1=$(sudo tcpdump -r ausgabe_opfer.txt | grep -c "ARP, Request who-has 10.10.
 test2=$(sudo tcpdump -r ausgabe_opfer.txt | grep -c "ARP, Request who-has 10.10.2.2 tell 10.10.2.1")
 test3=$(sudo tcpdump -r ausgabe_opfer.txt | grep -c "ARP, Reply 10.10.2.2 is-at")
 test4=$(sudo tcpdump -r ausgabe_opfer.txt | grep -c "IP 10.10.2.3 > 10.10.2.2:")
-# save hacker packet
 
+# save hacker packet
 test5=$(sudo tcpdump -r ausgabe_angreifer.txt | grep -c "IP 10.10.2.2 > 10.10.2.3:")
 test6=$(sudo tcpdump -r ausgabe_angreifer.txt | grep -c "IP 10.10.2.3 > 10.10.2.2:")
 test7=$(sudo tcpdump -r ausgabe_angreifer.txt | grep -c "ARP, Reply 10.10.2.2 is-at")
@@ -38,7 +39,6 @@ cat ../ressources/ascii/win.txt
 else 
     #then the user lost
 cat ../ressources/ascii/lost.txt
-
 fi
 
 unlink ausgabe_opfer.txt
