@@ -24,10 +24,10 @@ function enterEmail()
 	read infName
 	if [[ "$infName" =~ ^inf[0-9]{4}$ ]] ; then															#checks if the user puts in a valid Adress
 		email=${infName}@hs-worms.de																	#infName + @hs-worms.de --> E-Mail Adress
-		echo -n "Is $email correct? [J/N]: "
+		echo -n "Is $email correct? [Y/N]: "
 		read -n 2 answer																					
 		case $answer in																					#checks the enter value 
-			J|j) 
+			Y|y) 
 				echo -e "Sending email...\n";
 				generateCode			
 				echo -e "Your authentication code is: \n$hash\nIt runs out in $limitInMinutes minutes." | mail -s "Your authentication code for hacklab" -a FROM:"Team Hacklab <teamhacklab@gmail.com>" $email ;;	#generates Mail Packet
