@@ -19,22 +19,23 @@ function generateCode()
 
 function enterEmail()
 {
-	echo -n "Bitte geben Sie Ihren InfXXXX Namen ein: "
+	echo -e "**********AUTHENTICATION**********\n"
+	echo -n "Please enter your infXXXX name: "
 	read infName
 	if [[ "$infName" =~ ^inf[0-9]{4}$ ]] ; then															#checks if the user puts in a valid Adress
 		email=${infName}@hs-worms.de																	#infName + @hs-worms.de --> E-Mail Adress
-		echo -n "Ist folgende E-Mail korrekt $email ? [J/N]: "
+		echo -n "Is $email correct? [J/N]: "
 		read -n 2 answer																					
 		case $answer in																					#checks the enter value 
 			J|j) 
-				echo -e "Sending E-Mail...\n";
+				echo -e "Sending email...\n";
 				generateCode			
-				echo -e "Dein Code lautet: \n$hash\nDieser läuft in $limitInMinutes Minuten ab" | mail -s "Dein Zugangscode für Hacklab" -a FROM:"Team Hacklab <teamhacklab@gmail.com>" $email ;;	#generates Mail Packet
+				echo -e "Your authentication code is: \n$hash\nIt runs out in $limitInMinutes minutes." | mail -s "Your authentication code for hacklab" -a FROM:"Team Hacklab <teamhacklab@gmail.com>" $email ;;	#generates Mail Packet
 			N|n) enterEmail;;																			#the user can enter his/her email again
 			*) echo -e "Wrong option" ; enterEmail;;
 		esac
 	else
-		echo -e "Kein gültiger inf-Name\n"
+		echo -e "$infName is not a valid inf-name\n"
 		enterEmail
 	fi
 }
@@ -43,19 +44,27 @@ function enterCode()
 {
 	for ((i=1; i<=3; i++));																				#the user can enter his/her code three times
 	do
-		echo -n "($i. Versuch/3) Bitte geben Sie hier den Code ein, den Sie per E-Mail erhalten haben: "
+		echo -n "(Try $i/3) Please enter your authentication code, we send you by email: "
 		read -n 6 eingabe
 		if [ "$eingabe" == "$hash" ] && [ $(date +"%s") -lt "$timeLimit" ]; then						#checks if the value the user enters is equivalent to the hash we generated and if the time limit is not over 
-				echo -e "\nrichtig"
-			i=4
+			clear
+			echo -e "\nsuccessful"
+			break;
 		elif [ $(date +"%s") -gt "$timeLimit" ]; then													#checks if the time limit is over
 			echo -e "\n$limitInMinutes minutes are over\n"
 			break
 		else
-				echo -e "\nleider falsch"
+			echo -e "\nwrong code!"
+			main
 		fi
 	done
 }
 
-enterEmail
-enterCode
+function main()
+{
+	clear
+	enterEmail
+	enterCode	
+}
+
+main
