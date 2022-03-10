@@ -1,0 +1,2 @@
+#!/bin/bash
+echo -ne "    >"; sleep $1; echo -ne ">"; sleep $1; echo -ne ">"; sleep $1; echo -ne "    "
