@@ -2,7 +2,7 @@
 
 function getCurrentTimeAndTimeLimit()
 {
-	limitInMinutes=1
+	limitInMinutes=10
 	currentTime=$(date +"%s")
 	timeLimit=$((currentTime + $limitInMinutes*60))	
 }
