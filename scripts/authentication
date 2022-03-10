@@ -31,11 +31,11 @@ function enterEmail()
 				echo -e "Sending email...\n";
 				generateCode			
 				echo -e "Your authentication code is: \n$hash\nIt runs out in $limitInMinutes minutes." | mail -s "Your authentication code for hacklab" -a FROM:"Team Hacklab <teamhacklab@gmail.com>" $email ;;	#generates Mail Packet
-			N|n) enterEmail;;																			#the user can enter his/her email again
+			N|n) echo -ne "\n" ; enterEmail;;																			#the user can enter his/her email again
 			*) echo -e "Wrong option" ; enterEmail;;
 		esac
 	else
-		echo -e "$infName is not a valid inf-name\n"
+		echo -e "$infName is not a valid inf-name, try again\n"
 		enterEmail
 	fi
 }
@@ -44,11 +44,11 @@ function enterCode()
 {
 	for ((i=1; i<=3; i++));																				#the user can enter his/her code three times
 	do
-		echo -n "(Try $i/3) Please enter your authentication code, we send you by email: "
+		echo -n "(Try $i/3) Please enter your authentication code, we sent you by email: "
 		read -n 6 eingabe
 		if [ "$eingabe" == "$hash" ] && [ $(date +"%s") -lt "$timeLimit" ]; then						#checks if the value the user enters is equivalent to the hash we generated and if the time limit is not over 
 			clear
-			echo -e "\nsuccessful!\n"
+			echo -e "\nAuthentication successful!\n"
 			break;
 		elif [ $(date +"%s") -gt "$timeLimit" ]; then													#checks if the time limit is over
 			echo -e "\n$limitInMinutes minutes are over\n"
