@@ -25,7 +25,7 @@ ColorRed()
 function welcome_screen()
 {
     clear                                                                           #clears the window that the window is clean
-    cat ./ressources/ascii/Welcome.txt                                              #prints an Ascii graphic
+    cat ./ressources/ascii/welcome.txt                                              #prints an Ascii graphic
     sleep 2                                                                         #the user can see the graphic for two seconds
     clear
 }
@@ -47,7 +47,7 @@ function choose_stage ()
     while [ $i -ne 4 ]
     do
        echo -ne "$(Colorlight_cyan  "$i"')')"                                       #numers in this form 1)--will be printed  
-       awk 'NR=='$i'{ print}' read.txt                                              #Pupil STudent Expert will be read line by line
+       awk 'NR=='$i'{ print}' ./ressources/read.txt                                              #Pupil STudent Expert will be read line by line
     i=$(($i+1))
     done
     echo -ne "$(ColorRed 'e(x)it')\n" 
@@ -108,15 +108,15 @@ function networks_levels ()
 
     read -n 1 menuinput
     case $menuinput in
-    1)  ./levels/01-test/create_network_level01_session.sh;                        #splits tmux in different windows    
-        return 5 ;;                                                                 #return 5 means that the function networks_levels is going to run
+    1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows    
+        return 5 ;;                                                                 # return 5 means that the function networks_levels is going to run
 	2) echo -e "\nyou chose level 2" ; return 5 ;;
 	3) echo -e "\nyou chose level 3" ; return 5 ;;
 	4) echo -e "\nyou chose level 4" ; return 5 ;; 
 	5) echo -e "\nyou chose level 5" ; return 5 ;;
-    b) echo -e "\nyou chose back\n"; return 4 ;;                                    #return 4 means that the function module_menu is going to run
+    b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
     x) echo -e "\nyou chose exit"; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 5;;                            #return 5 means that the function networks_levels is going to run
+    *) echo -e $red"\nWrong option.\n"$clear; return 5;;                            # return 5 means that the function networks_levels is going to run
     esac
 }
 
@@ -133,9 +133,9 @@ function netsec_levels ()
 	3) echo -e "\nyou chose level 3. this is empty." ;  return 6;;
 	4) echo -e "\nyou chose level 4. this is empty." ;  return 6;; 
 	5) echo -e "\nyou chose level 5. this is empty." ;  return 6;;
-    b) echo -e "\nyou chose back\n"; return 4 ;;                                    #return 4 means that the function module_menu is going to run
+    b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
     x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 6;;                            #return 6 means that the function netsec_levels is going to run
+    *) echo -e $red"\nWrong option.\n"$clear; return 6;;                            # return 6 means that the function netsec_levels is going to run
     esac
 }
 
@@ -152,9 +152,9 @@ function expert_levels()
 	3) echo -e "\nyou chose level 3. this is empty." ;  return 7;;
 	4) echo -e "\nyou chose level 4. this is empty." ;  return 7;; 
 	5) echo -e "\nyou chose level 5. this is empty." ;  return 7;;
-    b) echo -e "\nyou chose back\n"; return 2 ;;                                    #return 2 means that the function choose_stage is going to run
+    b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
     x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 7;;                            #return 7 means that the function expert_levels is going to run
+    *) echo -e $red"\nWrong option.\n"$clear; return 7;;                            # return 7 means that the function expert_levels is going to run
     esac    
 }
 
@@ -167,15 +167,11 @@ Back_exit()
 level()
 {
 	i=1
-	while [ $i -ne $1 ]                                                             #loop from 1 till the given paramter $1 is the parameter
+	while [ $i -ne $1 ]                                                             # loop from 1 till the given paramter $1 is the parameter
 	  do
 	    echo -ne "$(Colorlight_cyan " $i"')')" "   -  Level " $i "\n"
 	    i=$(($i+1))
-<<<<<<< HEAD
-	  done 
-=======
 	done 
->>>>>>> 94-write-story-into-own-file-and-read-from-file-instead-of-multiple-echos-and-typeits
  }
 
 main_menu () 
@@ -190,13 +186,13 @@ main_menu ()
 
     while : ; do
         case $returnValue in
-            1) enter_name;;                                                         #is going to run if a function returns 1
-            2) choose_stage;;                                                       #is going to run if a function returns 2
-            3) pupil_levels;;                                                       #is going to run if a function returns 3 
-            4) module_menu;;                                                        #is going to run if a function returns 4
-            5) networks_levels;;                                                    #is going to run if a function returns 5
-            6) netsec_levels;;                                                      #is going to run if a function returns 6
-            7) expert_levels;;                                                      #is going to run if a function returns 7
+            1) enter_name;;                                                         # is going to run if a function returns 1
+            2) choose_stage;;                                                       # is going to run if a function returns 2
+            3) pupil_levels;;                                                       # is going to run if a function returns 3 
+            4) module_menu;;                                                        # is going to run if a function returns 4
+            5) networks_levels;;                                                    # is going to run if a function returns 5
+            6) netsec_levels;;                                                      # is going to run if a function returns 6
+            7) expert_levels;;                                                      # is going to run if a function returns 7
             *) exit 0;;
         esac
         returnValue=$?
@@ -204,6 +200,18 @@ main_menu ()
     done
 }
 
+#pwd
+hacklabdir=$(dirname $(readlink -f "$0"))
+#echo $hacklabdir
+cd $hacklabdir
+#pwd
+echo $PATH > ./path_backup
+#cat ./path_backup
+PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
+#echo $PATH
+#echo $PATH > ./path_backup2
+sleep 2s
 welcome_screen
 main_menu
-
+PATH=$(echo "./path_backup") ; rm -f ./path_backup
+cd -
