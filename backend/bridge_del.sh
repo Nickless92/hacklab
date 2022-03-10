@@ -14,6 +14,11 @@
 # script to delete a lxd network bridge
 # $1 = level
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1"
 
@@ -24,6 +29,8 @@ then
     sudo ip link set dev level$level down        # stops and deletes the L2 link $1
     sudo brctl delbr level$level                 # stops and deletes bridge named $1
     echo "[$(basename "$0")] DONE: deleted bridge for level $1"
+    exit 0
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters"
+    exit 1
 fi
