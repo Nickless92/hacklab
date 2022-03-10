@@ -1,10 +1,11 @@
 #!/bin/bash
 # start a tmux-session and all windows for level 01 
 
+cd $(dirname "$0")
 clear ; echo -e "\nyou chose level 1. starting..."
-(./backend/level_start.sh 1 3 &)                                           # containers getting started
-./levels/01-test/storytime.sh                                              # story time :)
-./levels/01-test/level_explanation.sh                                            # explanation for the level
+(../../backend/level_start 1 3 &)                                           # containers getting started
+./storytime.sh                                                              # story time :)
+#./levels/01-test/level_explanation.sh                                       # explanation for the level
 sleep 10                                                                    # the user gets some time to read the task
 sudo lxc exec lvl01-c01 -- touch command.txt                                # create a file where the user has to save his/her command
 
@@ -20,5 +21,6 @@ tmux select-window -t hacklab:0                                             # se
 
 tmux -2 attach-session -t hacklab                                           # to attach the session
 
-clear; ../levels/01-test/finish.sh                                          # evaluation of the level
+clear ; ./level_evaluation.sh                                               # evaluation of the level
 sleep 3
+cd -

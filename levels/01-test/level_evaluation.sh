@@ -14,26 +14,26 @@
 # determine if the attack (ip spoofing) was successful
 
 # to obtain the file where the User saves his command(filename: command.txt)
-lxc file pull lvl01-c01/root/command.txt ../levels/01-test/command_from_user.txt
+lxc file pull lvl01-c01/root/command.txt ./command_from_user.txt
 
 #result=$(diff ../levels/01-test/test.txt command_from_user.txt | wc -l)
 #file=$(cat command_from_user.txt)
 #lxc file push ./command_from_user.sh test1/root/command.sh
 
 # to save all the parameters of the sample solution in variables containing only numbers
-test1=$(grep -c "\-1" ../levels/01-test/command_from_user.txt)
-test2=$(grep -c "\-a 10.10.1.2 10.10.1.3" ../levels/01-test/command_from_user.txt)
-test3=$(grep -c "\-c 7" ../levels/01-test/command_from_user.txt)
-test4=$(grep -c "\-p 80" ../levels/01-test/command_from_user.txt)
-test5=$(grep "hping3" ../levels/01-test/command_from_user.txt | sed s/" .*"//)
+test1=$(grep -c "\-1" ./command_from_user.txt)
+test2=$(grep -c "\-a 10.10.1.2 10.10.1.3" ./command_from_user.txt)
+test3=$(grep -c "\-c 7" ./command_from_user.txt)
+test4=$(grep -c "\-p 80" ./command_from_user.txt)
+test5=$(grep "hping3" ./command_from_user.txt | sed s/" .*"//)
 
 # test to determine if the attack of the user was successful
 # to determine if all the parameters of the sample solution are included in the users'command
 if [ "$test1" = 1 ] && [ "$test2" = 1 ] && [ "$test3" = 1 ] && [ "$test4" = 1 ] && [ "$test5" = "hping3" ]
 then 
     # then the user won 
-    cat ../ressources/ascii/win.txt
+    cat ../../ressources/ascii/win.txt
 else 
     # then the user lost 
-    cat ../ressources/ascii/lost.txt
+    cat ../../ressources/ascii/lost.txt
 fi

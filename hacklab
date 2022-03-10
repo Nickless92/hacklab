@@ -24,9 +24,10 @@ ColorRed()
 
 function welcome_screen()
 {
-    clear                                                                           #clears the window that the window is clean
-    cat ./ressources/ascii/welcome.txt                                              #prints an Ascii graphic
-    sleep 2                                                                         #the user can see the graphic for two seconds
+    clear
+    sleep 2s
+    cat ./ressources/ascii/welcome.txt                                              # prints an Ascii graphic
+    sleep 2s                                                                        # the user can see the graphic for two seconds
     clear
 }
 
@@ -34,10 +35,10 @@ function enter_name()
 {
     echo -e "\nPlease enter your name, enter x to exit"
     read name
-    if [ "$name" == "x" ] ; then                                                    #if the user puts in x the programm is going to exit 
+    if [ "$name" == "x" ] ; then                                                    # if the user puts in x the programm is going to exit 
 	    exit 0
     else
-        return 2                                                                    #return 2 means that the function choose_stage is going to run
+        return 2                                                                    # return 2 means that the function choose_stage is going to run
     fi 
 }
 
@@ -46,8 +47,8 @@ function choose_stage ()
     i=1
     while [ $i -ne 4 ]
     do
-       echo -ne "$(Colorlight_cyan  "$i"')')"                                       #numers in this form 1)--will be printed  
-       awk 'NR=='$i'{ print}' ./ressources/read.txt                                              #Pupil STudent Expert will be read line by line
+       echo -ne "$(Colorlight_cyan  "$i"')')"                                       # numers in this form 1)--will be printed  
+       awk 'NR=='$i'{ print}' ./ressources/read.txt                                 # Pupil STudent Expert will be read line by line
     i=$(($i+1))
     done
     echo -ne "$(ColorRed 'e(x)it')\n" 
@@ -59,14 +60,14 @@ function choose_stage ()
 	2) echo -e "\nyou chose student.\n" ; ./authentication.sh ; return 4 ;;         #return 4 means that the function module_menu is going to run
 	3) echo -e "\nyou chose expert.\n" ; return 7 ;;                                #return 7 means that the function expert_levels is going to run
 	x) echo -e "\nyou chose exit" ; exit 0 ;; 
-    *) echo -e $red"\nWrong option.\n"$clear; return 2;;                            #return 2 means that the function choose_stage is going to run
+    *) echo -e $red"\nWrong option.\n"$clear; return 2;;                            # return 2 means that the function choose_stage is going to run
     esac
 }
 
 function pupil_levels () 
 {
     level 6
-    Back_exit    
+    back_exit    
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -76,9 +77,9 @@ function pupil_levels ()
 	3) echo -e "\nyou chose level 3" ; return 3 ;;
 	4) echo -e "\nyou chose level 4" ; return 3 ;;                         
 	5) echo -e "\nyou chose level 5" ; return 3 ;;
-    b) echo -e "\nyou chose back\n"; return 2 ;;                                    #return 2 means that the function choose_stage is going to run
+    b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
     x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 3;;                            #return 3 means that the function pupil_levels is going to run
+    *) echo -e $red"\nWrong option.\n"$clear; return 3;;                            # return 3 means that the function pupil_levels is going to run
     esac
 }
 
@@ -86,16 +87,16 @@ function module_menu ()
 {
     echo -ne "$(Colorlight_cyan '1)')     -  Networks (german: Netzwerke)\n"
     echo -ne "$(Colorlight_cyan '2)')     -  Network Security\n"
-    Back_exit    
+    back_exit    
     echo -ne "Please choose a module: "
 
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose networks.\n" ; return 5 ;;                              #return 5 means that the function networks_levels is going to run
-    2) echo -e "\nyou chose Network Security.\n" ; return 6 ;;                      #return 6 means that the function netsec_levels is going to run
-    b) echo -e "\nyou chose back\n"; return 2 ;;                                    #return 2 means that the function choose_stage is going to run
+    1) echo -e "\nyou chose networks.\n" ; return 5 ;;                              # return 5 means that the function networks_levels is going to run
+    2) echo -e "\nyou chose Network Security.\n" ; return 6 ;;                      # return 6 means that the function netsec_levels is going to run
+    b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
     x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 4;;                            #return 4 means that the function module_menu is going to run
+    *) echo -e $red"\nWrong option.\n"$clear; return 4;;                            # return 4 means that the function module_menu is going to run
     esac
 
 }
@@ -103,7 +104,7 @@ function module_menu ()
 function networks_levels () 
 {  
     level 6
-    Back_exit  
+    back_exit  
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -123,7 +124,7 @@ function networks_levels ()
 function netsec_levels ()  
 {  
     level 6
-    Back_exit        
+    back_exit        
 	echo -ne "Choose a level: "
 
     read -n 1 menuinput
@@ -142,7 +143,7 @@ function netsec_levels ()
 function expert_levels()
 {
     level 6
-    Back_exit
+    back_exit
     echo -ne "Choose a level: "
 
     read -n 1 menuinput
@@ -158,7 +159,7 @@ function expert_levels()
     esac    
 }
 
-Back_exit()
+back_exit()
 {
 	echo -ne "$(ColorRed 'b)ack')  -  Back to previous menu\n"
 	echo -ne "$(ColorRed 'e(x)it')\n" 
@@ -200,18 +201,17 @@ main_menu ()
     done
 }
 
-#pwd
+# change working directory into hacklabdir
 hacklabdir=$(dirname $(readlink -f "$0"))
-#echo $hacklabdir
 cd $hacklabdir
-#pwd
+
+# add relevant paths to environment
 echo $PATH > ./path_backup
-#cat ./path_backup
 PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
-#echo $PATH
-#echo $PATH > ./path_backup2
-sleep 2s
+
 welcome_screen
 main_menu
+
+# reset environment
 PATH=$(echo "./path_backup") ; rm -f ./path_backup
 cd -
