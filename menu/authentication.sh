@@ -3,8 +3,8 @@
 function getCurrentTimeAndTimeLimit()
 {
 	limitInMinutes=10
-	currentTime=$(date +"%s")
-	timeLimit=$((currentTime + $limitInMinutes*60))	
+	startTime=$(date +"%s")
+	timeLimit=$((startTime + $limitInMinutes*60))	
 }
 
 function generateCode()
