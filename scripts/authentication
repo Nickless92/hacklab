@@ -48,7 +48,7 @@ function enterCode()
 		read -n 6 eingabe
 		if [ "$eingabe" == "$hash" ] && [ $(date +"%s") -lt "$timeLimit" ]; then						#checks if the value the user enters is equivalent to the hash we generated and if the time limit is not over 
 			clear
-			echo -e "\nsuccessful"
+			echo -e "\nsuccessful!\n"
 			break;
 		elif [ $(date +"%s") -gt "$timeLimit" ]; then													#checks if the time limit is over
 			echo -e "\n$limitInMinutes minutes are over\n"
