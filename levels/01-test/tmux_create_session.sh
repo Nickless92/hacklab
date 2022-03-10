@@ -4,7 +4,7 @@
 cd $(dirname "$0")
 clear ; echo -e "\nyou chose level 1. starting..."
 (../../backend/level_start 1 3 &)                                           # containers getting started
-./storytime.sh                                                              # story time :)
+#./storytime.sh                                                              # story time :)
 #./levels/01-test/level_explanation.sh                                       # explanation for the level
 sleep 10                                                                    # the user gets some time to read the task
 sudo lxc exec lvl01-c01 -- touch command.txt                                # create a file where the user has to save his/her command
