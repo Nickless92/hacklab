@@ -26,4 +26,4 @@ tmux -2 attach-session -t hacklab                                           # to
 
 clear ; ./finish.sh                                                         # evaluation of the level
 sleep 3
-cd -
+cd - > /dev/null

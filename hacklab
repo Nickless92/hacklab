@@ -180,8 +180,9 @@ main_menu ()
     enter_name
     clear
     welcome="Welcome to hacklab"
-    game="This is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.
-    To start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
+    game=\
+"This is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.
+To start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
     echo -e "$welcome $(ColorGreen $name)!\n$game"
     returnValue=2
 
