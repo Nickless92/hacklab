@@ -25,7 +25,7 @@ ColorRed()
 function welcome_screen()
 {
     clear
-    sleep 2s
+    sleep 1s
     cat ./ressources/ascii/welcome.txt                                              # prints an Ascii graphic
     sleep 2s                                                                        # the user can see the graphic for two seconds
     clear
