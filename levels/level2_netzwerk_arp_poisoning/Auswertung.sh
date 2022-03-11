@@ -44,4 +44,3 @@ unlink ausgabe_angreifer.txt
 
 sudo lxc exec lvl02-c03 -- rm opfer.txt
 sudo lxc exec lvl02-c01 -- rm angreifer.txt
-
