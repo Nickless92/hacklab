@@ -41,9 +41,9 @@ else
 cat ./lost.txt
 fi
 
-unlink ausgabe_opfer.txt
+#unlink ausgabe_opfer.txt
 
-unlink ausgabe_angreifer.txt
+#unlink ausgabe_angreifer.txt
 
 
 

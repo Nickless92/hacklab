@@ -1,9 +1,9 @@
-instruction
+Instruction
 
  
 To perform the attack you need the available tool ettercap, see man page for more information.
 
-Use the w option to save your output to the attacker.txt file
+Use the w option to save your output to the angreifer.txt file
 
 You are standing on the container lvl02-c01 (10.10.2.1)
 
@@ -16,4 +16,7 @@ you can change the terminal with (Strg + B) an direction Buttun
 
 you can see the instruction with (Strg + b + n) 
 
-you can start
+you can start with (Strg + b + n)
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>good luck!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

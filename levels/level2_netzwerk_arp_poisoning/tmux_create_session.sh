@@ -18,7 +18,7 @@ tmux new-session -s hacklab -n level02 -d 'lxc exec lvl02-c02 -- ping 10.10.2.3;
 
 tmux new-window -t hacklab:1 -n help 'cat anweisung.txt; bash -i'                       # create a new window and run
 
-tmux select-window -t hacklab:0                                             # select the window who will start at first
+tmux select-window -t hacklab:1                                             # select the window who will start at first
 
 tmux -2 attach-session -t hacklab                                           # to attach the session
 
