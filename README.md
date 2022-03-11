@@ -28,6 +28,6 @@ Welcome to the repository of the project of team HackLab!
 
 The story line in itself is still a work in progress, but the current story idea is the following: 
 
-Your weird professor has been hinting at a plan to overtake the worlds telecommunication by seizing control of all home devices (IOT) and using them to doxx important services. You and your friends always were suspicious of him and are now trying to find a way to stop his ways.
+<code>Your weird professor has been hinting at a plan to overtake the worlds telecommunication by seizing control of all home devices (IOT) and using them to doxx important services. You and your friends always were suspicious of him and are now trying to find a way to stop his ways. </code>
 
 Whether we use all of this story is not determined yet, but it is our rough draft.
