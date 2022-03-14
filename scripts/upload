@@ -2,6 +2,7 @@
 
 echo -n "Do you want to upload your points? [Y/N]: "
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #./scripts/authentication ;
 
@@ -13,6 +14,11 @@ case $userInput in
     N|n) echo -e "\n" ;;
     *) echo -e "\nWrong option\n" 
 =======
+=======
+
+#./scripts/authentication ;
+
+>>>>>>> dd
 read -n 1 userInput
 case $userInput in
     Y|y)
