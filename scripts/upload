@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo -n "Do you want to upload your points? [Y/N]: "
+<<<<<<< HEAD
 
 #./scripts/authentication ;
 
@@ -11,5 +12,15 @@ case $userInput in
         echo -e "\n";;
     N|n) echo -e "\n" ;;
     *) echo -e "\nWrong option\n" 
+=======
+read -n 1 userInput
+case $userInput in
+    Y|y)
+        . ./scripts/authentication ;
+        echo "$1 ; $infName ; $(date +%c) ; Level $2 -- Punkte" >> database.txt;
+        echo -e "\n";;
+    N|n) echo -e "\n" ;;
+    *) echo -e "\nWrong option\n" ; 
+>>>>>>> added database
        ./scripts/upload;;
 esac
