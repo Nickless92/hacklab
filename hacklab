@@ -210,12 +210,7 @@ hacklabdir=$(dirname $(readlink -f "$0"))
 cd $hacklabdir
 
 # add relevant paths to environment
-echo $PATH > ./path_backup
 PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
 
 #welcome_screen
 main_menu
-
-# reset environment
-PATH=$(echo "./path_backup") ; rm -f ./path_backup
-cd -

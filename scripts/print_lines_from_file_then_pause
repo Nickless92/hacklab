@@ -3,7 +3,7 @@
 
 for (( i=$1 ; i<=$2 ; i++ )); do                            # first argument for loop start second for loop end and third for selection of new lines
     line=$(awk 'NR=='$i'{ print}' $(readlink -f "$4"))      # store line i from file in $line
-    ./scripts/typeit_like_handwriting $line                 # through typit function type every char of var slowly
+    typeit_like_handwriting $line                           # through typit function type every char of var slowly
     sleep $3
     echo -e "\n"
 done
