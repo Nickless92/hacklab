@@ -4,5 +4,5 @@
 IFS=''
 while read -n1 c; do
     echo -n "$c"
-    sleep .05$(( RANDOM % 40 ))
+    sleep .005$(( RANDOM % 40 ))
 done <<< "$@"

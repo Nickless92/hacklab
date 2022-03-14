@@ -16,6 +16,11 @@
 # $2 = number of containers
 # $3 = optional: fingerprint of ISO [default = alpine-iso-utils]
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - ISO: $3"
 
@@ -30,7 +35,9 @@ then
         echo "[$(basename "$0")] STEP: init container $container_"
         lxc init -p hacklab "$image" lvl"$level_"-c"$container_" 
     done
-    echo "[$(basename "$0")] DONE: created containers for level $level" 
+    echo "[$(basename "$0")] DONE: created containers for level $level"
+    exit 0
 else
-    echo "[$(basename "$0")] FAIL: invalid number of parameters" 
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
+    exit 1
 fi

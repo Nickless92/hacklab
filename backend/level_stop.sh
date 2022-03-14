@@ -16,6 +16,11 @@
 # $2 = number of containers
 # future: $3 = interface (optional)
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"
 
@@ -27,6 +32,8 @@ then
     echo "[$(basename "$0")] STEP: delete containers";    ./container_delete.sh "$1" "$2"
     echo -n "[$(basename "$0")] STEP: return to path: "; cd -
     echo "[$(basename "$0")] DONE: stopped level $1 with $2 containers"
+    exit 0
 else
     echo "[$(basename "$0")] FAILED: invalid number of parameters"
+    exit 1
 fi

@@ -14,6 +14,11 @@
 # script to create a lxd network bridge
 # $1 = name (optional - default: hacklab)
 
+function cd_return {
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+}
+trap cd_return EXIT
+
 cd $(dirname "$0") ; . ./log_with_timestamp.sh
 echo "[$(basename "$0")] CALL: $@"
 
@@ -26,8 +31,10 @@ then
         else
             echo "[$(basename "$0")] STEP: create network $name"
             lxc network create "$name" ipv4.address=none ipv4.dhcp=true ipv4.nat=true ipv6.address=none ipv6.dhcp=false ipv6.nat=false || 
-            echo "[$(basename "$0")] DONE: created network $name"; exit 0
+            echo "[$(basename "$0")] DONE: created network $name"
+            exit 0
     fi
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters"
+    exit 1
 fi
