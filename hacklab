@@ -27,7 +27,7 @@ function createDatabase()
     if [ -f database.txt ]; then
         return
     else
-        echo -e "Username ; inf-Name ; submission data ; level - points\n" >> database.txt
+        echo -e "Username ; inf-Name ; submission data ; level - points\n" > database.txt
     fi
 }
 
