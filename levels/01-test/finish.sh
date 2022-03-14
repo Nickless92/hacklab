@@ -25,8 +25,7 @@
 #export lostpoints=0
 
 lxc exec lvl01-c02 -- killall tshark					#kill tshark and the file will be created
-sleep 1;												#we need to wait 1 second for moving the file
-#mv ausgabe.log ../levels/01-test						#to move the file
+sleep 1;												#we need to wait 1 second before tshark will be killed
 
 
 paket=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ausgabe.log) 	#to determine if the correct pakets was sent with the correct IP-adress
@@ -48,8 +47,8 @@ else
 	cat ./ressources/ascii/lost.txt
 fi
 
-
 rm ausgabe.log
+
 #to save all the parameters of the sample solution in variables containing only numbers
 #test1=$(grep -c "\-1" command.txt)
 #test2=$(grep -c "\-a 10.10.1.2 10.10.1.3" command.txt)
