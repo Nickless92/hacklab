@@ -3,7 +3,7 @@
 echo -n "Do you want to upload your points? [Y/N]: "
 
 #./scripts/authentication ;
-=======
+
 read -n 1 userInput
 case $userInput in
     Y|y)
@@ -14,4 +14,3 @@ case $userInput in
     *) echo -e "\nWrong option\n" ; 
        ./scripts/upload;;
 esac
->>>>>>> 9ad887b9f7cac9be9bfce8aab83ef46a1a81406d
