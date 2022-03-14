@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -n "Do you want to upload your points? [Y/N]: "
+read -n 1 userInput
+case $userInput in
+    Y|y) echo "$name" >> datenbank.txt;;
+    N|n) echo -e "\n" ; exit 0;;
+esac
+
+
+#./scripts/authentication ;
