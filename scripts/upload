@@ -1,6 +1,9 @@
 #!/bin/bash
 
 echo -n "Do you want to upload your points? [Y/N]: "
+
+#./scripts/authentication ;
+
 read -n 1 userInput
 case $userInput in
     Y|y)
