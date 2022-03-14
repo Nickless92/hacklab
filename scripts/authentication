@@ -31,7 +31,7 @@ function enterEmail()
 				echo -e "Sending email...\n";
 				generateCode			
 				echo -e "Your authentication code is: \n$hash\nIt runs out in $limitInMinutes minutes." | mail -s "Your authentication code for hacklab" -a FROM:"Team Hacklab <teamhacklab@gmail.com>" $email ;;	#generates Mail Packet
-			N|n) echo -ne "\n" ; enterEmail;;																			#the user can enter his/her email again
+			N|n) echo -ne "\n" ; enterEmail;;															#the user can enter his/her email again
 			*) echo -e "Wrong option" ; enterEmail;;
 		esac
 	else
