@@ -57,7 +57,7 @@ function choose_stage ()
     read -n 1 menuinput
     case $menuinput in 
 	1) echo -e "\nyou chose pupil.\n" ; return 3 ;;                                 #return 3 means that the function pupil_levels is going to run
-	2) echo -e "\nyou chose student.\n" ; ./scripts/authentication ; return 4 ;;    #return 4 means that the function module_menu is going to run
+	2) echo -e "\nyou chose student.\n"; ./scripts/authentication ; return 4 ;;    #return 4 means that the function module_menu is going to run
 	3) echo -e "\nyou chose expert.\n" ; return 7 ;;                                #return 7 means that the function expert_levels is going to run
 	x) echo -e "\nyou chose exit" ; exit 0 ;; 
     *) echo -e $red"\nWrong option.\n"$clear; return 2;;                            # return 2 means that the function choose_stage is going to run
