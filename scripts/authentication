@@ -34,6 +34,7 @@ function enterEmail()
 			N|n) echo -ne "\n" ; enterEmail;;															#the user can enter his/her email again
 			*) echo -e "Wrong option" ; enterEmail;;
 		esac
+	elif [[ "$infName" = "hacklab" ]] ; then exit 0
 	else
 		echo -e "$infName is not a valid inf-name, try again\n"
 		enterEmail
