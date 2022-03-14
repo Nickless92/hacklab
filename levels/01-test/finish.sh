@@ -33,7 +33,7 @@ test1=$(grep -c "ICMP 42" ausgabe.log)													#to determine if the correct 
 if [ "$paket" = "7" ]
 then
 	cat ../../ressources/ascii/win.txt
-
+	
 elif [ "$paket" != 7 ] && [ "$test1" != 0 ]
 then 
 	echo "You haven't sent the requested paket number! Try Again!"
