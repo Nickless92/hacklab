@@ -11,11 +11,11 @@
 
 
 
-You have successfully read the password. it was:
+You have successfully intercepted the connection and read the file Dr. Blackhat has also received. It contained the following:
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-Your Password is  ApNRvd78.sf&qzev don't forget it anymore.
-It is dangerous a hacker could read it.
+Your Password is  ApNRvd78.sf&qzev. Don't forget it anymore.
+This method of transferring your password it very dangerous, let's hope that no one else is reading this.
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>You have 10 points<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
