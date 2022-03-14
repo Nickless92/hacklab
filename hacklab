@@ -22,6 +22,15 @@ ColorRed()
     echo -ne $red$1$clear
 }
 
+function createDatabase()
+{
+    if [ -f database.txt ]; then
+        return
+    else
+        echo -e "Username ; inf-Name ; submission data ; level - points\n" >> database.txt
+    fi
+}
+
 function welcome_screen()
 {
     clear
@@ -34,7 +43,7 @@ function welcome_screen()
 function enter_name()
 {
     echo -e "\nPlease enter your name, enter x to exit"
-    read name
+    read name 
     if [ "$name" == "x" ] ; then                                                    # if the user puts in x the programm is going to exit 
 	    exit 0
     else
@@ -57,7 +66,7 @@ function choose_stage ()
     read -n 1 menuinput
     case $menuinput in 
 	1) echo -e "\nyou chose pupil.\n" ; return 3 ;;                                 #return 3 means that the function pupil_levels is going to run
-	2) echo -e "\nyou chose student.\n" ; ./scripts/authentication ; return 4 ;;    #return 4 means that the function module_menu is going to run
+	2) echo -e "\nyou chose student.\n" ; return 4 ;;    #return 4 means that the function module_menu is going to run
 	3) echo -e "\nyou chose expert.\n" ; return 7 ;;                                #return 7 means that the function expert_levels is going to run
 	x) echo -e "\nyou chose exit" ; exit 0 ;; 
     *) echo -e $red"\nWrong option.\n"$clear; return 2;;                            # return 2 means that the function choose_stage is going to run
@@ -110,7 +119,12 @@ function networks_levels ()
 
     read -n 1 menuinput
     case $menuinput in
+<<<<<<< HEAD
 	1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows
+=======
+    1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows   
+        . ./scripts/upload $name 1;
+>>>>>>> added database
         return 5 ;;                                                                 # return 5 means that the function networks_levels is going to run
 	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
         return 5 ;;
@@ -180,6 +194,7 @@ level()
 
 main_menu () 
 {
+    createDatabase
     enter_name
     clear
     welcome="Welcome to hacklab"

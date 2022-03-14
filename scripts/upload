@@ -1,16 +1,13 @@
 #!/bin/bash
 
 echo -n "Do you want to upload your points? [Y/N]: "
-#read -n 1 userInput
-read -p datenbank.txt name Vorname Level
-
-read -p "Ihr Name : "
-read -p "Ihr Vorname : "
-read -p "DAs Level : "
-#case $userInput in
- #   Y|y) echo "$name" >> datenbank.txt;;
-  #  N|n) echo -e "\n" ; exit 0;;
-#esac
-
-
-#./scripts/authentication ;
+read -n 1 userInput
+case $userInput in
+    Y|y)
+        . ./scripts/authentication ;
+        echo "$1 ; $infName ; $(date +%c) ; Level $2 -- Punkte" >> database.txt;
+        echo -e "\n";;
+    N|n) echo -e "\n" ;;
+    *) echo -e "\nWrong option\n" ; 
+       ./scripts/upload;;
+esac
