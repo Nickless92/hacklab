@@ -16,24 +16,23 @@
 # $2 = number of containers
 
 function cd_return {
-    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                                       # cd to former working dir
 }
-trap cd_return EXIT
+trap cd_return EXIT                                                                                 # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh
-echo "[$(basename "$0")] CALL: level: $1 - containers: $2"
+cd $(dirname "$0") ; . ./log_with_timestamp.sh                                                      # cd to path/to/$0, call log_with_timestamp.sh
+echo "[$(basename "$0")] CALL: $@"
 
-if [ $# = 2 ]
+if [ $# = 2 ]                                                                                       # only two parameters allowed
 then
-    if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi
-    for((container = 1; container <= $2; container++))
-    do
+    if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi                                       # adjust for two-digit number sheme
+    for((container = 1; container <= $2; container++)); do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: delete container $container_"
-        lxc delete lvl"$level"-c"$container_"   # deletes a stopped container
+        lxc delete lvl"$level"-c"$container_"                                                       # deletes a container (only if STOPPED)
     done
     echo "[$(basename "$0")] STEP: try target container"
-    lxc delete lvl"$level"-target            # in case there is a target VM
+    lxc delete lvl"$level"-target                                                                   # in case there is a target VM - FIXME: catch this
     echo "[$(basename "$0")] DONE: deleted containers for level $1"
     exit 0
 else

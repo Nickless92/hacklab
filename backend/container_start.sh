@@ -16,24 +16,22 @@
 # $2 = number of containers
 
 function cd_return {
-    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                                           # cd tp former working dir
 }
-trap cd_return EXIT
+trap cd_return EXIT                                                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh
-echo "[$(basename "$0")] CALL: level: $1 - containers: $2"
+cd $(dirname "$0") ; . ./log_with_timestamp.sh                                                          # cd to path/to/$0, call log_with_timestamp.sh
+echo "[$(basename "$0")] CALL: $@"
 
-if [ $# = 2 ]
-then
-    if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi
-    for((container = 1; container <= "$2"; container++))     # cycle through all containers of a level
-    do
+if [ $# = 2 ] ; then                                                                                    # only two parameters allowed
+    if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                                         # adjust for two-digit number sheme
+    for((container = 1; container <= "$2"; container++)); do                                            # cycle through all containers of a level
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: start container $container_"
-        lxc start lvl"$level_"-c"$container_"           # only STOPS the given lxc container
+        lxc start lvl"$level_"-c"$container_"                                                           # only STARTS the given container (needs initialization first)
     done
     echo "[$(basename "$0")] try target container" 
-    lxc start lvl"$level_"-target                    # in case there is a TARGET container
+    lxc start lvl"$level_"-target                                                                       # in case there is a target VM - FIXME: catch this
     echo "[$(basename "$0")] DONE: started containers for level $1"
     exit 0
 else

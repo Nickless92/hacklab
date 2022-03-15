@@ -15,19 +15,19 @@
 # $1 = level
 
 function cd_return {
-    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -           # cd to former working dir
 }
-trap cd_return EXIT
+trap cd_return EXIT                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh
-echo "[$(basename "$0")] CALL: level: $1"
+cd $(dirname "$0") ; . ./log_with_timestamp.sh                          # cd to path/to/$0, call log_with_timestamp.sh
+echo "[$(basename "$0")] CALL: $@"
 
-if [ $# = 1 ]
+if [ $# = 1 ]                                                           # only one level parameter ($1) allowed
 then
-    if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi
+    if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi           # adjust for two-digit number sheme
     echo "[$(basename "$0")] STEP: delete bridge $level"
-    sudo ip link set dev level$level down        # stops and deletes the L2 link $1
-    sudo brctl delbr level$level                 # stops and deletes bridge named $1
+    sudo ip link set dev level$level down                               # stop and delete the L2 link
+    sudo brctl delbr level$level                                        # stop and delete bridge named $1
     echo "[$(basename "$0")] DONE: deleted bridge for level $1"
     exit 0
 else

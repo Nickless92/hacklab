@@ -17,24 +17,24 @@
 # $3 = interface [default = eth0]
 
 function cd_return {
-    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                                               # cd to former working dir
 }
-trap cd_return EXIT
+trap cd_return EXIT                                                                                         # trap 'EXIT', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh
-echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"
+cd $(dirname "$0") ; . ./log_with_timestamp.sh                                                              # cd to path/to/$0, call log_with_timestamp.sh
+echo "[$(basename "$0")] CALL: $@"
 
-if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]
+if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]                                                                         # only two or three parameters allowed
 then
-    if [ "$#" -eq 2 ]; then interface=eno1; else interface="$3"; fi     # hand over $interface if changed
-    if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi         # check for leading '0'
+    if [ "$#" -eq 2 ]; then interface=eno1; else interface="$3"; fi                                         # default $interface = eno1
+    if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                                             # adjust for two-digit number sheme
     for ((container = 1; container <= "$2"; container++))
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: add IP to container $container_"
-        lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" down
-        lxc exec lvl"$level_"-c"$container_" -- ip addr del 10.10."$1"."$container"/24 dev "$interface"
-        lxc config device remove lvl"$level_"-c"$container_" "$interface"
+        lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" down                           # inside container: change device state to 'down'
+        lxc exec lvl"$level_"-c"$container_" -- ip addr del 10.10."$1"."$container"/24 dev "$interface"     # inside container: delete ip address
+        lxc config device remove lvl"$level_"-c"$container_" "$interface"                                   # on host: delete interface from container
     done
     echo "[$(basename "$0")] STEP: try target container"
     lxc exec lvl"$level_"-target -- ip link set dev "$interface" down

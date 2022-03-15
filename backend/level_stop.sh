@@ -17,22 +17,19 @@
 # future: $3 = interface (optional)
 
 function cd_return {
-    echo -n "[$(basename "$0")] DONE: return to path: "; cd -
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                               # cd to former working dir
 }
-trap cd_return EXIT
+trap cd_return EXIT                                                                         # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh
-echo "[$(basename "$0")] CALL: level: $1 - containers: $2 - interface: $3"
+cd $(dirname "$0") ; . ./log_with_timestamp.sh                                              # cd to path/to/$0, 'source' log_with_timestamp.sh
+echo "[$(basename "$0")] CALL: $@"
 
-# to do: check for more complex calls (number of parameters)
-if [ "$#" -eq 2 ]
-then
-    echo "[$(basename "$0")] STEP: delete network IPs";   ./container_ip_del.sh "$1" "$2"
-    echo "[$(basename "$0")] STEP: stop containers";      ./container_stop.sh "$1" "$2"
-    echo "[$(basename "$0")] STEP: delete containers";    ./container_delete.sh "$1" "$2"
-    echo -n "[$(basename "$0")] STEP: return to path: "; cd -
-    echo "[$(basename "$0")] DONE: stopped level $1 with $2 containers"
-    exit 0
+if [ "$#" -eq 2 ] ; then                                                                    # only two parameters allowed - much simpler call than level_start.sh
+    echo "[$(basename "$0")] STEP: delete network IPs";   ./container_ip_del.sh "$1" "$2"   # remove ips...
+    echo "[$(basename "$0")] STEP: stop containers";      ./container_stop.sh "$1" "$2"     # stop ...
+    echo "[$(basename "$0")] STEP: delete containers";    ./container_delete.sh "$1" "$2"   # delete ...
+    echo "[$(basename "$0")] DONE: stopped level $1 with $2 containers"                     # ... done!
+    exit 0                                                                                  # left-overs: network and profile, ready for next level
 else
     echo "[$(basename "$0")] FAILED: invalid number of parameters"
     exit 1
