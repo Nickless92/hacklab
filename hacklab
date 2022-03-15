@@ -100,7 +100,6 @@ function networks() {
 	echo -ne "\nPlease choose a level: "
     read -n 1 menuinput
     case $menuinput in
-<<<<<<< HEAD
 	1)  . ./levels/01/tmux_create_session.sh;                                   # splits tmux in different windows
         . upload_score_to_database $module 1        ;;
 	2)  ./levels/02/tmux_create_session.sh;
@@ -111,24 +110,6 @@ function networks() {
 	b) echo -e "\nyou chose back\n";                next_stage="student_modules" ;;
 	x) echo -e "\nyou chose exit";                  exit 0 ;;
 	*) echo -e "\n$(color_red 'Wrong option.')\n"   ;;
-=======
-<<<<<<< HEAD
-	1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows
-=======
-    1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows   
-        . ./scripts/upload $name 1;
->>>>>>> added database
-        return 5 ;;                                                                 # return 5 means that the function networks_levels is going to run
-	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
-        return 5 ;;
-#	2) echo -e "you chose level 2. starting..." ; sudo tmux new-session -s lvl02 -d 'lxc shell lvl02-c02'\; split-window -v -d 'lxc shell lvl02-c01' \; split-window -h -d 'lxc shell lvl02-c03' \; attach ; clear ; ../levels/level2_netzwerk_arp_poisoning/Auswertung.sh ; return 5 ;;
-	3) echo -e "\nyou chose level 3" ; return 5 ;;
-	4) echo -e "\nyou chose level 4" ; return 5 ;; 
-	5) echo -e "\nyou chose level 5" ; return 5 ;;
-	b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
-	x) echo -e "\nyou chose exit"; exit 0 ;;
-	*) echo -e $red"\nWrong option.\n"$clear; return 5;;                            # return 5 means that the function networks_levels is going to run
->>>>>>> added database
     esac
 }
 
@@ -166,7 +147,6 @@ function experts() {
     esac    
 }
 
-<<<<<<< HEAD
 function print_menu_options() {
     [ $# -eq 0 ] && tag="$next_stage"
     [ $# -eq 1 ] && tag="$1"
@@ -176,49 +156,6 @@ function print_menu_options() {
         text=$(awk 'NR=='$line'{ print}' $file)                                 # store $line from $file in $text
         echo -e "$(color_cyan "$i"')')" $text
         ((i++))
-=======
-back_exit()
-{
-	echo -ne "$(ColorRed 'b)ack')  -  Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')\n" 
-}
-
-level()
-{
-	i=1
-	while [ $i -ne $1 ]                                                             # loop from 1 till the given paramter $1 is the parameter
-	  do
-	    echo -ne "$(Colorlight_cyan " $i"')')" "   -  Level " $i "\n"
-	    i=$(($i+1))
-	done 
-}
-
-main_menu () 
-{
-    createDatabase
-    enter_name
-    clear
-    welcome="Welcome to hacklab"
-    game=\
-"This is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.
-To start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
-    echo -e "$welcome $(ColorGreen $name)!\n$game"
-    returnValue=2
-
-    while : ; do
-        case $returnValue in
-            1) enter_name;;                                                         # is going to run if a function returns 1
-            2) choose_stage;;                                                       # is going to run if a function returns 2
-            3) pupil_levels;;                                                       # is going to run if a function returns 3 
-            4) module_menu;;                                                        # is going to run if a function returns 4
-            5) networks_levels;;                                                    # is going to run if a function returns 5
-            6) netsec_levels;;                                                      # is going to run if a function returns 6
-            7) expert_levels;;                                                      # is going to run if a function returns 7
-            *) exit 0;;
-        esac
-        returnValue=$?
-        [[ $returnValue -ne 0 ]] || break
->>>>>>> added database
     done
     [ $next_stage != "enter_experience" ] && echo -e "$(color_red 'b)ack')"
 	echo -e "$(color_red 'e(x)it')" 
