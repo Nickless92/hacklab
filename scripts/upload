@@ -4,8 +4,10 @@ echo -n "Do you want to upload your points? [Y/N]: "
 read -n 1 userInput
 case $userInput in
     Y|y)
+	#. ./scripts/hacklab/levels/01-test/finish ;
         . ./scripts/authentication ;
-        echo "$1 ; $infName ; $(date +%c) ; Level $2 -- Punkte" >> database.txt;
+	echo "upload: $points" >> points.log
+        echo "$1 ; $infName ; $(date +%c) ; Level $2 -- Points == $points" >> database.txt;
         echo -e "\n";;
     N|n) echo -e "\n" ;;
     *) echo -e "\nWrong option\n" ; 
