@@ -133,10 +133,16 @@ function network_levels () {
 	3) echo -e "\nyou chose level 3" ; return 5 ;;
 	4) echo -e "\nyou chose level 4" ; return 5 ;; 
 	5) echo -e "\nyou chose level 5" ; return 5 ;;
+<<<<<<< HEAD
 	b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
 >>>>>>> added database
 	x) echo -e "\nyou chose exit"; exit 0 ;;
 	*) echo -e "\n$(color_red 'Wrong option.')\n";  next_stage="network_levels" ;;
+=======
+    b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
+    x) echo -e "\nyou chose exit"; return 0 ;;
+    *) echo -e $red"\nWrong option.\n"$clear; return 5;;                            # return 5 means that the function networks_levels is going to run
+>>>>>>> added pushDatabaseToServer
     esac
 }
 
@@ -146,6 +152,7 @@ function netsec_levels () {
 	echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
+<<<<<<< HEAD
     1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="netsec_levels" ;;
 	2) echo -e "\nyou chose level 2. this is empty." ;  next_stage="netsec_levels" ;;
 	3) echo -e "\nyou chose level 3. this is empty." ;  next_stage="netsec_levels" ;;
@@ -154,6 +161,16 @@ function netsec_levels () {
     b) echo -e "\nyou chose back\n";                    next_stage="student_modules" ;;
     x) echo -e "\nyou chose exit" ; exit 0 ;;
     *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="netsec_levels" ;;
+=======
+    1) echo -e "\nyou chose level 1. this is empty." ;  return 6;;
+	2) echo -e "\nyou chose level 2. this is empty." ;  return 6;;
+	3) echo -e "\nyou chose level 3. this is empty." ;  return 6;;
+	4) echo -e "\nyou chose level 4. this is empty." ;  return 6;; 
+	5) echo -e "\nyou chose level 5. this is empty." ;  return 6;;
+    b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
+    x) echo -e "\nyou chose exit" ; return 0 ;;
+    *) echo -e $red"\nWrong option.\n"$clear; return 6;;                            # return 6 means that the function netsec_levels is going to run
+>>>>>>> added pushDatabaseToServer
     esac
 }
 
@@ -163,6 +180,7 @@ function expert_levels() {
     echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
+<<<<<<< HEAD
     1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="expert_levels" ;;
 	2) echo -e "\nyou chose level 2. this is empty." ;  next_stage="expert_levels" ;;
 	3) echo -e "\nyou chose level 3. this is empty." ;  next_stage="expert_levels" ;;
@@ -171,6 +189,16 @@ function expert_levels() {
     b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;            
     x) echo -e "\nyou chose exit" ; exit 0 ;;
     *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="expert_levels" ;;
+=======
+    1) echo -e "\nyou chose level 1. this is empty." ;  return 7;;
+	2) echo -e "\nyou chose level 2. this is empty." ;  return 7;;
+	3) echo -e "\nyou chose level 3. this is empty." ;  return 7;;
+	4) echo -e "\nyou chose level 4. this is empty." ;  return 7;; 
+	5) echo -e "\nyou chose level 5. this is empty." ;  return 7;;
+    b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
+    x) echo -e "\nyou chose exit" ; return 0 ;;
+    *) echo -e $red"\nWrong option.\n"$clear; return 7;;                            # return 7 means that the function expert_levels is going to run
+>>>>>>> added pushDatabaseToServer
     esac    
 }
 
@@ -201,7 +229,6 @@ level()
 
 main_menu () 
 {
-    createDatabase
     enter_name
     clear
     welcome="Welcome to hacklab"
@@ -220,7 +247,7 @@ To start, we will need to know how much knowledge you already posess.\nPlease ch
             5) networks_levels;;                                                    # is going to run if a function returns 5
             6) netsec_levels;;                                                      # is going to run if a function returns 6
             7) expert_levels;;                                                      # is going to run if a function returns 7
-            *) exit 0;;
+            *) return;;
         esac
         returnValue=$?
         [[ $returnValue -ne 0 ]] || break
