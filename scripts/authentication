@@ -55,8 +55,8 @@ function enterCode()
 			echo -e "\n$limitInMinutes minutes are over\n"
 			break
 		else
-			echo -e "\nWrong code!"
-			main
+			echo -e "\nwrong code!"
+			continue;
 		fi
 	done
 }
