@@ -1,0 +1,22 @@
+Instructions:
+
+ 
+To perform the attack you will need the tool ettercap, take a look at its man page for more information.
+
+Use the w option to write your output to the angreifer.txt file.
+
+You are currently on the computer c01 (10.10.2.1).
+
+Dr. Blackhat's ip adress is 10.10.2.3, they are using the computer c03.
+
+Blackhats' accomplice uses the computer c02 with the ip address 10.10.2.2.
+
+
+You can switch terminals with Ctrl + B and the arrow buttons.
+
+You can refer to the instructions by using Ctrl + b + n.
+
+You can start the attack by using Ctrl + b + n to switch to your computers' terminal. 
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>good luck!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

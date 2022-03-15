@@ -12,10 +12,10 @@ It seems like there is a message hidden in the numbers of each tweet... what doe
 Ah yes, that's right. Its 66.666.66.6. Seems like an IP adress. Let\'s visit that.
 You try accessing the adress, but you can only see \"Access Denied\". You go to inspect the page, and you see in the source code that only certain IPs can access the site ... 
 
-to enter, one needs to make it look like they are accessing the website from the ip listed in the web page.
-to do this, one can use something that is called an ip-spoofing attack. one fakes their own ip source address, just like writing a different sender on a packet.
-some tools used for ip spoofing and to monitor a network are hping and tshark.
-to find more about both, use the command man in front of the tool you would like to know more about.
+To enter, one needs to make it look like they are accessing the website from the ip listed in the web page.
+To do this, one can use something that is called an ip-spoofing attack. One fakes their own ip source address, just like writing a different sender on a packet.
+Some tools used for ip spoofing and to monitor a network are hping and tshark.
+To find more about both, use the command man in front of the tool you would like to know more about.
 just like this: man ping .
 
-to switch between the windows, press Ctrl + b then n
+To switch between the windows, press Ctrl + b then n

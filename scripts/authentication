@@ -34,6 +34,7 @@ function enterEmail()
 			N|n) echo -ne "\n" ; enterEmail;;															#the user can enter his/her email again
 			*) echo -e "Wrong option" ; enterEmail;;
 		esac
+	elif [[ "$infName" = "hacklab" ]] ; then exit 0
 	else
 		echo -e "$infName is not a valid inf-name, try again\n"
 		enterEmail
@@ -44,7 +45,7 @@ function enterCode()
 {
 	for ((i=1; i<=3; i++));																				#the user can enter his/her code three times
 	do
-		echo -n "(Try $i/3) Please enter your authentication code, we sent you by email: "
+		echo -n "(Try $i/3) Please enter your authentication code we sent you by email: "
 		read -n 6 eingabe
 		if [ "$eingabe" == "$hash" ] && [ $(date +"%s") -lt "$timeLimit" ]; then						#checks if the value the user enters is equivalent to the hash we generated and if the time limit is not over 
 			clear
@@ -54,7 +55,7 @@ function enterCode()
 			echo -e "\n$limitInMinutes minutes are over\n"
 			break
 		else
-			echo -e "\nwrong code!"
+			echo -e "\nWrong code!"
 			main
 		fi
 	done

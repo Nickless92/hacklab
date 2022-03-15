@@ -25,12 +25,12 @@ echo "done: update"
 
 # install man
 echo "todo: man"
-apk add mandoc
+apk add mandoc --no-cache
 echo "done: man"
 
 # install git
 echo "todo: git"
-apk add git
+apk add git --no-cache
 echo "done: git"
 
 # install lynis
@@ -48,68 +48,68 @@ echo "done: git"
 
 # install MACchanger
 echo "todo: macchanger"
-apk add macchanger
-apk add macchanger-doc
+apk add macchanger --no-cache
+apk add macchanger-doc --no-cache
 echo "done: macchanger"
 
 # install DNSrecon
 echo "todo: dnsrecon"
-apk add dnsrecon
+apk add dnsrecon --no-cache
 # didn't find any docu sources in repo
 echo "done: dnsrecon"
 
 # install nmap
 echo "todo: nmap"
-apk add nmap
-apk add nmap-doc
+apk add nmap --no-cache
+apk add nmap-doc --no-cache
 echo "done: nmap"
 
 # install tmux
 echo "todo: tmux"
-apk add tmux
-apk add tmux-doc
+apk add tmux --no-cache
+apk add tmux-doc --no-cache
 echo "done: tmux"
 
 # install iptables
 echo "todo: iptables"
-apk add iptables
-apk add iptables-doc
+apk add iptables --no-cache
+apk add iptables-doc --no-cache
 echo "done: iptables"
 
 # install tcpdump
 echo "todo: tcpdump"
-apk add tcpdump
-apk add tcpdump-doc
+apk add tcpdump --no-cache
+apk add tcpdump-doc --no-cache
 echo "done: tcpdump"
 
 # install tshark
 echo "todo: tshark"
-apk add tshark
-apk add wireshark-doc
+apk add tshark --no-cache
+apk add wireshark-doc --no-cache
 echo "done: tshark"
 
 # try to install hping3 from main repo first
 echo "todo: hping3"
-apk add hping3
-apk add hping3-doc
+apk add hping3 --no-cache
+apk add hping3-doc --no-cache
 echo "done: hping3"
 
 # install hping3 from edge/testing repo
 echo "todo: hping3 (testing)"
-apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3
-apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3-doc
+apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3 --no-cache
+apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3-doc --no-cache
 echo "done: hping3 (testing)"
 
 # try to install ettercap from main repo first
 echo "todo: ettercap"
-apk add ettercap
-apk add ettercap-doc
+apk add ettercap --no-cache
+apk add ettercap-doc --no-cache
 echo "done: ettercap"
 
 # install ettercap from edge/testing repo
 echo "todo: ettercap (testing)"
-apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ettercap
-apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ettercap-doc
+apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ettercap --no-cache
+apk add -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ettercap-doc --no-cache
 echo "done: ettercap (testing)"
 
 echo "DONE"

@@ -60,8 +60,8 @@ function choose_stage ()
        awk 'NR=='$i'{ print}' ./ressources/read.txt                                 # Pupil STudent Expert will be read line by line
     i=$(($i+1))
     done
-    echo -ne "$(ColorRed 'e(x)it')\n" 
-    echo -ne "Please choose your knowledge: "   
+    echo -ne "$(ColorRed 'e(x)it')\n"
+    echo -ne "Please choose your knowledge: "
 
     read -n 1 menuinput
     case $menuinput in 
@@ -73,10 +73,10 @@ function choose_stage ()
     esac
 }
 
-function pupil_levels () 
+function pupil_levels ()
 {
     level 6
-    back_exit    
+    back_exit
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -84,7 +84,7 @@ function pupil_levels ()
     1) echo -e "\nyou chose level 1. starting..." ; return 3 ;;
 	2) echo -e "\nyou chose level 2" ; return 3 ;;
 	3) echo -e "\nyou chose level 3" ; return 3 ;;
-	4) echo -e "\nyou chose level 4" ; return 3 ;;                         
+	4) echo -e "\nyou chose level 4" ; return 3 ;;
 	5) echo -e "\nyou chose level 5" ; return 3 ;;
     b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
     x) echo -e "\nyou chose exit" ; exit 0 ;;
@@ -92,11 +92,11 @@ function pupil_levels ()
     esac
 }
 
-function module_menu () 
+function module_menu ()
 {
     echo -ne "$(Colorlight_cyan '1)')     -  Networks (german: Netzwerke)\n"
     echo -ne "$(Colorlight_cyan '2)')     -  Network Security\n"
-    back_exit    
+    back_exit
     echo -ne "Please choose a module: "
 
     read -n 1 menuinput
@@ -110,6 +110,7 @@ function module_menu ()
 
 }
 
+
 function networks_levels () 
 {  
     level 6
@@ -121,18 +122,20 @@ function networks_levels ()
     1)  . ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows   
         . ./scripts/upload $name 1;
         return 5 ;;                                                                 # return 5 means that the function networks_levels is going to run
-	2) echo -e "\nyou chose level 2" ; return 5 ;;
+	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
+        return 5 ;;
+#	2) echo -e "you chose level 2. starting..." ; sudo tmux new-session -s lvl02 -d 'lxc shell lvl02-c02'\; split-window -v -d 'lxc shell lvl02-c01' \; split-window -h -d 'lxc shell lvl02-c03' \; attach ; clear ; ../levels/level2_netzwerk_arp_poisoning/Auswertung.sh ; return 5 ;;
 	3) echo -e "\nyou chose level 3" ; return 5 ;;
 	4) echo -e "\nyou chose level 4" ; return 5 ;; 
 	5) echo -e "\nyou chose level 5" ; return 5 ;;
-    b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
-    x) echo -e "\nyou chose exit"; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 5;;                            # return 5 means that the function networks_levels is going to run
+	b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
+	x) echo -e "\nyou chose exit"; exit 0 ;;
+	*) echo -e $red"\nWrong option.\n"$clear; return 5;;                            # return 5 means that the function networks_levels is going to run
     esac
 }
 
-function netsec_levels ()  
-{  
+function netsec_levels ()
+{
     level 6
     back_exit        
 	echo -ne "Choose a level: "
@@ -183,7 +186,7 @@ level()
 	    echo -ne "$(Colorlight_cyan " $i"')')" "   -  Level " $i "\n"
 	    i=$(($i+1))
 	done 
- }
+}
 
 main_menu () 
 {
@@ -218,12 +221,7 @@ hacklabdir=$(dirname $(readlink -f "$0"))
 cd $hacklabdir
 
 # add relevant paths to environment
-echo $PATH > ./path_backup
 PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
 
 #welcome_screen
 main_menu
-
-# reset environment
-PATH=$(echo "./path_backup") ; rm -f ./path_backup
-cd -
