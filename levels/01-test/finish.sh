@@ -21,6 +21,9 @@
 #file=$(cat command.txt)
 #sudo lxc file push ./command.sh test1/root/command.sh
 
+
+#export lostpoints=0
+
 lxc exec lvl01-c02 -- killall tshark					#kill tshark and the file will be created
 sleep 1;												#we need to wait 1 second for moving the file
 #mv ausgabe.log ../levels/01-test						#to move the file
@@ -32,13 +35,21 @@ test1=$(grep -c "ICMP 42" ausgabe.log)													#to determine if the correct 
 #to determine if the user attempt  was successful or not 
 if [ "$paket" = "7" ]
 then
+        points=10
 	cat ../../ressources/ascii/win.txt
 	
 elif [ "$paket" != 7 ] && [ "$test1" != 0 ]
 then 
+#	echo "finish 1: $points" >> points.log
+       cat ../../ressources/ascii/insufficient.txt
+	 points=6
+#	echo "finish 2: $points" >> points.log
 	echo "You haven't sent the requested paket number! Try Again!"
 
 else 
+	echo "finish 1: $points" >> points.log
+        points=0
+	echo "finish2: $points" >> points.log
 	cat ../../ressources/ascii/lost.txt
 fi
 

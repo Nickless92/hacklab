@@ -27,7 +27,7 @@ function createDatabase()
     if [ -f database.txt ]; then
         return
     else
-        echo -e "Username ; inf-Name ; submission data ; level - points\n" > database.txt
+        echo -e "Username ; inf-Name ; submission data ; level - points\n" >> database.txt
     fi
 }
 
@@ -119,12 +119,8 @@ function networks_levels ()
 
     read -n 1 menuinput
     case $menuinput in
-<<<<<<< HEAD
-	1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows
-=======
     1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows   
         . ./scripts/upload $name 1;
->>>>>>> added database
         return 5 ;;                                                                 # return 5 means that the function networks_levels is going to run
 	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
         return 5 ;;

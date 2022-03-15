@@ -3,8 +3,9 @@
 
 cd $(dirname "$0")
 clear ; echo -e "\nyou chose level 1. starting..."
-(../../backend/level_start.sh 1 3 &)                                        # containers getting started
-./storytime.sh                                                              # story time :)
+pwd
+(./backend/level_start.sh 1 3 &)                                        # containers getting started
+#./storytime.sh                                                              # story time :)
 sleep 5                                                                     # the user gets some time to read the task
 #sudo lxc exec lvl01-c01 -- touch command.txt                               # create a file where the user has to save his/her command
 
@@ -23,6 +24,6 @@ tmux select-window -t hacklab:1                                             # se
 
 tmux -2 attach-session -t hacklab                                           # to attach the session
 
-clear ; ./finish.sh                                                         # evaluation of the level
+clear ; . ./levels/01-test/finish.sh                                                         # evaluation of the level
 sleep 3
 cd - > /dev/null
