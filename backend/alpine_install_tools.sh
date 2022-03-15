@@ -55,7 +55,7 @@ echo "done: macchanger"
 # install DNSrecon
 echo "todo: dnsrecon"
 apk add dnsrecon --no-cache
-# didn't find any docu sources in repo
+# FIXME: find docu
 echo "done: dnsrecon"
 
 # install nmap
