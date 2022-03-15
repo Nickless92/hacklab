@@ -34,8 +34,9 @@ function pushDatabaseToServer()
 
 function createDatabase()
 {
-    if [ -f database.txt ]; then
-        return
+    if [ -f localDatabase.txt.asc ]; then
+        timeStamp=$(date +%s)
+        scp /home/dominic/hacklab/localDatabase.txt.asc hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timeStamp}-${RANDOM}.txt.gpg
     else
         echo -e "Username ; inf-Name ; submission data ; level - points\n" >> database.txt
     fi
