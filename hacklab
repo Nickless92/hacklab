@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Color  Variables
+# Color  select_lineiables
 
 green='\e[32m'
 light_cyan='\e[96m' 
@@ -55,11 +55,16 @@ function enter_name()
 function choose_stage () 
 {
     i=1
-    while [ $i -ne 4 ]
+    while [ $i -le 3 ]                                                              #read the 3 Levels from File
     do
        echo -ne "$(Colorlight_cyan  "$i"')')"                                       # numers in this form 1)--will be printed  
+<<<<<<< HEAD
        awk 'NR=='$i'{ print}' ./ressources/read.txt                                 # Pupil STudent Expert will be read line by line
         i=$(($i+1))
+=======
+       awk 'NR=='$i'{ print}' ./ressources/read.txt                                 # Pupil Student Expert will be read line by line
+    i=$(($i+1))
+>>>>>>> level read from file
     done
     echo -ne "$(ColorRed 'e(x)it')\n"
     echo -ne "Please choose your knowledge: "
@@ -74,10 +79,10 @@ function choose_stage ()
     esac
 }
 
-function pupil_levels ()
-{
-    level 6
-    back_exit
+function pupil_levels () 
+{ 
+    read_level pupil                                                                #call read_level function with parameter pupil
+    back_exit                                                                       #call bach_exit function 
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -114,8 +119,8 @@ function module_menu ()
 
 function networks_levels () 
 {  
-    level 6
-    back_exit  
+    read_level pupil                                                                # call read_level function with parameter network
+    back_exit                                                                       # call back_exit function 
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -135,19 +140,19 @@ function networks_levels ()
     esac
 }
 
-function netsec_levels ()
-{
-    level 6
-    back_exit        
+function netsec_levels ()  
+{  
+    read_level net-sec                                                              # call read_level function with parameter net-sec
+    back_exit                                                                       # call back_exit function        
 	echo -ne "Choose a level: "
 
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. this is empty." ;  return 6;;
-	2) echo -e "\nyou chose level 2. this is empty." ;  return 6;;
-	3) echo -e "\nyou chose level 3. this is empty." ;  return 6;;
-	4) echo -e "\nyou chose level 4. this is empty." ;  return 6;; 
-	5) echo -e "\nyou chose level 5. this is empty." ;  return 6;;
+    1) echo -e "\nyou chose level 1. this is empty.\n" ;  return 6;;
+	2) echo -e "\nyou chose level 2. this is empty.\n" ;  return 6;;
+	3) echo -e "\nyou chose level 3. this is empty.\n" ;  return 6;;
+	4) echo -e "\nyou chose level 4. this is empty.\n" ;  return 6;; 
+	5) echo -e "\nyou chose level 5. this is empty.\n" ;  return 6;;
     b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
     x) echo -e "\nyou chose exit" ; return 0 ;;
     *) echo -e $red"\nWrong option.\n"$clear; return 6;;                            # return 6 means that the function netsec_levels is going to run
@@ -156,8 +161,8 @@ function netsec_levels ()
 
 function expert_levels()
 {
-    level 6
-    back_exit
+   read_level expert                                                                # call read_level function with parameter expert
+    back_exit                                                                       # call back_exit function 
     echo -ne "Choose a level: "
 
     read -n 1 menuinput
@@ -173,20 +178,40 @@ function expert_levels()
     esac    
 }
 
-back_exit()
+function read_level()
+{
+	i=1
+    if [ pupil = $1 ] ; then
+        startline=$(( $( grep -n "<pupil>" ./ressources/level_description.txt | sed s/':.*'/''/ ) + 1 ))        # extract line where <TAG> appears
+        endline=$(( $( grep -n "</pupil>" ./ressources/level_description.txt | sed s/':.*'/''/ ) - 1 ))         # extract line where <TAG> appears
+        print_level                                                                                             # call print_level function to print from start to end line
+   elif [ network = $1 ] ; then
+        startline=$(( $( grep -n "<network>" ./ressources/level_description.txt | sed s/':.*'/''/ ) + 1 ))      # extract line where <TAG> appears
+        endline=$(( $( grep -n "</network>" ./ressources/level_description.txt | sed s/':.*'/''/ ) - 1 ))       # extract line where <TAG> appears
+        print_level
+    elif [ net-sec = $1 ] ; then
+        startline=$(( $( grep -n "<net-sec>" ./ressources/level_description.txt | sed s/':.*'/''/ ) + 1 ))       # extract line where <TAG> appears
+        endline=$(( $( grep -n "</net-sec>" ./ressources/level_description.txt | sed s/':.*'/''/ ) - 1 ))        # extract line where <TAG> appears
+        print_level
+    fi 
+}
+
+function print_level
+{
+    while [ $startline -le $endline ]                                                                           # loop from start Tag to end Tag
+            do
+                select_line=$(awk 'NR=='$startline'{print}' ./ressources/level_description.txt)                 # save the selected line from selected file in the variable 
+                echo -e "$(Colorlight_cyan  $i')') $select_line"                                                # print colored 1) and then the selected line
+                i=$(($i+1))                                                                                     # increment due to i) and level i
+                startline=$(($startline+1))                                                                     # increment till startline reaches endline
+            done
+
+}
+
+function back_exit()
 {
 	echo -ne "$(ColorRed 'b)ack')  -  Back to previous menu\n"
 	echo -ne "$(ColorRed 'e(x)it')\n" 
-}
-
-level()
-{
-	i=1
-	while [ $i -ne $1 ]                                                             # loop from 1 till the given paramter $1 is the parameter
-	  do
-	    echo -ne "$(Colorlight_cyan " $i"')')" "   -  Level " $i "\n"
-	    i=$(($i+1))
-	done 
 }
 
 main_menu () 
