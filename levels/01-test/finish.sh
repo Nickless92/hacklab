@@ -40,7 +40,7 @@ then
 elif [ "$paket" != 7 ] && [ "$test1" != 0 ]
 then 
     cat ./ressources/ascii/insufficient.txt
-	 points=6
+	points=6
 	echo "You haven't sent the requested paket number! Try Again!"
 
 else 
