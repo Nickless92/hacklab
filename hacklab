@@ -144,7 +144,7 @@ function experts() {
     b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;            
     x) echo -e "\nyou chose exit";                      exit 0 ;;
     *) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
-    esac    
+    esac
 }
 
 function print_menu_options() {
