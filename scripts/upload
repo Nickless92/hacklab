@@ -9,8 +9,8 @@ case $userInput in
     Y|y)
 	#. ./scripts/hacklab/levels/01-test/finish ;
         . ./scripts/authentication ;
-	echo "upload: $points" >> points.log
-        echo "$1 ; $infName ; $(date +%c) ; Level $2 -- Points == $points" >> database.txt;
+        echo "$1;$infName;$(date +%c);Level $2 -- Punkte" | gpg -e --always-trust -a -r 590659F58937BD0A763D1DCDD07DBD27DEB068CF > localDatabase.txt.asc;
+        pushDatabaseToServer;
         echo -e "\n";;
     N|n) echo -e "\n" ;;
     *) echo -e "\nWrong option\n" ; 
