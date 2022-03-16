@@ -1,8 +1,8 @@
 #!/bin/bash
 
-clear
+#clear
 sleep 1s
-print_lines_from_file_then_pause 1 3 1 story.txt                # type 1-3 line with --- and new line at the end
+print_lines_from_file_then_pause 1 3 1 ./story.txt                # type 1-3 line with --- and new line at the end
 
 wait_for_any_key                                                # call read asleep function
 
