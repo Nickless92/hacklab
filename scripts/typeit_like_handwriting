@@ -1,8 +1,12 @@
 #!/bin/bash
-# simulate handwriting by varying inter-letter pauses
 
+# simulate handwriting by varying inter-letter pauses
+# $1: pause factor [default: 0.005]
+# $2: random modul [default: 40]
+
+if [[ $# -eq 2 ]]; then fac=$1; mod=$2; else fac=.005; mod=40; fi 
 IFS=''
 while read -n1 c; do
     echo -n "$c"
-    sleep .005$(( RANDOM % 40 ))
+    sleep $fac$(( RANDOM % $mod ))
 done <<< "$@"

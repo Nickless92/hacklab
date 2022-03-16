@@ -1,2 +1,8 @@
 #!/bin/bash
-echo -ne "    >"; sleep $1; echo -ne ">"; sleep $1; echo -ne ">"; sleep $1; echo -ne "    "
+
+# print '    >>>    '
+# each '>' is being printed with a delay
+# $1: delay time [default: 0.2s]
+
+if [ $# -eq 1 ]; then time=$1; else time=0.2s; fi
+echo -n "    "; sleep $time; echo -n ">"; sleep $time; echo -n ">"; sleep $time; echo -n ">"; sleep $time; echo -n "    "
