@@ -1,25 +1,23 @@
 #!/bin/bash
 
-# Color  select_lineiables
+set -eEuo pipefail
+#set =x
 
+# Color  Variables
 green='\e[32m'
 light_cyan='\e[96m' 
 red='\e[31m'
-clear='\e[0m'
+clearcolor='\e[0m'
 
 # Color Functions
-
-ColorGreen()
-{
-    echo -ne $green$1$clear
+ColorGreen() {
+    echo -ne $green$1$clearcolor
 }
-Colorlight_cyan()
-{
-    echo -ne $light_cyan$1$clear
+Colorlight_cyan() {
+    echo -ne $light_cyan$1$clearcolor
 }
-ColorRed()
-{
-    echo -ne $red$1$clear
+ColorRed() {
+    echo -ne $red$1$clearcolor
 }
 
 function pushDatabaseToServer()
@@ -38,48 +36,54 @@ function createDatabase()
         timeStamp=$(date +%s)
         scp /home/dominic/hacklab/localDatabase.txt.asc hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timeStamp}-${RANDOM}.txt.gpg
     else
-        echo -e "Username ; inf-Name ; submission data ; level - points\n" >> database.txt
+        echo -e "Username;email;submission data;level;points\n" >> database.txt
     fi
 }
 
-function welcome_screen()
-{
+function welcome_screen() {
     clear
     sleep 1s
     cat ./ressources/ascii/welcome.txt                                              # prints an Ascii graphic
     sleep 2s                                                                        # the user can see the graphic for two seconds
     clear
+    enter_name
 }
 
-function enter_name()
-{
+function enter_name() {
     echo -e "\nPlease enter the hacker-name you want to be addressed with, enter x to exit"
-    read name 
-    if [ "$name" == "x" ] ; then                                                    # if the user puts in x the programm is going to exit 
-	    exit 0
-    else
-        return 2                                                                    # return 2 means that the function choose_stage is going to run
-    fi 
+    read name
+    if [[ $name = "x" ]]; then exit 0; else introduction; fi 
 }
 
-function choose_stage () 
-{
+function introduction() {
+    clear
+    cat <<-____HERE
+Welcome to hacklab $(ColorGreen $name)!
+This is a game in which you can start learning how to
+manipulate networks and defend yourself from cyber attacks.
+To start, we will need to know how much knowledge you already posess.
+Please choose one of the following options:
+
+____HERE
+    choose_stage
+}
+
+function choose_stage () {
     i=1
-    while [ $i -le 3 ]                                                              #read the 3 Levels from File
-    do
-        echo -ne "$(Colorlight_cyan  "$i"')')"                                      # numers in this form 1)--will be printed  
-        awk 'NR=='$i'{ print}' ./ressources/read.txt                                # Pupil STudent Expert will be read line by line
+    while [ $i -ne 4 ]; do
+        echo -ne "$(Colorlight_cyan  "$i"')')"                                       # numers in this form 1)--will be printed  
+        awk 'NR=='$i'{ print}' ./ressources/read.txt                                 # Pupil STudent Expert will be read line by line
         i=$(($i+1))
     done
     echo -ne "$(ColorRed 'e(x)it')\n"
     echo -ne "Please choose your knowledge: "
 
     read -n 1 menuinput
-    case $menuinput in 
-	1) echo -e "\nyou chose pupil.\n" ; return 3 ;;                                 #return 3 means that the function pupil_levels is going to run
-	2) echo -e "\nyou chose student.\n" ; return 4 ;;                               #return 4 means that the function module_menu is going to run
-	3) echo -e "\nyou chose expert.\n" ; return 7 ;;                                #return 7 means that the function expert_levels is going to run
-	x) echo -e "\nyou chose exit" ; return 0 ;; 
+    case $menuinput in
+	1) echo -e "\nyou chose pupil.\n" ; return 3 ;;                                 # return 3 means that the function pupil_levels is going to run
+	2) echo -e "\nyou chose student.\n" ; return 4 ;;                               # return 4 means that the function module_menu is going to run
+	3) echo -e "\nyou chose expert.\n" ; return 7 ;;                                # return 7 means that the function expert_levels is going to run
+	x) echo -e "\nyou chose exit" ; exit 0 ;;
     *) echo -e $red"\nWrong option.\n"$clear; return 2;;                            # return 2 means that the function choose_stage is going to run
     esac
 }
@@ -92,94 +96,92 @@ function pupil_levels ()
 
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. starting..." ; return 3 ;;
-	2) echo -e "\nyou chose level 2" ; return 3 ;;
-	3) echo -e "\nyou chose level 3" ; return 3 ;;
-	4) echo -e "\nyou chose level 4" ; return 3 ;;
-	5) echo -e "\nyou chose level 5" ; return 3 ;;
-    b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
-    x) echo -e "\nyou chose exit" ; return 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 3;;                            # return 3 means that the function pupil_levels is going to run
+        1) echo -e "\nyou chose level 1. Sorry, this is empty...";  pupil_levels ;;
+        2) echo -e "\nyou chose level 2. Sorry, this is empty...";  pupil_levels ;;
+        3) echo -e "\nyou chose level 3. Sorry, this is empty...";  pupil_levels ;;
+        4) echo -e "\nyou chose level 4. Sorry, this is empty...";  pupil_levels ;;
+        5) echo -e "\nyou chose level 5. Sorry, this is empty...";  pupil_levels ;;
+        b) echo -e "\nyou chose back\n";                            choose_stage ;;            
+        x) echo -e "\nyou chose exit"; exit 0 ;;
+        *) echo -e $red"\nWrong option.\n"$clearcolor;              pupil_levels;;
     esac
 }
 
-function module_menu ()
-{
+function module_menu () {
     echo -ne "$(Colorlight_cyan '1)')     -  Networks (german: Netzwerke)\n"
     echo -ne "$(Colorlight_cyan '2)')     -  Network Security\n"
-    back_exit
+    print_back_exit_options
     echo -ne "Please choose a module: "
 
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose networks.\n" ; return 5 ;;                              # return 5 means that the function networks_levels is going to run
-    2) echo -e "\nyou chose Network Security.\n" ; return 6 ;;                      # return 6 means that the function netsec_levels is going to run
-    b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
-    x) echo -e "\nyou chose exit" ; return 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 4;;                            # return 4 means that the function module_menu is going to run
+    1) echo -e "\nyou chose Network Technologies.\n";   network_levels ;;
+    2) echo -e "\nyou chose Network Security.\n";       netsec_levels ;;
+    b) echo -e "\nyou chose back\n";                    choose_stage ;;
+    x) echo -e "\nyou chose exit"; exit 0 ;;
+    *) echo -e $red"\nWrong option.\n"$clearcolor;      module_menu ;;
     esac
-
 }
 
 
-function networks_levels () 
-{  
+function network_levels () {
     read_level pupil                                                                # call read_level function with parameter network
-    back_exit                                                                       # call back_exit function 
+    #level 5
+    print_back_exit_options
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
     case $menuinput in
-    1)  . ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows   
-        . ./scripts/upload $name 1;
-        return 5 ;;                                                                 # return 5 means that the function networks_levels is going to run
+	1)  . ./levels/01-test/tmux_create_session.sh;                                  # splits tmux in different windows
+        . upload $name 1;
+        network_levels ;;
 	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
-        return 5 ;;
-#	2) echo -e "you chose level 2. starting..." ; sudo tmux new-session -s lvl02 -d 'lxc shell lvl02-c02'\; split-window -v -d 'lxc shell lvl02-c01' \; split-window -h -d 'lxc shell lvl02-c03' \; attach ; clear ; ../levels/level2_netzwerk_arp_poisoning/Auswertung.sh ; return 5 ;;
-	3) echo -e "\nyou chose level 3" ; return 5 ;;
-	4) echo -e "\nyou chose level 4" ; return 5 ;; 
-	5) echo -e "\nyou chose level 5" ; return 5 ;;
-    b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
-    x) echo -e "\nyou chose exit"; return 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 5;;                            # return 5 means that the function networks_levels is going to run
+         network_levels ;;
+#	2) echo -e "you chose level 2. starting..." ; sudo tmux new-session -s lvl02 -d 'lxc shell lvl02-c02'\; split-window -v -d 'lxc shell lvl02-c01' \; split-window -h -d 'lxc shell lvl02-c03' \; attach ; clear ; ../levels/level2_netzwerk_arp_poisoning/Auswertung.sh ;  network_levels ;;
+	3) echo -e "\nyou chose level 3" ;              network_levels ;;
+	4) echo -e "\nyou chose level 4" ;              network_levels ;;
+	5) echo -e "\nyou chose level 5" ;              network_levels ;;
+	b) echo -e "\nyou chose back\n";                module_menu ;;
+	x) echo -e "\nyou chose exit"; exit 0 ;;
+	*) echo -e $red"\nWrong option.\n"$clearcolor;  network_levels ;;
     esac
 }
 
-function netsec_levels ()  
-{  
+function netsec_levels () {
     read_level net-sec                                                              # call read_level function with parameter net-sec
-    back_exit                                                                       # call back_exit function        
+    #level 5
+    print_back_exit_options        
 	echo -ne "Choose a level: "
 
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. this is empty.\n" ;  return 6;;
-	2) echo -e "\nyou chose level 2. this is empty.\n" ;  return 6;;
-	3) echo -e "\nyou chose level 3. this is empty.\n" ;  return 6;;
-	4) echo -e "\nyou chose level 4. this is empty.\n" ;  return 6;; 
-	5) echo -e "\nyou chose level 5. this is empty.\n" ;  return 6;;
-    b) echo -e "\nyou chose back\n"; return 4 ;;                                    # return 4 means that the function module_menu is going to run
-    x) echo -e "\nyou chose exit" ; return 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 6;;                            # return 6 means that the function netsec_levels is going to run
+    1) echo -e "\nyou chose level 1. this is empty." ;  netsec_levels ;;
+	2) echo -e "\nyou chose level 2. this is empty." ;  netsec_levels ;;
+	3) echo -e "\nyou chose level 3. this is empty." ;  netsec_levels ;;
+	4) echo -e "\nyou chose level 4. this is empty." ;  netsec_levels ;; 
+	5) echo -e "\nyou chose level 5. this is empty." ;  netsec_levels ;;
+    b) echo -e "\nyou chose back\n";                    module_menu ;;
+    x) echo -e "\nyou chose exit" ; exit 0 ;;
+    *) echo -e $red"\nWrong option.\n"$clearcolor;      netsec_levels ;;
     esac
 }
 
-function expert_levels()
-{
-   read_level expert                                                                # call read_level function with parameter expert
-    back_exit                                                                       # call back_exit function 
+function expert_levels() {
+    read_level expert                                                                # call read_level function with parameter expert
+    #level 5
+    print_back_exit_options
     echo -ne "Choose a level: "
 
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. this is empty." ;  return 7;;
-	2) echo -e "\nyou chose level 2. this is empty." ;  return 7;;
-	3) echo -e "\nyou chose level 3. this is empty." ;  return 7;;
-	4) echo -e "\nyou chose level 4. this is empty." ;  return 7;; 
-	5) echo -e "\nyou chose level 5. this is empty." ;  return 7;;
-    b) echo -e "\nyou chose back\n"; return 2 ;;                                    # return 2 means that the function choose_stage is going to run
-    x) echo -e "\nyou chose exit" ; return 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 7;;                            # return 7 means that the function expert_levels is going to run
+    1) echo -e "\nyou chose level 1. this is empty." ;  expert_levels ;;
+	2) echo -e "\nyou chose level 2. this is empty." ;  expert_levels ;;
+	3) echo -e "\nyou chose level 3. this is empty." ;  expert_levels ;;
+	4) echo -e "\nyou chose level 4. this is empty." ;  expert_levels ;; 
+	5) echo -e "\nyou chose level 5. this is empty." ;  expert_levels ;;
+    b) echo -e "\nyou chose back\n";                    choose_stage ;;            
+    x) echo -e "\nyou chose exit" ; exit 0 ;;
+    *) echo -e $red"\nWrong option.\n"$clearcolor;      expert_levels ;;
     esac    
 }
 
@@ -211,45 +213,20 @@ function print_level
     done
 }
 
-function back_exit()
-{
+function print_back_exit_options() {
 	echo -ne "$(ColorRed 'b)ack')  -  Back to previous menu\n"
 	echo -ne "$(ColorRed 'e(x)it')\n" 
 }
 
-main_menu () 
-{
-    enter_name
-    clear
-    welcome="Welcome to hacklab"
-    game=\
-"This is a game in which you can start learning how to manipulate networks and defend yourself from cyber attacks.
-To start, we will need to know how much knowledge you already posess.\nPlease choose one of the following options:\n"
-    echo -e "$welcome $(ColorGreen $name)!\n$game"
-    returnValue=2
-
-    while : ; do
-        case $returnValue in
-            1) enter_name;;                                                         # is going to run if a function returns 1
-            2) choose_stage;;                                                       # is going to run if a function returns 2
-            3) pupil_levels;;                                                       # is going to run if a function returns 3 
-            4) module_menu;;                                                        # is going to run if a function returns 4
-            5) networks_levels;;                                                    # is going to run if a function returns 5
-            6) netsec_levels;;                                                      # is going to run if a function returns 6
-            7) expert_levels;;                                                      # is going to run if a function returns 7
-            *) return;;
-        esac
-        returnValue=$?
-        [[ $returnValue -ne 0 ]] || break
-    done
-}
-
-# change working directory into hacklabdir
+# cd into hacklabdir (= path/to/hacklab)
 hacklabdir=$(dirname $(readlink -f "$0"))
 cd $hacklabdir
 
 # add relevant paths to environment
 PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
 
-#welcome_screen
-main_menu
+# check if required tools are available
+verify_tools.sh
+
+# main menu
+welcome_screen
