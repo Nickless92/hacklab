@@ -59,7 +59,7 @@ function choose_stage ()
     do
        echo -ne "$(Colorlight_cyan  "$i"')')"                                       # numers in this form 1)--will be printed  
        awk 'NR=='$i'{ print}' ./ressources/read.txt                                 # Pupil STudent Expert will be read line by line
-    i=$(($i+1))
+        i=$(($i+1))
     done
     echo -ne "$(ColorRed 'e(x)it')\n"
     echo -ne "Please choose your knowledge: "

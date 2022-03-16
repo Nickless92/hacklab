@@ -35,22 +35,17 @@ test1=$(grep -c "ICMP 42" ausgabe.log)													#to determine if the correct 
 #to determine if the user attempt  was successful or not 
 if [ "$paket" = "7" ]
 then
-        points=10
-	cat ../../ressources/ascii/win.txt
-	
+    points=10
+	cat ./ressources/ascii/win.txt	
 elif [ "$paket" != 7 ] && [ "$test1" != 0 ]
 then 
-#	echo "finish 1: $points" >> points.log
-       cat ../../ressources/ascii/insufficient.txt
+    cat ./ressources/ascii/insufficient.txt
 	 points=6
-#	echo "finish 2: $points" >> points.log
 	echo "You haven't sent the requested paket number! Try Again!"
 
 else 
-	echo "finish 1: $points" >> points.log
-        points=0
-	echo "finish2: $points" >> points.log
-	cat ../../ressources/ascii/lost.txt
+    points=0
+	cat ./ressources/ascii/lost.txt
 fi
 
 
