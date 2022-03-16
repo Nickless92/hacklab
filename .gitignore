@@ -1,6 +1,7 @@
 # custom files
 *.token
 *.log
+*.swp
 *.pdf
 *backup*
 *logs/
