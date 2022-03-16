@@ -28,25 +28,40 @@ lxc exec lvl01-c02 -- killall tshark					#kill tshark and the file will be creat
 sleep 1;												#we need to wait 1 second before tshark will be killed
 
 
-paket=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ausgabe.log) 	#to determine if the correct pakets was sent with the correct IP-adress
+packet=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ausgabe.log) 	#to determine if the correct pakets was sent with the correct IP-adress
 test1=$(grep -c "ICMP 42" ausgabe.log)													#to determine if the correct pakets was sent
 
 #to determine if the user attempt  was successful or not 
-if [ "$paket" = "7" ]
+if [ "$packet" = "7" ]
 then
     points=10
 	cat ./ressources/ascii/win.txt	
-elif [ "$paket" != 7 ] && [ "$test1" != 0 ]
+elif [ "$packet" != 7 ] && [ "$test1" != 0 ]
 then 
+    points=7
     cat ./ressources/ascii/insufficient.txt
-	 points=6
-	echo "You haven't sent the requested paket number! Try Again!"
-
+	echo "You haven't sent the requested paket number!"
+    if [ "$packet" -lt 7 ]
+    then
+        echo -e "You have only sent $packet packets"
+    else
+        echo -e "You have already sent $packet packets\n"
+    fi
 else 
     points=0
 	cat ./ressources/ascii/lost.txt
 fi
 
+lxc file pull lvl01-c01/root/.ash_history ./levels/01-test/
+user_help=$(grep -c "hilfe" ./levels/01-test/.ash_history)
+
+if [ "user_help" > 0 ]
+then
+    points=5
+fi 
+
+unset packet                                                #variable unset 
+rm ./levels/01-test/.ash_history
 rm ausgabe.log
 
 #to save all the parameters of the sample solution in variables containing only numbers
