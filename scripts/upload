@@ -7,8 +7,8 @@ echo -n "Do you want to upload your points? [Y/N]: "
 read -n 1 userInput
 case $userInput in
     Y|y)
-        . ./scripts/authentication ;
-        ../ressources/importGpgKey
+        . ./scripts/authentication;
+        ./scripts/importGpgKey
         echo "$1;$email;$(date +%c);Level $2 -- Punkte = $points" | gpg -e --always-trust -a -r 590659F58937BD0A763D1DCDD07DBD27DEB068CF > localDatabase.txt.asc;
         echo -e "\n";;
     N|n) echo -e "\n" ;;
