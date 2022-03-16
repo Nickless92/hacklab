@@ -26,7 +26,7 @@ function pushDatabaseToServer()
 {
     if [ -f localDatabase.txt.asc ]; then
         timeStamp=$(date +%s)
-        scp /home/dominic/hacklab/localDatabase.txt.asc hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timeStamp}-${RANDOM}.txt.gpg
+        scp /home/dominic/hacklab/localDatabase.txt.asc hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timeStamp}-${RANDOM}.txt.gpg >> /dev/null
     else
         return
     fi
@@ -43,7 +43,7 @@ function welcome_screen()
 
 function enter_name()
 {
-    echo -e "\nPlease enter your name, enter x to exit"
+    echo -e "\nPlease enter the hacker-name you want to be addressed with, enter x to exit"
     read name 
     if [ "$name" == "x" ] ; then                                                    # if the user puts in x the programm is going to exit 
 	    exit 0

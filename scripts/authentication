@@ -33,7 +33,7 @@ function enterEmail()
 			N|n) echo -ne "\n" ; enterEmail;;															#the user can enter his/her email again
 			*) echo -e "Wrong option" ; enterEmail;;
 		esac
-	elif [[ "$infName" = "hacklab" ]] ; then exit 0
+	elif [[ "$email" = "hacklab" ]] ; then return;
 	else
 		echo -e "$infName is not a valid inf-name, try again\n"
 		enterEmail
@@ -49,6 +49,7 @@ function enterCode()
 		if [ "$eingabe" == "$hash" ] && [ $(date +"%s") -lt "$timeLimit" ]; then						#checks if the value the user enters is equivalent to the hash we generated and if the time limit is not over 
 			clear
 			echo -e "\nAuthentication successful!\n"
+			pushDatabaseToServer
 			break;
 		elif [ $(date +"%s") -gt "$timeLimit" ]; then													#checks if the time limit is over
 			echo -e "\n$limitInMinutes minutes are over\n"
