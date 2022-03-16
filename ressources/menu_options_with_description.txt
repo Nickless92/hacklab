@@ -1,0 +1,46 @@
+<experience>
+Pupil\t - for people who did not attend any module at HS Worms)
+Student\t - in the next step you can choose between different modules)
+Expert\t - you can choose between all levels of pupils and students)
+===
+
+<modules>
+Network Technologies
+Network Security
+===
+
+<pupils>
+Level 1 lvl1
+Level 2 lvl2
+Level 3 lvl3
+Level 4 lvl4
+Level 5 lvl5
+Level 6 lvl6
+Level 7 lvl7
+===
+
+<netsec>
+    -  Level 1 lvl1
+    -  Level 2 lvl2
+    -  Level 3 lvl3
+    -  Level 4 lvl4
+    -  Level 5 lvl5
+    -  Level 6 lvl6
+===
+
+<networks>
+    -  Level 1 Ip Spoofing
+    -  Level 2 Blocking Ping
+    -  Level 3 foo
+    -  Level 4 bar
+    -  Level 5 lorem
+    -  Level 6 ipsum
+===
+
+<experts>
+
+
+
+
+
+===
