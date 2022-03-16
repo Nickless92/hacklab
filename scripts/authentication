@@ -22,7 +22,7 @@ function enterEmail()
 	echo -e "**********AUTHENTICATION**********\n"
 	echo -n "Please enter your HS-Worms email address : "
 	read email
-	if [[ "$infName" =~ ^[A-Za-z0-9]+@hs-worms.de$ ]] ; then											#checks if the user puts in a valid Adress
+	if [[ "$email" =~ ^[A-Za-z0-9]+@hs-worms.de$ ]] ; then											#checks if the user puts in a valid Adress
 		echo -n "Is $email correct? [Y/N]: "
 		read -n 2 answer																					
 		case $answer in																					#checks the enter value 
