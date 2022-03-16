@@ -1,15 +1,16 @@
 #!/bin/bash
 
-set -eEuo pipefail
-#set =x
+# 
+set -eEuo pipefail      # make script fail on any errors/return!=0
+#set -x                 # VERY verbose, prints every step before its execution
 
-# Color  Variables
+# color variables
 green='\e[32m'
 light_cyan='\e[96m' 
 red='\e[31m'
 clearcolor='\e[0m'
 
-# Color Functions
+# color functions
 ColorGreen() {
     echo -ne $green$1$clearcolor
 }
@@ -88,10 +89,9 @@ function choose_stage () {
     esac
 }
 
-function pupil_levels () 
-{ 
-    read_level pupil                                                                #call read_level function with parameter pupil
-    back_exit                                                                       #call bach_exit function 
+function pupil_levels () {
+    read_level pupil
+    print_back_exit_options
 	echo -ne "\nChoose a level: "
 
     read -n 1 menuinput
@@ -125,7 +125,7 @@ function module_menu () {
 
 
 function network_levels () {
-    read_level pupil                                                                # call read_level function with parameter network
+    read_level network                                                              # call read_level function with parameter network
     #level 5
     print_back_exit_options
 	echo -ne "\nChoose a level: "
