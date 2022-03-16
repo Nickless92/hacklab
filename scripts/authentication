@@ -20,10 +20,9 @@ function generateCode()
 function enterEmail()
 {
 	echo -e "**********AUTHENTICATION**********\n"
-	echo -n "Please enter your infXXXX name: "
-	read infName
-	if [[ "$infName" =~ ^inf[0-9]{4}$ ]] ; then															#checks if the user puts in a valid Adress
-		email=${infName}@hs-worms.de																	#infName + @hs-worms.de --> E-Mail Adress
+	echo -n "Please enter your HS-Worms email address : "
+	read email
+	if [[ "$infName" =~ ^[A-Za-z0-9]+@hs-worms.de$ ]] ; then											#checks if the user puts in a valid Adress
 		echo -n "Is $email correct? [Y/N]: "
 		read -n 2 answer																					
 		case $answer in																					#checks the enter value 

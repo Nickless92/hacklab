@@ -2,7 +2,7 @@
 
 clear
 sleep 1s
-print_lines_from_file_then_pause 1 3 1 story.txt                # type 1-3 line with --- and new line at the end
+print_lines_from_file_then_pause 1 3 1 ./levels/01-test/story.txt                # type 1-3 line with --- and new line at the end
 
 wait_for_any_key                                                # call read asleep function
 
@@ -21,24 +21,24 @@ sleep 1s
 echo -e "\n    ---\n\n"
 
 sleep 1s
-print_lines_from_file_then_pause 4 4 1s ./story.txt
+print_lines_from_file_then_pause 4 4 1s ./levels/01-test/story.txt
 
 sleep 1s 
-print_lines_from_file_then_pause 5 6 1s ./story.txt
+print_lines_from_file_then_pause 5 6 1s ./levels/01-test/story.txt
 
 wait_for_any_key
 
 echo -e "\n"
-loading_arrows .5s; print_lines_from_file_then_pause 7 7 1s ./story.txt
-loading_arrows .5s; print_lines_from_file_then_pause 8 8 1s ./story.txt
-loading_arrows .5s; print_lines_from_file_then_pause 9 9 1s ./story.txt
-loading_arrows .5s; print_lines_from_file_then_pause 10 10 1s ./story.txt 
+loading_arrows .5s; print_lines_from_file_then_pause 7 7 1s ./levels/01-test/story.txt
+loading_arrows .5s; print_lines_from_file_then_pause 8 8 1s ./levels/01-test/story.txt
+loading_arrows .5s; print_lines_from_file_then_pause 9 9 1s ./levels/01-test/story.txt
+loading_arrows .5s; print_lines_from_file_then_pause 10 10 1s ./levels/01-test/story.txt 
 
 sleep 1s
-print_lines_from_file_then_pause 11 13 1s ./story.txt
+print_lines_from_file_then_pause 11 13 1s ./levels/01-test/story.txt
 
 wait_for_any_key
 
-print_lines_from_file_then_pause 14 19 1s ./story.txt
+print_lines_from_file_then_pause 14 19 1s ./levels/01-test/story.txt
 
-print_lines_from_file_then_pause 20 21 1s ./story.txt
+print_lines_from_file_then_pause 20 21 1s ./levels/01-test/story.txt
