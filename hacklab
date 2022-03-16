@@ -26,7 +26,7 @@ function pushDatabaseToServer()
 {
     if [ -f localDatabase.txt.asc ]; then
         timeStamp=$(date +%s)
-        scp /home/dominic/hacklab/localDatabase.txt.asc hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timeStamp}-${RANDOM}.txt.gpg >> /dev/null
+        scp /home/dominic/hacklab/localDatabase.txt.gpg hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timeStamp}-${RANDOM}.txt.gpg 
     else
         return
     fi

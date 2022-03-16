@@ -3,5 +3,5 @@
 TEST=$(gpg --list-key | grep 590659F58937BD0A763D1DCDD07DBD27DEB068CF)
 
 if [[ ! $TEST ]]; then
-    gpg --import ../ressources/hacklab-pub.gpg 2> /dev/null
+    gpg --import ./ressources/hacklab-pub.gpg 2> /dev/null
 fi
