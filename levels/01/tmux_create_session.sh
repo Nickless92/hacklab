@@ -3,7 +3,6 @@
 
 cd $(dirname "$0")
 clear ; echo -e "\nyou chose level 1. starting..."
-pwd
 (./backend/level_start.sh 1 3 &)                                        # containers getting started
 #./storytime.sh                                                              # story time :)
 sleep 5                                                                     # the user gets some time to read the task
