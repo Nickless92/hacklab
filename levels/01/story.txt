@@ -33,3 +33,8 @@ To find more about both, use the command man in front of the tool you would like
 just like this: man ping .
 To switch between the windows, press Ctrl + b then n
 ===
+
+
+<synopsis>
+here goes a short form of our story + short tmux cheat sheet
+===

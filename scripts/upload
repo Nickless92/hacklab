@@ -9,6 +9,6 @@ case $userInput in
         echo "$1;$email;$(date +%c);Level $2;$points" \
         | gpg -e --always-trust -a -r 590659F58937BD0A763D1DCDD07DBD27DEB068CF > localDatabase.txt.gpg && \
         pushDatabaseToServer ;;
-    N|n) continue ;;
+    N|n) return 0 ;;
     *) echo -e "\nWrong option\n" ; upload;;
 esac
