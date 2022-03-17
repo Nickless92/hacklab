@@ -49,8 +49,9 @@ function enterCode()
 		if [ "$eingabe" == "$hash" ] && [ $(date +"%s") -lt "$timeLimit" ]; then						#checks if the value the user enters is equivalent to the hash we generated and if the time limit is not over 
 			clear
 			echo -e "\nAuthentication successful!\n"
-			pushDatabaseToServer
-			break;
+			#pushDatabaseToServer
+			return 0
+			#break;
 		elif [ $(date +"%s") -gt "$timeLimit" ]; then													#checks if the time limit is over
 			echo -e "\n$limitInMinutes minutes are over\n"
 			break
