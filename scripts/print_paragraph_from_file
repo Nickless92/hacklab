@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# tl;dr: get_lines_with_tag retrieves paragraph from file
+# tl;dr: pass on these parameters to print_lines_from_file_then_pause
+# prints a whole paragraph from file $2, passes on pause time ($3)
+# paragraphs start at '<tag>' and end at '==='
+# (make sure to put each tag in SEPARATE lines)
+
+# $1: paragraph tag (wrap tag in '<>' in your file)
+# $2: path/to/file  (passed on to print_lines_from_file_then_pause)
+# $3: pause time    (passed on to print_lines_from_file_then_pause)
+
+# 'source' get_lines_with_tag (with '.') to retrieve its variables
+. get_lines_with_tag $1 $2
+print_lines_from_file_then_pause $startline $endline $file $3
