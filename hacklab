@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eEuo pipefail                      # make script fail on any errors/return!=0
+#set -eEuo pipefail                      # make script fail on any errors/return!=0
 [ $# -ge 1 ] && [ $1 = "v" ] && set -x  # VERY verbose, prints every step before its execution
 
 # color variables
