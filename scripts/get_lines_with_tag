@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# tl;dr: retrieves a paragraph from file
+# return startline and endline of a paragraph + /absolute/path/to/file
+# paragraphs start at '<tag>' and ends at '==='
+# (make sure to put each tag in seperate lines)
+
+# $1: paragraph tag (looks for '<tag>' in $file)
+# $2: ./relative/path/to/file
+
+file=$(readlink -f "$2")                                                # get path to file
+startline=$(( $( grep -n "<$1>" $file | sed s/':.*'/''/ ) + 1 ))        # extract line where <TAG> appears
+while read -r match; do                                                 # loop over every match from subproc (line16)
+    line=$(echo $match | sed s/':.*'//)                                 # extract line where '===' appeared
+    [ $line -gt $startline ] && endline=$(( $line - 1 )) && break       # search for first '===' line after <TAG>
+done < <(grep -n === $file)                                             # pipe from (subproc) into while loop
+                                                                        # subproc: greps for all '===' lines in $file
