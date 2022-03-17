@@ -1,23 +1,22 @@
 #!/bin/bash
 
-# 
-set -eEuo pipefail      # make script fail on any errors/return!=0
-#set -x                 # VERY verbose, prints every step before its execution
+set -eEuo pipefail                      # make script fail on any errors/return!=0
+[ $# -ge 1 ] && [ $1 = "v" ] && set -x  # VERY verbose, prints every step before its execution
 
 # color variables
 green='\e[32m'
-light_cyan='\e[96m' 
+cyan='\e[96m' 
 red='\e[31m'
 clearcolor='\e[0m'
 
 # color functions
-ColorGreen() {
+color_green() {
     echo -ne $green$1$clearcolor
 }
-Colorlight_cyan() {
-    echo -ne $light_cyan$1$clearcolor
+color_cyan() {
+    echo -ne $cyan$1$clearcolor
 }
-ColorRed() {
+color_red() {
     echo -ne $red$1$clearcolor
 }
 
@@ -34,102 +33,91 @@ function pushDatabaseToServer()
 function createDatabase()
 {
     if [ -f localDatabase.txt.asc ]; then
-        timeStamp=$(date +%s)
-        scp /home/dominic/hacklab/localDatabase.txt.asc hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timeStamp}-${RANDOM}.txt.gpg
+        timestamp=$(date +%s)
+        scp ./localDatabase.txt.asc hacklab@10.215.33.91:/home/hacklab/uploadedFiles/databaseHacklab-${timestamp}-${RANDOM}.txt.gpg
     else
         echo -e "Username;email;submission data;level;points\n" >> database.txt
     fi
 }
 
-function welcome_screen() {
+function welcome_screen() {                                                     # start sequence: print hacker graphic, wait, then proceed to enter_username
     clear
     sleep 1s
-    cat ./ressources/ascii/welcome.txt                                              # prints an Ascii graphic
-    sleep 2s                                                                        # the user can see the graphic for two seconds
+    cat ./ressources/ascii/welcome.txt
+    sleep 2s
     clear
-    enter_name
+    next_stage="enter_username"
 }
 
-function enter_name() {
-    echo -e "\nPlease enter the hacker-name you want to be addressed with, enter x to exit"
+function enter_username() {                                                     # read username from stdin, proceed with 'enter', exit with 'x' 
+    echo -ne "\nPlease enter the hacker-name you want to be addressed with, enter x to exit: "
     read name
-    if [[ $name = "x" ]]; then exit 0; else introduction; fi 
+    if [[ $name = "x" ]]; then exit 0; else next_stage="introduction"; fi 
 }
 
 function introduction() {
     clear
     cat <<-____HERE
-Welcome to hacklab $(ColorGreen $name)!
-This is a game in which you can start learning how to
-manipulate networks and defend yourself from cyber attacks.
-To start, we will need to know how much knowledge you already posess.
-Please choose one of the following options:
+Hello $(color_green $name). Welcome to hacklab!
 
+This is a game in which you can start learning how to manipulate
+networks and defend yourself from cyber attacks.
+To start with, we will need to know how much knowledge you already possess.
 ____HERE
-    choose_stage
+    next_stage="enter_experience"
 }
 
-function choose_stage () {
-    i=1
-    while [ $i -ne 4 ]; do
-        echo -ne "$(Colorlight_cyan  "$i"')')"                                       # numers in this form 1)--will be printed  
-        awk 'NR=='$i'{ print}' ./ressources/read.txt                                 # Pupil STudent Expert will be read line by line
-        i=$(($i+1))
-    done
-    echo -ne "$(ColorRed 'e(x)it')\n"
-    echo -ne "Please choose your knowledge: "
+function enter_experience () {
+    echo -e "Please choose one of the following options:"
+    print_menu_options experience
 
+    echo -ne "Pleace choose your experience level: "
     read -n 1 menuinput
     case $menuinput in
-	1) echo -e "\nyou chose pupil.\n" ; return 3 ;;                                 # return 3 means that the function pupil_levels is going to run
-	2) echo -e "\nyou chose student.\n" ; return 4 ;;                               # return 4 means that the function module_menu is going to run
-	3) echo -e "\nyou chose expert.\n" ; return 7 ;;                                # return 7 means that the function expert_levels is going to run
-	x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clear; return 2;;                            # return 2 means that the function choose_stage is going to run
+	1) echo -e "\nyou chose pupil.\n";              next_stage="pupil_levels" ;;
+	2) echo -e "\nyou chose student.\n";            next_stage="student_modules" ;;
+	3) echo -e "\nyou chose expert.\n";             next_stage="expert_levels" ;;
+	x) echo -e "\nyou chose exit"; exit 0 ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n";  next_stage="enter_experience" ;;
     esac
 }
 
 function pupil_levels () {
-    read_level pupil
-    print_back_exit_options
-	echo -ne "\nChoose a level: "
-
+    print_menu_options pupils
+    
+	echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
-        1) echo -e "\nyou chose level 1. Sorry, this is empty...";  pupil_levels ;;
-        2) echo -e "\nyou chose level 2. Sorry, this is empty...";  pupil_levels ;;
-        3) echo -e "\nyou chose level 3. Sorry, this is empty...";  pupil_levels ;;
-        4) echo -e "\nyou chose level 4. Sorry, this is empty...";  pupil_levels ;;
-        5) echo -e "\nyou chose level 5. Sorry, this is empty...";  pupil_levels ;;
-        b) echo -e "\nyou chose back\n";                            choose_stage ;;            
+        1) echo -e "\nyou chose level 1. Sorry, this is empty...";  next_stage="pupil_levels" ;;
+        2) echo -e "\nyou chose level 2. Sorry, this is empty...";  next_stage="pupil_levels" ;;
+        3) echo -e "\nyou chose level 3. Sorry, this is empty...";  next_stage="pupil_levels" ;;
+        4) echo -e "\nyou chose level 4. Sorry, this is empty...";  next_stage="pupil_levels" ;;
+        5) echo -e "\nyou chose level 5. Sorry, this is empty...";  next_stage="pupil_levels" ;;
+        b) echo -e "\nyou chose back\n";                            next_stage="enter_experience" ;;            
         x) echo -e "\nyou chose exit"; exit 0 ;;
-        *) echo -e $red"\nWrong option.\n"$clearcolor;              pupil_levels;;
+        *) echo -e "\n$(color_red 'Wrong option.')\n";              next_stage="pupil_levels" ;;
     esac
 }
 
-function module_menu () {
-    echo -ne "$(Colorlight_cyan '1)')     -  Networks (german: Netzwerke)\n"
-    echo -ne "$(Colorlight_cyan '2)')     -  Network Security\n"
-    print_back_exit_options
-    echo -ne "Please choose a module: "
-
+function student_modules () {
+    print_menu_options modules
+    
+    echo -e "Please choose a module: "
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose Network Technologies.\n";   network_levels ;;
-    2) echo -e "\nyou chose Network Security.\n";       netsec_levels ;;
-    b) echo -e "\nyou chose back\n";                    choose_stage ;;
+    1) echo -e "\nyou chose Network Technologies.\n";   next_stage="network_levels" ;;
+    2) echo -e "\nyou chose Network Security.\n";       next_stage="netsec_levels" ;;
+    b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;
     x) echo -e "\nyou chose exit"; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clearcolor;      module_menu ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="student_modules" ;;
     esac
 }
 
 
 function network_levels () {
-    read_level network                                                              # call read_level function with parameter network
-    #level 5
-    print_back_exit_options
-	echo -ne "\nChoose a level: "
-
+    print_menu_options networks
+    
+	echo -e "\nPlease choose a level: "
     read -n 1 menuinput
     case $menuinput in
 	1)  . ./levels/01-test/tmux_create_session.sh;                                  # splits tmux in different windows
@@ -138,84 +126,59 @@ function network_levels () {
 	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
          network_levels ;;
 #	2) echo -e "you chose level 2. starting..." ; sudo tmux new-session -s lvl02 -d 'lxc shell lvl02-c02'\; split-window -v -d 'lxc shell lvl02-c01' \; split-window -h -d 'lxc shell lvl02-c03' \; attach ; clear ; ../levels/level2_netzwerk_arp_poisoning/Auswertung.sh ;  network_levels ;;
-	3) echo -e "\nyou chose level 3" ;              network_levels ;;
-	4) echo -e "\nyou chose level 4" ;              network_levels ;;
-	5) echo -e "\nyou chose level 5" ;              network_levels ;;
-	b) echo -e "\nyou chose back\n";                module_menu ;;
+	3) echo -e "\nyou chose level 3" ;              next_stage="network_levels" ;;
+	4) echo -e "\nyou chose level 4" ;              next_stage="network_levels" ;;
+	5) echo -e "\nyou chose level 5" ;              next_stage="network_levels" ;;
+	b) echo -e "\nyou chose back\n";                next_stage="student_modules" ;;
 	x) echo -e "\nyou chose exit"; exit 0 ;;
-	*) echo -e $red"\nWrong option.\n"$clearcolor;  network_levels ;;
+	*) echo -e "\n$(color_red 'Wrong option.')\n";  next_stage="network_levels" ;;
     esac
 }
 
 function netsec_levels () {
-    read_level net-sec                                                              # call read_level function with parameter net-sec
-    #level 5
-    print_back_exit_options        
+    print_menu_options netsec
+            
 	echo -ne "Choose a level: "
-
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. this is empty." ;  netsec_levels ;;
-	2) echo -e "\nyou chose level 2. this is empty." ;  netsec_levels ;;
-	3) echo -e "\nyou chose level 3. this is empty." ;  netsec_levels ;;
-	4) echo -e "\nyou chose level 4. this is empty." ;  netsec_levels ;; 
-	5) echo -e "\nyou chose level 5. this is empty." ;  netsec_levels ;;
-    b) echo -e "\nyou chose back\n";                    module_menu ;;
+    1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="netsec_levels" ;;
+	2) echo -e "\nyou chose level 2. this is empty." ;  next_stage="netsec_levels" ;;
+	3) echo -e "\nyou chose level 3. this is empty." ;  next_stage="netsec_levels" ;;
+	4) echo -e "\nyou chose level 4. this is empty." ;  next_stage="netsec_levels" ;; 
+	5) echo -e "\nyou chose level 5. this is empty." ;  next_stage="netsec_levels" ;;
+    b) echo -e "\nyou chose back\n";                    next_stage="student_modules" ;;
     x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clearcolor;      netsec_levels ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="netsec_levels" ;;
     esac
 }
 
 function expert_levels() {
-    read_level expert                                                                # call read_level function with parameter expert
-    #level 5
-    print_back_exit_options
+    print_menu_options experts
+    
     echo -ne "Choose a level: "
-
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. this is empty." ;  expert_levels ;;
-	2) echo -e "\nyou chose level 2. this is empty." ;  expert_levels ;;
-	3) echo -e "\nyou chose level 3. this is empty." ;  expert_levels ;;
-	4) echo -e "\nyou chose level 4. this is empty." ;  expert_levels ;; 
-	5) echo -e "\nyou chose level 5. this is empty." ;  expert_levels ;;
-    b) echo -e "\nyou chose back\n";                    choose_stage ;;            
+    1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="expert_levels" ;;
+	2) echo -e "\nyou chose level 2. this is empty." ;  next_stage="expert_levels" ;;
+	3) echo -e "\nyou chose level 3. this is empty." ;  next_stage="expert_levels" ;;
+	4) echo -e "\nyou chose level 4. this is empty." ;  next_stage="expert_levels" ;; 
+	5) echo -e "\nyou chose level 5. this is empty." ;  next_stage="expert_levels" ;;
+    b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;            
     x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e $red"\nWrong option.\n"$clearcolor;      expert_levels ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="expert_levels" ;;
     esac    
 }
 
-function read_level()
-{
-	i=1
-    if [ pupil = $1 ] ; then
-        startline=$(( $( grep -n "<pupil>" ./ressources/level_description.txt | sed s/':.*'/''/ ) + 1 ))        # extract line where <TAG> appears
-        endline=$(( $( grep -n "</pupil>" ./ressources/level_description.txt | sed s/':.*'/''/ ) - 1 ))         # extract line where <TAG> appears
-        print_level                                                                                             # call print_level function to print from start to end line
-   elif [ network = $1 ] ; then
-        startline=$(( $( grep -n "<network>" ./ressources/level_description.txt | sed s/':.*'/''/ ) + 1 ))      # extract line where <TAG> appears
-        endline=$(( $( grep -n "</network>" ./ressources/level_description.txt | sed s/':.*'/''/ ) - 1 ))       # extract line where <TAG> appears
-        print_level
-    elif [ net-sec = $1 ] ; then
-        startline=$(( $( grep -n "<net-sec>" ./ressources/level_description.txt | sed s/':.*'/''/ ) + 1 ))       # extract line where <TAG> appears
-        endline=$(( $( grep -n "</net-sec>" ./ressources/level_description.txt | sed s/':.*'/''/ ) - 1 ))        # extract line where <TAG> appears
-        print_level
-    fi 
-}
-
-function print_level
-{
-    while [ $startline -le $endline ]; do                                                                       # loop from start Tag to end Tag
-        select_line=$(awk 'NR=='$startline'{print}' ./ressources/level_description.txt)                         # save the selected line from selected file in the variable 
-        echo -e "$(Colorlight_cyan  $i')') $select_line"                                                        # print colored 1) and then the selected line
-        i=$(($i+1))                                                                                             # increment due to i) and level i
-        startline=$(($startline+1))                                                                             # increment till startline reaches endline
+function print_menu_options() {
+    . get_lines_with_tag $1 ./ressources/menu_options_with_description.txt
+    i=1
+    for (( line=$startline ; line<=$endline ; line++ )); do
+        text=$(awk 'NR=='$line'{ print}' $file)       # store $line from $file in $text
+        echo -e "$(color_cyan "$i"')')" $text
+        ((i++))
     done
-}
-
-function print_back_exit_options() {
-	echo -ne "$(ColorRed 'b)ack')  -  Back to previous menu\n"
-	echo -ne "$(ColorRed 'e(x)it')\n" 
+    [ $next_stage != "enter_experience" ] && echo -e "$(color_red 'b)ack')"
+	echo -e "$(color_red 'e(x)it')" 
 }
 
 # cd into hacklabdir (= path/to/hacklab)
@@ -229,4 +192,6 @@ PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
 verify_tools.sh
 
 # main menu
-welcome_screen
+next_stage=welcome_screen
+while : ; do $next_stage; done
+exit 0
