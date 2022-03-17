@@ -52,6 +52,7 @@ else
 	cat ./ressources/ascii/lost.txt
 fi
 
+<<<<<<< HEAD
 lxc file pull lvl01-c01/root/.ash_history ./levels/01-test/
 user_help=$(grep -c "hilfe" ./levels/01-test/.ash_history)
 
@@ -62,6 +63,8 @@ fi
 
 unset packet                                                #variable unset 
 rm ./levels/01-test/.ash_history
+=======
+>>>>>>> 549773ac87b00f812d494356bc39cd54e45ba9cf
 rm ausgabe.log
 
 #to save all the parameters of the sample solution in variables containing only numbers
