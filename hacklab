@@ -110,6 +110,7 @@ function network_levels () {
     case $menuinput in
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	1)  . ./levels/01/tmux_create_session.sh;                                  # splits tmux in different windows
         . upload $name 1;                           next_stage="network_levels" ;;
 	2)  ./levels/02/tmux_create_session.sh;         next_stage="network_levels" ;;
@@ -125,6 +126,10 @@ function network_levels () {
 >>>>>>> points
     1)  ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows   
         . ./scripts/upload $name 1;
+=======
+    1)  . ./levels/01-test/tmux_create_session.sh;                                    # splits tmux in different windows   
+        . ./scripts/upload $name $email 1;
+>>>>>>> fixed email problem
         return 5 ;;                                                                 # return 5 means that the function networks_levels is going to run
 	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
         return 5 ;;
