@@ -33,16 +33,13 @@ paket=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ausgabe.l
 test1=$(grep -c "ICMP 42" ausgabe.log)													#to determine if the correct pakets was sent
 
 #to determine if the user attempt  was successful or not 
-if [ "$paket" = "7" ]
-then
+if [ "$paket" = "7" ]; then
     points=10
 	cat ./ressources/ascii/win.txt	
-elif [ "$paket" != 7 ] && [ "$test1" != 0 ]
-then 
+elif [ "$paket" != 7 ] && [ "$test1" != 0 ]; then
     cat ./ressources/ascii/insufficient.txt
 	points=6
 	echo "You haven't sent the requested paket number! Try Again!"
-
 else 
     points=0
 	cat ./ressources/ascii/lost.txt
