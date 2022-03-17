@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# $1 --> username
+# $2 --> level number
+
 echo -n "Do you want to upload your points? [Y|n]: "
 read -n 1 userInput
 case $userInput in
