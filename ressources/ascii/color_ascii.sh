@@ -44,7 +44,10 @@
  
 clear
 
+<<<<<<< HEAD
 cd $(dirname "$0")
+=======
+>>>>>>> add: print colored ascii
 while IFS= read -r line; do #a full file will be printed
           echo "${blink}${green}$line"         
   done <./win.txt
