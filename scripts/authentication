@@ -8,7 +8,7 @@ function enter_email() {
 	read input
 	if [[ $input =~ ^[A-Za-z0-9.]+@hs-worms.de$ ]]; then													# matches $input vs infXXXX regex
 		email=$input																						# $input + @hs-worms.de
-	elif [[ $input = "hacklab" ]]; then exit 0																# FIXME: remove from final product
+	elif [[ $input = "hacklab" ]]; then email="teamhacklab@gmail.com"; return 0																# FIXME: remove from final product
 	else echo -e "$input is not a valid account name, try again.\n"; enter_email; fi
 }
 
@@ -31,12 +31,12 @@ function get_starttime_and_timelimit() {
 }
 
 function generate_code() {																					# FIXME: don't store plain text code -> solve in generate_code_and_save_sha() 
-	code=$( echo $RANDOM | sha256sum | cut -c1-6 )															# generate sha256sum of $RANDOM, then take first 6 digits
+	code=$( echo $RANDOM"\n" | sha256sum | cut -c1-6 )															# generate sha256sum of $RANDOM, then take first 6 digits
 }
 
 function generate_code_and_save_sha() {																		# generate sha256sum of $RANDOM, then take first 6 digits
 	rm -f sha.log > /dev/null																				# clean-up
-	code=$( echo $RANDOM | sha256sum | cut -c1-6 | tee >(sha256sum | cat > sha.log) )						# branch off plain text, shasum it and save the cipher text
+	code=$( echo $RANDOM"\n" | sha256sum | cut -c1-6 | tee >(sha256sum | cat > sha.log) )						# branch off plain text, shasum it and save the cipher text
 	#flock -x ./sha.log ??
 	chmod 400 sha.log # or 444 ?																			# security measure - lock out 'normal users'
 	timestamp=$( stat sha.log | grep Modify | date -d "$(sed s/'Modify: '//)" +%s )							# get timestamp of last modification (i.e. content changed)
@@ -67,21 +67,22 @@ function confirm_code_with_sha() {																			# a little more complex, bu
 		if [[ $checksum = $(cat ./sha.log) ]]; then 
 			echo -e "\nAuthentication successful!\n"
 			rm -f ./sha.log &> /dev/null
-			exit 0
+			return 0
 		elif [ $(date +"%s") -gt "$timelimit" ]; then														# checks if the time limit is over
 			echo -e "$timelimit_minutes minutes are over. Your code is no longer valid."
 			rm -f ./sha.log > /dev/null
-			exit 1
+			return 1
 		else echo -e "\twrong code: $input"; fi
-	else echo -e "\nFile manipulation detected. Aborting." && exit 1; fi
+	else echo -e "\nFile manipulation detected. Aborting." && return 1; fi
 }
 
 function enter_code() {
 	echo -e " please enter your authentication code:"
 	for (( i=1; i<=3; i++ )); do																			# users can enter their code three times
 		echo -ne "(try $i/3): "
-		read -n 6 input
+		read input
 		confirm_code_with_sha
+		[ $? -eq 0 ] && break
 	done
 }
 
