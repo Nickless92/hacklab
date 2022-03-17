@@ -7,13 +7,9 @@ echo -n "Do you want to upload your points? [Y/N]: "
 read -n 1 userInput
 case $userInput in
     Y|y)
-        ./scripts/importGpgKey
-        echo "$1;$2;$(date +%c);Level $3;$points" | gpg -e --always-trust -a -r 590659F58937BD0A763D1DCDD07DBD27DEB068CF > localDatabase.txt.gpg;
-        if [ . ./scripts/authentication = 0]; then
-            pushDatabaseToServer
-        fi
+        ./scripts/importGpgKey && . ./scripts/authentication && echo "$1;$email;$(date +%c);Level $2;$points" | gpg -e --always-trust -a -r 590659F58937BD0A763D1DCDD07DBD27DEB068CF > localDatabase.txt.gpg && pushDatabaseToServer
         echo -e "\n";;
     N|n) echo -e "\n" ;;
-    *) echo -e "\nWrong option\n" ; 
+    *) echo -e "\nWrong option\n" 
        ./scripts/upload;;
 esac
