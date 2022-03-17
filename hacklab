@@ -63,15 +63,15 @@ Hello $(color_green $name). Welcome to hacklab!
 This is a game in which you can start learning how to manipulate
 networks and defend yourself from cyber attacks.
 To start with, we will need to know how much knowledge you already possess.
+
 ____HERE
     next_stage="enter_experience"
 }
 
 function enter_experience () {
-    echo -e "Please choose one of the following options:"
     print_menu_options experience
 
-    echo -ne "Pleace choose your experience level: "
+    echo -ne "Please choose your experience level: "
     read -n 1 menuinput
     case $menuinput in
 	1) echo -e "\nyou chose pupil.\n";              next_stage="pupil_levels" ;;
@@ -102,7 +102,7 @@ function pupil_levels () {
 function student_modules () {
     print_menu_options modules
     
-    echo -e "Please choose a module: "
+    echo -ne "Please choose a module: "
     read -n 1 menuinput
     case $menuinput in
     1) echo -e "\nyou chose Network Technologies.\n";   next_stage="network_levels" ;;
@@ -117,15 +117,12 @@ function student_modules () {
 function network_levels () {
     print_menu_options networks
     
-	echo -e "\nPlease choose a level: "
+	echo -ne "\nPlease choose a level: "
     read -n 1 menuinput
     case $menuinput in
-	1)  . ./levels/01-test/tmux_create_session.sh;                                  # splits tmux in different windows
-        . upload $name 1;
-        network_levels ;;
-	2)  ./levels/level2_netzwerk_arp_poisoning/tmux_create_session.sh;
-         network_levels ;;
-#	2) echo -e "you chose level 2. starting..." ; sudo tmux new-session -s lvl02 -d 'lxc shell lvl02-c02'\; split-window -v -d 'lxc shell lvl02-c01' \; split-window -h -d 'lxc shell lvl02-c03' \; attach ; clear ; ../levels/level2_netzwerk_arp_poisoning/Auswertung.sh ;  network_levels ;;
+	1)  . ./levels/01/tmux_create_session.sh;                                  # splits tmux in different windows
+        . upload $name 1;                           next_stage="network_levels" ;;
+	2)  ./levels/02/tmux_create_session.sh;         next_stage="network_levels" ;;
 	3) echo -e "\nyou chose level 3" ;              next_stage="network_levels" ;;
 	4) echo -e "\nyou chose level 4" ;              next_stage="network_levels" ;;
 	5) echo -e "\nyou chose level 5" ;              next_stage="network_levels" ;;
@@ -138,7 +135,7 @@ function network_levels () {
 function netsec_levels () {
     print_menu_options netsec
             
-	echo -ne "Choose a level: "
+	echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
     1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="netsec_levels" ;;
@@ -155,7 +152,7 @@ function netsec_levels () {
 function expert_levels() {
     print_menu_options experts
     
-    echo -ne "Choose a level: "
+    echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
     1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="expert_levels" ;;
