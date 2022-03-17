@@ -24,4 +24,6 @@ verify file lxd
 verify file lxc
 verify file gpg
 verify file awk
+verify file gawk
+verify file mail
 #verify alias hacklab
