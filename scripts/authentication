@@ -1,25 +1,26 @@
 #!/bin/bash
 
-#[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :							# automatically lock script on first run, see 'man flock'
+#[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :								# automatically lock script on first run, see 'man flock'
 
 function enter_email() {
 	echo -e "**********AUTHENTICATION**********\n"
-	echo -n "Please enter your infXXXX account name: "
+	echo -n "Please enter your HS-Worms email account: "
+	unset input
 	read input
 	if [[ $input =~ ^[A-Za-z0-9.]+@hs-worms.de$ ]]; then													# matches $input vs infXXXX regex
-		email=$input																						# $input + @hs-worms.de
-	elif [[ $input = "hacklab" ]]; then email="teamhacklab@gmail.com"; return 0								# FIXME: remove from final product
-	else echo -e "$input is not a valid account name, try again.\n"; enter_email; fi
+		email=$input; next_step="confirm_email"; return 0																				# $input + @hs-worms.de
+	else echo -e "$input is not a valid account name, try again.\n"; next_step="enter_email"; return 0; fi
 }
 
 function confirm_email() {
 	echo -n "Is $email correct? [Y|n]: "
+	unset button
 	while : ; do
-		read -n 1 button
+		read -n 2 button
 		case $button in
-			Y|y) break ;;
-			N|n) enter_email ;;																				# re-enter email
-			*) echo -e "\nWrong option."; confirm_email ;;													# re-enter Y or n
+			Y|y) next_step="get_starttime_and_timelimit"; return 0 ;;
+			N|n) echo -e "\n\n"; next_step="enter_email"; return 0 ;;										# re-enter email
+			*) echo -e "\nWrong option."; next_step="confirm_email"; return 0 ;;							# re-enter Y or n
 		esac
 	done
 }
@@ -28,34 +29,53 @@ function get_starttime_and_timelimit() {
 	timelimit_minutes=10
 	starttime=$( date +"%s" )																				# gets time since 1/1/1970 in seconds
 	timelimit=$(( starttime + $timelimit_minutes*60 ))														# time limit until the code isn't useable anymore
+	next_step="generate_code_and_save_sha"
+	return 0
 }
 
 function generate_code() {																					# FIXME: don't store plain text code -> solve in generate_code_and_save_sha() 
-	code=$( echo $RANDOM"\n" | sha256sum | cut -c1-6 )														# generate sha256sum of $RANDOM, then take first 6 digits
+	code=$( echo $RANDOM | sha256sum | cut -c1-6 )															# generate sha256sum of $RANDOM, then take first 6 digits
+	next_step="generate_and_send_email"
+	return 0
 }
 
 function generate_code_and_save_sha() {																		# generate sha256sum of $RANDOM, then take first 6 digits
 	rm -f sha.log > /dev/null																				# clean-up
-	code=$( echo $RANDOM"\n" | sha256sum | cut -c1-6 | tee >(sha256sum | cat > sha.log) )					# branch off plain text, shasum it and save the cipher text
+	code=$( echo $RANDOM | sha256sum | cut -c1-6 | tee >(sha256sum | cat > sha.log) )						# branch off plain text, shasum it and save the cipher text
 	#flock -x ./sha.log ??
 	chmod 400 sha.log # or 444 ?																			# security measure - lock out 'normal users'
 	timestamp=$( stat sha.log | grep Modify | date -d "$(sed s/'Modify: '//)" +%s )							# get timestamp of last modification (i.e. content changed)
+	next_step="generate_and_send_email"
+	return 0
 }
 
 function generate_and_send_email() {
 	echo -ne "\nSending email"; sleep .3; echo -n "."; sleep .3; echo -n "."; sleep .3; echo -n "."			# little animation for UX purposes
 	echo -e "Your authentication code is: \n$code \nThis code runs out in $timelimit_minutes minutes." \
 	| mail -s "Hacklab authentication code" -a FROM:"Team Hacklab <teamhacklab@gmail.com>" $email			# generates email packet
+	next_step="enter_code"
+	return 0
+}
+
+function enter_code() {
+	echo -e " please enter your authentication code: "
+	for (( i=1; i<=3; i++ )); do																			# users can enter their code three times
+		echo -ne "(try $i/3): "
+		read -n 6 input
+		confirm_code_with_sha && next_step="break" && return 0		# correct code -> return 0 to leave enter_code(), then 'break' while loop 
+	done
+	echo -e "Wrong code. Your chances are up. Aborting."; sleep 2s
+	exit 1
 }
 
 function confirm_code() {																					# simple solution:
 	if [ "$input" = "$code" ] && [ $(date +"%s") -lt "$timelimit" ]; then									# check if input=code and time < $timelimit 
 		echo -e "\nAuthentication successful!\n"
-		exit 0
+		return 0
 	elif [ $(date +"%s") -gt "$timelimit" ]; then															# check if the time limit is over
 		echo -e "$timelimit_minutes minutes are over. Your code is no longer valid."
-		exit 1
-	else echo -e "\twrong code: $input"; fi
+		exit 1	# FIXME: shouldn't break with 'set -e'
+	else echo -e "\twrong code: $input"; return 1; fi
 }
 
 function confirm_code_with_sha() {																			# a little more complex, but still imperfect solution:
@@ -71,29 +91,24 @@ function confirm_code_with_sha() {																			# a little more complex, bu
 		elif [ $(date +"%s") -gt "$timelimit" ]; then														# checks if the time limit is over
 			echo -e "$timelimit_minutes minutes are over. Your code is no longer valid."
 			rm -f ./sha.log > /dev/null
-			return 1
-		else echo -e "\twrong code: $input"; fi
-	else echo -e "\nFile manipulation detected. Aborting." && return 1; fi
-}
-
-function enter_code() {
-	echo -e " please enter your authentication code:"
-	for (( i=1; i<=3; i++ )); do																			# users can enter their code three times
-		echo -ne "(try $i/3): "
-		read input
-		confirm_code_with_sha
-		[ $? -eq 0 ] && break
-	done
+			exit 1
+		else echo -e "\twrong code: $input"; return 1; fi
+	else echo -e "\nFile manipulation detected. Aborting." && exit 1; fi
 }
 
 clear
-enter_email								# ask for email account name (without @hs-worms.de, only infXXXX + whitelist)
-confirm_email							# confirm with 'y', return to enter_email with 'n', else repeat
+next_step="enter_email"
+while : ; do
+	$next_step
+done; return 0
+
+#enter_email							# ask for email account name (without @hs-worms.de, only infXXXX + whitelist)
+#confirm_email							# confirm with 'y', return to enter_email with 'n', else repeat
 
 #generate_code							# simple solution to check if input=code + timelimit
-generate_code_and_save_sha				# a little more complex, but still imperfect solution
-get_starttime_and_timelimit				# start the clock
-generate_and_send_email					# send email with authentication $code to user 
-unset code								# then unset $code - FIXME: this shouldn't be stored in variable at all! 
+#generate_code_and_save_sha				# a little more complex, but still imperfect solution
+#get_starttime_and_timelimit			# start the clock
+#generate_and_send_email				# send email with authentication $code to user 
+#unset code								# then unset $code - FIXME: this shouldn't be stored in variable at all! 
 
-enter_code								# get user input, with call to confirm_code, or confirm_code_with_sha - FIXME: manually
+#enter_code								# get user input, with call to confirm_code, or confirm_code_with_sha - FIXME: manually

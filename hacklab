@@ -158,7 +158,7 @@ function print_menu_options() {
     . get_lines_with_tag $1 ./ressources/menu_options_with_description.txt
     i=1
     for (( line=$startline ; line<=$endline ; line++ )); do
-        text=$(awk 'NR=='$line'{ print}' $file)       # store $line from $file in $text
+        text=$(awk 'NR=='$line'{ print}' $file)                                 # store $line from $file in $text
         echo -e "$(color_cyan "$i"')')" $text
         ((i++))
     done
