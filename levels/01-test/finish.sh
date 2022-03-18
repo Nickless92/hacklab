@@ -22,13 +22,12 @@
 #sudo lxc file push ./command.sh test1/root/command.sh
 
 
-#export lostpoints=0
 
-lxc exec lvl01-c02 -- killall tshark					#kill tshark and the file will be created
-sleep 1;												#we need to wait 1 second before tshark will be killed
+lxc exec lvl01-c02 -- killall tshark					                                #kill tshark and the file will be created
+sleep 1;												                                #we need to wait 1 second before tshark will be killed
 
 
-packet=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ausgabe.log) 	#to determine if the correct pakets was sent with the correct IP-adress
+packet=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ausgabe.log) 	    #to determine if the correct pakets was sent with the correct IP-adress
 test1=$(grep -c "ICMP 42" ausgabe.log)													#to determine if the correct pakets was sent
 
 #to determine if the user attempt  was successful or not 
@@ -36,32 +35,35 @@ if [ "$packet" = "7" ]
 then
     points=10
 	cat ./ressources/ascii/win.txt	
+    echo "You get 10 points!"
 elif [ "$packet" != 7 ] && [ "$test1" != 0 ]
 then 
     points=7
     cat ./ressources/ascii/insufficient.txt
-	echo "You haven't sent the requested paket number!"
+	echo "You haven't sent the requested paket number and get 7 points for it!"
     if [ "$packet" -lt 7 ]
     then
-        echo -e "You have only sent $packet packets"
+        echo -e "You have only sent $packet packets "
     else
-        echo -e "You have already sent $packet packets\n"
+        echo -e "You have already sent $packet packets"
     fi
 else 
     points=0
 	cat ./ressources/ascii/lost.txt
+    echo "You get 0 points!"
 fi
 
-lxc file pull lvl01-c01/root/.ash_history ./levels/01-test/
-user_help=$(grep -c "hilfe" ./levels/01-test/.ash_history)
+#lxc file pull lvl01-c01/root/.ash_history ./levels/01-test/
+#user_help=$(grep -c "hilfe" ./levels/01-test/.ash_history)
 
-if [ "user_help" > 0 ]
-then
-    points=5
-fi 
+#if [ "user_help" > 0 ]
+#then
+#    points=5
+#    echo "You get 5 points!"    
+#fi 
 
-unset packet                                                #variable unset 
-rm ./levels/01-test/.ash_history
+unset packet                                                                             #clean the variable  
+#rm ./levels/01-test/.ash_history
 rm ausgabe.log
 
 #to save all the parameters of the sample solution in variables containing only numbers

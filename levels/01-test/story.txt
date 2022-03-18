@@ -19,3 +19,5 @@ To find more about both, use the command man in front of the tool you would like
 just like this: man ping .
 
 to switch between the windows, press Ctrl + b then n(next) or p(previous)
+to Scroll around the window use Ctrl-B then [ then you can use your normal navigation keys.
+Press q to quit scroll mode.
