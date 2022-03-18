@@ -176,6 +176,14 @@ PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
 # check if required tools are available
 verify_tools.sh
 
+# FIXME: print message that some heavy-lifting is being done, and ask for patience
+# build iso for hacklab containers                                              # only builds a new iso if non-existent or age>24h
+alpine_create_iso.sh                                                            # optional call with 'force' parameter
+
+# initialize lxc network and profile
+network_create.sh                                                               # create a hacklab bridge
+profile_create.sh                                                               # create a hacklab profile using hacklab bridge
+
 # main menu
 next_stage=welcome_screen
 while : ; do $next_stage; done

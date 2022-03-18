@@ -43,9 +43,6 @@ lxc start alpine-runner
 #lxc launch images:alpine/edge alpine-runner                                                         # shorthand
 echo "[$(basename "$0")] DONE: started alpine-runner with alpine/edge image"
 
-lxc network set lxdbr0 ipv4.dhcp=true                                                               # config lxdbr0 to start DHCP service - FIXME: still necessary?
-echo "[$(basename "$0")] DONE: hacklab bridge: set ipv4.dhcp true"
-
 lxc file push ./alpine_install_tools.sh alpine-runner/root/install_tools                            # install packages as per install_tools.sh
 echo "[$(basename "$0")] DONE: push alpine_install_tools.sh in alpine-runner"
 lxc exec alpine-runner -- ./install_tools ; wait 10                                                 # wait for install_tools.sh - FIXME: '$!' stopped working??
@@ -56,9 +53,6 @@ lxc exec alpine-runner -- rm -rf /tmp/
 lxc exec alpine-runner -- rm -f /root/install_tools
 lxc exec alpine-runner -- rm -f /root/log
 echo "[$(basename "$0")] DONE: pull + purge logs from alpine-runner"
-
-lxc network set lxdbr0 ipv4.dhcp=false                                                              # config lxdbr0 to stop DHCP service - FIXME: still necessary?
-echo "[$(basename "$0")] DONE: hacklab bridge: set ipv4.dhcp false"
 
 lxc snapshot alpine-runner alpine-snap                                                              # snapshot and export image as ISO
 lxc publish alpine-runner/alpine-snap --alias iso-alpine-stage

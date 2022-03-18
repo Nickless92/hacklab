@@ -27,14 +27,14 @@ then
     if [ $# = 0 ]; then name=hacklab; else name="$1"; fi                        # default: hacklab - FIXME: configurable name
     lxc profile show "$name" > /dev/null || echo "[$(basename "$0")] FAIL: profile $name doesn't exist."    # probe for $name's existence
     # # # nothing between 'lxc network show' and 'if' statement # # #
-    if [ "$?" = 0 ]                                                             # only if network $name doesn't exist already
-        then echo "[$(basename "$0")] DONE: network $name already exists!"; exit 0
-        else
-            echo "[$(basename "$0")] STEP: create profile $name"
-            lxc profile copy default $name                                      # create a lxc bridge
-            cat ../ressources/lxc_profile_config.yml | lxc profile edit $name 
-            echo "[$(basename "$0")] DONE: created profile $name"
-            exit 0
+    if [ $? = 0 ]; then                                                         # only if network $name doesn't exist already
+        echo "[$(basename "$0")] DONE: network $name already exists!"; exit 0
+    else
+        echo "[$(basename "$0")] STEP: create profile $name"
+        lxc profile create $name                                                # create a lxc bridge
+        cat ../ressources/lxc_profile_config.yml | lxc profile edit $name       # get config from .yml file
+        echo "[$(basename "$0")] DONE: created profile $name"
+        exit 0
     fi
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters"
