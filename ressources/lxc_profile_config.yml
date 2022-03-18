@@ -1,6 +1,6 @@
 config:
   limits.cpu: "1"
-  limits.memory: 1GB
+  limits.memory: 100MB
 description: LXD profile for hacklab devices
 devices:
   eth0:
