@@ -5,7 +5,7 @@
 
 # color variables
 green='\e[32m'
-cyan='\e[96m' 
+cyan='\e[96m'
 red='\e[31m'
 clearcolor='\e[0m'
 
@@ -103,8 +103,8 @@ function student_modules () {
 }
 
 
-function network_levels () {
-    print_menu_options networks
+function network_levels () {        # rename in "networks"
+    print_menu_options networks     # remove parameter, use $next_stage
     module="networks"
 
 	echo -ne "\nPlease choose a level: "
