@@ -44,6 +44,7 @@
  
 clear
 
+cd $(dirname "$0")
 while IFS= read -r line; do #a full file will be printed
           echo "${blink}${green}$line"         
   done <./win.txt
