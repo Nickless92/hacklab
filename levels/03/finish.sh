@@ -24,11 +24,11 @@
 
 #export lostpoints=0
 
-lxc exec lvl01-c02 -- killall tshark					#kill tshark and the file will be created
-sleep 1;												#we need to wait 1 second before tshark will be killed
+#lxc exec lvl01-c02 -- killall tshark					#kill tshark and the file will be created
+#sleep 1;												#we need to wait 1 second before tshark will be killed
 
 
-packet=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 42 Echo (ping) reply" ausgabe.log) 	#to determine if the correct pakets was sent with the correct IP-adress
+packet=$(grep -c "10.10.1.3 → 10.10.1.2    ICMP 126 Destination unreachable" ausgabe.log) 	#to determine if the correct pakets was sent with the correct IP-adress
 test1=$(grep -c "ICMP 42" ausgabe.log)													#to determine if the correct pakets was sent
 
 #to determine if the user attempt  was successful or not 

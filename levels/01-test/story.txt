@@ -18,10 +18,4 @@ Some tools used for ip spoofing and to monitor a network are hping and tshark.
 To find more about both, use the command man in front of the tool you would like to know more about.
 just like this: man ping .
 
-<<<<<<< HEAD
 to switch between the windows, press Ctrl + b then n(next) or p(previous)
-=======
-to switch between the windows, press Ctrl + b then n(next) or p(previous)
-
-                               
->>>>>>> 549773ac87b00f812d494356bc39cd54e45ba9cf

@@ -4,7 +4,7 @@
 cd $(dirname "$0")
 #clear ; 
 echo -e "\nyou chose level 1. starting..."
-(../../backend/level_start.sh 1 3 &)                                        # containers getting started
+(../../backend/level_start.sh 3 3 &)                                        # containers getting started
 #./storytime.sh                                                              # story time :)
 #./levels/01-test/level_explanation.sh                                      # explanation for the level
 sleep 5                                                                     # the user gets some time to read the task
@@ -12,20 +12,20 @@ sleep 5                                                                     # th
 
 clear; clear; clear;
 
-lxc file push ./levels/01-test/help.sh lvl01-c01/root/                      #to push scripts for hints in the container
+#lxc file push ./levels/01-test/help.sh lvl01-c01/root/                      #to push scripts for hints in the container
 
-lxc file push ./levels/01-test/user_needs_help.sh lvl01-c01/root/           #to push scripts for hints in the container
+#lxc file push ./levels/01-test/user_needs_help.sh lvl01-c01/root/           #to push scripts for hints in the container
 
-lxc file push ./levels/01-test/user_tips.txt lvl01-c01/root/                #to push scripts for hints in the container
+#lxc file push ./levels/01-test/user_tips.txt lvl01-c01/root/                #to push scripts for hints in the container
 
-(lxc exec lvl01-c01 -- source /root/user_needs_help.sh)                      #to count the 10minutes bevor the user needs help and explain how he can have help
+#(lxc exec lvl01-c01 -- source /root/user_needs_help.sh)                      #to count the 10minutes bevor the user needs help and explain how he can have help
 
-lxc exec lvl01-c01 -- alias hilfe="./help.sh"                               #to create a alias
+#lxc exec lvl01-c01 -- alias hilfe="./help.sh"                               #to create a alias
 
 lxc exec lvl01-c02 -- tshark -i eno1 &>> ausgabe.log & 
                                                                            
                                                                             # create the session and two split pane
-tmux new-session -s hacklab -n level01 -d 'lxc exec lvl01-c02 -- tshark -i eno1; bash -i'\;\
+tmux new-session -s hacklab -n level03 -d 'lxc exec lvl03-c01 -- tshark -i eno1; bash -i'\;\
     split-window -v -d 'lxc shell lvl01-c01;'\;\
     split-window -h -d 'lxc exec lvl01-c03 -- tshark -i eno1' \;\
     select-pane -D
