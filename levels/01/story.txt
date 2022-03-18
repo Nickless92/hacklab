@@ -31,10 +31,12 @@ To do this, one can use something that is called an ip-spoofing attack. One fake
 Some tools used for ip spoofing and to monitor a network are hping and tshark.
 To find more about both, use the command man in front of the tool you would like to know more about.
 just like this: man ping .
-To switch between the windows, press Ctrl + b then n
+To switch between the windows, press 'Ctrl' + 'b', then 'n'
 ===
 
 
 <synopsis>
 here goes a short form of our story + short tmux cheat sheet
+
+To switch between windows, press 'Ctrl' + 'b', then 'n'
 ===
