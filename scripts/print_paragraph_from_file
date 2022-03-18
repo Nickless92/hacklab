@@ -10,6 +10,15 @@
 # $2: path/to/file  (passed on to print_lines_from_file_then_pause)
 # $3: pause time    (passed on to print_lines_from_file_then_pause)
 
+function print_paragraph() {
+    for (( line=$startline ; line<=$endline ; line++ )); do
+        text=$(awk 'NR=='$line'{ print}' $file)                                 # store $line from $file in $text
+        echo -e $text
+        ((i++))
+    done
+}
+
 # 'source' get_lines_with_tag (with '.') to retrieve its variables
 . get_lines_with_tag $1 $2
-print_lines_from_file_then_pause $startline $endline $file $3
+[ $# -eq 3 ] && print_lines_from_file_then_pause $startline $endline $file $3
+[ $# -eq 2 ] && print_paragraph
