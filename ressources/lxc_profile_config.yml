@@ -1,0 +1,13 @@
+config:
+  limits.cpu: "1"
+  limits.memory: 100MB
+description: LXD profile for hacklab devices
+devices:
+  eth0:
+    name: eno1
+    network: hacklab
+    type: nic
+  root:
+    path: /
+    pool: hacklabStorage
+    type: disk

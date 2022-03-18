@@ -1,0 +1,7 @@
+#!/bin/bash
+
+TEST=$(gpg --list-key | grep 590659F58937BD0A763D1DCDD07DBD27DEB068CF)          #key-id for hacklab public key (database)      
+
+if [[ ! $TEST ]]; then                                                          #tests if the gpg key already exists 
+    gpg --import ./ressources/hacklab-pub.gpg 2> /dev/null                      #if the key does not exist, it will be added
+fi

@@ -1,9 +1,16 @@
 #!/bin/bash
-# read text file line by line, wait $3 seconds, then print it 
 
-for (( i=$1 ; i<=$2 ; i++ )); do                            # first argument for loop start second for loop end and third for selection of new lines
-    line=$(awk 'NR=='$i'{ print}' $(readlink -f "$4"))      # store line i from file in $line
-    typeit_like_handwriting $line                           # through typit function type every char of var slowly
-    sleep $3
+# read text file from startline till endline, wait $3 seconds, then print next line
+# e.g. this gets called from print_paragraph_from_file with appropriate parameters
+
+# $1: first line
+# $2: last line
+# $3: path/to/some/file
+# $4: pause time
+
+for (( i=$1 ; i<=$2 ; i++ )); do
+    line=$(awk 'NR=='$i'{ print}' $3)       # store line i from file $3 in $line
+    typeit_like_handwriting $line           # typeit function types every char of $line slowly
+    sleep $4
     echo -e "\n"
 done

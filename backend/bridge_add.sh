@@ -14,19 +14,19 @@
 # script to create a lxd network bridge
 # $1 = level
 
-function cd_return {
+function cd_return {                                                    # cd to former working dir
     echo -n "[$(basename "$0")] DONE: return to path: "; cd -
 }
-trap cd_return EXIT
+trap cd_return EXIT                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh
-echo "[$(basename "$0")] CALL: level: $1"
-if [ $# = 1 ]
+cd $(dirname "$0") ; . ./log_with_timestamp.sh                          # cd to path/to/$0, call log_with_timestamp.sh
+echo "[$(basename "$0")] CALL: $@"
+if [ $# = 1 ]                                                           # only one level parameter ($1) allowed
 then
-    if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi
+    if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi           # adjust for two-digit number sheme
     echo "[$(basename "$0")] STEP: create bridge $level"
-    sudo brctl addbr level$level up              # adds and starts a bridge named $1 
-    sudo ip link set dev level$level up          # adds and starts the L2 link
+    sudo brctl addbr level$level up                                     # add and start a bridge
+    sudo ip link set dev level$level up                                 # add and start the L2 link
     echo "[$(basename "$0")] DONE: created bridge for level $level"
     exit 0
 else

@@ -1,5 +1,18 @@
+<1>
 Dr. Blackhat has a secret password for the file where they wrote down all their intentions and plans. 
-It's not encrypted. 
+It's not encrypted.
+===
+<2> 
 They forgot the password. Their accomplice should send them the password over the network. 
+===
+<3>
 You think to yourself that you should try and intercept their network to steal the password. 
+===
+<4>
 With that you could know everything about his intentions and foil his plans!
+===
+
+<synopsis>
+here goes a short form of our story + short tmux cheat sheet
+===
+

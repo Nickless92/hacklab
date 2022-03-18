@@ -1,3 +1,7 @@
 #!/bin/bash
+
+# pause until user interaction (one key) - FIXME: stdin buffer overflow 
+# immediate "Ok!" prompt to avoid user irritation due to pause times
+
 read -p "Press any key to continue... " -n1 -s
 echo -ne "Ok!"

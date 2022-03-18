@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# $1 --> username
+# $2 --> level number
+
+echo -n "Do you want to upload your points? [Y|n]: "
+read -n 1 userInput
+case $userInput in
+    Y|y)
+        importGpgKey &&                                                                                             `#checks if the key already exists --> imports the correct public key`\
+        . authentication && \                                                                                       
+        echo "$1;$email;$(date +%c);Level $2;$points"                                                               `#text we want to add to database`\
+        | gpg -e --always-trust -a -r 590659F58937BD0A763D1DCDD07DBD27DEB068CF > localDataset.txt.gpg &&            `#encrypts the text with the public key of the database`\
+        pushDatasetToServer ;;     
+    N|n) return 0 ;;
+    *) echo -e "\nWrong option\n" ; upload;;
+esac

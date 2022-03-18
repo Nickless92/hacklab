@@ -1,0 +1,53 @@
+How to use this file?
+1) put your tag in diamond brackets like <this>
+2) end your paragraph with '==='
+3) make sure each tag is its own line
+4) you may use extended markup if used with 'echo -e'
+5) ... profit (and don't worry about changing your text anymore) 
+
+<experience>
+Pupil\t - for people who did not attend any module at HS Worms
+Student\t - in the next step you can choose between different modules
+Expert\t - you can choose between all levels of pupils and students
+===
+
+<modules>
+Network Technologies
+Network Security
+===
+
+<pupils>
+Level 1: lorem ipsum
+Level 2: some text
+Level 3: abc
+Level 4: foo
+Level 5: bar
+Level 6: this is a verbose description
+Level 7: nice, huh?
+===
+
+<netsec>
+Level 1 lvl1
+Level 2 lvl2
+Level 3 lvl3
+Level 4 lvl4
+Level 5 lvl5
+Level 6 lvl6
+===
+
+<networks>
+Level 1 Ip Spoofing
+Level 2 Blocking Ping
+Level 3 foo
+Level 4 bar
+Level 5 lorem
+Level 6 ipsum
+===
+
+<experts>
+
+
+
+
+
+===
