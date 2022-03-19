@@ -111,8 +111,9 @@ function network_levels () {        # rename in "networks"
     read -n 1 menuinput
     case $menuinput in
 	1)  . ./levels/01/tmux_create_session.sh;                                  # splits tmux in different windows
-        . upload $module 1;                           next_stage="network_levels" ;;
+        . upload_score_to_database $module 1        ;;
 	2)  ./levels/02/tmux_create_session.sh;         next_stage="network_levels" ;;
+        . upload_score_to_database $module 2        ;;
 	3) echo -e "\nyou chose level 3" ;              next_stage="network_levels" ;;
 	4) echo -e "\nyou chose level 4" ;              next_stage="network_levels" ;;
 	5) echo -e "\nyou chose level 5" ;              next_stage="network_levels" ;;

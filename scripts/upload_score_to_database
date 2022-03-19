@@ -3,6 +3,14 @@
 # $1 --> username
 # $2 --> level number
 
+function pushDatasetToServer() {
+    if [ -f localDataset.txt.gpg ]; then                                        #checks if the file exists
+        timeStamp=$(date +%s)
+        echo "sending dataset..."
+        scp ./localDataset.txt.gpg hacklab@10.215.33.91:/home/hacklab/uploadedFiles/datasetHacklab-${timeStamp}-${RANDOM}.txt.gpg       #copies the encrypted file to the database
+    fi
+}
+
 echo -n "Do you want to upload your points? [Y|n]: "
 read -n 1 userInput
 case $userInput in
