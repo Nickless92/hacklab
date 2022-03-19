@@ -10,7 +10,7 @@
 
 for (( i=$1 ; i<=$2 ; i++ )); do
     line=$(awk 'NR=='$i'{ print}' $3)       # store line i from file $3 in $line
-    typeit_like_handwriting $line           # typeit function types every char of $line slowly
+    typeit_like_handwriting "$line"         # typeit function types every char of $line slowly
     sleep $4
     echo -e "\n"
 done
