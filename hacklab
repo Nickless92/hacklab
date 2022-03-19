@@ -20,15 +20,6 @@ color_red() {
     echo -ne $red$1$clearcolor
 }
 
-function pushDatasetToServer()
-{
-    if [ -f localDataset.txt.gpg ]; then                                        #checks if the file exists
-        timeStamp=$(date +%s)
-        echo "sending dataset..."
-        scp ./localDataset.txt.gpg hacklab@10.215.33.91:/home/hacklab/uploadedFiles/datasetHacklab-${timeStamp}-${RANDOM}.txt.gpg       #copies the encrypted file to the database
-    fi
-}
-
 function welcome_screen() {                                                     # start sequence: print hacker graphic, wait, then proceed to enter_username
     clear
     sleep 1s
@@ -57,108 +48,109 @@ ____HERE
     next_stage="enter_experience"
 }
 
-function enter_experience () {
+function enter_experience() {
     print_menu_options experience
 
     echo -ne "Please choose your experience level: "
     read -n 1 menuinput
     case $menuinput in
-	1) echo -e "\nyou chose pupil.\n";              next_stage="pupil_levels" ;;
+	1) echo -e "\nyou chose pupil.\n";              next_stage="pupils" ;;
 	2) echo -e "\nyou chose student.\n";            next_stage="student_modules" ;;
-	3) echo -e "\nyou chose expert.\n";             next_stage="expert_levels" ;;
-	x) echo -e "\nyou chose exit"; exit 0 ;;
-    *) echo -e "\n$(color_red 'Wrong option.')\n";  next_stage="enter_experience" ;;
+	3) echo -e "\nyou chose expert.\n";             next_stage="experts" ;;
+	x) echo -e "\nyou chose exit";                  exit 0 ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n"   ;;
     esac
 }
 
-function pupil_levels () {
-    print_menu_options pupils
+function pupils() {
+    print_menu_options
     
 	echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
-        1) echo -e "\nyou chose level 1. Sorry, this is empty...";  next_stage="pupil_levels" ;;
-        2) echo -e "\nyou chose level 2. Sorry, this is empty...";  next_stage="pupil_levels" ;;
-        3) echo -e "\nyou chose level 3. Sorry, this is empty...";  next_stage="pupil_levels" ;;
-        4) echo -e "\nyou chose level 4. Sorry, this is empty...";  next_stage="pupil_levels" ;;
-        5) echo -e "\nyou chose level 5. Sorry, this is empty...";  next_stage="pupil_levels" ;;
+        1) echo -e "\nyou chose level 1. Sorry, this is empty..."   ;;
+        2) echo -e "\nyou chose level 2. Sorry, this is empty..."   ;;
+        3) echo -e "\nyou chose level 3. Sorry, this is empty..."   ;;
+        4) echo -e "\nyou chose level 4. Sorry, this is empty..."   ;;
+        5) echo -e "\nyou chose level 5. Sorry, this is empty..."   ;;
         b) echo -e "\nyou chose back\n";                            next_stage="enter_experience" ;;            
-        x) echo -e "\nyou chose exit"; exit 0 ;;
-        *) echo -e "\n$(color_red 'Wrong option.')\n";              next_stage="pupil_levels" ;;
+        x) echo -e "\nyou chose exit";                              exit 0 ;;
+        *) echo -e "\n$(color_red 'Wrong option.')\n"               ;;
     esac
 }
 
-function student_modules () {
-    print_menu_options modules
+function student_modules() {
+    print_menu_options
     
     echo -ne "Please choose a module: "
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose Network Technologies.\n";   next_stage="network_levels" ;;
-    2) echo -e "\nyou chose Network Security.\n";       next_stage="netsec_levels" ;;
+    1) echo -e "\nyou chose Network Technologies.\n";   next_stage="networks" ;;
+    2) echo -e "\nyou chose Network Security.\n";       next_stage="netsec" ;;
     b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;
-    x) echo -e "\nyou chose exit"; exit 0 ;;
-    *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="student_modules" ;;
+    x) echo -e "\nyou chose exit";                      exit 0 ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
     esac
 }
 
 
-function network_levels () {        # rename in "networks"
-    print_menu_options networks     # remove parameter, use $next_stage
-    module="networks"
+function networks() {
+    print_menu_options
 
 	echo -ne "\nPlease choose a level: "
     read -n 1 menuinput
     case $menuinput in
-	1)  . ./levels/01/tmux_create_session.sh;                                  # splits tmux in different windows
+	1)  . ./levels/01/tmux_create_session.sh;                                   # splits tmux in different windows
         . upload_score_to_database $module 1        ;;
-	2)  ./levels/02/tmux_create_session.sh;         next_stage="network_levels" ;;
+	2)  ./levels/02/tmux_create_session.sh;
         . upload_score_to_database $module 2        ;;
-	3) echo -e "\nyou chose level 3" ;              next_stage="network_levels" ;;
-	4) echo -e "\nyou chose level 4" ;              next_stage="network_levels" ;;
-	5) echo -e "\nyou chose level 5" ;              next_stage="network_levels" ;;
+	3) echo -e "\nyou chose level 3"                ;;
+	4) echo -e "\nyou chose level 4"                ;;
+	5) echo -e "\nyou chose level 5"                ;;
 	b) echo -e "\nyou chose back\n";                next_stage="student_modules" ;;
-	x) echo -e "\nyou chose exit"; exit 0 ;;
-	*) echo -e "\n$(color_red 'Wrong option.')\n";  next_stage="network_levels" ;;
+	x) echo -e "\nyou chose exit";                  exit 0 ;;
+	*) echo -e "\n$(color_red 'Wrong option.')\n"   ;;
     esac
 }
 
-function netsec_levels () {
-    print_menu_options netsec
-            
+function netsec() {
+    print_menu_options
+
 	echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="netsec_levels" ;;
-	2) echo -e "\nyou chose level 2. this is empty." ;  next_stage="netsec_levels" ;;
-	3) echo -e "\nyou chose level 3. this is empty." ;  next_stage="netsec_levels" ;;
-	4) echo -e "\nyou chose level 4. this is empty." ;  next_stage="netsec_levels" ;; 
-	5) echo -e "\nyou chose level 5. this is empty." ;  next_stage="netsec_levels" ;;
+    1) echo -e "\nyou chose level 1. this is empty."    ;;
+	2) echo -e "\nyou chose level 2. this is empty."    ;;
+	3) echo -e "\nyou chose level 3. this is empty."    ;;
+	4) echo -e "\nyou chose level 4. this is empty."    ;; 
+	5) echo -e "\nyou chose level 5. this is empty."    ;;
     b) echo -e "\nyou chose back\n";                    next_stage="student_modules" ;;
-    x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="netsec_levels" ;;
+    x) echo -e "\nyou chose exit";                      exit 0 ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
     esac
 }
 
-function expert_levels() {
-    print_menu_options experts
+function experts() {
+    print_menu_options
     
     echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose level 1. this is empty." ;  next_stage="expert_levels" ;;
-	2) echo -e "\nyou chose level 2. this is empty." ;  next_stage="expert_levels" ;;
-	3) echo -e "\nyou chose level 3. this is empty." ;  next_stage="expert_levels" ;;
-	4) echo -e "\nyou chose level 4. this is empty." ;  next_stage="expert_levels" ;; 
-	5) echo -e "\nyou chose level 5. this is empty." ;  next_stage="expert_levels" ;;
+    1) echo -e "\nyou chose level 1. this is empty."    ;;
+	2) echo -e "\nyou chose level 2. this is empty."    ;;
+	3) echo -e "\nyou chose level 3. this is empty."    ;;
+	4) echo -e "\nyou chose level 4. this is empty."    ;; 
+	5) echo -e "\nyou chose level 5. this is empty."    ;;
     b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;            
-    x) echo -e "\nyou chose exit" ; exit 0 ;;
-    *) echo -e "\n$(color_red 'Wrong option.')\n";      next_stage="expert_levels" ;;
+    x) echo -e "\nyou chose exit";                      exit 0 ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
     esac    
 }
 
 function print_menu_options() {
-    . get_lines_with_tag $1 ./ressources/menu_options_with_description.txt
+    [ $# -eq 0 ] && tag="$next_stage"
+    [ $# -eq 1 ] && tag="$1"
+    . get_lines_with_tag "$tag" ./ressources/menu_options_with_description.txt
     i=1
     for (( line=$startline ; line<=$endline ; line++ )); do
         text=$(awk 'NR=='$line'{ print}' $file)                                 # store $line from $file in $text
