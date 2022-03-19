@@ -4,9 +4,9 @@
 # $1: pause factor [default: 0.005]
 # $2: random modul [default: 40]
 
-if [[ $# -eq 2 ]]; then fac=$1; mod=$2; else fac=.005; mod=40; fi 
+if [[ $# -eq 3 ]]; then fac=$1; mod=$2; text="$3"; else fac=.005; mod=40; text="$1"; fi 
 IFS=''
 while read -n1 c; do
-    echo -n "$c"
+    echo -en "$c"
     sleep $fac$(( RANDOM % $mod ))
-done <<< "$@"
+done <<< $text
