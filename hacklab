@@ -161,12 +161,16 @@ function print_menu_options() {
 	echo -e "$(color_red 'e(x)it')" 
 }
 
-# cd into hacklabdir (= path/to/hacklab)
+# first, cd into hacklabdir (= path/to/hacklab)
 hacklabdir=$(dirname $(readlink -f "$0"))
 cd $hacklabdir
 
-# add relevant paths to environment
-PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend)
+# second, add relevant paths to environment
+PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend:$hacklabdir/database)
+
+# third, load config parameters
+source ./.CONF
+
 
 # check if required tools are available
 verify_tools.sh
