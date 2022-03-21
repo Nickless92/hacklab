@@ -164,14 +164,14 @@ hacklabdir=$(dirname $(readlink -f "$0"))
 cd $hacklabdir
 
 # second, add relevant paths to environment
-PATH=$(echo $PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend:$hacklabdir/database)
+PATH=$PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend:$hacklabdir/database
 
 # third, load config parameters
 source ./.CONF
 
 
 # check if required tools are available
-verify_tools.sh
+tools_verify.sh
 
 # FIXME: print message that some heavy-lifting is being done, and ask for patience
 # build iso for hacklab containers                                              # only builds a new iso if non-existent or age>24h
