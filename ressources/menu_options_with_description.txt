@@ -12,7 +12,7 @@ Expert\t - you can choose between all levels of pupils and students
 ===
 
 <student_modules>
-Network Technologies
+Networks
 Network Security
 ===
 
