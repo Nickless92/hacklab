@@ -3,14 +3,10 @@
 
 cd $(dirname "$0")
 clear ; echo -e "\nyou chose level 1. starting..."
-pwd
-(./backend/level_start.sh 1 3 &)                                        # containers getting started
-#./storytime.sh                                                              # story time :)
-sleep 5                                                                     # the user gets some time to read the task
-#sudo lxc exec lvl01-c01 -- touch command.txt                               # create a file where the user has to save his/her command
+(level_start.sh 1 3 &)                                                      # containers getting started
+./levels/01/storytime.sh                                                    # story time :)
 
 clear
-
 lxc exec lvl01-c02 -- tshark -i eno1 &>> ausgabe.log & 
                                                                             # create the session and two split pane
 tmux new-session -s hacklab -n level01 -d 'lxc exec lvl01-c02 -- tshark -i eno1; bash -i'\;\
