@@ -10,7 +10,6 @@ sleep 5                                                                     # th
 #sudo lxc exec lvl01-c01 -- touch command.txt                               # create a file where the user has to save his/her command
 
 clear; clear; clear;
->>>>>>> points:levels/01-test/tmux_create_session.sh
 
 clear
 lxc exec lvl01-c02 -- tshark -i eno1 &>> ausgabe.log & 
