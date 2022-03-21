@@ -14,6 +14,3 @@ wait_for_any_key
 
 print_paragraph_from_file text_2 ./story.txt .5
 wait_for_any_key
-
-print_paragraph_from_file text_3 ./story.txt .5
-wait_for_any_key

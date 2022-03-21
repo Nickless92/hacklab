@@ -23,15 +23,18 @@ for that you should.
 ===
 
 <text_2>
+---here goes a short form of our story + short tmux cheat sheet---
+to switch between windows, press 'Ctrl' + 'b', then 'n'
+===
+
+<synopsis>
 Instructions: 
 To perform the attack you will need the tool ettercap, take a look at its man page for more information.
 Use the w option to write your output to the angreifer.txt file.
 You are currently on the computer c01 (10.10.2.1).
 Dr. Blackhat's ip adress is 10.10.2.3, they are using the computer c03.
 Blackhats' accomplice uses the computer c02 with the ip address 10.10.2.2.
-===
 
-<text_3>
 here goes a short form of our story + short tmux cheat sheet
 
 To switch between windows, press 'Ctrl' + 'b', then 'n'
