@@ -1,0 +1,21 @@
+blink=`echo -en "\e[5m"`
+green=`echo -en "\e[32m"`
+purple=`echo -en "\e[35m"`
+default=`echo -en "\e[39m"`
+
+clear
+file=$(readlink -f "$1")
+file_name=$(basename $file)
+if [ $file_name = win.txt ] || [ $file_name = insufficient.txt ] ; then
+   while IFS= read -r line;
+      do #a full file will be printed
+         echo "${blink}${green}$line${default}"         
+      done <$file
+elif [ $file_name = lost.txt ] ; then
+   while IFS= read -r line;
+   do #a full file will be printed
+         echo "${blink}${purple}$line${default}"         
+   done <$file
+else
+   echo "Error in printing colored_ascii.sh file when called from $file"
+fi
