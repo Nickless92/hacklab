@@ -4,4 +4,4 @@
 # immediate "Ok!" prompt to avoid user irritation due to pause times
 
 read -p "Press any key to continue... " -n1 -s
-echo -ne "Ok!"
+echo -e "Ok!\n"
