@@ -1,4 +1,4 @@
-<1>
+<text_1>
 Dr. Blackhat has a secret password for the file where they wrote down all their intentions and plans. 
 It's not encrypted.
 ===
@@ -12,7 +12,33 @@ You think to yourself that you should try and intercept their network to steal t
 With that you could know everything about his intentions and foil his plans!
 ===
 
-<synopsis>
-here goes a short form of our story + short tmux cheat sheet
+<tweeb_1>
+greetings.
+===
+<tweeb_2>
+You may not know what I'm up to, but you'll soon find out.
+===
+<tweeb_3>
+find what's going on here.
+===
+<tweeb_4>
+for that you should.
+===
+<tweeb_5>
+()> 0   <-> 2  <3 10)
 ===
 
+<text_2>
+Instructions: 
+To perform the attack you will need the tool ettercap, take a look at its man page for more information.
+Use the w option to write your output to the angreifer.txt file.
+You are currently on the computer c01 (10.10.2.1).
+Dr. Blackhat's ip adress is 10.10.2.3, they are using the computer c03.
+Blackhats' accomplice uses the computer c02 with the ip address 10.10.2.2.
+===
+
+<text_3>
+here goes a short form of our story + short tmux cheat sheet
+
+To switch between windows, press 'Ctrl' + 'b', then 'n'
+===
