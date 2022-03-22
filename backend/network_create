@@ -19,7 +19,7 @@ function cd_return {
 }
 trap cd_return EXIT
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh
+cd $(dirname "$0") ; . ./log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
 if [ $# = 0 ] || [ $# = 1 ]

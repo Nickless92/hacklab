@@ -1,0 +1,20 @@
+#!/bin/bash
+
+module=networks
+level=2
+
+cd $(dirname "$0")
+PATH=$PATH:$(dirname "$0")
+echo -e "\nyou chose level $level. starting..."
+(level_start $level 3 &)                    # initiate level infrastructure
+
+storytime                                   # story time :)
+tmux_session; clear                         # <- actual gameplay - create different windows
+. evaluation                                # evaluation of the level
+allow_retry                                 # allows user to play again without destructing containers
+. upload_score_to_database $module $level   # upload + authentication, 1 = level
+
+#end tmux session                           # clean up
+(level_stop $level 3 &)                     # remove level infrastructure
+
+exit 0

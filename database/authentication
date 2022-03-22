@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :								# automatically lock script on first run, see 'man flock'
+#[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :							# automatically lock script on first run, see 'man flock'
 
 function enter_email() {
 	echo -e "**********AUTHENTICATION**********\n"
@@ -8,7 +8,7 @@ function enter_email() {
 	unset input
 	read input
 	if [[ $input =~ ^[A-Za-z0-9.]+@hs-worms.de$ ]]; then													# matches $input vs infXXXX regex
-		email=$input; next_step="confirm_email"; return 0																				# $input + @hs-worms.de
+		email=$input; next_step="confirm_email"; return 0													# $input + @hs-worms.de
 	else echo -e "$input is not a valid account name, try again.\n"; next_step="enter_email"; return 0; fi
 }
 
@@ -62,7 +62,7 @@ function enter_code() {
 	for (( i=1; i<=3; i++ )); do																			# users can enter their code three times
 		echo -ne "(try $i/3): "
 		read -n 6 input
-		confirm_code_with_sha && next_step="break" && return 0		# correct code -> return 0 to leave enter_code(), then 'break' while loop 
+		confirm_code_with_sha && next_step="break" && return 0												# correct code -> return 0 to leave enter_code(), then 'break' while loop 
 	done
 	echo -e "Wrong code. Your chances are up. Aborting."; sleep 2s
 	exit 1

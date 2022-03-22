@@ -16,19 +16,19 @@
 # $2 = number of containers
 
 function cd_return {
-    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                               # cd to former working dir
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                           # cd to former working dir
 }
-trap cd_return EXIT                                                                         # trap 'exit', run cd_return first
+trap cd_return EXIT                                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh                                              # cd to path/to/$0, 'source' log_with_timestamp.sh
+cd $(dirname "$0") ; . ./log_with_timestamp                                             # cd to path/to/$0, 'source' log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
-if [ "$#" -eq 2 ] ; then                                                                    # only two parameters allowed - FIXME: check for more complex calls
-    #echo "[$(basename "$0")] STEP: create network";     ./network_create.sh                 # creates lxc bridge "hacklab" (default name)
-    echo "[$(basename "$0")] STEP: init containers";    ./container_create.sh "$1" "$2"     # creates $2 containers (stopped, with profile 'hacklab')
-    echo "[$(basename "$0")] STEP: start containers";   ./container_start.sh  "$1" "$2"     # changes container state (stopped -> running)
-    echo "[$(basename "$0")] STEP: add network IPs";    ./container_ip_add.sh "$1" "$2"     # adds network addresses (general sheme: 10.10.level.container/24)
-    echo "[$(basename "$0")] DONE: started level $1 with $2 containers"                     # so only containers within a level can reach each other (net mask /24)
+if [ "$#" -eq 2 ] ; then                                                                # only two parameters allowed - FIXME: check for more complex calls
+    #echo "[$(basename "$0")] STEP: create network";     ./network_create                # creates lxc bridge "hacklab" (default name)
+    echo "[$(basename "$0")] STEP: init containers";    ./container_create "$1" "$2"    # creates $2 containers (stopped, with profile 'hacklab')
+    echo "[$(basename "$0")] STEP: start containers";   ./container_start  "$1" "$2"    # changes container state (stopped -> running)
+    echo "[$(basename "$0")] STEP: add network IPs";    ./container_ip_add "$1" "$2"    # adds network addresses (general sheme: 10.10.level.container/24)
+    echo "[$(basename "$0")] DONE: started level $1 with $2 containers"                 # so only containers within a level can reach each other (net mask /24)
     exit 0
 else
     echo "[$(basename "$0")] FAILED: invalid number of parameters: $#"

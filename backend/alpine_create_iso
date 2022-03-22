@@ -32,9 +32,9 @@ function create_iso() {
     #lxc launch images:alpine/edge alpine-runner                                                         # shorthand
     echo "[$(basename "$0")] DONE: started alpine-runner with alpine/edge image"
 
-    lxc file push ./alpine_install_tools.sh alpine-runner/root/install_tools                            # install packages as per install_tools.sh
-    echo "[$(basename "$0")] DONE: push alpine_install_tools.sh in alpine-runner"
-    lxc exec alpine-runner -- ./install_tools ; wait 10                                                 # wait for install_tools.sh - FIXME: '$!' stopped working??
+    lxc file push ./alpine_install_tools alpine-runner/root/install_tools                               # install packages as per install_tools
+    echo "[$(basename "$0")] DONE: push alpine_install_tools in alpine-runner"
+    lxc exec alpine-runner -- ./install_tools ; wait 10                                                 # wait for install_tools - FIXME: '$!' stopped working??
     echo "[$(basename "$0")] DONE: tools installed in alpine-runner"
     lxc file pull alpine-runner/root/log ./logs/alpine_install_tools.log                                # pull logs from alpine-runner
     lxc exec alpine-runner -- rm -rf /var/log/                                                          # some clean-up to reduce iso file size
@@ -69,8 +69,8 @@ function create_iso() {
 }
 
 function communicate_build() {
-    exec 1>&3 3>&-                                                                                  # restore stdin from fd #3
-    print_loading_arrows .5s;   typeit_like_handwriting .25 40 "... ..."; sleep .5                  # conversation to indicate progress
+    exec 1>&3 3>&-                                                                                      # restore stdin from fd #3
+    print_loading_arrows .5s;   typeit_like_handwriting .25 40 "... ..."; sleep .5                      # conversation to indicate progress
                                 typeit_like_handwriting .5  40 " Hmmm? "; sleep 1
                                 typeit_like_handwriting .25 40 "... ..."; sleep .5
                                 typeit_like_handwriting .25  40 " Ooooh!"; sleep 1; echo ""
@@ -78,20 +78,20 @@ function communicate_build() {
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "We've got to do some heavy-lifting to set up your hacklab."; sleep 1
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "Please wait"; sleep 2; typeit_like_handwriting .25 40 "... ... ..."; sleep 1; echo ""                                                     # inform user about background work and
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "Almost done"; sleep 2; typeit_like_handwriting .25 40 "... ... ..."; sleep 1; echo " =)"
-    . ./log_with_timestamp.sh                                                                       # continue logging
+    . ./log_with_timestamp                                                                              # continue logging
 }
 
 function cd_return {
-    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                                       # cd to former working dir
+    echo -n "[$(basename "$0")] DONE: return to path: "; cd -                                           # cd to former working dir
 }
-trap cd_return EXIT                                                                                 # trap 'exit', run cd_return first
+trap cd_return EXIT                                                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh ; echo "Done: changed into $(pwd)"                   # cd to path/to/$0, call log_with_timestamp.sh
+cd $(dirname "$0") ; . ./log_with_timestamp ; echo "Done: changed into $(pwd)"                          # cd to path/to/$0, call log_with_timestamp
 
-timestamp=$( lxc image info iso-alpine-utils | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )  # $timestamp: fetch iso creation time
-timelimit=$(( $timestamp + 3600*24 ))                                                               # $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
-if [ "$1" != "force" ] && [ $(date +%s) -lt "$timelimit" ]                                          # check if (date > $timelimit) or update forced by user ('force')
-    then echo "[$(basename "$0")] DONE: iso-alpine-utils still up-to-date. READY!"; exit 0; fi      # else, continue
+timestamp=$( lxc image info iso-alpine-utils | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )      # $timestamp: fetch iso creation time
+timelimit=$(( $timestamp + 3600*24 ))                                                                   # $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
+if [ "$1" != "force" ] && [ $(date +%s) -lt "$timelimit" ]                                              # check if (date > $timelimit) or update forced by user ('force')
+    then echo "[$(basename "$0")] DONE: iso-alpine-utils still up-to-date. READY!"; exit 0; fi          # else, continue
 
-(create_iso &)                                                                                      # actual iso creation runs in background
-communicate_build                                                                                   # meanwhile, some entertainment
+(create_iso &)                                                                                          # actual iso creation runs in background
+communicate_build                                                                                       # meanwhile, some entertainment
