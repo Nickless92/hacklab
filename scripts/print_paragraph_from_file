@@ -6,9 +6,9 @@
 # paragraphs start at '<tag>' and end at '==='
 # (make sure to put each tag in SEPARATE lines)
 
-# $1: paragraph tag (wrap tag in '<>' in your file)
-# $2: path/to/file  (passed on to print_lines_from_file_then_pause)
-# $3: pause time    (passed on to print_lines_from_file_then_pause)
+# $1: paragraph tag          (wrap tag in '<>' in your file)
+# $2: path/to/file           (passed on to print_lines_from_file_then_pause)
+# $3: [optional: pause time] (passed on to print_lines_from_file_then_pause)
 
 function print_paragraph() {
     for (( line=$startline ; line<=$endline ; line++ )); do
