@@ -11,7 +11,7 @@ echo -e "\nyou chose level $level. starting..."
 ./storytime.sh                              # story time :)
 ./tmux_session.sh; clear                    # <- actual gameplay - create different windows
 . ./evaluation.sh                           # evaluation of the level
-./allow_retry.sh
+. allow_retry.sh
 . upload_score_to_database $module $level   # upload + authentication, 1 = level
 
 rm ausgabe.log                              # clean up
