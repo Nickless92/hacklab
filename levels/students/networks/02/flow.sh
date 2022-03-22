@@ -1,7 +1,7 @@
 #!/bin/bash
 
 module=networks
-level=02
+level=2
 
 cd $(dirname "$0")
 PATH=$PATH:$(dirname "$0")
