@@ -31,4 +31,4 @@ else
     echo "You get 0 points!"
 fi
 
-unset packet                              # clean up 
+unset packets                                                                           #clean up variable 
