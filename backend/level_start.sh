@@ -24,7 +24,7 @@ cd $(dirname "$0") ; . ./log_with_timestamp.sh                                  
 echo "[$(basename "$0")] CALL: $@"
 
 if [ "$#" -eq 2 ] ; then                                                                    # only two parameters allowed - FIXME: check for more complex calls
-    echo "[$(basename "$0")] STEP: create network";     ./network_create.sh                 # creates lxc bridge "hacklab" (default name)
+    #echo "[$(basename "$0")] STEP: create network";     ./network_create.sh                 # creates lxc bridge "hacklab" (default name)
     echo "[$(basename "$0")] STEP: init containers";    ./container_create.sh "$1" "$2"     # creates $2 containers (stopped, with profile 'hacklab')
     echo "[$(basename "$0")] STEP: start containers";   ./container_start.sh  "$1" "$2"     # changes container state (stopped -> running)
     echo "[$(basename "$0")] STEP: add network IPs";    ./container_ip_add.sh "$1" "$2"     # adds network addresses (general sheme: 10.10.level.container/24)
