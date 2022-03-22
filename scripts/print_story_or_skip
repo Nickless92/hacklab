@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# allow user to skip story mode
+
+while : ; do
+    echo -ne "Do you wish to see the story? [Y|n]: "
+    read -n 1 input
+    case $input in
+        Y|y) ./storytime;   break ;;                  # story time :)
+        N|n)                break ;;
+        *) echo -e "\nWrong option." ;;
+    esac
+done
