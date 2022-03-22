@@ -1,27 +1,20 @@
 #!/bin/bash
-set -e
-export module=networks
-export level=1
+
+module=networks
+level=1
 
 cd $(dirname "$0")
 PATH=$PATH:$(dirname "$0")
+echo -e "\nyou chose level $level. starting..."
+(level_start $level 3 &)                    # initiate level infrastructure
 
-echo -e "\n\nCheck for existing containers..."; sleep .5
-lxc info $module-lvl01-$USER-c01 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
-lxc info $module-lvl01-$USER-c02 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
-lxc info $module-lvl01-$USER-c03 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
+./storytime                                 # story time :)
+./tmux_session; clear                       # <- actual gameplay - create different windows
+. ./evaluation                              # evaluation of the level
+. allow_retry
+. upload_score_to_database $module $level   # upload + authentication, 1 = level
 
-(level_start $module $level 3 &)            # initiate level infrastructure
-
-. print_story_or_skip                       # y: story time, n: skip
-
-./tmux_session; clear                       # <- actual gameplay - create different windows, DON'T SOURCE IT
-. ./evaluation                              # needs to be sourced (with '.') to retrieve points
-. allow_retry 3
-
-rm ausgabe.log                              # clean up first...
-(level_stop $module $level 3 &)             # ... and remove level infrastructure
-
-. upload_score_to_nibelung $module $level   # upload + authentication (after clean up to save time)
+rm ausgabe.log                              # clean up
+(level_stop $level 3 &)                     # remove level infrastructure
 
 exit 0

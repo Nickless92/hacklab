@@ -11,7 +11,11 @@ function cd_return {
 }
 trap cd_return EXIT                                                                                     # trap 'exit', run cd_return first
 
+<<<<<<< HEAD
 cd $(dirname "$0") ; . log_with_timestamp                                                               # cd to path/to/$0, call log_with_timestamp
+=======
+cd $(dirname "$0") ; . ./log_with_timestamp                                                             # cd to path/to/$0, call log_with_timestamp
+>>>>>>> change: fix .sh suffix in scripts
 echo "[$(basename "$0")] CALL: $@"
 
 if [ $# = 3 ] ; then                                                                                    # only two parameters allowed

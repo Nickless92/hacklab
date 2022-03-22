@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# allow users to retry n times
+# allow users to retry $1 times
 
 # $1: max number of retries
 
