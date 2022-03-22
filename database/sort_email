@@ -5,7 +5,7 @@
 #3. we want to sort the entries descending by points
 #4. pretty edition
 
-grep "@" ./summaryUploads/allUploads\
+grep "@" ./database/allUploads\
 | sort -n -t ";" -k 2 -r\
 | sort -t ";" -k 5 -r\
 | column -t -s ";"

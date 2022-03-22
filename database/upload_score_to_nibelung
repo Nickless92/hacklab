@@ -4,24 +4,24 @@
 # $2 --> level number
 
 function pushDatasetToServer() {
-    if [ -f localDataset.txt.gpg ]; then                                                                    # checks if the file exists
+    if [ -f localDataset.txt.gpg ]; then                                        #checks if the file exists
         timeStamp=$(date +%s)
-        echo "sending dataset..."
-        scp ./localDataset.txt.gpg hacklab@10.215.33.91:/home/hacklab/uploadedFiles/datasetHacklab-${timeStamp}-${RANDOM}.txt.gpg || return 1 # copies the encrypted file to the database
+        echo "preparing dataset..."
+        scp ./localDataset.txt.gpg $usernameHS@obelix.hs-worms.de:/home/bwl/hacklab/uploads/datasetHacklab-${timeStamp}-${RANDOM}.txt.gpg || return 1       #copies the encrypted file to the database
         rm ./localDataset.txt.gpg 2> /dev/null
     fi
 }
 
-echo -en "\nDo you want to upload your points? [Y|n]: "
+echo -ne "\nDo you want to upload your points? [Y|n]: "
 read -n 1 userInput
 case $userInput in
     Y|y)
-        importGpgKey &&                                                                                    `#checks if the key already exists --> imports the correct public key`\
-        . authentication &&                                                                                        
-        echo "$email;$(date +%c);$1;Level $2;$points"                                                      `#text we want to add to database` \
-        | gpg -e --always-trust -a -r 590659F58937BD0A763D1DCDD07DBD27DEB068CF > localDataset.txt.gpg &&   `#encrypts the text with the public key of the database` \
-        pushDatasetToServer && echo -e "Upload successful.\n" || \
-        ( echo -e "Warning: Upload failed. Retry.\n"; . upload_score_to_database $module $level ) ;;
+        importGpgKey &&                                                                                             `#checks if the key already exists --> imports the correct public key`\
+        . authentication_nibelung &&                                                                                        
+        echo "$usernameHS;$(date +%c);$1;Level $2;$points"                                                               `#text we want to add to database`\
+        | gpg -e --always-trust -a -r ADE7442014A0B09FFE775A82F9EEC022136831FB > localDataset.txt.gpg &&            `#encrypts the text with the public key of the database`\
+        pushDatasetToServer && echo -e "Upload successful.\n**********************************" || \
+        ( echo -e "Warning: Upload failed. Retry.\n"; . upload_score_to_database_nibelung $module $level ) ;;
     N|n) echo ""; return 0 ;;
-    *) echo -e "\nWrong option\n" ; upload_score_to_database $module $level ;;
+    *) echo -e "\nWrong option\n" ; upload_score_to_database_nibelung $module $level ;;
 esac

@@ -6,8 +6,8 @@
 #4. concatenates the old entries with the new ones
 #5. deletes the latest decrypted files after they have been attached to allUploads
 
-(gpg --decrypt-files ./uploadedFiles/*.gpg) &> /dev/null                                                            
-touch ./summaryUploads/allUploads
-(grep '^Username;email;submission\ data;level;points$' './summaryUploads/allUploads' >> /dev/null) || (echo "Username;email;submission data;level;points" >> ./summaryUploads/allUploads)
-cat ./uploadedFiles/datasetHacklab-*.txt >> ./summaryUploads/allUploads
-rm ./uploadedFiles/datasetHacklab-*
+(gpg --decrypt-files ./uploads/*.gpg) &> /dev/null                                                            
+touch ./database/allUploads
+(grep '^HS-Worms\ Username;submission\ data;module;level;points$' './database/allUploads' >> /dev/null) || (echo "HS-Worms Username;submission data;module;level;points" >> ./database/allUploads)
+cat ./uploads/datasetHacklab-*.txt >> ./database/allUploads
+yes | rm ./uploads/datasetHacklab-*

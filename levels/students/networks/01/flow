@@ -12,9 +12,9 @@ echo -e "\nyou chose level $level. starting..."
 ./tmux_session; clear                       # <- actual gameplay - create different windows
 . ./evaluation                              # needs to be sourced (with '.') to retrieve points 
 . allow_retry
-. upload_score_to_database $module $level   # upload + authentication, 1 = level
+. upload_score_to_nibelung $module $level   # upload + authentication
 
 rm ausgabe.log                              # clean up
-(level_stop $level 3 &)                     # remove level infrastructure
+(level_stop.sh $level 3 &)                  # remove level infrastructure
 
 exit 0

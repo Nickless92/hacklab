@@ -6,6 +6,6 @@
 #2. sorts the level descending by points
 #3. pretty edition
 
-[ $# -eq 1 ] && grep ".*Level $1.*" ./summaryUploads/allUploads\
+[ $# -eq 1 ] && grep ".*Level $1.*" ./database/allUploads\
 | sort -n -t ";" -k 5 -r\
 | column -t -s ";"
