@@ -30,3 +30,5 @@ else
 	print_colored_ascii ../../../../ressources/ascii/lost.txt
     echo "You get 0 points!"
 fi
+
+unset packet                              # clean up 
