@@ -100,8 +100,8 @@ function networks() {
 	echo -ne "\nPlease choose a level: "
     read -n 1 menuinput
     case $menuinput in
-	1)  ./levels/students/networks/01/flow.sh       ;;
-	2)  ./levels/students/networks/02/flow.sh       ;;
+	1)  ./levels/students/networks/01/flow          ;;
+	2)  ./levels/students/networks/02/flow          ;;
 	3) echo -e "\nyou chose level 3"                ;;
 	4) echo -e "\nyou chose level 4"                ;;
 	5) echo -e "\nyou chose level 5"                ;;
@@ -171,15 +171,15 @@ source ./.CONF
 
 
 # check if required tools are available
-tools_verify.sh
+tools_verify
 
 # FIXME: print message that some heavy-lifting is being done, and ask for patience
 # build iso for hacklab containers                                              # only builds a new iso if non-existent or age>24h
-alpine_create_iso.sh                                                            # optional call with 'force' parameter
+alpine_create_iso                                                               # optional call with 'force' parameter
 
 # initialize lxc network and profile
-network_create.sh                                                               # create a hacklab bridge
-profile_create.sh                                                               # create a hacklab profile using hacklab bridge
+network_create                                                                  # create a hacklab bridge
+profile_create                                                                  # create a hacklab profile using hacklab bridge
 
 # main menu
 next_stage=welcome_screen

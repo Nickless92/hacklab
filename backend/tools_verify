@@ -22,7 +22,7 @@ function verify {
 }
 
 trap cd_return EXIT                                     # trap 'exit', run cd_return first
-cd $(dirname "$0") ; . log_with_timestamp.sh            # cd to path/to/$0, write to ./logs/
+cd $(dirname "$0") ; . log_with_timestamp               # cd to path/to/$0, write to ./logs/
 verify file tmux "tmux 3.0a" || verify file tmux "tmux next-3.4"
 verify file lxd
 verify file lxc

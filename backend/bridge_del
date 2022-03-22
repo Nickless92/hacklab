@@ -19,7 +19,7 @@ function cd_return {
 }
 trap cd_return EXIT                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp.sh                          # cd to path/to/$0, call log_with_timestamp.sh
+cd $(dirname "$0") ; . ./log_with_timestamp                             # cd to path/to/$0, call log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
 if [ $# = 1 ]                                                           # only one level parameter ($1) allowed
