@@ -56,7 +56,7 @@ Setze Netzwerk Konzepte mit unserem HackLab in die Praxis um und tauche tiefer i
 ## Troubleshooting
 
 Falls ein Fehlverhalten im Backend auftritt, gibt es die Möglichkeit sich die log-Files im backend/logs/ Ordner anzuschauen.
-Mit dem Skript <code>backend/level_stop $1 $2  $3</code>können die Container eines Levels gestoppt werden.
+Mit dem Skript <code>backend/level_stop $1 $2  $3</code><br>können die Container eines Levels gestoppt werden.
 Daraufhin können diese mit <code>backend/level_start $1 $2  $3</code> wieder gestartet werden
 - <code>$1 = pupil/expert or module, if student</code>
 - <code>$2 = level</code>
