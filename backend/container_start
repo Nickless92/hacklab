@@ -11,24 +11,20 @@ function cd_return {
 }
 trap cd_return EXIT                                                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp                                                             # cd to path/to/$0, call log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp                                                               # cd to path/to/$0, call log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
 if [ $# = 3 ] ; then                                                                                    # only two parameters allowed
-    case $1 in      # FIXME: put this in .CONF
-        pupils)     module=1 ;;
-        networks)   module=2 ;;
-        netsec)     module=3 ;;
-        experts)    module=0 ;;
-    esac
     if [ "$2" -lt 10 ]; then level_=0"$2"; else level_="$2"; fi                                         # adjust for two-digit number sheme
-    for((container = 1; container <= "$3"; container++)); do                                            # cycle through all containers of a level
+    for ((container = 1; container <= "$3"; container++)); do                                           # cycle through all containers of a level
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: start container $container_"
-        lxc start $1-lvl"$level_"-c"$container_"-$USER                                                           # only STARTS the given container (needs initialization first)
+        lxc start $1-lvl"$level_"-$USER-c"$container_"                                                  # only STARTS the given container (needs initialization first)
     done
+
     echo "[$(basename "$0")] try target container" 
-    lxc start $1-lvl"$level_"-target-$USER                                                                       # in case there is a target VM - FIXME: catch this
+    lxc start $1-lvl"$level_"-$USER-target || echo "no target container found."                         # in case there is a target VM - FIXME: catch this
+
     echo "[$(basename "$0")] DONE: started containers for level $2 in module $1."
     exit 0
 else

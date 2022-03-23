@@ -11,19 +11,20 @@ function cd_return {
 }
 trap cd_return EXIT                                                                                 # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp                                                         # cd to path/to/$0, call log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp                                                           # cd to path/to/$0, call log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
-if [ $# = 3 ]                                                                                       # only two parameters allowed
-then
+if [ $# = 3 ]; then                                                                                 # only three parameters allowed
     if [ "$2" -lt 10 ]; then level=0"$2"; else level="$2"; fi                                       # adjust for two-digit number sheme
-    for((container = 1; container <= $3; container++)); do
+    for ((container = 1; container <= $3; container++)); do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: delete container $container_"
-        lxc delete $1-lvl"$level"-c"$container_"-$USER                                              # deletes a container (only if STOPPED)
+        lxc delete $1-lvl"$level"-$USER-c"$container_"                                              # deletes a container (only if STOPPED)
     done
+
     echo "[$(basename "$0")] STEP: try target container"
-    lxc delete $1-lvl"$level"-target-$USER                                                          # in case there is a target VM - FIXME: catch this
+    lxc delete $1-lvl"$level"-$USER-target || echo "no target container found."                     # in case there is a target VM - FIXME: catch this
+
     echo "[$(basename "$0")] DONE: deleted containers for level $level of module $1"
     exit 0
 else

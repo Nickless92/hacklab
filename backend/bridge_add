@@ -8,15 +8,14 @@ function cd_return {                                                    # cd to 
 }
 trap cd_return EXIT                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp                             # cd to path/to/$0, call log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp                               # cd to path/to/$0, call log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
-if [ $# = 1 ]                                                           # only one level parameter ($1) allowed
+if [ $# = 0 ]                                                           # no parameters allowed
 then
-    if [ "$1" -lt 10 ]; then level=0"$1"; else level="$1"; fi           # adjust for two-digit number sheme
-    echo "[$(basename "$0")] STEP: create bridge $level"
-    sudo brctl addbr level$level up                                     # add and start a bridge
-    sudo ip link set dev level$level up                                 # add and start the L2 link
-    echo "[$(basename "$0")] DONE: created bridge for level $level"
+    echo "[$(basename "$0")] STEP: create bridge hacklab-$USER"
+    sudo brctl addbr hacklab-$USER up                                   # add and start a bridge
+    sudo ip link set dev hacklab-$USER up                               # add and start the L2 link
+    echo "[$(basename "$0")] DONE: created bridge hacklab-$USER"
     exit 0
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters"

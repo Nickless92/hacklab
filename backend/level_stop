@@ -11,13 +11,13 @@ function cd_return {
 }
 trap cd_return EXIT                                                                         # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp                                                 # cd to path/to/$0, 'source' log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp                                                   # cd to path/to/$0, 'source' log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
-if [ "$#" -eq 3 ] ; then                                                                    # only two parameters allowed - much simpler call than level_start
-    echo "[$(basename "$0")] STEP: delete network IPs";   ./container_ip_del "$1" "$2" "$3" # remove ips...
+if [ "$#" -eq 3 ] ; then                                                                    # only three parameters allowed
+    echo "[$(basename "$0")] STEP: delete network IPs"; ./container_ip_del "$1" "$2" "$3"   # remove ips...
     echo "[$(basename "$0")] STEP: stop containers";      ./container_stop "$1" "$2" "$3"   # stop ...
-    echo "[$(basename "$0")] STEP: delete containers";    ./container_delete "$1" "$2" "$3" # delete ...
+    echo "[$(basename "$0")] STEP: delete containers";  ./container_delete "$1" "$2" "$3"   # delete ...
     echo "[$(basename "$0")] DONE: stopped level $2 with $3 containers for module $1."      # ... done!
     exit 0                                                                                  # left-overs: network and profile, ready for next level
 else

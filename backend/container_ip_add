@@ -12,7 +12,7 @@ function cd_return {
 }
 trap cd_return EXIT                                                                                                             # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp                                                                                     # cd to path/to/$0, call log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp                                                                                     # cd to path/to/$0, call log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
 if [ "$#" -eq 4 ] || [ "$#" -eq 3 ]                                                                                             # only two or three parameters allowed
@@ -23,19 +23,23 @@ then
         netsec)     module=3 ;;
         experts)    module=0 ;;
     esac
+
     if [ "$#" -eq 3 ]; then interface=eno1; else interface="$4"; fi                                                             # default $interface = eno1
     if [ "$2" -lt 10 ]; then level_=0"$2"; else level_="$2"; fi                                                                 # adjust for two-digit number sheme
+    
     for ((container = 1; container <= "$3"; container++)); do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: add IP to container $container_"
-        lxc config device add $1-lvl"$level_"-c"$container_"-$USER "$interface" nic nictype=bridged parent=hacklab name="$interface"     # on host: add interface to container
-        lxc exec $1-lvl"$level_"-c"$container_"-$USER -- ip addr add 10."$module"."$2"."$container"/24 dev "$interface"                         # inside container: add ip address to device
-        lxc exec $1-lvl"$level_"-c"$container_"-$USER -- ip link set dev "$interface" up                                                 # inside container: change device state to 'up'
+        lxc config device add $1-lvl"$level_"-$USER-c"$container_" "$interface" nic nictype=bridged parent=hacklab name="$interface"     # on host: add interface to container
+        lxc exec $1-lvl"$level_"-$USER-c"$container_" -- ip addr add 10."$module"."$2"."$container"/24 dev "$interface"                         # inside container: add ip address to device
+        lxc exec $1-lvl"$level_"-$USER-c"$container_" -- ip link set dev "$interface" up                                                 # inside container: change device state to 'up'
     done
+    
     echo "[$(basename "$0")] STEP: try target container"                                                                        # in case there is a target VM - FIXME: catch this
-    lxc config device add $1-lvl"$level_"-target-$USER "$interface" nic nictype=bridged parent=hacklab name="$interface"
-    lxc exec $1-lvl"$level_"-target-$USER -- ip addr add 10."$module"."$2".0/24 dev "$interface" 
-    lxc exec $1-lvl"$level_"-target-$USER -- ip link set dev "$interface" up 
+    lxc config device add $1-lvl"$level_"-$USER-target "$interface" nic nictype=bridged parent=hacklab name="$interface" &&
+    lxc exec $1-lvl"$level_"-$USER-target -- ip addr add 10."$module"."$2".0/24 dev "$interface" &&
+    lxc exec $1-lvl"$level_"-$USER-target -- ip link set dev "$interface" up || echo "no target container found."
+    
     echo "[$(basename "$0")] DONE: added network to containers for level $level in module $1."
     exit 0
 else
