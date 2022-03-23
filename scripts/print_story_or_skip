@@ -3,7 +3,7 @@
 # allow user to skip story mode
 
 while : ; do
-    echo -ne "Do you wish to see the story? [Y|n]: "
+    echo -ne "\nDo you wish to see the story? [Y|n]: "
     read -n 1 input
     case $input in
         Y|y) ./storytime;   break ;;                  # story time :)

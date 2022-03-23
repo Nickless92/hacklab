@@ -8,19 +8,19 @@ function push_dataset_to_server() {
         timestamp=$(date +%s)
         echo "preparing dataset..."
         scp ./local_dataset.txt.gpg $usernameHS@nibelung.hs-worms.de:/home/bwl/hacklab/uploads/dataset-${timestamp}-${RANDOM}.txt.gpg || return 1 # copies the encrypted file nibelung.hs-worms.de
-        rm ./local_dataset.txt.gpg 2> /dev/null ||
+        rm ./local_dataset.txt.gpg 2> /dev/null || return 1
     fi
 }
 
 echo -ne "\nDo you want to upload your points? [Y|n]: "
-read -n 1 input
+read -n 1 input; echo ""
 case $input in
     Y|y)
         . authentication_nibelung &&                                                                                        
         echo "$usernameHS;$(date +%c);$1;Level $2;$points"                                                 `#text we want to add to database`\
         | gpg -e --always-trust -a -r ADE7442014A0B09FFE775A82F9EEC022136831FB > local_dataset.txt.gpg &&  `#encrypts the text with the public key of the database` \
         push_dataset_to_server && echo -e "Upload successful.\n" || \
-        ( echo -e "Warning: Upload failed. Retry.\n"; . upload_score_to_nibelung $module $level ) ;;
+        ( echo -e "Warning: Upload failed. Retry."; . upload_score_to_nibelung $module $level ) ;;
     N|n) echo ""; return 0 ;;
     *) echo -e "\nWrong option\n" ; upload_score_to_nibelung $module $level ;;
 esac
