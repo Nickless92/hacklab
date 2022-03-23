@@ -15,6 +15,6 @@ echo -e "\nyou chose level $level. starting..."
 . upload_score_to_nibelung $module $level   # upload + authentication
 
 rm ausgabe.log                              # clean up
-(level_stop.sh $level 3 &)                  # remove level infrastructure
+(level_stop $level 3 &)                     # remove level infrastructure
 
 exit 0

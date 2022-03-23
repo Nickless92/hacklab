@@ -2,9 +2,9 @@
 
 # $1 --> means the level number
 
-#1. checks if there is more than one parameter & greps Level X from allUploads
-#2. sorts the level descending by points
-#3. pretty edition
+# 1. checks if there is more than one parameter & greps Level X from allUploads
+# 2. sorts the level descending by points
+# 3. pretty edition
 
 [ $# -eq 1 ] && grep ".*Level $1.*" ./database/allUploads\
 | sort -n -t ";" -k 5 -r\

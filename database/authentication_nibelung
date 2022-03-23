@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# easy, since authentication on nibelung is done via ssh/LDAP
+
 echo -e "\n\n**********AUTHENTICATION**********\n"
 echo -n "Please enter your HS-Worms username: "
 unset usernameHS
