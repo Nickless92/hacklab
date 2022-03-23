@@ -21,25 +21,17 @@ lxc info $module-lvl02-$USER-c01 &> /dev/null && ( echo -e "Error: wait for cont
 lxc info $module-lvl02-$USER-c02 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
 lxc info $module-lvl02-$USER-c03 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
 
-(level_start $module $level 3 &)                    # initiate level infrastructure
+(level_start $module $level 3 &)            # initiate level infrastructure
+(change_mac &); sleep 5                     # FIXME: that's not yet a smart solution..
 
-(change_mac &)                                      # change mac addresses in background
+. print_story_or_skip                       # y: story time, n: skip
 
-. print_story_or_skip                               # y: story time, n: skip
+./tmux_session; clear                       # <- actual gameplay - create different windows, DON'T SOURCE IT
+. ./evaluation                              # needs to be sourced (with '.') to retrieve points 
+. allow_retry 3                             # allows user to play again 3x without destructing containers
+. upload_score_to_nibelung $module $level   # upload + authentication
 
-echo -ne "\nyou chose level $level. starting..."    # wait for change_mac()
-while : ; do
-    echo -n "."; sleep .5
-    state=$( lxc info $module-lvl01-c03-$USER 2> /dev/null | grep '(global)' | sed s/'.*('/'('/ ) &> /dev/null
-    [ "$state" = '(global)' ] && break
-done
-
-./tmux_session; clear                               # <- actual gameplay - create different windows, DON'T SOURCE IT
-. ./evaluation                                      # needs to be sourced (with '.') to retrieve points 
-. allow_retry                                       # allows user to play again without destructing containers
-. upload_score_to_nibelung $module $level           # upload + authentication
-
-# end tmux session                                  # clean up
-(level_stop $module $level 3 &)                     # remove level infrastructure
+# end tmux session                          # clean up
+(level_stop $module $level 3 &)             # remove level infrastructure
 
 exit 0

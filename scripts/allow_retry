@@ -1,6 +1,10 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 # allow users to retry $1 times
+=======
+# allow users to retry n times
+>>>>>>> add: levels/flow: more interactive control flow
 
 # $1: max number of retries
 
