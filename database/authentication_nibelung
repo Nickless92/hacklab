@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo -e "\n\n**********AUTHENTICATION**********\n"
+# easy, since authentication on nibelung is done via ssh/LDAP
+
+echo -e "\n**********AUTHENTICATION**********\n"
 echo -n "Please enter your HS-Worms username: "
 unset usernameHS
 read usernameHS; usernameHS=$( echo $usernameHS | tr '[:upper:]' '[:lower:]' )
