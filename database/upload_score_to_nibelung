@@ -7,7 +7,7 @@ function push_dataset_to_server() {
     if [ -f local_dataset.txt.gpg ]; then                                                                    # checks if the file exists
         timestamp=$(date +%s)
         echo "preparing dataset..."
-        scp ./local_dataset.txt.gpg $usernameHS@obelix.hs-worms.de:/home/bwl/hacklab/uploads/dataset-${timestamp}-${RANDOM}.txt.gpg || return 1 # copies the encrypted file nibelung.hs-worms.de
+        scp ./local_dataset.txt.gpg $usernameHS@nibelung.hs-worms.de:/home/bwl/hacklab/uploads/dataset-${timestamp}-${RANDOM}.txt.gpg || return 1 # copies the encrypted file nibelung.hs-worms.de
         rm ./local_dataset.txt.gpg 2> /dev/null || return 1
     fi
 }
