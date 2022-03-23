@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# script to connect containers to the lxc network bridge
-# $1 = level
-# $2 = number of containers
-# $3 = interface [default = eth0]
+# connect containers to the lxc network bridge
+
+# $1 = pupil/expert or module, if student
+# $2 = level
+# $3 = number of containers
+# $4 = interface [default = eth0]
 
 function cd_return {
     echo -n "[$(basename "$0")] DONE: return to path: "; cd -                                               # cd to former working dir
@@ -13,23 +15,29 @@ trap cd_return EXIT                                                             
 cd $(dirname "$0") ; . ./log_with_timestamp                                                                 # cd to path/to/$0, call log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
-if [ "$#" -eq 3 ] || [ "$#" -eq 2 ]                                                                         # only two or three parameters allowed
+if [ "$#" -eq 4 ] || [ "$#" -eq 3 ]                                                                         # only two or three parameters allowed
 then
-    if [ "$#" -eq 2 ]; then interface=eno1; else interface="$3"; fi                                         # default $interface = eno1
-    if [ "$1" -lt 10 ]; then level_=0"$1"; else level_="$1"; fi                                             # adjust for two-digit number sheme
-    for ((container = 1; container <= "$2"; container++))
+    case $1 in      # FIXME: put this in .CONF
+        pupils)     module=1 ;;
+        networks)   module=2 ;;
+        netsec)     module=3 ;;
+        experts)    module=0 ;;
+    esac
+    if [ "$#" -eq 3 ]; then interface=eno1; else interface="$4"; fi                                         # default $interface = eno1
+    if [ "$1" -lt 10 ]; then level_=0"$2"; else level_="$2"; fi                                             # adjust for two-digit number sheme
+    for ((container = 1; container <= "$3"; container++))
     do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: add IP to container $container_"
-        lxc exec lvl"$level_"-c"$container_" -- ip link set dev "$interface" down                           # inside container: change device state to 'down'
-        lxc exec lvl"$level_"-c"$container_" -- ip addr del 10.10."$1"."$container"/24 dev "$interface"     # inside container: delete ip address
-        lxc config device remove lvl"$level_"-c"$container_" "$interface"                                   # on host: delete interface from container
+        lxc exec $1-lvl"$level_"-c"$container_"-$USER -- ip link set dev "$interface" down                           # inside container: change device state to 'down'
+        lxc exec $1-lvl"$level_"-c"$container_"-$USER -- ip addr del 10.$module."$2"."$container"/24 dev "$interface"     # inside container: delete ip address
+        lxc config device remove $1-lvl"$level_"-c"$container_"-$USER "$interface"                                   # on host: delete interface from container
     done
     echo "[$(basename "$0")] STEP: try target container"
-    lxc exec lvl"$level_"-target -- ip link set dev "$interface" down
-    lxc exec lvl"$level_"-target -- ip addr del 10.10."$1".0/24 dev "$interface"
-    lxc config device remove lvl"$level_"-target "$interface"
-    echo "[$(basename "$0")] DONE: removed network from containers for level $1"
+    lxc exec $1-lvl"$level_"-target-$USER -- ip link set dev "$interface" down
+    lxc exec $1-lvl"$level_"-target-$USER -- ip addr del 10.$module."$2".0/24 dev "$interface"
+    lxc config device remove $1-lvl"$level_"-target-$USER "$interface"
+    echo "[$(basename "$0")] DONE: removed network from containers for level $2 in module $1."
     exit 0
 else
     echo "[$(basename "$0")] FAIL: invalid number of parameters"

@@ -65,7 +65,7 @@ function communicate_build() {
                                 typeit_like_handwriting .25  40 " Ooooh!"; sleep 1; echo ""
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "Hey there. Welcome back! =)"; sleep 1; echo -ne "\n"
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "We've got to do some heavy-lifting to set up your hacklab."; sleep 1
-    print_loading_arrows .5s; typeit_like_handwriting .05 40 "Please wait"; sleep 2; typeit_like_handwriting .25 40 "... ... ..."; sleep 1; echo ""                                                     # inform user about background work and
+    print_loading_arrows .5s; typeit_like_handwriting .05 40 "Please wait"; sleep 2; typeit_like_handwriting .25 40 "... ... ..."; sleep 1; echo " "                                                     # inform user about background work and
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "Almost done"; sleep 2; typeit_like_handwriting .25 40 "... ... ..."; sleep 1; echo " =)"
     . ./log_with_timestamp                                                                              # continue logging
 }
@@ -75,9 +75,9 @@ function cd_return {
 }
 trap cd_return EXIT                                                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp ; echo "Done: changed into $(pwd)"                          # cd to path/to/$0, call log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp ; echo "Done: changed into $(pwd)"                            # cd to path/to/$0, call log_with_timestamp
 
-timestamp=$( lxc image info iso-alpine-utils | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )      # $timestamp: fetch iso creation time
+timestamp=$( (lxc image info iso-alpine-utils 2> /dev/null || echo "Created: @0") | grep Created | date -d "$(sed s/'^.*: '/''/)" +%s )      # $timestamp: fetch iso creation time
 timelimit=$(( $timestamp + 3600*24 ))                                                                   # $timelimit: add 24 hours (1h = 3600s) - date() takes care of timezones
 if [ "$1" != "force" ] && [ $(date +%s) -lt "$timelimit" ]                                              # check if (date > $timelimit) or update forced by user ('force')
     then echo "[$(basename "$0")] DONE: iso-alpine-utils still up-to-date. READY!"; exit 0; fi          # else, continue

@@ -1,20 +1,27 @@
 #!/bin/bash
 
-module=networks
-level=1
+export module=networks
+export level=1
 
 cd $(dirname "$0")
 PATH=$PATH:$(dirname "$0")
-echo -e "\nyou chose level $level. starting..."
-(level_start $level 3 &)                    # initiate level infrastructure
+(level_start $module $level 3 &)            # initiate level infrastructure
 
 . print_story_or_skip                       # y: story time, n: skip
+
+echo -ne "\nyou chose level $level. starting..."
+while : ; do
+    echo -n "."; sleep .5
+    state=$( lxc info $module-lvl01-c03-$USER 2> /dev/null | grep '(global)' | sed s/'.*('/'('/ ) &> /dev/null
+    [ "$state" = '(global)' ] && break
+done
+
 ./tmux_session; clear                       # <- actual gameplay - create different windows
 . ./evaluation                              # needs to be sourced (with '.') to retrieve points 
 . allow_retry
 . upload_score_to_nibelung $module $level   # upload + authentication
 
 rm ausgabe.log                              # clean up
-(level_stop $level 3 &)                     # remove level infrastructure
+(level_stop $module $level 3 &)             # remove level infrastructure
 
 exit 0
