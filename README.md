@@ -88,4 +88,4 @@ Die Option <code>set -x</code> kann auch nur in einzelnen Skripten gesetzt werde
 
 ## Diagramm der Programm-Architektur
 
-![Programm-Architektur](ressources/models/programm_architektur.jpg) 
+![Programm-Architektur](ressources/models/program_architecture.svg) 
