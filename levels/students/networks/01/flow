@@ -1,27 +1,27 @@
 #!/bin/bash
-
+set -e
 export module=networks
 export level=1
 
 cd $(dirname "$0")
 PATH=$PATH:$(dirname "$0")
+
+echo -e "\n\nCheck for existing containers..."; sleep .5
+lxc info $module-lvl01-$USER-c01 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
+lxc info $module-lvl01-$USER-c02 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
+lxc info $module-lvl01-$USER-c03 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
+
 (level_start $module $level 3 &)            # initiate level infrastructure
 
 . print_story_or_skip                       # y: story time, n: skip
 
-echo -ne "\nyou chose level $level. starting..."
-while : ; do
-    echo -n "."; sleep .5
-    state=$( lxc info $module-lvl01-c03-$USER 2> /dev/null | grep '(global)' | sed s/'.*('/'('/ ) &> /dev/null
-    [ "$state" = '(global)' ] && break
-done
+./tmux_session; clear                       # <- actual gameplay - create different windows, DON'T SOURCE IT
+. ./evaluation                              # needs to be sourced (with '.') to retrieve points
+. allow_retry 3
 
-./tmux_session; clear                       # <- actual gameplay - create different windows
-. ./evaluation                              # needs to be sourced (with '.') to retrieve points 
-. allow_retry
-. upload_score_to_nibelung $module $level   # upload + authentication
+rm ausgabe.log                              # clean up first...
+(level_stop $module $level 3 &)             # ... and remove level infrastructure
 
-rm ausgabe.log                              # clean up
-(level_stop $module $level 3 &)             # remove level infrastructure
+. upload_score_to_nibelung $module $level   # upload + authentication (after clean up to save time)
 
 exit 0

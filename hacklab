@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#set -eEuo pipefail                      # make script fail on any errors/return!=0
+set -a                                  # exports all env variables to child procs
+set -eEuo pipefail                      # make script fail on any errors/return!=0
 [ $# -ge 1 ] && [ $1 = "v" ] && set -x  # VERY verbose, prints every step before its execution
 
 # color variables
@@ -100,8 +101,8 @@ function networks() {
 	echo -ne "\nPlease choose a level: "
     read -n 1 menuinput
     case $menuinput in
-	1)  ./levels/students/networks/01/flow          ;;
-	2)  ./levels/students/networks/02/flow          ;;
+	1)  ./levels/students/networks/01/flow || return 0 ;;
+	2)  ./levels/students/networks/02/flow || return 0 ;;
 	3) echo -e "\nyou chose level 3"                ;;
 	4) echo -e "\nyou chose level 4"                ;;
 	5) echo -e "\nyou chose level 5"                ;;

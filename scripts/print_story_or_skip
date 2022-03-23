@@ -7,7 +7,15 @@ while : ; do
     read -n 1 input
     case $input in
         Y|y) ./storytime;   break ;;                  # story time :)
-        N|n)                break ;;
+        N|n) sleep .3;      break ;;
         *) echo -e "\nWrong option." ;;
     esac
+done
+
+echo -ne "\nyou chose level $level. starting "
+if [ "$level" -lt 10 ]; then level_=0"$level"; else level_="$level"; fi
+while : ; do
+    echo -n "."; sleep .5
+    state=$( lxc info $module-lvl$level_-$USER-c03 2> /dev/null | grep '(global)' | sed s/'.*('/'('/ ) &> /dev/null
+    [ "$state" = '(global)' ] && break
 done
