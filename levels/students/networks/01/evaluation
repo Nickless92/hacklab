@@ -31,4 +31,4 @@ else
     echo "You get 0 points!"
 fi
 
-unset packets                                                                           #clean up variable 
+>ausgabe.log                                                                            #clean up the file 
