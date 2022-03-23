@@ -1,0 +1,43 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: HackLab
+Upstream-Contact: Katrin Vollhardt <inf3493@hs-worms.de>
+Source: https://top.pages.gitlab.rlp.net/22s/hacklab/hacklab-site/
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...
+
+Files: *
+Copyright: 2022 Katrin Vollhardt
+Copyright: 2022 Bassam Thiab
+Copyright: 2022 Dominic Meyer
+Copyright: 2022 Felix Rheinheimer
+Copyright: 2022 Jean-Arole Fotsing
+Copyright: 2022 Syed Saad-Ullah
+Copyright: 2022 Thierry Djeutchou
+Copyright: 2022 Steve-Landry Tchamabe
+License: GPL-3.0-or-later
+
+Files: archive/*
+Copyright: 2022 Katrin Vollhardt
+Copyright: 2022 Bassam Thiab
+Copyright: 2022 Dominic Meyer
+Copyright: 2022 Felix Rheinheimer
+Copyright: 2022 Jean-Arole Fotsing
+Copyright: 2022 Syed Saad-Ullah
+Copyright: 2022 Thierry Djeutchou
+Copyright: 2022 Steve-Landry Tchamabe
+License: CC0-1.0
+
+Files: ressources/ascii/*
+Copyright: 2022 Katrin Vollhardt
+Copyright: 2022 Bassam Thiab
+Copyright: 2022 Dominic Meyer
+Copyright: 2022 Felix Rheinheimer
+Copyright: 2022 Jean-Arole Fotsing
+Copyright: 2022 Syed Saad-Ullah
+Copyright: 2022 Thierry Djeutchou
+Copyright: 2022 Steve-Landry Tchamabe
+License: CC0-1.0

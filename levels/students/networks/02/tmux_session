@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # start a tmux-session and all windows for level 02
 
 # create the session and two split pane

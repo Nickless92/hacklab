@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#1. we just want email entries
-#2. we sort the entries descending by emails
-#3. we want to sort the entries descending by points
-#4. pretty edition
+# 1. we just want email entries
+# 2. we sort the entries descending by emails
+# 3. we want to sort the entries descending by points
+# 4. pretty edition
 
 grep "@" ./database/allUploads\
 | sort -n -t ";" -k 2 -r\
