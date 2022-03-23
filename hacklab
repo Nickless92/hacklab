@@ -169,6 +169,8 @@ PATH=$PATH:$hacklabdir:$hacklabdir/scripts:$hacklabdir/backend:$hacklabdir/datab
 # third, load config parameters
 source ./.CONF
 
+# import ressources/hacklab-pub.gpg.asc if not yet in keyring
+import_gpg_key
 
 # check if required tools are available
 tools_verify
