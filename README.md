@@ -16,13 +16,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Welcome to the repository of the project of team HackLab! 
 
 
-## Documentation
-
-| Scripts | C programs | Levels |
-|---|---|---|
-| [Overview](scripts.md) | | |
-| [level_start](scripts.md) | | |
-| [level_stop](scripts.md) | | |
+## [backend documentation](backend/README.md)
 
 ## Storyline
 
