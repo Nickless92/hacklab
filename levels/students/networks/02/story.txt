@@ -35,7 +35,7 @@ You are currently on the computer c01 (10.2.2.1).
 Dr. Blackhat's ip adress is 10.2.2.3, they are using the computer c03.
 Blackhats' accomplice uses the computer c02 with the ip address 10.2.2.2.
 
-here goes a short form of our story + short tmux cheat sheet
+here is a short form of our story + short tmux cheat sheet
 
 To switch between windows, press 'Ctrl' + 'b', then 'n'
 ===

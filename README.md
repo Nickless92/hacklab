@@ -22,7 +22,7 @@ Willkommen im Repository des Team HackLab!
 
 Die Storyline ist nur ein grober Entwurf, lautet aber wie folgt (Englisch, da die Sprache im Spiel Englisch ist): 
 
-<code>Your weird professor has been hinting at a plan to overtake the worlds telecommunication by seizing control of all home devices (IOT) and using them to doxx important services. You and your friends always were suspicious of him and are now trying to find a way to stop his ways. </code>
+<code>Your weird professor has been hinting at a plan to overtake the worlds telecommunication by seizing control of all home devices (IOT) and using them to doxx important services. You and your friends always were suspicious of him and are now trying to find a way to stop his ways.</code>
 
 Ob wir alle Elemente dieser Story nutzen ist noch fraglich, aber dies ist der Entwurf.
 
