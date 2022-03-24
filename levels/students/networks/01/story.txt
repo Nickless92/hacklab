@@ -30,7 +30,7 @@ Weird.
 @blckht: 66 years ago American scientists John Bardeen and Walter Houser Brattain observe the basic principles of the transistor, a key element for the electronics revolution of the 20th century. Fun fact!
 ===
 <tweeb_7>
-@ladbible: it takes .666 seconds to check your drip HAHA lol
+@ladbible: it takes .66 seconds to check your drip HAHA lol
 ===
 <tweeb_8>
 @tourism: check out this 66-minute escape room in neuwied!
@@ -41,7 +41,7 @@ Weird.
 
 <text_3>
 It seems like there is a message hidden in the numbers of each tweet... what does it say?
-Ah yes, that's right. Its 66.666.66.6. Seems like an IP adress. Let\'s visit that.
+Ah yes, that's right. Its 66.66.66.6. Seems like an IP adress. Let\'s visit that.
 You try accessing the adress, but you can only see \"Access Denied\". You go to inspect the page, and you see in the source code that only certain IPs can access the site ... 
 ===
 <text_4>
@@ -55,7 +55,7 @@ To switch between the windows, press 'Ctrl' + 'b', then 'n'
 
 
 <synopsis>
-here goes a short form of our story + short tmux cheat sheet
+here is a short form of our story + short tmux cheat sheet
 
 to switch between the windows, press 'Ctrl' + 'b' then n(next) or p(previous)
 to scroll around the window use 'Ctrl' + 'b' then [ then you can use your normal navigation keys.
