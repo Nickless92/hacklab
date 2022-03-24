@@ -23,7 +23,7 @@ color_red() {
 
 function welcome_screen() {                                                     # start sequence: print hacker graphic, wait, then proceed to enter_username
     clear
-    sleep 1s
+    sleep .4
     cat ./ressources/ascii/welcome.txt
     sleep 2s
     clear
@@ -58,7 +58,7 @@ function enter_experience() {
 	1) echo -e "\nyou chose pupil.\n";              next_stage="pupils" ;;
 	2) echo -e "\nyou chose student.\n";            next_stage="student_modules" ;;
 	3) echo -e "\nyou chose expert.\n";             next_stage="experts" ;;
-	x) echo -e "\nyou chose exit";                  exit 0 ;;
+	x) echo -e "\nyou chose exit.";                 exit 0 ;;
     *) echo -e "\n$(color_red 'Wrong option.')\n"   ;;
     esac
 }
@@ -74,8 +74,8 @@ function pupils() {
         3) echo -e "\nyou chose level 3. Sorry, this is empty..."   ;;
         4) echo -e "\nyou chose level 4. Sorry, this is empty..."   ;;
         5) echo -e "\nyou chose level 5. Sorry, this is empty..."   ;;
-        b) echo -e "\nyou chose back\n";                            next_stage="enter_experience" ;;            
-        x) echo -e "\nyou chose exit";                              exit 0 ;;
+        b) echo -e "\nyou chose back.\n";                           next_stage="enter_experience" ;;
+        x) echo -e "\nyou chose exit.";                             exit 0 ;;
         *) echo -e "\n$(color_red 'Wrong option.')\n"               ;;
     esac
 }
@@ -86,11 +86,11 @@ function student_modules() {
     echo -ne "Please choose a module: "
     read -n 1 menuinput
     case $menuinput in
-    1) echo -e "\nyou chose Network Technologies.\n";   next_stage="networks" ;;
-    2) echo -e "\nyou chose Network Security.\n";       next_stage="netsec" ;;
-    b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;
-    x) echo -e "\nyou chose exit";                      exit 0 ;;
-    *) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
+    1) echo -e "\nyou chose Networks.\n";           next_stage="networks" ;;
+    2) echo -e "\nyou chose Network Security.\n";   next_stage="netsec" ;;
+    b) echo -e "\nyou chose back.\n";               next_stage="enter_experience" ;;
+    x) echo -e "\nyou chose exit.";                 exit 0 ;;
+    *) echo -e "\n$(color_red 'Wrong option.')\n"   ;;
     esac
 }
 
@@ -98,17 +98,17 @@ function student_modules() {
 function networks() {
     print_menu_options
 
-	echo -ne "\nPlease choose a level: "
+	echo -ne "Please choose a level: "
     read -n 1 menuinput
     case $menuinput in
-	1)  ./levels/students/networks/01/flow || return 0 ;;
-	2)  ./levels/students/networks/02/flow || return 0 ;;
-	3) echo -e "\nyou chose level 3"                ;;
-	4) echo -e "\nyou chose level 4"                ;;
-	5) echo -e "\nyou chose level 5"                ;;
-	b) echo -e "\nyou chose back\n";                next_stage="student_modules" ;;
-	x) echo -e "\nyou chose exit";                  exit 0 ;;
-	*) echo -e "\n$(color_red 'Wrong option.')\n"   ;;
+	1) ./levels/students/networks/01/flow || return 0   ;;
+	2) ./levels/students/networks/02/flow || return 0   ;;
+	3) echo -e "\nyou chose level 3"                    ;;
+	4) echo -e "\nyou chose level 4"                    ;;
+	5) echo -e "\nyou chose level 5"                    ;;
+	b) echo -e "\nyou chose back.\n";                   next_stage="student_modules" ;;
+	x) echo -e "\nyou chose exit.";                     exit 0 ;;
+	*) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
     esac
 }
 
@@ -123,8 +123,8 @@ function netsec() {
 	3) echo -e "\nyou chose level 3. this is empty."    ;;
 	4) echo -e "\nyou chose level 4. this is empty."    ;; 
 	5) echo -e "\nyou chose level 5. this is empty."    ;;
-    b) echo -e "\nyou chose back\n";                    next_stage="student_modules" ;;
-    x) echo -e "\nyou chose exit";                      exit 0 ;;
+    b) echo -e "\nyou chose back.\n";                   next_stage="student_modules" ;;
+    x) echo -e "\nyou chose exit.";                     exit 0 ;;
     *) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
     esac
 }
@@ -138,10 +138,10 @@ function experts() {
     1) echo -e "\nyou chose level 1. this is empty."    ;;
 	2) echo -e "\nyou chose level 2. this is empty."    ;;
 	3) echo -e "\nyou chose level 3. this is empty."    ;;
-	4) echo -e "\nyou chose level 4. this is empty."    ;; 
+	4) echo -e "\nyou chose level 4. this is empty."    ;;
 	5) echo -e "\nyou chose level 5. this is empty."    ;;
-    b) echo -e "\nyou chose back\n";                    next_stage="enter_experience" ;;            
-    x) echo -e "\nyou chose exit";                      exit 0 ;;
+    b) echo -e "\nyou chose back.\n";                   next_stage="enter_experience" ;;
+    x) echo -e "\nyou chose exit.";                     exit 0 ;;
     *) echo -e "\n$(color_red 'Wrong option.')\n"       ;;
     esac
 }
@@ -159,6 +159,16 @@ function print_menu_options() {
     [ $next_stage != "enter_experience" ] && echo -e "$(color_red 'b)ack')"
 	echo -e "$(color_red 'e(x)it')" 
 }
+
+# init logging var
+export startdate=$(date +%Y-%m-%d)                                              # YYYY-MM-DD
+export starttime=$(date +%H-%M-%S)                                              # hh-mm-ss
+mkdir -p logs/$startdate
+export LOGFILE=$(readlink -f "./logs/$startdate/$USER-$starttime-hacklab.log")  # hacklab/logs/YYYY-MM-DD/$USER-hh-mm-ss-hacklab.log
+touch $LOGFILE
+exec 2>> $LOGFILE                                                               # redirect stderr to $hacklablog
+#exec 2>> >(gawk '{ print strftime("[%Y-%m-%d %H:%M:%S]"), $0 ; fflush(stdout) }' \
+#| sed s/']'/" - $$]"/ >> "$LOGFILE")                                     # redirect output with timestamps, flushing stdout to get continuous output
 
 # first, cd into hacklabdir (= path/to/hacklab)
 hacklabdir=$(dirname $(readlink -f "$0"))
