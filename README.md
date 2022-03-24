@@ -13,23 +13,23 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # HackLab
 
-Welcome to the repository of the project of team HackLab! 
+Willkommen im Repository des Team HackLab!
 
 
 ## [backend documentation](backend/README.md)
 
 ## Storyline
 
-The story line in itself is still a work in progress, but the current story idea is the following: 
+Die Storyline ist nur ein grober Entwurf, lautet aber wie folgt (Englisch, da die Sprache im Spiel Englisch ist): 
 
 <code>Your weird professor has been hinting at a plan to overtake the worlds telecommunication by seizing control of all home devices (IOT) and using them to doxx important services. You and your friends always were suspicious of him and are now trying to find a way to stop his ways. </code>
 
-Whether we use all of this story is not determined yet, but it is our rough draft.
+Ob wir alle Elemente dieser Story nutzen ist noch fraglich, aber dies ist der Entwurf.
 
 
 ## Was ist das Ziel der Software?
 
-Setze Netzwerk Konzepte mit unserem HackLab in die Praxis um und tauche tiefer in die Cyber Security-Welt ein! Im HackLab kannst du nicht nur innerhalb einer realistischen Umgebung Angriffe auf Netzwerke ausüben, sondern auch lernen, wie man sich gut gegen solche Angriffe verteidigt.
+Setze Netzwerkkonzepte mit unserem HackLab in die Praxis um und tauche tiefer in die Cyber Security-Welt ein! Im HackLab kannst du nicht nur innerhalb einer realistischen Umgebung Angriffe auf Netzwerke ausüben, sondern auch lernen, wie man sich gut gegen solche Angriffe verteidigt.
 
 
 ## Welche Komponenten werden benötigt?
