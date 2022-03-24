@@ -9,5 +9,5 @@
 (gpg --decrypt-files ./uploads/*.gpg) &> /dev/null                                                            
 touch ./database/allUploads
 (grep '^HS-Worms\ Username;submission\ data;module;level;points$' './database/allUploads' >> /dev/null) || (echo "HS-Worms Username;submission data;module;level;points" >> ./database/allUploads)
-cat ./uploads/datasetHacklab-*.txt >> ./database/allUploads
-yes | rm ./uploads/datasetHacklab-*
+cat ./uploads/dataset-*.txt >> ./database/allUploads
+yes | rm ./uploads/dataset-*

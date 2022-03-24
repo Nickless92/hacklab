@@ -1,23 +1,24 @@
 #!/bin/bash
 
-<<<<<<< HEAD
 # allow users to retry $1 times
-=======
-# allow users to retry n times
->>>>>>> add: levels/flow: more interactive control flow
 
 # $1: max number of retries
 
-for (( try=0; try<$1; try++ )); do
-    echo "You've got $(( $1 - $try )) tries left."
-    while : ; do
-        unset choice
-        echo -n "Do you want to play again? [Y|n]: "
-        read -n 1 choice
-        case $choice in
-            Y|y) ./tmux_session; clear; ./evaluation; sleep .5; break ;;
-            N|n) try=$1; break ;;
-            *) echo " - wrong option: $choice" ;;
-        esac
+if [ $# -eq 1 ]; then
+    for (( try=0; try<$1; try++ )); do
+        echo "You've got $(( $1 - $try )) tries left. Your points and packet count will be reset."
+        while : ; do
+            unset choice
+            echo -n "Do you want to play again? [Y|n]: "
+            read -n 1 choice
+            case $choice in
+                Y|y) ./tmux_session; clear; . ./evaluation; sleep .5; break ;;
+                N|n) try=$1; break ;;
+                *) echo " - wrong option: $choice" ;;
+            esac
+        done
     done
-done
+else
+    echo "[$(basename "$0")] FAIL: invalid number of parameters"
+    exit 1
+fi

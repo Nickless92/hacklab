@@ -4,9 +4,9 @@
 
 while : ; do
     echo -ne "\nDo you wish to see the story? [Y|n]: "
-    read -n 1 input
+    read -n1 -t5 input || input=n                   # waits 5s for user input, then defaults to "no"
     case $input in
-        Y|y) ./storytime;   break ;;                  # story time :)
+        Y|y) ./storytime;   break ;;                # story time :)
         N|n) sleep .3;      break ;;
         *) echo -e "\nWrong option." ;;
     esac
