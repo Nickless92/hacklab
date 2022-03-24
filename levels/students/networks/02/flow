@@ -1,37 +1,39 @@
 #!/bin/bash
-
+set -e
 export module=networks
 export level=2
 
-function change_mac() {                             # FIXME: that's not yet a smart solution..
+function change_mac() {                     # FIXME: that's not yet a smart solution...
     lxc config set $module-lvl02-$USER-c01 volatile.eth0.hwaddr 00:00:00:00:00:11
-    lxc restart $module-lvl02-$USER-c01
     lxc config set $module-lvl02-$USER-c02 volatile.eth0.hwaddr 00:00:00:00:00:22
-    lxc restart $module-lvl02-$USER-c02
     lxc config set $module-lvl02-$USER-c03 volatile.eth0.hwaddr 00:00:00:00:00:33
-    lxc restart $module-lvl02-$USER-c03
-    container_ip_add.sh 2 3
 }
 
 cd $(dirname "$0")
 PATH=$PATH:$(dirname "$0")
 
-echo -e "\n\nCheck for existing containers..."; sleep .5
-lxc info $module-lvl02-$USER-c01 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
-lxc info $module-lvl02-$USER-c02 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
+echo -e "\n\nCheck for existing containers..."; sleep .5    # FIXME: that's not yet a smart solution..
+(lxc info $module-lvl02-$USER-c01 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )) ||
+(lxc info $module-lvl02-$USER-c02 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )) ||
 lxc info $module-lvl02-$USER-c03 &> /dev/null && ( echo -e "Error: wait for containers to be removed.\n" && (level_stop $module $level 3 &) && exit 1 )
 
-(level_start $module $level 3 &)            # initiate level infrastructure
-(change_mac &); sleep 5                     # FIXME: that's not yet a smart solution..
+container_create $module $level 3; echo "done: container_create"
+change_mac; echo "done: change_mac"
+container_start $module $level 3; echo "done: container_start"
+container_ip_add $module $level 3; echo "done: container_ip_add"
+
+#(level_start $module $level 3 &); sleep 20  # initiate level infrastructure
+#(change_mac &); echo "change mac"; sleep 10 # FIXME: that's not yet a smart solution..
 
 . print_story_or_skip                       # y: story time, n: skip
 
 ./tmux_session; clear                       # <- actual gameplay - create different windows, DON'T SOURCE IT
 . ./evaluation                              # needs to be sourced (with '.') to retrieve points 
 . allow_retry 3                             # allows user to play again 3x without destructing containers
-. upload_score_to_nibelung $module $level   # upload + authentication
 
 # end tmux session                          # clean up
 (level_stop $module $level 3 &)             # remove level infrastructure
+
+. upload_score_to_nibelung $module $level   # upload + authentication
 
 exit 0
