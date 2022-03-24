@@ -55,6 +55,13 @@ To switch between the windows, press 'Ctrl' + 'b', then 'n'
 
 
 <synopsis>
+Hello Hacker! 
+I am here to help you with your IP-Spoofing attack.
+You can use the tool 'hping3' to execute the attack. It's not complicated.
+You just need to take a look at the man page in order to see all options which can be used.
+Don't forget... you must only send 7 ICMP packets on Port 80.
+
+
 here is a short form of our story + short tmux cheat sheet
 
 to switch between the windows, press 'Ctrl' + 'b' then n(next) or p(previous)
