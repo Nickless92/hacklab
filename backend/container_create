@@ -22,7 +22,7 @@ if [ "$#" -eq 4 ] || [ "$#" -eq 3 ] ; then                                      
     for (( container=1; container <= "$3"; container++ )); do
         if [ "$container" -lt 10 ]; then container_=0"$container"; else container_="$container"; fi
         echo "[$(basename "$0")] STEP: init container $container_"
-        lxc init -p hacklab "$image" "$1"-lvl"$level_"-$USER-c"$container_"                         # profile = 'hacklab', image = $image
+        lxc init -p hacklab "$image" "$1"-lvl"$level_"-$USER-c"$container_"                   # profile = 'hacklab', image = $image
     done
     
     echo "[$(basename "$0")] DONE: created containers for level $level of module $1."

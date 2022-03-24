@@ -10,8 +10,8 @@ trap cd_return EXIT                                                     # trap '
 
 cd $(dirname "$0") ; . log_with_timestamp                               # cd to path/to/$0, call log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
-if [ $# = 0 ]                                                           # no parameters allowed
-then
+
+if [ $# = 0 ]; then                                                     # no parameters allowed
     echo "[$(basename "$0")] STEP: create bridge hacklab-$USER"
     sudo brctl addbr hacklab-$USER up                                   # add and start a bridge
     sudo ip link set dev hacklab-$USER up                               # add and start the L2 link

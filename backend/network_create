@@ -1,19 +1,18 @@
 #!/bin/bash
 
 # script to create a lxd network bridge
-# $1 = name (optional - default: hacklab)
+# $1 = name [optional - default: hacklab-$USER]
 
 function cd_return {
     echo -n "[$(basename "$0")] DONE: return to path: "; cd -
 }
 trap cd_return EXIT
 
-cd $(dirname "$0") ; . ./log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
-if [ $# = 0 ] || [ $# = 1 ]
-then
-    if [ $# = 0 ]; then name=hacklab; else name="$1"; fi                        # default: hacklab - FIXME: configurable name
+if [ $# = 0 ] || [ $# = 1 ]; then
+    if [ $# = 0 ]; then name=hacklab`#-$USER`; else name="$1"; fi                  # default: hacklab-$USER - FIXME: load $USER var in lxc_profile_config.yml template???
     lxc network show "$name" > /dev/null                                        # probe for $name's existence
     # # # nothing between 'lxc network show' and 'if' statement # # #
     if [ $? = 0 ]; then                                                         # only if network $name doesn't exist already
@@ -21,7 +20,7 @@ then
     else
         echo "[$(basename "$0")] STEP: create network $name"
         lxc network create "$name"                                             `# create a lxc bridge` \
-        ipv4.address=10.10.0.1/24   ipv4.dhcp=true  ipv4.nat=true              `# IPv4: dhcp hands out IPs if none provided manually` \
+        ipv4.address=10.0.0.1/24    ipv4.dhcp=true  ipv4.nat=true              `# IPv4: dhcp hands out IPs if none provided manually` \
         ipv6.address=none           ipv6.dhcp=false ipv6.nat=false              # IPv6: generally disabled - FIXME: still, containers get a IPv6 link address
         echo "[$(basename "$0")] DONE: created network $name"
         exit 0

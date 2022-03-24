@@ -17,14 +17,14 @@ function verify {
     elif [ "$#" -eq 3 ]; then
         verify $1 $2
         [ $($2 -V) = $3 ] || [ $($2 --version) = $3 ] || \
-        (echo "Warning: $2's verion is not $3.")
+        (echo "Warning: $2's version is not $3.")
     else echo "Warning: invalid number of parameters (max 2 expected, $# given): $@"; fi
 }
 
 trap cd_return EXIT                                     # trap 'exit', run cd_return first
 cd $(dirname "$0") ; . log_with_timestamp               # cd to path/to/$0, write to ./logs/
 
-verify file tmux "tmux 3.0a" || verify file tmux "tmux next-3.4"
+verify file tmux #"tmux 3.0a" || verify file tmux "tmux next-3.4"           # only use three-parameter-call if you want to EXCLUDE every other bin version! 
 verify file lxd
 verify file lxc
 verify file gpg

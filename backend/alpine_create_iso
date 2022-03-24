@@ -67,7 +67,7 @@ function communicate_build() {
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "We've got to do some heavy-lifting to set up your hacklab."; sleep 1
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "Please wait"; sleep 2; typeit_like_handwriting .25 40 "... ... ..."; sleep 1; echo " "                                                     # inform user about background work and
     print_loading_arrows .5s; typeit_like_handwriting .05 40 "Almost done"; sleep 2; typeit_like_handwriting .25 40 "... ... ..."; sleep 1; echo " =)"
-    . ./log_with_timestamp                                                                              # continue logging
+    . log_with_timestamp                                                                                # continue logging
 }
 
 function cd_return {

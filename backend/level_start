@@ -10,11 +10,10 @@ function cd_return {
 }
 trap cd_return EXIT                                                                     # trap 'exit', run cd_return first
 
-cd $(dirname "$0") ; . ./log_with_timestamp                                             # cd to path/to/$0, 'source' log_with_timestamp
+cd $(dirname "$0") ; . log_with_timestamp                                               # cd to path/to/$0, 'source' log_with_timestamp
 echo "[$(basename "$0")] CALL: $@"
 
 if [ "$#" -eq 3 ] ; then                                                                # only three parameters allowed - FIXME: check for more complex calls
-    #echo "[$(basename "$0")] STEP: create network";     ./network_create                # creates lxc bridge "hacklab" (default name)
     echo "[$(basename "$0")] STEP: init containers"; ./container_create "$1" "$2" "$3"  # creates $3 containers (stopped, with profile 'hacklab')
     echo "[$(basename "$0")] STEP: start containers"; ./container_start "$1" "$2" "$3"  # changes container state (stopped -> running)
     echo "[$(basename "$0")] STEP: add network IPs"; ./container_ip_add "$1" "$2" "$3"  # adds network addresses (general sheme: 10.10.level.container/24)
