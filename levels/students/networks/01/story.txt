@@ -67,4 +67,5 @@ here is a short form of our story + short tmux cheat sheet
 to switch between the windows, press 'Ctrl' + 'b' then n(next) or p(previous)
 to scroll around the window use 'Ctrl' + 'b' then [ then you can use your normal navigation keys.
 press q to quit scroll mode.
+when the game is finished, press 'Ctrl' + 'b' then 'd' to close all the tmux-windows.
 ===
