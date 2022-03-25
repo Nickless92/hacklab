@@ -83,3 +83,20 @@ Die Option <code>set -x</code> kann auch nur in einzelnen Skripten gesetzt werde
 ## Diagramm der Programm-Architektur
 
 ![Programm-Architektur](ressources/models/program_architecture.svg) 
+---
+
+## Lehrleitfaden zur Verwendung von HackLab
+
+### Was ist HackLab?
+HackLab ist ein Programm, welches automatisiert Netzwerke von LXC-Containern aufsetzt und auch wieder abbaut. 
+Um dem Ganzen ein spielerisches Element zu verleihen, wurden bewertete Level mit einer (halb) zusammenhängenden Storyline hinzugefügt. 
+In den Levels können zurzeit nur Angriffe auf vorab aufgesetzte Netzwerke ausgeübt werden, weitere Level mit Verteidigungsszenarien sind in Planung. Hierzu können die bereits vorhandenen Szenarien "umgekehrt" werden, sodass der Spieler bspw. eine Attacke mit IP Spoofing erkennen und abwehren muss. 
+Wir erklären kurz HackLabs Funktionalitäten, welche in einer Lehrumgebung genutzt werden können: 
+
+### HackLab als Lernumgebung
+- HackLab ist in unabhängige Levels unterteilt, welche gut als themenspezifische Praxisübung zur Unterstützung von Lerneinheiten genutzt werden können. 
+- Präferiert ist die Ausführung auf den Laborcomputern, da hier der Aufwand für die Studierenden, das System aufsetzen, kleiner ist. 
+- Auf Wunsch können Studierende ihre erzielten Punkte auf HS-Worms-Server hochladen. 
+- Punkte, Level, Upload-Zeit sowie der HS Worms-E-Mail-Username der Studierenden werden über Nibelung in einer CSV-Datenbank gespeichert. 
+- Nur hacklab@hs-worms.de und jeder andere Mailaccount, der Zugriffsrechte auf /home/bwl/hacklab/database/ verfügt, hat Zugriff auf die Datenbank (Rohdaten). 
+- Auf Wunsch können Dozenten mit simplen RegEx-Skripten die Rohdaten auswerten und bspw. levelspezifische Highscore-Listen erzeugen, die in /home/bwl/hacklab/highscores für authentifizierte User abrufbar sind. 
